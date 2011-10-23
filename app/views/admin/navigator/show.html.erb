@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nav name:</b>
+  <%= @navigator.nav_name %>
+</p>
+
+<p>
+  <b>Menu name:</b>
+  <%= @navigator.menu_name %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @navigator.position %>
+</p>
+
+<p>
+  <b>Navigatable:</b>
+  <%= @navigator.navigatable_id %>
+</p>
+
+<p>
+  <b>Navigatable type:</b>
+  <%= @navigator.navigatable_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_navigator_path(@navigator) %> |
+<%= link_to 'Back', navigators_path %>

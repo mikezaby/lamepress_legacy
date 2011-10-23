@@ -1,0 +1,122 @@
+<% javascript 'sortable_list' %>
+<article class="module width_full">
+		<header><h3 class="tabs_involved">block Manager</h3>
+		<ul class="tabs">
+   			<li><a href="#tab1">top</a></li>
+    		<li><a href="#tab2">left</a></li>
+    		<li><a href="#tab3">right</a></li>
+    		<li><a href="#tab4">bottom</a></li>
+		</ul>
+		</header>
+    <input id="url1" value="/admin/block/sorter?place=top" type="hidden" />
+    <input id="url2" value="/admin/block/sorter?place=left" type="hidden" />
+    <input id="url3" value="/admin/block/sorter?place=right" type="hidden" />
+    <input id="url4" value="/admin/block/sorter?place=bottom" type="hidden" />
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				<th>id</th>
+    				<th>name</th>
+    				<th>mode</th>
+    				<th></th>
+    				<th></th>
+			  	</tr>
+			  </thead>
+			  <tbody id="sortable1">
+				  <% @block_top.each do |block| %>
+				  <tr id="page_<%= block.id %>">
+            <td><%= block.id %></td>
+            <td><%= block.name %></td>
+            <td><%= block.mode %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_block_path(block) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), block, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+          <% end %>
+			  </tbody>
+			  </table>
+			</div><!-- end of #tab1 -->
+
+			<div id="tab2" class="tab_content">
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				<th>id</th>
+    				<th>name</th>
+    				<th>mode</th>
+    				<th></th>
+    				<th></th>
+			  	</tr>
+			  </thead>
+			  <tbody id="sortable2">
+				  <% @block_left.each do |block| %>
+				  <tr id="page_<%= block.id %>">
+            <td><%= block.id %></td>
+            <td><%= block.name %></td>
+            <td><%= block.mode %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_block_path(block) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), block, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+          <% end %>
+			  </tbody>
+			  </table>
+			</div><!-- end of #tab2 -->
+
+			<div id="tab3" class="tab_content">
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				<th>id</th>
+    				<th>name</th>
+    				<th>mode</th>
+    				<th></th>
+    				<th></th>
+			  	</tr>
+			  </thead>
+			  <tbody id="sortable3">
+				  <% @block_right.each do |block| %>
+				  <tr id="page_<%= block.id %>">
+            <td><%= block.id %></td>
+            <td><%= block.name %></td>
+            <td><%= block.mode %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_block_path(block) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), block, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+          <% end %>
+			  </tbody>
+			  </table>
+			</div><!-- end of #tab1 -->
+
+			<div id="tab4" class="tab_content">
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				<th>id</th>
+    				<th>name</th>
+    				<th>mode</th>
+    				<th></th>
+    				<th></th>
+			  	</tr>
+			  </thead>
+			  <tbody id="sortable4">
+				  <% @block_bottom.each do |block| %>
+				  <tr id="page_<%= block.id %>">
+            <td><%= block.id %></td>
+            <td><%= block.name %></td>
+            <td><%= block.mode %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_block_path(block) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), block, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+          <% end %>
+			  </tbody>
+			  </table>
+			</div><!-- end of #tab1 -->
+
+
+
+		</div><!-- end of .tab_container -->
+
+</article><!-- end of content manager article -->
+

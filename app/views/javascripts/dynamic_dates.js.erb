@@ -1,0 +1,78 @@
+$(document).ready(function()
+{
+var issues = new Array();
+var issuess = new Array();
+var selected =  $('select#article_issue_id option:selected').val();
+<% @issues.each do |issue| %>
+  issues[<%= issue.id %>] = new Array(<%= issue.id %>, '<%=h issue.number %>', '<%=h issue.date %>');
+  issuess.push(new Array(<%= issue.id %>, '<%=h issue.number %>', '<%=h issue.date %>'));
+<% end %>
+
+function issueHelper(){
+	var date="00-00-00";
+	var option="<option value=\"\">Φύλλο</option>";
+	if($('select#year').val()!=0)
+	{
+		date= $('select#year').val();
+		if($('select#month').val()!=0)
+		{
+			ndate = parseInt($('select#month').val())+1;
+			if(ndate<=9) ndate="0"+ndate
+			ndate = date+"-"+ndate+"-00";
+			date = date+"-"+$('select#month').val()+"-00";
+		}
+		else
+		{
+			ndate = parseInt($('select#year').val())+1;
+			ndate = ndate+"-00-00";
+			date = date+"-00-00";
+		}
+
+		$.each(issuess, function(index, issue)
+		{
+			//alert(issue[2]);
+			if(issue[2]>date&&issue[2]<ndate)
+			{
+			  if(issue[0]==selected)
+				  option+="<option selected=\"selected\" value=\""+issue[0]+"\">"+issue[1]+"</option>";
+				else
+				  option+="<option value=\""+issue[0]+"\">"+issue[1]+"</option>";
+			}
+
+		});
+	}
+	else
+	{
+		$.each(issuess, function(index, issue)
+		{
+		  if(issue[0]==selected)
+		    option+="<option selected=\"selected\" value=\""+issue[0]+"\">"+issue[1]+"</option>";
+			else
+			  option+="<option value=\""+issue[0]+"\">"+issue[1]+"</option>";
+		});
+	}
+	$('select#article_issue_id').html(option);
+
+}
+
+
+function whichIssue() {
+  issue_id = $('select#article_issue_id').val();
+	if(issue_id>0)
+	{
+		$('input#article_date').attr("readonly", true);
+		$('input#article_date').val(issues[issue_id][2]);
+	}
+	else
+	{
+		$('input#article_date').removeAttr("readonly");
+		$('input#article_date').val('');
+	}
+}
+
+ 	issueHelper();
+  $('select#article_issue_id').change(whichIssue);
+  $('select#year').change(issueHelper);
+  $('select#month').change(issueHelper);
+});
+

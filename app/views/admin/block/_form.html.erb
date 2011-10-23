@@ -1,0 +1,38 @@
+<% if @block.errors.any? %>
+		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+			<ul>
+      	<% @block.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+      	<% end %>
+    	</ul>
+		</h4>
+<% end %>
+
+<%= form_for @block, :url => { :action => @act, :id => @block.id  } do |f| %>
+<div class="module_content">
+  <%= field_set_tag do %>
+		<%= f.label :name %>
+ 		<%= f.text_field :name %>
+ 	<% end %>
+
+ 	<%= field_set_tag do %>
+		<%= f.label :placement %>
+ 		<%= f.text_field :placement %>
+ 	<% end %>
+
+ 	<%= field_set_tag do %>
+		<%= f.label :mode %>
+ 		<%= f.text_field :mode %>
+ 	<% end %>
+
+ 	<%= (f.hidden_field :position, :value => 0) unless @act=="update" %>
+
+ <div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+		<%= f.submit %>
+	</div>
+</footer>
+<% end %>
+

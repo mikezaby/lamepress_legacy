@@ -1,0 +1,39 @@
+<article class="module width_full">
+		<header><h3 class="tabs_involved">Banner Manager</h3>
+		</header>
+
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				<th>id</th>
+    				<th>block name</th>
+    				<th>block place</th>
+    				<th>describe</th>
+    				<th>photo</th>
+    				<th>Actions</th>
+    				<th></th>
+    				<th></th>
+			  	</tr>
+			  </thead>
+			  <tbody>
+				  <% @banner.each do |banner| %>
+          <tr>
+            <td><%= banner.id %></td>
+            <td><%= banner.block.name %></td>
+            <td><%= banner.block.placement %></td>
+            <td><%= banner.describe %></td>
+            <td><%= link_to "show", banner.photo.url %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_banner_path(banner) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), banner, :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+          <% end %>
+			  </tbody>
+			  </table>
+			</div><!-- end of #tab1 -->
+
+		</div><!-- end of .tab_container -->
+
+</article><!-- end of content manager article -->
+

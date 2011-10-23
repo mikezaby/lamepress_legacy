@@ -1,0 +1,18 @@
+<!--<% cache 'searchissue' do %>-->
+<% javascript 'date_picker' %>
+<div class = "side_panel">
+  <div class = "search_panel">Αναζήτηση προηγούμενων φύλλων:
+    <label for="startDate">Ημερομηνία :</label>
+    <% d=Time.now %>
+    <input name="startDate" id="startDate" class="date-picker" />
+	  <% search_issues = Issue.last_issues(5) %>
+	  <div class = "search_issues">
+	    <% search_issues.each do |search_issue| %>
+	      <%= link_to search_issue.number,search_issue.linker.permalink %>
+	    <% end %>
+	  </div>
+  </div>
+</div>
+
+<!--<% end %>-->
+

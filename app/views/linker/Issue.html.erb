@@ -1,0 +1,8 @@
+<% cache 'home#'+params[:perma1].to_s do
+	@article = Article.home(params[:perma1])
+%>
+<%=	render "left" %>
+<%=	render "mainissue" %>
+<%=	render "right" %>
+<% end %>
+

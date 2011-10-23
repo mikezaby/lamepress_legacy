@@ -1,0 +1,34 @@
+<% javascript 'sortable_list' %>
+<% @cat = Navigator.all %>
+<article class="module width_full"><header><h3 class="tabs_involved">Drag to sort pages</h3></header>
+<ul class="sort-table">
+<li id="sort-head">
+	<span class="drag-head">Drag</span>
+    <span>Title</span>
+    <span>Url</span>
+	<span>Active</span>
+	<span>Menu Visibility</span>
+	<span>Menu Name</span>
+</li>
+</ul>
+<ul class="sort-table" id="sortable">
+<% @cat.each do |category| %>
+  <li id="page_<%= category.id %>">
+	<span class="sort-button"></span>
+    <span><%= category.name %></span>
+    <span><%= category.block_id %></span>
+    <span><%= category.position %></span>
+    <span><%= category.navigatable_type %></span>
+    <span><%= category.navigatable_id %></span>
+  </li>
+<% end %>
+</ul>
+<div style="clear: both">
+<footer>
+	<div class="submit_link">
+		<%= link_to 'New Page', new_category_path, :class => "link-like-button" %>
+	</div>
+</footer>
+</article>
+<br />
+

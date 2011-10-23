@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  article_id: 1
+  issue_pos: 1
+  cat_pos: 1
+
+two:
+  article_id: 1
+  issue_pos: 1
+  cat_pos: 1

@@ -1,0 +1,41 @@
+<% if @banner.errors.any? %>
+		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+			<ul>
+      	<% @banner.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+      	<% end %>
+    	</ul>
+		</h4>
+<% end %>
+
+<%= form_for @banner, :url => { :action => @act, :id => @banner.id  }, :html => { :multipart => true } do |f| %>
+<div class="module_content">
+  <%= field_set_tag do %>
+		<%= f.label :describe %>
+ 		<%= f.text_field :describe %>
+ 	<% end %>
+
+ 	<%= field_set_tag do %>
+		<%= f.label :block_id %>
+ 		<%= f.text_field :block_id %>
+ 	<% end %>
+
+  <%= field_set_tag do %>
+    <%= f.label :url %>
+    <%= f.url_field :url %>
+ 	<% end %>
+
+ 	<%= field_set_tag do %>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+ 	<% end %>
+
+ <div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+		<%= f.submit %>
+	</div>
+</footer>
+<% end %>
+

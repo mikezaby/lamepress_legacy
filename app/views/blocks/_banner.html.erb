@@ -1,0 +1,7 @@
+<% banner = Banner.get_banner(@block.id) %>
+<% if banner[0] %>
+  <div class = 'right_col_img1'>
+    <%= link_to (image_tag banner[0].photo.url, :border => 0, :width => "232px", :alt => banner[0].describe), banner[0].url,:target => "blank",   %>
+  </div>
+<% end %>
+

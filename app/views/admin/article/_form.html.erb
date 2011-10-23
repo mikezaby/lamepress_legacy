@@ -1,0 +1,93 @@
+<% javascript 'dynamic_categories' %>
+<% javascript 'dynamic_dates' %>
+<% javascript 'misc' %>
+<% if @article.errors.any? %>
+		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+			<ul>
+      	<% @article.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+      	<% end %>
+    	</ul>
+		</h4>
+<% end %>
+<%= form_for @article, :url => { :action => @act, :id => @article.id  }, :html => { :multipart => true } do |f| %>
+<div class="module_content">
+
+
+  <%= field_set_tag do %>
+		<%= f.label "Τιτλος" %>
+ 		<%= f.text_field :title %>
+ 	<% end %>
+
+ 	<%= field_set_tag do %>
+		<%= f.label "υπερτιτλος" %>
+ 		<%= f.text_field :hypertitle %>
+ 	<% end %>
+
+ 	<%= field_set_tag nil, :style => "width:17%;float:left;margin-left:0%;margin-right:2%;" do %>
+		<%= f.label :date, :style => "width:70%;" %>
+ 		<%= f.text_field :date, :style => "width:70%;"  %>
+ 	<% end %>
+
+ 	<%= field_set_tag nil, :style => "width:25%; float:left;margin-left:0%;margin-right: 2%;" do %>
+		<%= f.label "αρθρογραφος", :style => "width:84%;" %>
+ 		<%= f.text_field :author, :style => "width:84%;" %>
+ 	<% end %>
+
+
+  <%= field_set_tag nil, :style => "width:25%; float:left;margin-left:0%;margin-right: 2%;" do %>
+  	<%= f.label "Φυλλο", {:style => "float:left;width:84%"} %>
+  	<select id="year" style="float:left;width:33%;margin-left:2%;margin-right:0;">
+  		<option value="0">Year</option>
+  		<% time = Time.new;year=1990 %>
+  		<% for year in (time.year+1).downto(1990) %>
+  			<option value=<%= year %>><%= year %></option>
+  		<% end %>
+  	</select>
+  	<select id="month" style="float:left;width:25%;margin-left:2%;margin-right:0;">
+  		<option value="0">Month</option>
+  		<% for month in '01'..'12' %>
+  			<option value=<%= month %><%= month %></option>
+  		<% end %>
+  	</select>
+		<%= f.collection_select :issue_id, Issue.find(:all, :order => "number DESC"), :id, :number, {:prompt => "Φύλλο"}, {:style => "float:left;width:30%;margin-left:2%;"}  %>
+	<% end %>
+
+	<%= field_set_tag nil, :style => "max-width:25%;float:left;margin-left:0%;margin-right: 0%;" do %>
+		<%= f.label "Κατηγορια", :style => "width:84%;" %>
+		<%= f.collection_select :category_id, Category.find(:all), :id, :name, {:prompt => "Select a Category"}, {:style => "width:84%;"} %>
+  <% end %>
+
+  <%= field_set_tag nil, :style => "width:100%; float:left;" do %>
+		<%= f.cktext_area :html, :toolbar=>'Easy', :width=>'98%', :height=>'200px' %>
+	<% end %>
+
+
+  <%= field_set_tag nil, :style => "width:48%; float:left;margin-right:3%" do %>
+		<%= f.label :tag_names %>
+  	<%= f.text_field :tag_names ,:style => "width:92%;"%>
+  <% end %>
+
+  <%= field_set_tag nil, :style => "width:48%; float:left;" do %>
+		<%= f.label :photo, :style => "width:100%" %>
+  	<%= f.file_field :photo,:style => "margin-left:10px;" %>
+  <% end %>
+
+
+
+
+  <div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+    <% if (@article.published==true || @article.published.nil? ) %>
+		  <%= select :article, :published, "<option  value=\"1\" selected=\"selected\">Published</option><option value=\"0\">Hidden</option>"%>
+		<% else %>
+		  <%= select :article, :published, "<option  value=\"1\">Published</option><option value=\"0\" selected=\"selected\">Hidden</option>"%>
+		<% end %>
+		<%= f.submit %>
+	</div>
+</footer>
+
+<% end %>
+
