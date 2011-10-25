@@ -1,7 +1,9 @@
 class Admin::ArticleController < Admin::BaseController
 
- def index
-		@article = Article.issued.page(params[:page]).per(20)
+  cache_sweeper :article_sweeper
+
+  def index
+  	@article = Article.issued.page(params[:page]).per(20)
 		@nonis_article = Article.non_issued.page(params[:ni_page]).per(20)
     respond_to do |format|
       format.html # index.html.erb

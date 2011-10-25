@@ -1,11 +1,10 @@
-<% cache @article.id.to_s+'#articles' do %>
 <% keywords(@article.tag_names) %>
+<% cache 'article#'+@article.id.to_s do %>
 <div class = "main_col">
 	<div class = "main_panel">
 
 		<div class = "full_redline"></div>
 		<div class="headart">
-			<% cache 'article_'+@article.id.to_s do %>
 			<h3>
 				<%= link_to (raw @article.category_name)+image_tag("base/pointer.gif"), cat_link(@article) %>
 			</h3>
@@ -29,7 +28,6 @@
 		<div class = 'art_date'>
 			<%= raw I18n.l(@article.date, :format=> "%A  %d %b %Y")  %>
 		</div>
-		<% end %>
 		<div class = 'full_redline'></div>
 
 	</div>
