@@ -1,21 +1,21 @@
 <div class = "header_red_menu">
 
-  <% cache @issue.id.to_s+'#header_red_block' do %>
+  <% cache '#header_red_block'+@issue.id.to_s do %>
 	<div class = "header_red_block">
 		<ul>
 		  <% active="" %>
-		  <% if @url == "/"+@iss.to_s %>
+		  <!--<% if @url == "/"+@iss.to_s %>
         <% active="activated" %>
-      <% end %>
+      <% end %>-->
 			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/"+(raw @iss), :id => active  %></li>
         <% nav_list=Navigator.list(@head_block.id) %>
         <% nav_list.each do |navigator| %>
-          <% active="" %>
+          <!--<% active="" %>
           <% if @url == "/"+@iss.to_s+"/"+navigator.navigatable.permalink %>
             <% active="activated" %>
           <% elsif @url == navigator.navigatable.permalink %>
             <% active="activated" %>
-          <% end %>
+          <% end %>-->
           <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
             <li><%= (link_to navigator.name, "/"+@iss.to_s+"/"+(raw navigator.navigatable.permalink), :id => active) %></li>
           <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
