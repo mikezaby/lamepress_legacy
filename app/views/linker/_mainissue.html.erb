@@ -5,7 +5,7 @@ i=0
 left=""
 right=""
 %>
-<!-- <% cache @issue.number.to_s+'_articles' do %>-->
+<% cache @issue.id.to_s+'#home_issue' do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>
@@ -107,6 +107,6 @@ right=""
 			<div class = "half_main_right">
 				<%=raw right %>
 			</div>
-<!--<% end %>-->
+<% end %>
 	</div>
 

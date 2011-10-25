@@ -1,6 +1,6 @@
 <div class = "header_red_menu">
 
-  <% cache raw (raw @iss)+'#header_red_block' do %>
+  <% cache @issue.id.to_s+'#header_red_block' do %>
 	<div class = "header_red_block">
 		<ul>
 		  <% active="" %>
@@ -29,6 +29,6 @@
 
 			</ul>
 		</div>
-	<% end %>
+  <% end %>
 </div>
 

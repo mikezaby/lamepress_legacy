@@ -5,6 +5,7 @@ i=0
 left=""
 right=""
  %>
+<% cache @issue.id.to_s+"-"+@article[0].category_id.to_s+'#home_cat' do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>
@@ -106,6 +107,6 @@ right=""
 			<div class = "half_main_right">
 				<%= raw right %>
 			</div>
-			<%#= will_paginate @article %>
 	</div>
+<% end %>
 

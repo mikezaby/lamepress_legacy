@@ -21,14 +21,9 @@ class LinkerController < ApplicationController
         type=@linker.linkerable_type
         id=@linker.linkerable_id
         if @linker.linkerable_type=="Issue"
-
-          #if @linker.linkerable.published
+            #todo na min fenode unpublished
 			      @iss=@linker.linkerable.number
 			      @issue=@linker.linkerable
-			    #else
-			     # return redirect_to root_path, :flash => {:url_missing => "Den iparxeis"}
-			    #end
-
         elsif @linker.linkerable_type=="Article"
 
           @article= @linker.linkerable

@@ -1,4 +1,4 @@
-<!--######---main column---###########-->
+<% cache @article.id.to_s+'#articles' do %>
 <% keywords(@article.tag_names) %>
 <div class = "main_col">
 	<div class = "main_panel">
@@ -35,4 +35,5 @@
 	</div>
 
 </div>
+<% end %>
 

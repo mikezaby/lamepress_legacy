@@ -5,6 +5,7 @@ i=0
 left=""
 right=""
  %>
+<% cache @linker.linkerable.id.to_s+'#category' do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>
@@ -110,4 +111,5 @@ right=""
 			  <%= paginate @article %>
 			</div>
 	</div>
+<% end %>
 

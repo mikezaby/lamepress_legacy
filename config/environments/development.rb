@@ -23,7 +23,7 @@ Mizatron::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  #config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = true
 
 	Paperclip.options[:command_path] = "/usr/bin/"
 
