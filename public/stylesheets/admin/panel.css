@@ -9,27 +9,27 @@
 	SITE WRAPPER
 ===============================*/
 .site-wrapper
-{   
-    width:950px; 
+{
+    width:950px;
 	height:auto;
 	background-color: #fffff1;
 	border:solid 1px black;
 	margin-left:auto;
 	margin-right:auto;
- 
+
 }
 /*==============================
 	HEADER WRAPPER
 ===============================*/
 .header-wrapper
-{	
+{
 	margin-top:0px;
-	width:950px; 
-	height:75px; 
+	width:950px;
+	height:75px;
 	background:url('images/apanel_bg.gif');
 	background-repeat: repeat-x;
- 
-	/* css lets you designate how you want an image to 
+
+	/* css lets you designate how you want an image to
 	repeat. Along the x-axis, y-axis or not at all. */
 
 }
@@ -48,7 +48,7 @@ padding-top:15px;
 .header_image
 {
 float:left;
-width:65px; 
+width:65px;
 height:55px;
 margin-left:20px;
 margin-right:20px;
@@ -58,7 +58,7 @@ margin-bottom:10px;
 
 .header_image img
 {
-width:55px; 
+width:55px;
 height:55px;
 }
 
@@ -67,11 +67,11 @@ height:55px;
 		BODY WRAPPER
 ===============================*/
 .body-wrapper
-{	
+{
 	float:left;
 	margin-top:10px;
 	margin-bottom:16px;
-	width:950px; 
+	width:950px;
 	height: auto;
 }
 
@@ -131,19 +131,19 @@ padding-bottom:8px;
 padding-left:8px;
 padding-right:8px;
 font-weight:bold;
-color:#ead20c; 
+color:#ead20c;
 }
 
 .left_panel_link a
 {
 text-decoration:none;
-color:red; 
+color:red;
 }
 
 .left_panel_link a:hover
 {
 text-decoration:none;
-color:black; 
+color:black;
 }
 
 /*--------------- main_col ----------------*/
@@ -154,13 +154,13 @@ color:black;
 .arrow a
 {
 text-decoration:none;
-color:red; 
+color:red;
 }
 
 .arrow a:hover
 {
 text-decoration:none;
-color:black; 
+color:black;
 }
 
 .login
@@ -474,3 +474,10 @@ margin-left:10px;
 margin-top:3px;
 font-weight:bold;
 }
+
+
+
+
+
+.handle { font-size: 12px; color: #777; cursor: move; }
+

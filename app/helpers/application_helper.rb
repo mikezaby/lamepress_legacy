@@ -14,6 +14,14 @@ module ApplicationHelper
     content_for(:head) { raw "\n<meta name=\"keywords\" content=\""+string+"\" />"}
   end
 
+  def head_title(string)
+    content_for(:title) { string+" | "}
+  end
+
+   def head_desc(string)
+    content_for(:head) {  raw "\n<meta name=\"description\" content=\""+string+"\" />"}
+  end
+
 
   def menu(placement)
   	#return Navigator.find_all_by_nav_name(name, :include => "navigatable")
@@ -47,14 +55,6 @@ module ApplicationHelper
 		return menu
 	end
 
-	def summarize(html)
-
-		html = html.gsub(/\<!--(.+?)--\>/m,"").gsub(/<\/?[^>]*>/, "")
-		return html[0..300]
-		#html = truncate(html, :length => 300, :omission => '...')
-		#return strip_tags(html)
-
-	end
 
 	def cat_link(article)
 		linkzor = "/"

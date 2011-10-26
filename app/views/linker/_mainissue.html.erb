@@ -34,7 +34,7 @@ right=""
 		</div>
 		<% end %>
 		<div class = "article">
-			<%= summarize(article.html) %>
+			<%= article.html.summarize %>
 		</div>
 		<div class = "complete_article">
 			<%= (link_to  "Πλήρες άρθρο...", article.linker.permalink) %>
@@ -61,7 +61,7 @@ right=""
 									</h1>
 								</div>
 	              <div class = 'article'>
-									"+summarize(article.html)+"
+									"+article.html.summarize+"
 								</div>
 								<div class = 'complete_article'>
 									"+(link_to  "Πλήρες άρθρο...", article.linker_permalink)+"
@@ -86,7 +86,7 @@ right=""
 									</h1>
 								</div>
 	              <div class = 'article'>
-									"+summarize(article.html)+"
+									"+article.html.summarize+"
 								</div>
 								<div class = 'complete_article'>
 									"+(link_to  "Πλήρες άρθρο...", article.linker_permalink)+"

@@ -239,11 +239,11 @@ text-decoration:none;
 	font-weight:bold;
 }
 
-a#activated
-{
 
-	background:url("images/redpointer.gif") center no-repeat;
-	padding-bottom:25px;
+.header_red_block a#activated
+{
+	background:url("images/redpointer.png") center no-repeat;
+	padding-bottom:26px;
 }
 
 .blackline_4px
@@ -476,6 +476,13 @@ margin-top:8px;
 .stiles li
 {
  list-style:none;
+}
+
+.stiles a#activated
+{
+	color:#ec121b;
+	text-decoration:underline;
+	list-style-type:circle;
 }
 
 .stiles a

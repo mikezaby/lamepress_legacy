@@ -1,29 +1,25 @@
 <div class = "header_red_menu">
-
+<script type="text/javascript">
+	$(document).ready(function()
+    	{
+      	 $('a[href$="<%= @url %>"]:first').attr("id", "activated");
+   	 }
+	);
+</script>
   <% cache '#header_red_block'+@issue.id.to_s do %>
 	<div class = "header_red_block">
 		<ul>
-		  <% active="" %>
-		  <!--<% if @url == "/"+@iss.to_s %>
-        <% active="activated" %>
-      <% end %>-->
-			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/"+(raw @iss), :id => active  %></li>
+			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/"+(raw @iss)%></li>
         <% nav_list=Navigator.list(@head_block.id) %>
         <% nav_list.each do |navigator| %>
-          <!--<% active="" %>
-          <% if @url == "/"+@iss.to_s+"/"+navigator.navigatable.permalink %>
-            <% active="activated" %>
-          <% elsif @url == navigator.navigatable.permalink %>
-            <% active="activated" %>
-          <% end %>-->
           <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
-            <li><%= (link_to navigator.name, "/"+@iss.to_s+"/"+(raw navigator.navigatable.permalink), :id => active) %></li>
+            <li><%= (link_to navigator.name, "/"+@iss.to_s+"/"+(raw navigator.navigatable.permalink)) %></li>
           <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
-            <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink), :id => active %></li>
+            <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
           <% elsif navigator.navigatable_type == "Block" %>
-            <li><%= link_to navigator.name, "/"+(raw navigator.navigatable.name), :id => active %></li>
+            <li><%= link_to navigator.name, "/"+(raw navigator.navigatable.name) %></li>
           <% elsif navigator.navigatable_type == "Article" %>
-            <li><%= link_to navigator.name, (raw navigator.navigatable.linker_permalink), :id => active %></li>
+            <li><%= link_to navigator.name, (raw navigator.navigatable.linker_permalink) %></li>
           <% end %>
         <% end %>
 
