@@ -1,6 +1,8 @@
 class Admin::IssueController < Admin::BaseController
 
-   def index
+  load_and_authorize_resource
+
+  def index
 
     @issue = Issue.pub.page(params[:page]).per(20)
 		@unpub_issue = Issue.unpub.page(params[:np_page]).per(20)

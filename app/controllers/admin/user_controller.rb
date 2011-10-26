@@ -1,14 +1,16 @@
 class Admin::UserController < Admin::BaseController
-  
+
+  load_and_authorize_resource
+
   def index
 		@user = User.all
 
     respond_to do |format|
       format.html # index.html.erb
     end
-  
+
   end
-  
+
   def new
   	@user=User.new
   	@act="create"
@@ -19,7 +21,7 @@ class Admin::UserController < Admin::BaseController
 
   def create
   	@user = User.new(params[:user])
-		
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to(user_index_path, :notice => 'Page was successfully created.') }
@@ -64,3 +66,4 @@ class Admin::UserController < Admin::BaseController
   end
 
 end
+

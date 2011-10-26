@@ -1,4 +1,7 @@
 class Admin::NavigatorController < Admin::BaseController
+
+  load_and_authorize_resource
+
   # GET /navigators.xml
   def index
     @navigator = Navigator.orderit

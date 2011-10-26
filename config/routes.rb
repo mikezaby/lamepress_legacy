@@ -23,7 +23,7 @@ Mizatron::Application.routes.draw do
 	resources :banner, :controller => "admin/banner", :path => "admin/banner"
 	match '/admin/block/sorter' => 'admin/block#sorter'
 	resources :block, :controller => "admin/block", :path => "admin/block"
-  match 'admin' => 'admin/base#index'
+  match '/admin' => 'admin/base#index'
   match 'mobile/menu' => 'mobile#menu'
 	#match '/c/:permalink' => 'admin/category#show'
 

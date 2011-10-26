@@ -1,12 +1,14 @@
 class Admin::CategoryController < Admin::BaseController
 
-   def index
+  load_and_authorize_resource
+
+  def index
     @category = Category.issued.page(params[:page]).per(20)
 		@nonis_category = Category.non_issued.page(params[:ni_page]).per(20)
 
     respond_to do |format|
       format.html # index.html.erb
-    end
+  end
 
   end
 

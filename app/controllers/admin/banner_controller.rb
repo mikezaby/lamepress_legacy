@@ -1,6 +1,8 @@
 class Admin::BannerController < Admin::BaseController
 
-   def index
+  load_and_authorize_resource
+
+  def index
 
     @banner = Banner.all
 

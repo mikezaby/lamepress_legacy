@@ -1,5 +1,7 @@
 class Admin::BlockController < Admin::BaseController
-  # GET /navigators.xml
+
+  load_and_authorize_resource
+
   def index
     @block_top = Block.place('top')
     @block_left = Block.place('left')
@@ -11,8 +13,7 @@ class Admin::BlockController < Admin::BaseController
     end
   end
 
-  # GET /navigators/1
-  # GET /navigators/1.xml
+
   def show
     @block = Block.find(params[:id])
 
@@ -21,8 +22,7 @@ class Admin::BlockController < Admin::BaseController
     end
   end
 
-  # GET /navigators/new
-  # GET /navigators/new.xml
+
   def new
     @block = Block.new
     @act="create"
@@ -31,7 +31,6 @@ class Admin::BlockController < Admin::BaseController
     end
   end
 
-  # GET /navigators/1/edit
   def edit
     @block = Block.find(params[:id])
     @act="update"
@@ -40,8 +39,7 @@ class Admin::BlockController < Admin::BaseController
     end
   end
 
-  # POST /navigators
-  # POST /navigators.xml
+
   def create
     @block = Block.new(params[:block])
 
@@ -54,8 +52,7 @@ class Admin::BlockController < Admin::BaseController
     end
   end
 
-  # PUT /navigators/1
-  # PUT /navigators/1.xml
+
   def update
     @block = Block.find(params[:id])
 
@@ -68,8 +65,7 @@ class Admin::BlockController < Admin::BaseController
     end
   end
 
-  # DELETE /navigators/1
-  # DELETE /navigators/1.xml
+
   def destroy
     @block = Block.find(params[:id])
     @block.destroy
@@ -85,9 +81,7 @@ class Admin::BlockController < Admin::BaseController
       block.position = params['page'].index(block.id.to_s) + 1
       block.save
     end
-	#delete_cache
     render :nothing => true
-     #logger.info 'informational message'
   end
 
 end

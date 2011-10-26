@@ -119,6 +119,7 @@
 
 	<section id="main" class="column">
 		<%= (raw "<h4 class=\"alert_info\">"+notice+"</h4>") unless notice.nil? %>
+		<%= (raw "<h4 class=\"alert_error\">"+alert+"</h4>") unless alert.nil? %>
 		<%= yield %>
 	<div class="spacer"></div>
 	</section>

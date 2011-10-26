@@ -14,22 +14,30 @@
 		<%= f.label :email %>
  		<%= f.text_field :email %>
  	<% end %>
- 	
+
  	<%= field_set_tag do %>
 		<%= f.label :password %>
  		<%= f.text_field :password %>
  	<% end %>
- 	
+
  	<%= field_set_tag do %>
 		<%= f.label :password_confirmation %>
  		<%= f.text_field :password_confirmation %>
  	<% end %>
 
+ 	  <%= f.label :roles %>
+    <% for role in User::ROLES %>
+      <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
+      <%= h role.humanize %>
+    <% end %>
+  <%= hidden_field_tag "user[roles][]"%>
+
  <div class="clear"></div>
 </div>
 <footer>
 	<div class="submit_link">
-		<%= f.submit %>	
+		<%= f.submit %>
 	</div>
 </footer>
 <% end %>
+

@@ -1,5 +1,7 @@
 class Admin::ArticleController < Admin::BaseController
 
+  load_and_authorize_resource
+
   cache_sweeper :article_sweeper
 
   def index
