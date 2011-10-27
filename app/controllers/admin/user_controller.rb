@@ -41,7 +41,7 @@ class Admin::UserController < Admin::BaseController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'Page was successfully updated.') }
+        format.html { redirect_to(user_index_path, :notice => 'Page was successfully updated.') }
       else
         format.html { render :action => "edit" }
       end
