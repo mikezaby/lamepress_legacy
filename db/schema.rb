@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026121940) do
+ActiveRecord::Schema.define(:version => 20111004235243) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -154,4 +154,3 @@ ActiveRecord::Schema.define(:version => 20111026121940) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
-
