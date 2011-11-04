@@ -33,8 +33,8 @@ class Issue < ActiveRecord::Base
     where("date > ? and date < ?", date1, date2).pub
   end
 
-  scope :pub , where("issues.published = 1")
-	scope :unpub , where("issues.published = 0")
+  scope :pub , where("issues.published = TRUE")
+	scope :unpub , where("issues.published = FALSE")
 
 
 end
