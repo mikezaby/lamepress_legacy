@@ -30,7 +30,7 @@ class Category < ActiveRecord::Base
   end
 
   scope :issued , where(:issued => true)
-	scope :non_issued , where(:issued = false)
+	scope :non_issued , where(:issued => false)
 
 end
 
