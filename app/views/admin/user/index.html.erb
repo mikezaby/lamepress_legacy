@@ -4,31 +4,34 @@
 
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-			  <table class="tablesorter" cellspacing="0"> 
-			  <thead> 
-				  <tr>  
-    				  <th>id</th> 
-    				  <th>email</th> 
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				  <th>id</th>
+    				  <th>email</th>
     				  <th>actions</th>
-						  <th></th> 
-			  	</tr> 
-			  </thead> 
+						  <th></th>
+						  <th></th>
+			  	</tr>
+			  </thead>
 			  <tbody>
 			    <% @user.each do |user| %>
           <tr>
             <td><%= user.id %></td>
             <td><%= user.email %></td>
+            <td><%= link_to "roles", roles_user_path(user) %></td>
             <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_user_path(user) %></td>
             <td><%= link_to image_tag("admin_html5/icn_trash.png"), user, :confirm => 'Are you sure?', :method => :delete %></td>
            </tr>
-        <% end %> 
-				  
-			 </tbody> 
+        <% end %>
+
+			 </tbody>
 			 </table>
 			</div><!-- end of #tab1 -->
-			
 
-			
+
+
 		</div><!-- end of .tab_container -->
-		
+
 </article><!-- end of content manager article -->
+

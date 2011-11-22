@@ -36,6 +36,11 @@ class Admin::UserController < Admin::BaseController
   	@act="update"
   end
 
+  def roles
+  	@user = User.find(params[:id])
+  	@act="update"
+  end
+
   def update
   	@user = User.find(params[:id])
 

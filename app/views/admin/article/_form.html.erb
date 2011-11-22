@@ -47,7 +47,7 @@
   	<select id="month" style="float:left;width:25%;margin-left:2%;margin-right:0;">
   		<option value="0">Month</option>
   		<% for month in '01'..'12' %>
-  			<option value=<%= month %><%= month %></option>
+  			<option value="<%= month %>"><%= month %></option>
   		<% end %>
   	</select>
 		<%= f.collection_select :issue_id, Issue.find(:all, :order => "number DESC"), :id, :number, {:prompt => "Φύλλο"}, {:style => "float:left;width:30%;margin-left:2%;"}  %>

@@ -1,0 +1,29 @@
+<% if @user.errors.any? %>
+		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+			<ul>
+      	<% @user.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+      	<% end %>
+    	</ul>
+		</h4>
+<% end %>
+
+<%= form_for @user, :url => { :action => @act, :id => @user.id  } do |f| %>
+<div class="module_content">
+    <b><%= @user.email %></b></br>
+ 	  <%= f.label :roles %>
+    <% for role in User::ROLES %>
+      <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
+      <%= h role.humanize %>
+    <% end %>
+  <%= hidden_field_tag "user[roles][]"%>
+
+ <div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+		<%= f.submit %>
+	</div>
+</footer>
+<% end %>
+

@@ -30,6 +30,7 @@ class Category < ActiveRecord::Base
   end
 
   scope :issued , where(:issued => true)
+  scope :mobile_issued , where(:issued => true).select("id, name, permalink")
 	scope :non_issued , where(:issued => false)
 
 end

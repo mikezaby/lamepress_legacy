@@ -8,7 +8,10 @@ Mizatron::Application.routes.draw do
 	match '/javascripts/:action.:format' => "javascripts"
   get "base/index"
   root :to => 'linker#forward'
+
+  match '/admin/user/:id/roles' => 'admin/user#roles', :as => "roles_user"
   resources :user, :controller => "admin/user", :path => "admin/user"
+
   resources :category, :controller => "admin/category", :path => "admin/category"
 
   match '/admin/article/reproc' => 'admin/article#reproc'
@@ -24,8 +27,12 @@ Mizatron::Application.routes.draw do
 	match '/admin/block/sorter' => 'admin/block#sorter'
 	resources :block, :controller => "admin/block", :path => "admin/block"
   match '/admin' => 'admin/base#index'
+
+#--> Android service
   match 'mobile/menu' => 'mobile#menu'
-	#match '/c/:permalink' => 'admin/category#show'
+  match 'mobile/category' => 'mobile#category'
+  match 'mobile/article' => 'mobile#article'
+#--> End of Android service
 
 	match 'article.php' => 'linker#php'
 
