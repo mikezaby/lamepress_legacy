@@ -15,9 +15,9 @@ gem 'devise'
 gem 'jquery-rails', "1.0.14"
 gem "paperclip", "~> 2.3.11"
 gem "ckeditor", "~> 3.6.3"
-#gem "passenger"
 gem 'kaminari'
 gem 'cancan'
+gem 'sunspot_rails'
 # Use unicorn as the web server
 # gem 'unicorn'
 

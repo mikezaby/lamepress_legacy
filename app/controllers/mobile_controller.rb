@@ -12,7 +12,7 @@ class MobileController < ApplicationController
 
   def article
     article = Article.where("id = ? AND published = TRUE",params[:article]).select("id,title,html")
-    render :json => article.first
+    render :json => article
   end
 
 end
