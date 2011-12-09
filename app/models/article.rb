@@ -33,6 +33,10 @@ class Article < ActiveRecord::Base
                   	:path => ":rails_root/public/media/articles/:id/:style_img_:id.:extension",
                   	:styles => {:medium => "225>", :small => "200>" }
 
+  def self.search(tade)
+    where("html like ?", "%#{tade}%")
+  end
+
   def tag_names
     @tag_names || tags.map(&:name).join(', ')
   end

@@ -1,0 +1,31 @@
+wrapper
+{
+  float:left;
+  width:100%;
+}
+
+h3
+{
+  float:left;
+  width:100%;
+}
+
+content
+{
+  width:100%;
+  float:left;
+}
+
+img
+{
+  max-width:100%;
+  height:auto;
+}
+
+.image
+{
+  float:left;
+  width:100%;
+  text-align:center;
+}
+

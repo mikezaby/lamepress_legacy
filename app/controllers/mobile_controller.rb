@@ -11,8 +11,9 @@ class MobileController < ApplicationController
   end
 
   def article
-    article = Article.where("id = ? AND published = TRUE",params[:article]).select("id,title,html")
-    render :json => article
+    article = Article.where("id = ? AND published = TRUE",params[:id])
+    @article = article.first
+    render :layout => false
   end
 
 end

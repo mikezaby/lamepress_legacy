@@ -9,6 +9,8 @@ Mizatron::Application.routes.draw do
   get "base/index"
   root :to => 'linker#forward'
 
+  match "search" => "search#index"
+
   match '/admin/user/:id/roles' => 'admin/user#roles', :as => "roles_user"
   resources :user, :controller => "admin/user", :path => "admin/user"
 
