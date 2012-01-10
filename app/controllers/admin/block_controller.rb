@@ -7,48 +7,27 @@ class Admin::BlockController < Admin::BaseController
     @block_left = Block.place('left')
     @block_right = Block.place('right')
     @block_bottom = Block.place('bottom')
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
-
 
   def show
     @block = Block.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
   end
-
 
   def new
     @block = Block.new
-    @act="create"
-    respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   def edit
     @block = Block.find(params[:id])
-    @act="update"
-  	respond_to do |format|
-      format.html # new.html.erb
-    end
   end
-
 
   def create
     @block = Block.new(params[:block])
 
-    respond_to do |format|
-      if @block.save
-        format.html { redirect_to(block_index_path, :notice => 'Block was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
+    if @block.save
+      redirect_to(blocks_path, :notice => 'Block was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
@@ -56,12 +35,10 @@ class Admin::BlockController < Admin::BaseController
   def update
     @block = Block.find(params[:id])
 
-    respond_to do |format|
-      if @block.update_attributes(params[:block])
-        format.html {  redirect_to(block_index_path, :notice => 'Block was successfully updated.') }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @block.update_attributes(params[:block])
+      redirect_to(blocks_path, :notice => 'Block was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
@@ -69,10 +46,7 @@ class Admin::BlockController < Admin::BaseController
   def destroy
     @block = Block.find(params[:id])
     @block.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(block_index_path) }
-    end
+    redirect_to(blocks_path)
   end
 
    def sorter

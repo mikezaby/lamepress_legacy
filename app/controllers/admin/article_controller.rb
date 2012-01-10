@@ -7,18 +7,10 @@ class Admin::ArticleController < Admin::BaseController
   def index
   	@article = Article.issued.page(params[:page]).per(20)
 		@nonis_article = Article.non_issued.page(params[:ni_page]).per(20)
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-
   end
 
   def new
   	@article=Article.new
-  	@act="create"
-  	respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   def create
@@ -26,52 +18,39 @@ class Admin::ArticleController < Admin::BaseController
 		url=""
 		url= "/"+@article.issue_number.to_s unless @article.issue_id.nil?
 		url+="/"+@article.category_permalink+"/"+@article.title.parameterize unless @article.category_id.nil?
-    respond_to do |format|
-      if @article.save
-        @article.create_ordering(:cat_pos => 99 ) unless @article.issue_id.nil?
-        if @article.create_linker(:permalink => url)
-          format.html { redirect_to(article_index_path, :notice => 'Page was successfully created.') }
-        else
-          format.html { render :action => "new" }
-        end
+    if @article.save
+      @article.create_ordering(:cat_pos => 99 ) unless @article.issue_id.nil?
+      if @article.create_linker(:permalink => url)
+        redirect_to(articles_path, :notice => 'Page was successfully created.')
       else
-        format.html { render :action => "new" }
+        render :action => "new"
       end
+    else
+      render :action => "new"
     end
   end
 
   def edit
   	@article = Article.find(params[:id])
-  	@act="update"
   end
 
-    def update
+  def update
   	@article = Article.find(params[:id])
-
-    respond_to do |format|
-      if @article.update_attributes(params[:article])
-        format.html { redirect_to(article_index_path, :notice => 'Page was successfully updated.') }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @article.update_attributes(params[:article])
+      redirect_to(articles_path, :notice => 'Page was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
   def destroy
   	@article = Article.find(params[:id])
     @article.destroy
-    respond_to do |format|
-      format.html { redirect_to(article_index_path) }
-    end
+    redirect_to(articles_path)
   end
 
   def show
-
   	@article = Article.find_by_id(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
   end
 
   def reproc

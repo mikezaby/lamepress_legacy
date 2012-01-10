@@ -8,7 +8,7 @@
 		</h4>
 <% end %>
 
-<%= form_for @banner, :url => { :action => @act, :id => @banner.id  }, :html => { :multipart => true } do |f| %>
+<%= form_for @banner, :html => { :multipart => true } do |f| %>
 <div class="module_content">
   <%= field_set_tag do %>
 		<%= f.label :describe %>

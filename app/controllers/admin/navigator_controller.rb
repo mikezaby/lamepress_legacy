@@ -2,16 +2,10 @@ class Admin::NavigatorController < Admin::BaseController
 
   load_and_authorize_resource
 
-  # GET /navigators.xml
   def index
     @navigator = Navigator.orderit
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
 
-  # GET /navigators/1
-  # GET /navigators/1.xml
   def show
     @navigator = Navigator.find(params[:id])
 
@@ -20,60 +14,37 @@ class Admin::NavigatorController < Admin::BaseController
     end
   end
 
-  # GET /navigators/new
-  # GET /navigators/new.xml
   def new
     @navigator = Navigator.new
-    @act="create"
-    respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
-  # GET /navigators/1/edit
   def edit
     @navigator = Navigator.find(params[:id])
-    @act="update"
-  	respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   def create
     @navigator = Navigator.new(params[:navigator])
-
-    respond_to do |format|
-      if @navigator.save
-        format.html { redirect_to(navigator_index_path, :notice => 'Navigator was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
+    if @navigator.save
+      redirect_to(navigators_path, :notice => 'Navigator was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /navigators/1
-  # PUT /navigators/1.xml
   def update
     @navigator = Navigator.find(params[:id])
 
-    respond_to do |format|
-      if @navigator.update_attributes(params[:navigator])
-        format.html { redirect_to(navigator_index_path, :notice => 'Navigator was successfully updated.') }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @navigator.update_attributes(params[:navigator])
+      redirect_to(navigators_path, :notice => 'Navigator was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /navigators/1
-  # DELETE /navigators/1.xml
   def destroy
     @navigator = Navigator.find(params[:id])
     @navigator.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(navigator_index_path) }
-    end
+    redirect_to(navigators_path)
   end
 
   def sorter

@@ -12,22 +12,22 @@ Mizatron::Application.routes.draw do
   match "search" => "search#index"
 
   match '/admin/user/:id/roles' => 'admin/user#roles', :as => "roles_user"
-  resources :user, :controller => "admin/user", :path => "admin/user"
+  resources :user, :controller => "admin/user", :path => "admin/user", :as => "users"
 
-  resources :category, :controller => "admin/category", :path => "admin/category"
+  resources :category, :controller => "admin/category", :path => "admin/category", :as => "categories"
 
   match '/admin/article/reproc' => 'admin/article#reproc'
-  resources :article, :controller => "admin/article", :path => "admin/article"
+  resources :article, :controller => "admin/article", :path => "admin/article", :as => "articles"
 
   match '/admin/issue/reproc' => 'admin/issue#reproc'
-	resources :issue, :controller => "admin/issue", :path => "admin/issue"
+	resources :issue, :controller => "admin/issue", :path => "admin/issue", :as => "issues"
 
-	resources :position, :controller => "admin/position", :path => "admin/position"
+	#resources :position, :controller => "admin/position", :path => "admin/position"
 	match '/admin/navigator/sorter' => 'admin/navigator#sorter'
-	resources :navigator, :controller => "admin/navigator", :path => "admin/navigator"
-	resources :banner, :controller => "admin/banner", :path => "admin/banner"
+	resources :navigator, :controller => "admin/navigator", :path => "admin/navigator", :as => "navigators"
+	resources :banner, :controller => "admin/banner", :path => "admin/banner", :as => "banners"
 	match '/admin/block/sorter' => 'admin/block#sorter'
-	resources :block, :controller => "admin/block", :path => "admin/block"
+	resources :block, :controller => "admin/block", :path => "admin/block", :as => "blocks"
   match '/admin' => 'admin/base#index'
 
 #--> Android service

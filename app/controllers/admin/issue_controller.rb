@@ -5,68 +5,43 @@ class Admin::IssueController < Admin::BaseController
   def index
     @issue = Issue.pub.page(params[:page]).per(20)
 		@unpub_issue = Issue.unpub.page(params[:np_page]).per(20)
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-
   end
 
   def new
   	@issue=Issue.new
-  	@act="create"
-  	respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   def create
 		@issue = Issue.new(params[:issue])
     @issue.create_linker(:permalink=>"/"+@issue.number.to_s)
-    respond_to do |format|
-      if @issue.save
-        format.html { redirect_to(issue_index_path, :notice => 'Page was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
+    if @issue.save
+      redirect_to(issues_path, :notice => 'Issue was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
   def edit
   	@issue = Issue.find(params[:id])
-  	@act="update"
   end
 
   def update
-
   	@issue = Issue.find(params[:id])
-
-    respond_to do |format|
-      if @issue.update_attributes(params[:issue])
-        format.html { redirect_to(issue_index_path, :notice => 'Page was successfully updated.'+params[:id]) }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @issue.update_attributes(params[:issue])
+      redirect_to(issues_path, :notice => "The issue was successfully updated.")
+    else
+      render :action => "edit"
     end
   end
 
   def destroy
   	@issue = Issue.find(params[:id])
-		#@linker = Linker.find_by_permalink(@issue.number)
-    #@linker.destroy
     @issue.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(issue_index_path) }
-    end
+    redirect_to(issues_path)
   end
 
   def show
   	@issue = Issue.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
   end
 
   def reproc
