@@ -8,19 +8,19 @@
 
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-			  <table class="tablesorter" cellspacing="0"> 
-			  <thead> 
-				  <tr>  
-    				<th>id</th> 
-    				<th>number</th> 
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				<th>id</th>
+    				<th>number</th>
     				<th>date</th>
     				<th>cover</th>
     				<th>pdf</th>
     				<th>Actions</th>
     				<th></th>
-			  	</tr> 
-			  </thead> 
-			  <tbody> 
+			  	</tr>
+			  </thead>
+			  <tbody>
 				  <% @issue.each do |issue| %>
           <tr>
             <td><%= issue.id %></td>
@@ -28,29 +28,29 @@
             <td><%= issue.date %></td>
             <td><%= link_to "show", issue.cover.url %></td>
             <td><%= link_to "show", issue.pdf.url %></td>
-            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_issue_path(issue) %></td>
-            <td><%= link_to image_tag("admin_html5/icn_trash.png"), issue, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_issue_path(issue) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,issue], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
-          <% end %> 
-			  </tbody> 
+          <% end %>
+			  </tbody>
 			  </table>
 				<%= paginate @issue %>
 			</div><!-- end of #tab1 -->
-			
+
 			<div id="tab2" class="tab_content">
-			<table class="tablesorter" cellspacing="0"> 
-			<thead> 
-				<tr>  
-    		  <th>id</th> 
-    			<th>number</th> 
+			<table class="tablesorter" cellspacing="0">
+			<thead>
+				<tr>
+    		  <th>id</th>
+    			<th>number</th>
     			<th>date</th>
     			<th>cover</th>
     			<th>pdf</th>
     			<th>Actions</th>
     			<th></th>
-				</tr> 
-			</thead> 
-			<tbody> 
+				</tr>
+			</thead>
+			<tbody>
 				<% @unpub_issue.each do |issue| %>
           <tr>
             <td><%= issue.id %></td>
@@ -58,17 +58,16 @@
             <td><%= issue.date %></td>
             <td><%= link_to "show", issue.cover.url %></td>
             <td><%= link_to "show", issue.pdf.url %></td>
-            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_issue_path(issue) %></td>
-            <td><%= link_to image_tag("admin_html5/icn_trash.png"), issue, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_issue_path(issue) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,issue], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
         <% end %>
-			</tbody> 
+			</tbody>
 			</table>
 				<%= paginate @unpub_issue, :param_name => :np_page%>
 			</div><!-- end of #tab2 -->
-			
+
 		</div><!-- end of .tab_container -->
-		
+
 </article><!-- end of content manager article -->
-		
 

@@ -8,61 +8,61 @@
 
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
-			  <table class="tablesorter" cellspacing="0"> 
-			  <thead> 
-				  <tr>  
-    				  <th>Title</th> 
-    				  <th>Category</th> 
+			  <table class="tablesorter" cellspacing="0">
+			  <thead>
+				  <tr>
+    				  <th>Title</th>
+    				  <th>Category</th>
     				  <th>Issue</th>
 						  <th>published</th>
     				  <th>Actions</th>
     				  <th></th>
-			  	</tr> 
-			  </thead> 
-			  <tbody> 
+			  	</tr>
+			  </thead>
+			  <tbody>
 				  <% @article.each do |article| %>
-				  <tr> 
-    				<td><%= article.title %></td> 
+				  <tr>
+    				<td><%= article.title %></td>
     				<td><%= article.category_name %></td>
 						<td><%= article.issue_number unless article.issue_id.nil? %></td>
 						<td><%= article.published  %></td>
-    				<td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_article_path(article) %></td>
-				    <td><%= link_to image_tag("admin_html5/icn_trash.png"), article, :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
+    				<td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_article_path(article) %></td>
+				    <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,article], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
 				  </tr>
 				  <% end %>
-			  </tbody> 
+			  </tbody>
 			  </table>
 				<%= paginate @article %>
 			</div><!-- end of #tab1 -->
-			
+
 			<div id="tab2" class="tab_content">
-			<table class="tablesorter" cellspacing="0"> 
-			<thead> 
-				<tr>  
-    				<th>Title</th> 
-    				<th>Category</th> 
+			<table class="tablesorter" cellspacing="0">
+			<thead>
+				<tr>
+    				<th>Title</th>
+    				<th>Category</th>
 						<th>published</th>
     				<th>Actions</th>
-    				<th><th> 
-				</tr> 
-			</thead> 
-			<tbody> 
+    				<th><th>
+				</tr>
+			</thead>
+			<tbody>
 				<% @nonis_article.each do |article| %>
-				<tr> 
-   					 
-    				<td><%= article.title %></td> 
+				<tr>
+
+    				<td><%= article.title %></td>
     				<td><%= article.category_name %></td>
 						<td><%= article.published  %></td>
-    				<td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_article_path(article) %></td>
-				    <td><%= link_to image_tag("admin_html5/icn_trash.png"), article, :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
+    				<td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_article_path(article) %></td>
+				    <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,article], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
 				</tr>
 				<% end %>
-			</tbody> 
+			</tbody>
 			</table>
 				<%= paginate @nonis_article, :param_name => :ni_page%>
 			</div><!-- end of #tab2 -->
-			
+
 		</div><!-- end of .tab_container -->
-		
+
 </article><!-- end of content manager article -->
-		
+

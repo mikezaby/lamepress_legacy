@@ -13,7 +13,7 @@ class Admin::BannerController < Admin::BaseController
   def create
 		@banner = Banner.new(params[:banner])
     if @banner.save
-      redirect_to(banners_path, :notice => 'Banner was successfully created.')
+      redirect_to(admin_banners_path, :notice => 'Banner was successfully created.')
     else
       render :action => "new"
     end
@@ -26,7 +26,7 @@ class Admin::BannerController < Admin::BaseController
   def update
   	@banner = Banner.find(params[:id])
     if @banner.update_attributes(params[:banner])
-      redirect_to(banners_path, :notice => 'Banner was successfully updated.')
+      redirect_to(admin_banners_path, :notice => 'Banner was successfully updated.')
     else
       render :action => "edit"
     end
@@ -35,7 +35,7 @@ class Admin::BannerController < Admin::BaseController
   def destroy
   	@banner = Banner.find(params[:id])
     @banner.destroy
-    redirect_to(banners_path)
+    redirect_to(admin_banners_path)
   end
 
   def show

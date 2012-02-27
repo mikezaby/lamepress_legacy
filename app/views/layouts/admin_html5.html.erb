@@ -77,50 +77,50 @@
 		<% if can? :manage, Article %>
 		<h3>Αρθρα</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Προσθήκη άρθρου", new_article_path %></li>
-			<li class="icn_edit_article"><%= link_to "Διαχείριση άρθρων", articles_path %></li>
+			<li class="icn_new_article"><%= link_to "Προσθήκη άρθρου", new_admin_article_path %></li>
+			<li class="icn_edit_article"><%= link_to "Διαχείριση άρθρων", admin_articles_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Issue %>
 		<h3>Φυλλα</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Προσθήκη φύλλου", new_issue_path %></li>
-			<li class="icn_categories"><%= link_to "Διαχείριση Φύλλων", issues_path %></li>
+			<li class="icn_new_article"><%= link_to "Προσθήκη φύλλου", new_admin_issue_path %></li>
+			<li class="icn_categories"><%= link_to "Διαχείριση Φύλλων", admin_issues_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Category %>
 		<h3>Κατηγοριες</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Προσθήκη κατηγορίας", new_category_path %></li>
-			<li class="icn_categories"><%= link_to "Διαχείριση κατηγοριών", categories_path %></li>
+			<li class="icn_new_article"><%= link_to "Προσθήκη κατηγορίας", new_admin_category_path %></li>
+			<li class="icn_categories"><%= link_to "Διαχείριση κατηγοριών", admin_categories_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Block %>
 		<h3>Blocks</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Προσθήκη block", new_block_path %></li>
-			<li class="icn_categories"><%= link_to "Διαχείριση block", blocks_path %></li>
+			<li class="icn_new_article"><%= link_to "Προσθήκη block", new_admin_block_path %></li>
+			<li class="icn_categories"><%= link_to "Διαχείριση block", admin_blocks_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Navigator %>
 		<h3>Navigator</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Προσθήκη navigator", new_navigator_path %></li>
-			<li class="icn_categories"><%= link_to "Διαχείριση navigator", navigators_path %></li>
+			<li class="icn_new_article"><%= link_to "Προσθήκη navigator", new_admin_navigator_path %></li>
+			<li class="icn_categories"><%= link_to "Διαχείριση navigator", admin_navigators_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Banner %>
 		<h3>Banner</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Προσθήκη banner", new_banner_path %></li>
-			<li class="icn_categories"><%= link_to "Διαχείριση banner", banners_path %></li>
+			<li class="icn_new_article"><%= link_to "Προσθήκη banner", new_admin_banner_path %></li>
+			<li class="icn_categories"><%= link_to "Διαχείριση banner", admin_banners_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, User %>
 		<h3>Xρηστες</h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><%= link_to "Προσθήκη χρήστη", new_user_path %></li>
-			<li class="icn_view_users"><%= link_to "Διαχείριση χρηστών", users_path %></li>
+			<li class="icn_add_user"><%= link_to "Προσθήκη χρήστη", new_admin_user_path %></li>
+			<li class="icn_view_users"><%= link_to "Διαχείριση χρηστών", admin_users_path %></li>
 		</ul>
 		<% end %>
 

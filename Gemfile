@@ -17,6 +17,7 @@ gem "paperclip", "~> 2.3.11"
 gem "ckeditor", "~> 3.6.3"
 gem 'kaminari'
 gem 'cancan'
+gem 'passenger'
 # Use unicorn as the web server
 # gem 'unicorn'
 

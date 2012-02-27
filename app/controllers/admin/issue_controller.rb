@@ -15,7 +15,7 @@ class Admin::IssueController < Admin::BaseController
 		@issue = Issue.new(params[:issue])
     @issue.create_linker(:permalink=>"/"+@issue.number.to_s)
     if @issue.save
-      redirect_to(issues_path, :notice => 'Issue was successfully created.')
+      redirect_to(admin_issues_path, :notice => 'Issue was successfully created.')
     else
       render :action => "new"
     end
@@ -28,7 +28,7 @@ class Admin::IssueController < Admin::BaseController
   def update
   	@issue = Issue.find(params[:id])
     if @issue.update_attributes(params[:issue])
-      redirect_to(issues_path, :notice => "The issue was successfully updated.")
+      redirect_to(admin_issues_path, :notice => "The issue was successfully updated.")
     else
       render :action => "edit"
     end
@@ -37,7 +37,7 @@ class Admin::IssueController < Admin::BaseController
   def destroy
   	@issue = Issue.find(params[:id])
     @issue.destroy
-    redirect_to(issues_path)
+    redirect_to(admin_issues_path)
   end
 
   def show

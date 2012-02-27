@@ -19,7 +19,7 @@ class Admin::CategoryController < Admin::BaseController
 			@category.create_linker(:permalink => "/"+@category.permalink)
 		end
     if @category.save
-      redirect_to(categories_path, :notice => 'Page was successfully created.')
+      redirect_to(admin_categories_path, :notice => 'Page was successfully created.')
     else
       render :action => "new"
     end
@@ -33,7 +33,7 @@ class Admin::CategoryController < Admin::BaseController
   	@category = Category.find(params[:id])
     @category.permalink=params[:category][:name].parameterize
     if @category.update_attributes(params[:category])
-      redirect_to(categories_path, :notice => 'Page was successfully updated.')
+      redirect_to(admin_categories_path, :notice => 'Page was successfully updated.')
     else
       render :action => "edit"
     end
@@ -42,7 +42,7 @@ class Admin::CategoryController < Admin::BaseController
   def destroy
   	@category = Category.find(params[:id])
     @category.destroy
-    redirect_to(categories_path)
+    redirect_to(admin_categories_path)
   end
 
   def show

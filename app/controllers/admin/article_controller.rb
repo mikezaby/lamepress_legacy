@@ -21,7 +21,7 @@ class Admin::ArticleController < Admin::BaseController
     if @article.save
       @article.create_ordering(:cat_pos => 99 ) unless @article.issue_id.nil?
       if @article.create_linker(:permalink => url)
-        redirect_to(articles_path, :notice => 'Page was successfully created.')
+        redirect_to(admin_articles_path, :notice => 'Page was successfully created.')
       else
         render :action => "new"
       end
@@ -37,7 +37,7 @@ class Admin::ArticleController < Admin::BaseController
   def update
   	@article = Article.find(params[:id])
     if @article.update_attributes(params[:article])
-      redirect_to(articles_path, :notice => 'Page was successfully updated.')
+      redirect_to(admin_articles_path, :notice => 'Page was successfully updated.')
     else
       render :action => "edit"
     end
@@ -46,7 +46,7 @@ class Admin::ArticleController < Admin::BaseController
   def destroy
   	@article = Article.find(params[:id])
     @article.destroy
-    redirect_to(articles_path)
+    redirect_to(admin_articles_path)
   end
 
   def show

@@ -25,8 +25,8 @@
             <td><%= banner.block.placement %></td>
             <td><%= banner.describe %></td>
             <td><%= link_to "show", banner.photo.url %></td>
-            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_banner_path(banner) %></td>
-            <td><%= link_to image_tag("admin_html5/icn_trash.png"), banner, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_banner_path(banner) %></td>
+            <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,banner], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
           <% end %>
 			  </tbody>

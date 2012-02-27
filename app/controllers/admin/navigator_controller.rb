@@ -25,7 +25,7 @@ class Admin::NavigatorController < Admin::BaseController
   def create
     @navigator = Navigator.new(params[:navigator])
     if @navigator.save
-      redirect_to(navigators_path, :notice => 'Navigator was successfully created.')
+      redirect_to(admin_navigators_path, :notice => 'Navigator was successfully created.')
     else
       render :action => "new"
     end
@@ -35,7 +35,7 @@ class Admin::NavigatorController < Admin::BaseController
     @navigator = Navigator.find(params[:id])
 
     if @navigator.update_attributes(params[:navigator])
-      redirect_to(navigators_path, :notice => 'Navigator was successfully updated.')
+      redirect_to(admin_navigators_path, :notice => 'Navigator was successfully updated.')
     else
       render :action => "edit"
     end
@@ -44,7 +44,7 @@ class Admin::NavigatorController < Admin::BaseController
   def destroy
     @navigator = Navigator.find(params[:id])
     @navigator.destroy
-    redirect_to(navigators_path)
+    redirect_to(admin_navigators_path)
   end
 
   def sorter

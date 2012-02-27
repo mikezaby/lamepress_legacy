@@ -44,8 +44,8 @@
               <td><%= navigator.id %></td>
               <td><%= navigator.name %></td>
               <td><%= navigator.block.name %></td>
-              <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_navigator_path(navigator) %></td>
-              <td><%= link_to image_tag("admin_html5/icn_trash.png"), navigator, :confirm => 'Are you sure?', :method => :delete %></td>
+              <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_navigator_path(navigator) %></td>
+              <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,navigator], :confirm => 'Are you sure?', :method => :delete %></td>
             </tr>
 			<% end %>
 

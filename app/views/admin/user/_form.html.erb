@@ -8,7 +8,7 @@
 		</h4>
 <% end %>
 
-<%= form_for @user do |f| %>
+<%= form_for [:admin,@user] do |f| %>
 <div class="module_content">
   <%= field_set_tag do %>
 		<%= f.label :email %>

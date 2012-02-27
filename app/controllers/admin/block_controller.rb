@@ -25,7 +25,7 @@ class Admin::BlockController < Admin::BaseController
     @block = Block.new(params[:block])
 
     if @block.save
-      redirect_to(blocks_path, :notice => 'Block was successfully created.')
+      redirect_to(admin_blocks_path, :notice => 'Block was successfully created.')
     else
       render :action => "new"
     end
@@ -36,7 +36,7 @@ class Admin::BlockController < Admin::BaseController
     @block = Block.find(params[:id])
 
     if @block.update_attributes(params[:block])
-      redirect_to(blocks_path, :notice => 'Block was successfully updated.')
+      redirect_to(admin_blocks_path, :notice => 'Block was successfully updated.')
     else
       render :action => "edit"
     end
@@ -46,7 +46,7 @@ class Admin::BlockController < Admin::BaseController
   def destroy
     @block = Block.find(params[:id])
     @block.destroy
-    redirect_to(blocks_path)
+    redirect_to(admin_blocks_path)
   end
 
    def sorter
