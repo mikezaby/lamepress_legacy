@@ -1,6 +1,9 @@
 class Category < ActiveRecord::Base
 
-	after_update :update_link
+  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
+
+	before_save :prettify_permalink
+	after_save :update_linker
 
 	has_many :articles
 	has_many :navigators, :as => :navigatable
@@ -8,7 +11,7 @@ class Category < ActiveRecord::Base
 	has_one :linker, :as => :linkerable, :dependent => :destroy
 
 	validates :name, :presence => true
-	validates :permalink, :presence => true, :uniqueness => true
+	validates :permalink, :uniqueness => true
 
 	attr_accessible :name, :permalink, :issued
   delegate :permalink, :to => :linker, :prefix => true
@@ -17,12 +20,19 @@ class Category < ActiveRecord::Base
     where("categories.permalink = ?", category)
   end
 
-  def update_link
+  def prettify_permalink
+    # parameterize function is nice but not as good as below
+    self.permalink = self.name
+    self.permalink = truncate(self.permalink.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
+  end
+
+  def update_linker
     if !self.issued
-      link = self.linker
+      linker = self.linker
 		  url= "/"+self.permalink
-		  if !link.nil?
-        link.update_attributes(:permalink => url)
+		  if !linker.nil?
+        linker.update_attributes(:permalink => url)
+        #self.articles.each {|article| article.save} #big proccess
       else
         self.create_linker(:permalink => url)
       end

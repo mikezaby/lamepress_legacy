@@ -6,6 +6,5 @@ class Linker < ActiveRecord::Base
 
 	attr_accessible :permalink, :linkerable_id, :linkerable_type
 
-
 end
 

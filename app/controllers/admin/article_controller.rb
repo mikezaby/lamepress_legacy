@@ -15,16 +15,9 @@ class Admin::ArticleController < Admin::BaseController
 
   def create
 		@article = Article.new(params[:article])
-		url=""
-		url= "/"+@article.issue_number.to_s unless @article.issue_id.nil?
-		url+="/"+@article.category_permalink+"/"+@article.title.parameterize unless @article.category_id.nil?
     if @article.save
       @article.create_ordering(:cat_pos => 99 ) unless @article.issue_id.nil?
-      if @article.create_linker(:permalink => url)
-        redirect_to(admin_articles_path, :notice => 'Page was successfully created.')
-      else
-        render :action => "new"
-      end
+      redirect_to(admin_articles_path, :notice => 'Page was successfully created.')
     else
       render :action => "new"
     end

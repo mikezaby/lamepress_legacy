@@ -14,10 +14,6 @@ class Admin::CategoryController < Admin::BaseController
 
   def create
   	@category = Category.new(params[:category])
-  	@category.permalink=@category.name.parameterize
-		if !@category.issued
-			@category.create_linker(:permalink => "/"+@category.permalink)
-		end
     if @category.save
       redirect_to(admin_categories_path, :notice => 'Page was successfully created.')
     else
@@ -31,7 +27,6 @@ class Admin::CategoryController < Admin::BaseController
 
   def update
   	@category = Category.find(params[:id])
-    @category.permalink=params[:category][:name].parameterize
     if @category.update_attributes(params[:category])
       redirect_to(admin_categories_path, :notice => 'Page was successfully updated.')
     else

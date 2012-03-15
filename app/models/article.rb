@@ -1,6 +1,8 @@
 class Article < ActiveRecord::Base
 
-  after_update :update_link, :assign_tags
+  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
+
+  before_update :update_linker
   after_save :assign_tags
 
   attr_writer :tag_names
@@ -70,20 +72,26 @@ class Article < ActiveRecord::Base
 	scope :iss_order, joins(:ordering).merge(Ordering.issue_ordered)
 	scope :cat_order, joins(:ordering).merge(Ordering.cat_ordered)
 
-	scope :issued , where("issue_id is not NULL").order('date DESC').includes(:issue, :category)
-	scope :non_issued , where("issue_id is NULL").order('date DESC').includes(:issue, :category)
+	scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
+	scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:issue, :category)
 
+  def prettify_permalink
+    # parameterize function is nice but not as good as below
+    self.title = truncate(self.title.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
+  end
 
   private
 
-  def update_link
-
-    link = self.linker
+  def update_linker
+    linker = self.linker
     url=""
 		url= "/"+self.issue_number.to_s unless self.issue_id.nil?
-		url+= "/"+self.category_permalink+"/"+self.title.parameterize unless self.category_id.nil?
-    link.update_attributes(:permalink => url)
-
+		url+= "/"+self.category_permalink+"/"+self.prettify_permalink unless self.category_id.nil?
+    if !linker.nil?
+      linker.update_attributes(:permalink => url)
+    else
+      self.create_linker(:permalink => url)
+    end
   end
 
 
