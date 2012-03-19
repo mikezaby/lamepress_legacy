@@ -1,6 +1,9 @@
-<% javascript 'dynamic_categories' %>
-<% javascript 'dynamic_dates' %>
-<% javascript 'misc' %>
+<% javascript 'djs/dynamic_categories' %>
+<% javascript 'djs/dynamic_dates' %>
+<% javascript 'djs/misc' %>
+<%= content_for :head do %>
+  <%= javascript_include_tag "ckeditor/init" %>
+<% end %>
 <% if @article.errors.any? %>
 		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
 			<ul>

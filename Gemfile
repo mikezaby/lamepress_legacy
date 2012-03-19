@@ -5,16 +5,26 @@ gem 'rails', '3.1.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+group :assets do
+  gem 'sass-rails', " ~> 3.1.0"
+  gem 'coffee-rails', " ~> 3.1.0"
+  gem 'uglifier'
+end
 
-gem 'pg', :group => :production
-gem 'thin', :group => :production
+
+group :production do
+  gem 'pg', :group => :production
+  gem 'thin', :group => :production
+end
+
+gem 'therubyracer'
+gem 'jquery-rails'
+gem "ckeditor", "3.7.0.rc3"
 gem 'railroady', :group => :development
 gem 'mysql2', "0.3.7"
 gem 'rake', "0.9.2.2"
 gem 'devise'
-gem 'jquery-rails', "1.0.14"
 gem "paperclip", "~> 2.3.11"
-gem "ckeditor", "~> 3.6.3"
 gem 'kaminari'
 gem 'cancan'
 gem 'passenger'

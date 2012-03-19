@@ -12,7 +12,7 @@ class Admin::BaseController < ApplicationController
 
 	layout :compute_layout
 	def compute_layout
-  	action_name ==  "show" ?  "base" : "admin_html5"
+  	action_name ==  "show" ?  "base" : "admin"
 	end
 
 

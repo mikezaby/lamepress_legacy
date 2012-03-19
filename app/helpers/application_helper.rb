@@ -3,7 +3,7 @@ module ApplicationHelper
 	include ActionView::Helpers::SanitizeHelper
 
 	def javascript(*files)
-  	content_for(:head) { javascript_include_tag(*files) }
+  	content_for(:scripts) { javascript_include_tag(*files) }
 	end
 
 	def stylesheet(*files)

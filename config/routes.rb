@@ -1,11 +1,12 @@
 Mizatron::Application.routes.draw do
 
-
+  mount Ckeditor::Engine => '/ckeditor'
 
 	devise_for :users, :controllers => { :registrations => "admin/user" }
 
   match '/ajax_handler/:action' => "ajax_handler"
-	match '/javascripts/:action.:format' => "javascripts"
+	match '/assets/djs/:action.:format' => "javascripts"
+
   get "base/index"
   root :to => 'linker#forward'
 
@@ -39,11 +40,6 @@ Mizatron::Application.routes.draw do
 
 	match 'article.php' => 'linker#php'
 
-	namespace :ckeditor do
-    resources :pictures, :only => [:index, :create, :destroy]
-  	resources :attachment_files, :only => [:index, :create, :destroy]
-  	resources :attachments, :only => [:index, :create, :destroy]
-	end
 
 	match '/:perma1(/:perma2(/:perma3))' => 'linker#forward'
 

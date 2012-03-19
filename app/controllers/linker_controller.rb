@@ -4,7 +4,7 @@ class LinkerController < ApplicationController
 
 
   def forward
-    begin
+    #begin
 
   	  #expire_fragment('article_11513')
   	  if !params[:perma1].nil?
@@ -62,9 +62,9 @@ class LinkerController < ApplicationController
   		  @mnom = "Den iparxeis"
   		  render :action => "mnom"
   	  end
-    rescue Exception => link
-      render :text => "controller=>linker </br> type => #{type}</br> id=> #{id}</br> error =>#{link.message}"
-    end
+#    rescue Exception => link
+#      render :text => "controller=>linker </br> type => #{type}</br> id=> #{id}</br> error =>#{link.message}"
+#    end
 
 
   end

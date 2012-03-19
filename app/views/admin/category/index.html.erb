@@ -23,8 +23,8 @@
             <td><%= category.id %></td>
             <td><%= category.name %></td>
             <td><%= category.permalink %></td>
-            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_category_path(category) %></td>
-            <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,category], :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_category_path(category) %></td>
+            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,category], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
           <% end %>
 			  </tbody>
@@ -48,8 +48,8 @@
             <td><%= category.id %></td>
             <td><%= category.name %></td>
             <td><%= category.permalink %></td>
-            <td><%= link_to image_tag("admin_html5/icn_edit.png"), edit_admin_category_path(category) %></td>
-            <td><%= link_to image_tag("admin_html5/icn_trash.png"), [:admin,category], :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_category_path(category) %></td>
+            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,category], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
           <% end %>
 			</tbody>
