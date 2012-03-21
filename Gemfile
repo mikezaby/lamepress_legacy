@@ -11,11 +11,11 @@ group :assets do
   gem 'uglifier'
 end
 
-
-group :production do
-  gem 'pg', :group => :production
-  gem 'thin', :group => :production
-end
+#this is for heroku
+#group :production do
+#  gem 'pg', :group => :production
+#  gem 'thin', :group => :production
+#end
 
 gem 'therubyracer'
 gem 'jquery-rails'
