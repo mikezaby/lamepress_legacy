@@ -24,9 +24,11 @@ Mizatron::Application.routes.draw do
       get "reproc", :on => :collection
     end
     resources :navigator, :as => :navigators do
-      get "sorter", :on => :collection
+      post "sorter", :on => :collection
     end
-    resources :block, :as => :blocks
+    resources :block, :as => :blocks do
+      post "sorter", :on => :collection
+    end
     resources :banner, :as => :banners
   end
 
