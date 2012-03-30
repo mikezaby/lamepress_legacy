@@ -56,11 +56,7 @@ module ApplicationHelper
 	end
 
 
-	def cat_link(article)
-		linkzor = "/"
-		linkzor += article.issue_number.to_s+"/" unless article.issue_id.nil?
-		linkzor += article.category_permalink
-	end
+
 
 end
 

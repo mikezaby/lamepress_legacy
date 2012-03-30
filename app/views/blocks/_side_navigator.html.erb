@@ -9,13 +9,13 @@
 	  <% left_nav = Navigator.list(@block.id) %>
 		<% left_nav.each do |navigator|%>
        <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
-          <li><%= (link_to navigator.name, "/"+@iss.to_s+"/"+(raw navigator.navigatable.permalink)) %></li>
+          <li><%= (link_to navigator.name, "/issue_"+@issue.number.to_s+"/"+(raw navigator.navigatable.permalink)) %></li>
         <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
           <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
         <% elsif navigator.navigatable_type == "Block" %>
           <li><%= link_to navigator.name, "/"+(raw navigator.navigatable.name) %></li>
         <% elsif navigator.navigatable_type == "Article" %>
-          <li><%= link_to navigator.name, (raw navigator.navigatable.linker_permalink) %></li>
+          <li><%= link_to navigator.name, article_permalink(navigator.navigatable) %></li>
         <% end %>
 		<% end %>
 	</div>

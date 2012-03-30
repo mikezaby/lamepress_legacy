@@ -48,7 +48,7 @@ class Article < ActiveRecord::Base
 	end
 
 	def self.one_art(issue_id, category_id)
-	  where("issue_id = ? and category_id = ?", issue_id, category_id)
+	  where(issue_id: issue_id, category_id: category_id)
 	end
 
 
@@ -77,7 +77,7 @@ class Article < ActiveRecord::Base
 
   def prettify_permalink
     # parameterize function is nice but not as good as below
-    self.title = truncate(self.title.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
+    truncate(self.title.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
   end
 
   private

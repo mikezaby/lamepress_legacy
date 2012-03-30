@@ -7,7 +7,7 @@
 	  <% search_issues = Issue.last_issues(5) %>
 	  <div class = "search_issues">
 	    <% search_issues.each do |search_issue| %>
-	      <%= link_to search_issue.number,search_issue.linker.permalink %>
+	      <%= link_to search_issue.number, "/issue_"+search_issue.number.to_s %>
 	    <% end %>
 	  </div>
   </div>

@@ -24,7 +24,7 @@ right=""
 			</h2>
 			<% end %>
 			<h1>
-				<%= link_to article.title, article.linker.permalink, :class => "art_title" %>
+				<%= link_to article.title, article_permalink(article), :class => "art_title" %>
 			</h1>
 		</div>
 		<% if article.photo_file_name %>
@@ -36,7 +36,7 @@ right=""
 			<%= raw article.html.summarize %>
 		</div>
 		<div class = "complete_article">
-			<%= (link_to  "Πλήρες άρθρο...", article.linker.permalink) %>
+			<%= (link_to  "Πλήρες άρθρο...", article_permalink(article)) %>
 		</div>
 
 		<div class = "full_redline"></div>
@@ -48,7 +48,7 @@ right=""
 		left+="<div class = 'half_main_panel_left'>
 								<div class=\"headart\">
 									<h3>
-										"+(link_to  (raw article.category.name)+image_tag("base/pointer.gif"), "/"+article.category.permalink)+"
+										"+(link_to  (raw article.category.name)+image_tag("base/pointer.gif"), cat_link(article))+"
 									</h3>" %>
 		<% if !article.hypertitle.nil? %>
 		<%	left+="		<h2>
@@ -56,14 +56,14 @@ right=""
 									</h2>" %>
 		<% end %>
 		<% left+="     <h1>
-										"+(link_to article.title, article.linker.permalink , :class => "art_title")+"
+										"+(link_to article.title, article_permalink(article), :class => "art_title")+"
 									</h1>
 								</div>
 	              <div class = 'article'>
 									"+article.html.summarize+"
 								</div>
 								<div class = 'complete_article'>
-									"+(link_to  "Πλήρες άρθρο...", article.linker.permalink)+"
+									"+(link_to  "Πλήρες άρθρο...", article_permalink(article))+"
 								</div>
 					</div>
 					<div class = \"half_redline\"></div>" %>
@@ -73,7 +73,7 @@ right=""
 		right+="<div class = 'half_main_panel_right'>
 								<div class=\"headart\">
 									<h3>
-										"+(link_to  (raw article.category.name)+image_tag("base/pointer.gif"), "/"+article.category.permalink)+"
+										"+(link_to  (raw article.category.name)+image_tag("base/pointer.gif"),cat_link(article))+"
 									</h3>" %>
 		<% if !article.hypertitle.nil? %>
 		<%	right+="		<h2>
@@ -81,14 +81,14 @@ right=""
 									</h2>" %>
 		<% end %>
 		<% right+="     <h1>
-										"+(link_to article.title, article.linker.permalink, :class => "art_title")+"
+										"+(link_to article.title,article_permalink(article), :class => "art_title")+"
 									</h1>
 								</div>
 	              <div class = 'article'>
 									"+article.html.summarize+"
 								</div>
 								<div class = 'complete_article'>
-									"+(link_to  "Πλήρες άρθρο...", article.linker.permalink)+"
+									"+(link_to  "Πλήρες άρθρο...", article_permalink(article))+"
 								</div>
 					</div>
 					<div class = \"half_redline\"></div>" %>

@@ -9,17 +9,17 @@
   <% cache '#header_red_block'+@issue.id.to_s do %>
 	<div class = "header_red_block">
 		<ul>
-			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/"+(raw @iss)%></li>
+			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/issue_"+(raw @issue.number)%></li>
         <% nav_list=Navigator.list(@head_block.id) %>
         <% nav_list.each do |navigator| %>
           <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
-            <li><%= (link_to navigator.name, "/"+@iss.to_s+"/"+(raw navigator.navigatable.permalink)) %></li>
+            <li><%= (link_to navigator.name, "/issue_"+@issue.number.to_s+"/"+(raw navigator.navigatable.permalink)) %></li>
           <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
             <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
           <% elsif navigator.navigatable_type == "Block" %>
             <li><%= link_to navigator.name, "/"+(raw navigator.navigatable.name) %></li>
           <% elsif navigator.navigatable_type == "Article" %>
-            <li><%= link_to navigator.name, (raw navigator.navigatable.linker_permalink) %></li>
+            <li><%= link_to navigator.name, article_permalink(navigator.navigatable) %></li>
           <% end %>
         <% end %>
 

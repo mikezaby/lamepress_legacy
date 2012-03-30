@@ -8,7 +8,7 @@ Mizatron::Application.routes.draw do
 	match '/assets/djs/:action.:format' => "javascripts"
 
   get "base/index"
-  root :to => 'linker#forward'
+  root :to => 'linker#root'
 
   match "search" => "search#index"
 
@@ -41,8 +41,8 @@ Mizatron::Application.routes.draw do
 	match 'article.php' => 'linker#php'
 
 
-	match '/:perma1(/:perma2(/:perma3))' => 'linker#forward'
-
+	match '/issue_:perma1(/:perma2(/:perma3))' => 'linker#issued'
+  match '/:perma1(/:perma2)' => 'linker#non_issued'
 
 end
 

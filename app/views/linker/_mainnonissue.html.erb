@@ -5,7 +5,7 @@ i=0
 left=""
 right=""
  %>
-<% cache @linker.linkerable.id.to_s+'#category' do %>
+<% cache @category.id.to_s+'#category' do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>
@@ -24,7 +24,7 @@ right=""
 			</h2>
 			<% end %>
 			<h1>
-				<%= link_to article.title, article.linker.permalink, :class => "art_title" %>
+				<%= link_to article.title, article_permalink(article), :class => "art_title" %>
 			</h1>
 		</div>
 		<% if article.photo_file_name %>
@@ -36,7 +36,7 @@ right=""
 			<%= raw article.html.summarize.bold("enet") %>
 		</div>
 		<div class = "complete_article">
-			<%= (link_to  "Πλήρες άρθρο...", article.linker.permalink) %>
+			<%= (link_to  "Πλήρες άρθρο...", article_permalink(article)) %>
 		</div>
 
 		<div class = "full_redline"></div>
@@ -56,14 +56,14 @@ right=""
 									</h2>" %>
 		<% end %>
 		<% left+="     <h1>
-										"+(link_to article.title, article.linker.permalink , :class => "art_title")+"
+										"+(link_to article.title, article_permalink(article) , :class => "art_title")+"
 									</h1>
 								</div>
 	              <div class = 'article'>
 									"+article.html.summarize+"
 								</div>
 								<div class = 'complete_article'>
-									"+(link_to  "Πλήρες άρθρο...", article.linker.permalink)+"
+									"+(link_to  "Πλήρες άρθρο...", article_permalink(article))+"
 								</div>
 					</div>
 					<div class = \"half_redline\"></div>" %>
@@ -81,14 +81,14 @@ right=""
 									</h2>" %>
 		<% end %>
 		<% right+="     <h1>
-										"+(link_to article.title, article.linker.permalink, :class => "art_title")+"
+										"+(link_to article.title, article_permalink(article), :class => "art_title")+"
 									</h1>
 								</div>
 	              <div class = 'article'>
 									"+article.html.summarize+"
 								</div>
 								<div class = 'complete_article'>
-									"+(link_to  "Πλήρες άρθρο...", article.linker.permalink)+"
+									"+(link_to  "Πλήρες άρθρο...", article_permalink(article))+"
 								</div>
 					</div>
 					<div class = \"half_redline\"></div>" %>
@@ -108,7 +108,7 @@ right=""
 				<%= raw right %>
 			</div>
       <div class="pager">
-			  <%= paginate @article %>
+			  <%#= paginate @article %>
 			</div>
 	</div>
 <% end %>
