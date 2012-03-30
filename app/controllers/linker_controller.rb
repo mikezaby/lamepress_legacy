@@ -9,6 +9,7 @@ class LinkerController < ApplicationController
   end
 
   def issued
+    @url = request.fullpath
     #article
     if !params[:perma3].nil?
       if (@article = Article.find_by_id(params[:perma3].split("-").first.to_i))
@@ -24,7 +25,8 @@ class LinkerController < ApplicationController
         if !@article.empty?
           render action: "catshow"
         else
-          render text: "den iparxoun arthra"
+          @message = "No articles for this category in specific issue"
+          render action: "empty"
         end
       else
         render_404
@@ -52,7 +54,8 @@ class LinkerController < ApplicationController
       if !@article.empty?
         render action: "Category"
       else
-        render text: "den iparxoun arthra"
+        @message = "No articles for this category"
+        render action: "empty"
       end
     else
       render_404

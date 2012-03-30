@@ -30,7 +30,7 @@ class Issue < ActiveRecord::Base
   def self.search_issues(year,month)
     date1=year.to_s+"-"+month.to_s+"-00"
     date2=year.to_s+"-"+month.to_s+"-31"
-    where("date > ? and date < ?", date1, date2).pub
+    where("date > ? and date < ?", date1, date2).pub.order("date DESC")
   end
 
   scope :pub , where("issues.published = TRUE")

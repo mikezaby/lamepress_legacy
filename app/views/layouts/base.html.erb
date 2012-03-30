@@ -7,36 +7,9 @@
 
 <%= stylesheet_link_tag 'base/stylesheet', 'base/jquery-ui', :media => 'all' %>
 <%= stylesheet_link_tag "fancybox/jquery.fancybox-1.3.4", :media => 'all' %>
-<%#= javascript_include_tag :defaults , :cache => 'cache/all2' %>
-<script>
-	!window.jQuery && document.write('<script src="/javascripts/jquery.min.js"><\/script>');
-</script>
-<%= javascript_include_tag "jquery-ui.min"  %>
-<%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack", "fancybox/jquery.mousewheel-3.0.4.pack"  %>
 <%= csrf_meta_tag %>
 <%= yield(:head) %>
-<script type="text/javascript">
-		$(document).ready(function() {
-			/*
-			*   Examples - images
-			*/
 
-			$("a#single").fancybox({
-				'overlayShow'	: false,
-				'transitionIn'	: 'elastic',
-				'transitionOut'	: 'elastic'
-			});
-
-			$("a[rel=album]").fancybox({
-				'transitionIn'		: 'none',
-				'transitionOut'		: 'none',
-				'titlePosition' 	: 'over',
-				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
-					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-				}
-			});
-		});
-	</script>
 </head>
 
 <body>
@@ -112,6 +85,30 @@
 
 </div>
 
+
+
+<%= javascript_include_tag "all"  %>
+<%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack", "fancybox/jquery.mousewheel-3.0.4.pack"  %>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		$("a#single").fancybox({
+			'overlayShow'	: false,
+			'transitionIn'	: 'elastic',
+			'transitionOut'	: 'elastic'
+		});
+
+		$("a[rel=album]").fancybox({
+			'transitionIn'		: 'none',
+			'transitionOut'		: 'none',
+			'titlePosition' 	: 'over',
+			'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+				return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+			}
+		});
+	});
+</script>
+<%= yield(:scripts) %>
 </body>
 </html>
 

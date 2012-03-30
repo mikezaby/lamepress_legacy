@@ -1,11 +1,13 @@
 <div class = "header_red_menu">
-<script type="text/javascript">
-	$(document).ready(function()
-    	{
-      	 $('a[href$="<%= @url %>"]:first').attr("id", "activated");
-   	 }
-	);
-</script>
+<% content_for :scripts do %>
+  <script type="text/javascript">
+  	$(document).ready(function()
+      	{
+        	 $('a[href$="<%= @url %>"]:first').attr("id", "activated");
+     	 }
+  	);
+  </script>
+<% end %>
   <% cache '#header_red_block'+@issue.id.to_s do %>
 	<div class = "header_red_block">
 		<ul>
