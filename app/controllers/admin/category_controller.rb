@@ -9,7 +9,6 @@ class Admin::CategoryController < Admin::BaseController
 
   def new
   	@category=Category.new
-		@linker=Linker.new
   end
 
   def create

@@ -13,7 +13,6 @@ class Admin::IssueController < Admin::BaseController
 
   def create
 		@issue = Issue.new(params[:issue])
-    @issue.create_linker(:permalink=>"/"+@issue.number.to_s)
     if @issue.save
       redirect_to(admin_issues_path, :notice => 'Issue was successfully created.')
     else

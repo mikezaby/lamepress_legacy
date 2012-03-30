@@ -4,7 +4,7 @@ class LinkerController < ApplicationController
 
   def root
     @issue = CurrentIssue.first.issue
-    @article = @issue.articles
+    @article = @article = Article.home(@issue.number.to_i)
     render action: "Issue"
   end
 

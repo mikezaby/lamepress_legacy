@@ -2,7 +2,6 @@ class Article < ActiveRecord::Base
 
   include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
 
-  before_update :update_linker
   after_save :assign_tags
 
   attr_writer :tag_names
@@ -11,7 +10,6 @@ class Article < ActiveRecord::Base
 	belongs_to :issue
 
 	has_one :ordering
-	has_one :linker, :as => :linkerable, :dependent => :destroy
 
 	has_many :navigators, :as => :navigatable, :dependent => :destroy
 	has_many :taggings, :dependent => :destroy
@@ -23,11 +21,10 @@ class Article < ActiveRecord::Base
 	validates :html, :presence => true
 	validates :category_id, :presence => true
 
-  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id, :date, :published, :hypertitle, :linker_permalink, :photo
+  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id, :date, :published, :hypertitle, :photo
 
 	delegate :number, :date, :cover, :pdf, :published, :to => :issue, :prefix => true
 	delegate :name, :permalink, :issued, :to => :category, :prefix => true
-	delegate :permalink, :to => :linker, :prefix => true
 	delegate :issue_pos, :cat_pos, :to => :ordering, :prefix => true
 
   has_attached_file :photo,
@@ -81,19 +78,6 @@ class Article < ActiveRecord::Base
   end
 
   private
-
-  def update_linker
-    linker = self.linker
-    url=""
-		url= "/"+self.issue_number.to_s unless self.issue_id.nil?
-		url+= "/"+self.category_permalink+"/"+self.prettify_permalink unless self.category_id.nil?
-    if !linker.nil?
-      linker.update_attributes(:permalink => url)
-    else
-      self.create_linker(:permalink => url)
-    end
-  end
-
 
   def assign_tags
     if @tag_names
