@@ -30,6 +30,10 @@ Mizatron::Application.routes.draw do
       post "sorter", :on => :collection
     end
     resources :banner, :as => :banners
+    resources :setting, :as => :settings, :only => [:create, :update, :destroy] do
+      get "current_issue", :on => :collection
+      get "block_placements", :on => :collection
+    end
   end
 
   match '/admin' => 'admin/base#index'

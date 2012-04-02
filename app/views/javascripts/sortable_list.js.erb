@@ -1,5 +1,5 @@
 $(document).ready(function() {
-<% for i in 1..6 %>
+<% for i in 1..10 %>
 	$( "#sortable<%= i %>" ).sortable({placeholder: "ui-state-highlight", update: function() {
 				//alert(AUTH_TOKEN);
 				$.ajax({

@@ -3,10 +3,12 @@ class Admin::BlockController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @block_top = Block.place('top')
-    @block_left = Block.place('left')
-    @block_right = Block.place('right')
-    @block_bottom = Block.place('bottom')
+    @blocks = Array.new
+    @block_placements = Setting.block_placements
+    @block_placements.each do |placement|
+      block = Block.place(placement)
+      @blocks += [block] unless block.empty?
+    end
   end
 
   def show
@@ -15,10 +17,12 @@ class Admin::BlockController < Admin::BaseController
 
   def new
     @block = Block.new
+    @block_placements = Setting.block_placements
   end
 
   def edit
     @block = Block.find(params[:id])
+    @block_placements = Setting.block_placements
   end
 
   def create

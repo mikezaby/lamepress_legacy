@@ -1,0 +1,39 @@
+<% javascript 'djs/dynamic_dates' %>
+<% if @setting.errors.any? %>
+  <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+    <ul>
+      <% @setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </h4>
+<% end %>
+<%= form_for [:admin,@setting] do |f| %>
+<div class="module_content">
+  
+  <%= field_set_tag nil, :style => "width:25%; float:left;margin-left:20px;margin-right: 2%;" do %>
+  <%= f.label "Current Issue", {:style => "float:left;width:84%"} %>
+    <select id="year" style="float:left;width:33%;margin-left:2%;margin-right:0;">
+      <option value="0">Year</option>
+      <% time = Time.new;year=1990 %>
+      <% for year in (time.year+1).downto(1990) %>
+        <option value=<%= year %>><%= year %></option>
+      <% end %>
+    </select>
+    <select id="month" style="float:left;width:25%;margin-left:2%;margin-right:0;">
+      <option value="0">Month</option>
+      <% for month in '01'..'12' %>
+        <option value="<%= month %>"><%= month %></option>
+      <% end %>
+    </select>
+    <%= f.collection_select :meta_value, Issue.find(:all, :order => "number DESC"), :id, :number, {:prompt => "Issue"}, {:style => "float:left;width:30%;margin-left:2%;", :id => "article_issue_id"}  %>
+    
+    <div class="submit_link">
+      <%= f.submit :confirm => "Are you sure?" %>
+    </div>
+  <% end %>
+
+  <div class="clear"></div>
+</div>
+
+<% end %>

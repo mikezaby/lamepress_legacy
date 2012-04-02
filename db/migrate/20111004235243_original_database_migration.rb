@@ -60,12 +60,6 @@ class OriginalDatabaseMigration < ActiveRecord::Migration
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
-  create_table "current_issues", :force => true do |t|
-    t.integer  "issue_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "issues", :force => true do |t|
     t.integer  "number"
     t.date     "date"
@@ -80,14 +74,6 @@ class OriginalDatabaseMigration < ActiveRecord::Migration
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
-  end
-
-  create_table "linkers", :force => true do |t|
-    t.integer  "linkerable_id"
-    t.string   "linkerable_type"
-    t.string   "permalink"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "navigators", :force => true do |t|
@@ -146,7 +132,6 @@ class OriginalDatabaseMigration < ActiveRecord::Migration
     drop_table :users
     drop_table :orderings
     drop_table :navigators
-    drop_table :linkers
     drop_table :issues
     drop_table :current_issues
     drop_table :ckeditor_assets

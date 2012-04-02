@@ -1,6 +1,5 @@
 class Issue < ActiveRecord::Base
 	has_many :articles, :dependent => :destroy
-	has_one :current_issue
 
 	has_attached_file :cover,
 										:url  => "/media/issues/:id/:style_issue_:id.:extension",

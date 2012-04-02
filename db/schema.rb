@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026121940) do
+ActiveRecord::Schema.define(:version => 20120402125021) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -73,12 +73,6 @@ ActiveRecord::Schema.define(:version => 20111026121940) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
-  create_table "current_issues", :force => true do |t|
-    t.integer  "issue_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "issues", :force => true do |t|
     t.integer  "number"
     t.date     "date"
@@ -95,14 +89,6 @@ ActiveRecord::Schema.define(:version => 20111026121940) do
     t.datetime "pdf_updated_at"
   end
 
-  create_table "linkers", :force => true do |t|
-    t.integer  "linkerable_id"
-    t.string   "linkerable_type"
-    t.string   "permalink"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "navigators", :force => true do |t|
     t.string   "name"
     t.integer  "block_id"
@@ -117,6 +103,13 @@ ActiveRecord::Schema.define(:version => 20111026121940) do
     t.integer  "article_id"
     t.integer  "issue_pos"
     t.integer  "cat_pos"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "meta_key"
+    t.string   "meta_value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -15,14 +15,14 @@
  		<%= f.text_field :name %>
  	<% end %>
 
- 	<%= field_set_tag do %>
+  <%= field_set_tag nil, :style => "width:48%; float:left;margin-left:0%;margin-right: 2%;" do %>
 		<%= f.label :placement %>
- 		<%= f.text_field :placement %>
+ 		<%= f.select :placement, @block_placements, {:style => "width:84%;"} %>
  	<% end %>
 
- 	<%= field_set_tag do %>
+  <%= field_set_tag nil, :style => "width:49%; float:left;margin-left:0%;margin-right: 0%;" do %>
 		<%= f.label :mode %>
- 		<%= f.text_field :mode %>
+ 		<%= f.text_field :mode, {:style => "width:84%;"} %>
  	<% end %>
 
  	<%= (f.hidden_field :position, :value => 0) unless @act=="update" %>

@@ -3,7 +3,7 @@ class LinkerController < ApplicationController
   layout "base"
 
   def root
-    @issue = CurrentIssue.first.issue
+    @issue = Setting.current_issue
     @article = @article = Article.home(@issue.number.to_i)
     render action: "Issue"
   end

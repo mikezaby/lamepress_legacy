@@ -7,7 +7,7 @@ class Ability
       can :manage, User
     end
     if user.role? :moderator
-      can :manage, [Block, Navigator, Banner]
+      can :manage, [Block, Navigator, Banner, Setting]
     end
     if user.role? :author
       can :manage, [Article, Issue, Category]

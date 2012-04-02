@@ -6,4 +6,6 @@ public/ckeditor_assets/**/*
 public/javascripts/cache/*
 public/stylesheets/cache/*
 .sass-cache/
+.bundle
+bin
 
