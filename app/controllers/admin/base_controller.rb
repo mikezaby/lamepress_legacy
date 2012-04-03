@@ -6,13 +6,12 @@ class Admin::BaseController < ApplicationController
     redirect_to admin_path, :alert => exception.message
   end
 
-  #
-
-
+  
 
 	layout :compute_layout
-	def compute_layout
-  	action_name ==  "show" ?  "base" : "admin"
+	
+  def compute_layout
+  	(action_name ==  "show" and controller_name == "Article") ?  "base" : "admin"
 	end
 
 

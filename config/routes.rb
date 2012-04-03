@@ -13,23 +13,23 @@ Mizatron::Application.routes.draw do
   match "search" => "search#index"
 
   namespace :admin do
-    resources :user, :as => :users do
+    resources :user, :as => :users, :except => [:show] do
        get "roles", :on => :member
     end
-    resources :category, :as => :categories
+    resources :category, :as => :categories, :except => [:show]
     resources :article, :as => :articles do
       get "reproc", :on => :collection
     end
-    resources :issue, :as => :issues do
+    resources :issue, :as => :issues, :except => [:show] do
       get "reproc", :on => :collection
     end
-    resources :navigator, :as => :navigators do
+    resources :navigator, :as => :navigators, :except => [:show] do
       post "sorter", :on => :collection
     end
-    resources :block, :as => :blocks do
+    resources :block, :as => :blocks, :except => [:show] do
       post "sorter", :on => :collection
     end
-    resources :banner, :as => :banners
+    resources :banner, :as => :banners, :except => [:show]
     resources :setting, :as => :settings, :only => [:create, :update, :destroy] do
       get "current_issue", :on => :collection
       get "block_placements", :on => :collection

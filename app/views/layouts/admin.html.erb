@@ -45,7 +45,7 @@
 		<h3>Articles</h3>
 		<ul class="toggle">
 			<li class="icn_new_article"><%= link_to "Add Article", new_admin_article_path %></li>
-			<li class="icn_edit_article"><%= link_to "Manage Articles", admin_articles_path %></li>
+			<li class="icn_categories"><%= link_to "Manage Articles", admin_articles_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Issue %>
@@ -70,14 +70,14 @@
 		</ul>
 		<% end %>
 		<% if can? :manage, Navigator %>
-		<h3>Navigator</h3>
+		<h3>Navigators</h3>
 		<ul class="toggle">
 			<li class="icn_new_article"><%= link_to "Add Navigator", new_admin_navigator_path %></li>
 			<li class="icn_categories"><%= link_to "Manage Navigators", admin_navigators_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Banner %>
-		<h3>Banner</h3>
+		<h3>Banners</h3>
 		<ul class="toggle">
 			<li class="icn_new_article"><%= link_to "Add Banner", new_admin_banner_path %></li>
 			<li class="icn_categories"><%= link_to "Manage Banners", admin_banners_path %></li>
