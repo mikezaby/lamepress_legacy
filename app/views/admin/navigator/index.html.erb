@@ -1,60 +1,42 @@
 <% javascript 'djs/sortable_list' %>
 <article class="module width_full">
-		<header><h3 class="tabs_involved">Navigator Manager</h3>
-		  <ul class="tabs">
-		  <% block_id="" %>
-      <% i=0 %>
-		  <% @navigator.each do |navigator| %>
-		    <% if navigator.block_id!=block_id or block_id==""%>
-		      <% i+=1 %>
-		      <% block_id = navigator.block_id %>
-          <li><a href="#tab<%= i %>"><%= navigator.block.name%></a></li>
-		    <% end %>
-		  <% end %>
-		  </ul>
-		</header>
-
-		<div class="tab_container">
-      <% block_id="" %>
-      <% i=0 %>
-			<% @navigator.each do |navigator| %>
-			  <% if navigator.block_id!=block_id or block_id==""%>
-				  <% i+=1 %>
-				  <% if block_id!="" %>
-				    </tbody>
-				    </table>
-			      </div>
-				  <% end %>
-				  <% block_id = navigator.block_id %>
-				  <div id="tab<%= i %>" class="tab_content">
-			    <table class="tablesorter" cellspacing="0">
-				    <input id="url<%= i %>" value="/admin/navigator/sorter?block_id=<%= block_id %>" type="hidden" />
-			      <thead>
-				      <tr>
-    				    <th>id</th>
-    				    <th>name</th>
-    				    <th>block</th>
-    				    <th></th>
-    				    <th></th>
-			  	    </tr>
-            </thead>
-			      <tbody id="sortable<%= i %>">
-			    <% end %>
-				    <tr id="page_<%= navigator.id %>">
-              <td><%= navigator.id %></td>
-              <td><%= navigator.name %></td>
-              <td><%= navigator.block.name %></td>
-              <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_navigator_path(navigator) %></td>
-              <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,navigator], :confirm => 'Are you sure?', :method => :delete %></td>
-            </tr>
-			<% end %>
-
-          </tbody>
-				</table>
-      </div>
-
-
-		</div><!-- end of .tab_container -->
+    <header><h3 class="tabs_involved">navigator Manager</h3>
+    <ul class="tabs">
+      <% i = 0 %>
+      <% @navigator_blocks.each do |block| %>
+        <% i += 1 %>
+        <li><a href="#tab_<%= block.id %>"><%= block.name %></a></li>
+        <input id="url<%= i %>" value="/admin/navigator/sorter?block_id=<%= block.id %>" type="hidden" />
+      <% end %>
+    </ul>
+    </header>
+    <div class="tab_container">
+            <% i = 0 %>
+            <% @navigators.each do |navigators| %>
+              <% i += 1 %>
+              <div id="tab_<%= navigators.first.block.id unless navigators.first.nil? %>" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>Action</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="sortable<%= i %>">
+                  <% navigators.each do |navigator| %>
+                    <tr id="page_<%= navigator.id %>" class="handle">
+                      <td><%= navigator.id %></td>
+                      <td><%= navigator.name %></td>
+                      <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_navigator_path(navigator) %></td>
+                      <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,navigator], :confirm => 'Are you sure?', :method => :delete %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+                </table>
+              </div><!-- end of #tab1 -->
+            <% end %>
+    </div><!-- end of .tab_container -->
 
 </article><!-- end of content manager article -->
-

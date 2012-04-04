@@ -3,7 +3,8 @@ class Admin::NavigatorController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @navigator = Navigator.orderit
+    @navigator_blocks = Setting.navigator_blocks
+    @navigators = @navigator_blocks.map(&:id).collect {|block_id| Navigator.list(block_id)}
   end
 
   def show
