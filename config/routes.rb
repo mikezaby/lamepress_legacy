@@ -33,6 +33,7 @@ Mizatron::Application.routes.draw do
     resources :setting, :as => :settings, :only => [:create, :update, :destroy] do
       get "current_issue", :on => :collection
       get "block_placements", :on => :collection
+      get "navigator_blocks", :on => :collection
     end
   end
 

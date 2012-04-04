@@ -10,5 +10,9 @@ class Block < ActiveRecord::Base
 		where('placement = ?', place).order('position')
 	end
 
+  def self.get_name(id)
+    find_by_id(id).name
+  end
+
 end
 

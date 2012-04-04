@@ -13,9 +13,9 @@
 <div class="module_content">
   
   <%= field_set_tag nil, :style => "width:400px; float:left;margin-left:20px;margin-right: 2%;" do %>
-    <%= f.label "Block Placement", {:style => "float:left;width:84%"} %>
-    <%= f.text_field :meta_value, {:style => "width:365px;"} %>
-    <%= f.hidden_field :meta_key, :value => "block_placement" %>
+    <%= f.label "Navigator's Block", {:style => "float:left;width:84%"} %>
+    <%= f.collection_select :meta_value, Block.find(:all), :id, :name, {:prompt => "Select a Block"}, {:style => "width:365px;"} %>
+    <%= f.hidden_field :meta_key, :value => "navigator_block" %>
     <div class="submit_link">
       <%= f.submit "Create Block Placement" %>
     </div>
@@ -25,7 +25,7 @@
 </div>
 <% end %>
 <article class="module width_full">
-    <header><h3 class="tabs_involved">Block Manager</h3>
+    <header><h3 class="tabs_involved">Navigator's Blocks Managment</h3>
     </header>
 
     <div class="tab_container">
@@ -33,7 +33,7 @@
         <table class="tablesorter" cellspacing="0">
         <thead>
           <tr>
-              <th>Block Placement</th>
+              <th>Navigator's Block</th>
               <th>Actions</th>
               <th></th>
           </tr>
@@ -41,7 +41,7 @@
         <tbody>
           <% @settings.each do |setting| %>
           <tr>
-            <td><%= setting.meta_value %></td>
+            <td><%= Block.get_name(setting.meta_value) %></td>
             <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,setting], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
           <% end %>

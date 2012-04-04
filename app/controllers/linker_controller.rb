@@ -43,13 +43,13 @@ class LinkerController < ApplicationController
   def non_issued
     if !params[:perma2].nil?
       if (@article = Article.find_by_id(params[:perma2].split("-").first.to_i))
-        @issue = CurrentIssue.first.issue
+        @issue = Setting.current_issue
         render action: "Article"
       else
         render_404
       end
     elsif (@category = Category.where(permalink: params[:perma1], issued: false).first)
-      @issue =  CurrentIssue.first.issue
+      @issue = Setting.current_issue
       @article = Article.where(category_id: @category.id)
       if !@article.empty?
         render action: "Category"
