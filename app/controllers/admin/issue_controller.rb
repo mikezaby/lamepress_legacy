@@ -39,18 +39,15 @@ class Admin::IssueController < Admin::BaseController
     redirect_to(admin_issues_path)
   end
 
-  def show
-  	@issue = Issue.find(params[:id])
-  end
 
-  def reproc
-    issue = Issue.find(:all)
-    issue.each do |iss|
-      iss.update_attributes(:cover => File.open("/home/miza/rails/mizatron/public/phpmedia/issue_"+iss.number.to_s+"/issue_"+iss.number.to_s+".jpg"), :pdf => File.open("/home/miza/rails/mizatron/public/phpmedia/issue_"+iss.number.to_s+"/issue_"+iss.number.to_s+".pdf"))
-      #iss.update_attributes(:cover_file
-    end
-    render :text => "y0"
-  end
+  # def reproc
+  #   issue = Issue.find(:all)
+  #   issue.each do |iss|
+  #     iss.update_attributes(:cover => File.open("/home/miza/rails/mizatron/public/phpmedia/issue_"+iss.number.to_s+"/issue_"+iss.number.to_s+".jpg"), :pdf => File.open("/home/miza/rails/mizatron/public/phpmedia/issue_"+iss.number.to_s+"/issue_"+iss.number.to_s+".pdf"))
+  #     #iss.update_attributes(:cover_file
+  #   end
+  #   render :text => "y0"
+  # end
 
 
 end

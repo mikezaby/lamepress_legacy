@@ -39,9 +39,6 @@ class Admin::CategoryController < Admin::BaseController
     redirect_to(admin_categories_path)
   end
 
-  def show
-  	@category = Category.find_by_permalink(params[:permalink])
-  end
 
 end
 

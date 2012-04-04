@@ -7,14 +7,6 @@ class Admin::NavigatorController < Admin::BaseController
     @navigators = @navigator_blocks.map(&:id).collect {|block_id| Navigator.list(block_id)}
   end
 
-  def show
-    @navigator = Navigator.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
-  end
-
   def new
     @navigator = Navigator.new
   end
@@ -49,14 +41,12 @@ class Admin::NavigatorController < Admin::BaseController
   end
 
   def sorter
-    navigators = Navigator.where("block_id =?",params['block_id'])
-    navigators.each do |navigator|
+    Navigator.where(block_id: params['block_id']).each do |navigator|
       navigator.position = params['page'].index(navigator.id.to_s) + 1
       navigator.save
     end
 	#delete_cache
     render :nothing => true
-     #logger.info 'informational message'
   end
 
 

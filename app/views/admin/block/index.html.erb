@@ -14,7 +14,7 @@
             <% i = 0 %>
             <% @blocks.each do |blocks| %>
                 <% i += 1 %>
-    			<div id="tab_<%= blocks.first.placement %>" class="tab_content">
+    			<div id="tab_<%= blocks.first.placement unless blocks.first.nil? %>" class="tab_content">
     			  <table class="tablesorter" cellspacing="0">
     			  <thead>
     				  <tr>

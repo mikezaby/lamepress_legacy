@@ -43,9 +43,5 @@ class Admin::UserController < Admin::BaseController
     redirect_to(admin_users_path)
   end
 
-  def show
-  	 @user = User.find(params[:id])
-  end
-
 end
 

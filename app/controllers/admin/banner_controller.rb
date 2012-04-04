@@ -38,9 +38,5 @@ class Admin::BannerController < Admin::BaseController
     redirect_to(admin_banners_path)
   end
 
-  def show
-  end
-
-
 end
 

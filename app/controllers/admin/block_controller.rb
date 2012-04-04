@@ -3,16 +3,8 @@ class Admin::BlockController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @blocks = Array.new
     @block_placements = Setting.block_placements
-    @block_placements.each do |placement|
-      block = Block.place(placement)
-      @blocks += [block] unless block.empty?
-    end
-  end
-
-  def show
-    @block = Block.find(params[:id])
+    @blocks =  @block_placements.collect {|placement| Block.place(placement) }
   end
 
   def new
@@ -54,8 +46,7 @@ class Admin::BlockController < Admin::BaseController
   end
 
    def sorter
-    blocks = Block.place(params['place'])
-    blocks.each do |block|
+    Block.place(params['place']).each do |block|
       block.position = params['page'].index(block.id.to_s) + 1
       block.save
     end
