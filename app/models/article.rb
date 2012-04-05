@@ -5,6 +5,7 @@ class Article < ActiveRecord::Base
   after_save :assign_tags
 
   attr_writer :tag_names
+  attr_accessor :preview
 
 	belongs_to :category
 	belongs_to :issue
@@ -21,7 +22,7 @@ class Article < ActiveRecord::Base
 	validates :html, :presence => true
 	validates :category_id, :presence => true
 
-  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id, :date, :published, :hypertitle, :photo
+  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id, :date, :published, :hypertitle, :photo, :preview
 
 	delegate :number, :date, :cover, :pdf, :published, :to => :issue, :prefix => true
 	delegate :name, :permalink, :issued, :to => :category, :prefix => true

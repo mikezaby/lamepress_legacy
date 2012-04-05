@@ -11,7 +11,7 @@ class Admin::BaseController < ApplicationController
 	layout :compute_layout
 	
   def compute_layout
-  	(action_name ==  "show" and controller_name == "Article") ?  "base" : "admin"
+  	(action_name == "show" and controller_name == "article") ?  "base" : "admin"
 	end
 
 

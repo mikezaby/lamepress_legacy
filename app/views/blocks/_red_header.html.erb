@@ -8,7 +8,7 @@
   	);
   </script>
 <% end %>
-  <% cache '#header_red_block'+@issue.id.to_s do %>
+<% cache '#header_red_block'+@issue.id.to_s do %>
 	<div class = "header_red_block">
 		<ul>
 			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/issue_"+(raw @issue.number)%></li>
