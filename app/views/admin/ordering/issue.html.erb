@@ -1,0 +1,45 @@
+<% javascript 'djs/sortable_list' %>
+<input id="url1" value="/admin/ordering/sorter?what=issue" type="hidden" />
+
+<%= form_for :ordering, :url => { :action => "update_issue" } do |f| %>
+<div class="module_content">
+  
+  <%= field_set_tag nil, :style => "width:650px; float:left;margin-left:20px;margin-right: 2%;" do %>
+    <%= f.label "Issue  #{@issue.number} - Not ordered articles", {:style => "float:left;width:84%"} %>
+    <%= f.collection_select :id, @not_ordered, :id, :article_title, {},{:style => "height:300px;",:multiple => true} %>
+    <div class="submit_link">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+  <div class="clear"></div>
+</div>
+<% end %>
+<article class="module width_full">
+    <header><h3 class="tabs_involved">Issue  <%= @issue.number %> - Ordered articles</h3>
+    </header>
+
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+        <thead>
+          <tr>
+              <th>Article Title</th>
+              <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="sortable1">
+          <% @ordered.each do |ordered| %>
+          <tr id="page_<%= ordered.ordering.id %>" class="handle">
+            <td><%= ordered.title %></td>
+            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,ordered.ordering], :confirm => 'Are you sure?', :method => :delete %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+
+      </div><!-- end of #tab1 -->
+
+    </div><!-- end of .tab_container -->
+
+</article><!-- end of content manager article -->

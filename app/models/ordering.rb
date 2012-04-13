@@ -4,7 +4,6 @@ class Ordering < ActiveRecord::Base
 	scope :issue_ordered, exist.order("issue_pos")
 	scope :cat_ordered, order("cat_pos")
 
-
-
+  delegate :title, :issue_id, :to => :article, :prefix => true
 end
 

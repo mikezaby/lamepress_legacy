@@ -10,7 +10,7 @@ class Ability
       can :manage, [Block, Navigator, Banner]
     end
     if user.role? :author
-      can :manage, [Article, Issue, Category]
+      can :manage, [Article, Issue, Category, Ordering]
     end
 
     # Define abilities for the passed in user here. For example:

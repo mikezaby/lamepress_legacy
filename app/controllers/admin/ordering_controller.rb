@@ -1,0 +1,48 @@
+class Admin::OrderingController < Admin::BaseController
+  
+  load_and_authorize_resource
+
+  def index
+  end
+
+  def issue
+    articles = Article.joins(:ordering).where(issue_id: params[:issue_id])
+    @issue = articles.first.issue
+    @not_ordered = articles.merge(Ordering.where(issue_pos: nil)).collect {|article| article.ordering}
+    @ordered = articles.merge(Ordering.where("issue_pos is not null").order("issue_pos ASC"))
+  end
+
+  def category
+    @articles = Article.joins(:ordering).where(issue_id: params[:issue_id], category_id: params[:category_id]).order("cat_pos ASC")
+  end
+
+  def update_issue
+    orderings = Ordering.find(params[:ordering][:id])
+    orderings.each do |ordering|
+      ordering.issue_pos=99
+      ordering.save
+    end
+    flash[:notice] = 'Ordering updated'
+    redirect_to :back
+  end
+
+  def destroy
+    ordering = Ordering.find(params[:id])
+    ordering.issue_pos = nil
+    ordering.save
+    redirect_to :back
+  end
+
+  def sorter
+    Ordering.find(params['page']).each do |ordering|
+      if params['what'] == "issue"
+        ordering.issue_pos = params['page'].index(ordering.id.to_s) + 1
+      elsif params['what'] == "category"
+        ordering.cat_pos = params['page'].index(ordering.id.to_s) + 1
+      end
+      ordering.save
+    end
+    render :nothing => true
+  end
+
+end

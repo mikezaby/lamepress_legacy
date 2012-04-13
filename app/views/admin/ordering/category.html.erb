@@ -1,0 +1,30 @@
+<% javascript 'djs/sortable_list' %>
+<input id="url1" value="/admin/ordering/sorter?what=category" type="hidden" />
+
+<% end %>
+<article class="module width_full">
+    <header><h3 class="tabs_involved">Issue  <%= @articles.first.issue_number %> - Category <%= @articles.first.category_name %></h3>
+    </header>
+
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+        <thead>
+          <tr>
+              <th>Article Title</th>
+          </tr>
+        </thead>
+        <tbody id="sortable1">
+          <% @articles.each do |article| %>
+          <tr id="page_<%= article.ordering.id %>" class="handle">
+            <td><%= article.title %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+
+      </div><!-- end of #tab1 -->
+
+    </div><!-- end of .tab_container -->
+
+</article><!-- end of content manager article -->

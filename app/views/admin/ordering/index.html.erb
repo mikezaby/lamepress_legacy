@@ -1,0 +1,19 @@
+<% javascript 'djs/date_picker' %>
+<%= form_tag "" do %>
+<div class="module_content">
+  
+  <%= field_set_tag nil, :style => "width:250px; float:left;margin-left:20px;" do %>
+    <%= label_tag "Date" %>
+    <%= text_field :date,{}, {:class => "date-picker",:style => "float:left;width:220px;"} %>
+    <% search_issues = Issue.last_created(10) %>
+    <div class = "search_issues" style="float:left;width:100%;text-align:center;">
+      <% search_issues.each do |search_issue| %>
+        <%= field_set_tag nil, :style => "margin-left:10px;margin-right:10px;background-color:#666666;" do %>
+          <%= link_to search_issue.number, issue_admin_orderings_path(:issue_id => search_issue.id), :method => :post %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+<% end %>

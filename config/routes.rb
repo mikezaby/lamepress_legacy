@@ -20,6 +20,13 @@ Mizatron::Application.routes.draw do
     resources :article, :as => :articles do
       #get "reproc", :on => :collection
     end
+    resources :ordering, :as => :orderings, :only => [:index, :destroy]  do
+      post "update_issue", :on => :collection
+      post 'issue', :on => :collection
+      get 'category(/:issue_id/:category_id)', :action => "issue", :on => :collection
+      post "sorter", :on => :collection
+    end
+
     resources :issue, :as => :issues, :except => [:show] do
       #get "reproc", :on => :collection
     end

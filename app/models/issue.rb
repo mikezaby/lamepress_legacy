@@ -25,6 +25,10 @@ class Issue < ActiveRecord::Base
     order("number DESC").pub.limit(number)
   end
 
+  def self.last_created(number)
+    order("created_at DESC").limit(number)
+  end
+
   def self.search_issues(year,month)
     date1=year.to_s+"-"+month.to_s+"-00"
     date2=year.to_s+"-"+month.to_s+"-31"

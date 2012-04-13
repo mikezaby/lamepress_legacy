@@ -10,7 +10,7 @@ class Article < ActiveRecord::Base
 	belongs_to :category
 	belongs_to :issue
 
-	has_one :ordering
+	has_one :ordering, :dependent => :delete
 
 	has_many :navigators, :as => :navigatable, :dependent => :destroy
 	has_many :taggings, :dependent => :destroy
