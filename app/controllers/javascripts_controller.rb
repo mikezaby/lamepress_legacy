@@ -20,5 +20,9 @@ class JavascriptsController < ApplicationController
 
 	end
 
+	def admin_date_picker
+		
+	end
+
 end
 

@@ -22,8 +22,7 @@ Mizatron::Application.routes.draw do
     end
     resources :ordering, :as => :orderings, :only => [:index, :destroy]  do
       post "update_issue", :on => :collection
-      post 'issue', :on => :collection
-      get 'category(/:issue_id/:category_id)', :action => "issue", :on => :collection
+      get 'priority', :on => :collection
       post "sorter", :on => :collection
     end
 

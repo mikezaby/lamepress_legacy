@@ -29,10 +29,14 @@ class Issue < ActiveRecord::Base
     order("created_at DESC").limit(number)
   end
 
-  def self.search_issues(year,month)
+  def self.search_issues(year,month,published)
     date1=year.to_s+"-"+month.to_s+"-00"
     date2=year.to_s+"-"+month.to_s+"-31"
-    where("date > ? and date < ?", date1, date2).pub.order("date DESC")
+    if published
+      where("date > ? and date < ?", date1, date2).pub.order("date DESC")
+    else
+      where("date > ? and date < ?", date1, date2).order("date DESC")
+    end
   end
 
   scope :pub , where("issues.published = TRUE")

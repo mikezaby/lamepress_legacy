@@ -5,15 +5,23 @@ class Admin::OrderingController < Admin::BaseController
   def index
   end
 
-  def issue
-    articles = Article.joins(:ordering).where(issue_id: params[:issue_id])
-    @issue = articles.first.issue
-    @not_ordered = articles.merge(Ordering.where(issue_pos: nil)).collect {|article| article.ordering}
-    @ordered = articles.merge(Ordering.where("issue_pos is not null").order("issue_pos ASC"))
+  def priority
+    if params[:issue_id].present? and params[:category_id].present?
+      @articles = Article.joins(:ordering).where(issue_id: params[:issue_id], category_id: params[:category_id]).order("cat_pos ASC")
+      render "category"
+    elsif params[:issue_id].present?
+      articles = Article.joins(:ordering).where(issue_id: params[:issue_id])
+      @issue = articles.first.issue
+      @not_ordered = articles.merge(Ordering.where(issue_pos: nil)).collect {|article| article.ordering}
+      @ordered = articles.merge(Ordering.where("issue_pos is not null").order("issue_pos ASC"))
+      render "issue"
+    else
+      redirect_to admin_orderings_path, :notice => "Wrong values"
+    end
   end
 
   def category
-    @articles = Article.joins(:ordering).where(issue_id: params[:issue_id], category_id: params[:category_id]).order("cat_pos ASC")
+    
   end
 
   def update_issue

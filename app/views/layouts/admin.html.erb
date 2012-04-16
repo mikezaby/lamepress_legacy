@@ -46,6 +46,7 @@
 		<ul class="toggle">
 			<li class="icn_new_article"><%= link_to "Add Article", new_admin_article_path %></li>
 			<li class="icn_categories"><%= link_to "Manage Articles", admin_articles_path %></li>
+			<li class="icn_categories"><%= link_to "Priority of Articles", admin_orderings_path %></li>
 		</ul>
 		<% end %>
 		<% if can? :manage, Issue %>

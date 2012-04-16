@@ -1,18 +1,43 @@
-<% javascript 'djs/date_picker' %>
+<% javascript 'djs/admin_date_picker' %>
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $('#Category_id').change(function() {
+      if ($('#Category_id').val() ==  "") {
+        $(".issue_link").each(function() {
+          var issue_id = $(this).attr("href").match(/issue_id=([0-9]+)/)[1];
+          $(this).attr("href", "/admin/ordering/priority?issue_id="+issue_id);
+        });
+      }
+      else {
+        $(".issue_link").each(function() {
+          var issue_id = $(this).attr("href").match(/issue_id=([0-9]+)/)[1];
+          var category_id = $('#Category_id').val();
+          $(this).attr("href", "/admin/ordering/priority?issue_id="+issue_id+"&category_id="+category_id);
+        });
+      }
+    });
+    </script>
+<% end %>
 <%= form_tag "" do %>
-<div class="module_content">
+<div class="module_content" style="float:left;" >
   
   <%= field_set_tag nil, :style => "width:250px; float:left;margin-left:20px;" do %>
-    <%= label_tag "Date" %>
-    <%= text_field :date,{}, {:class => "date-picker",:style => "float:left;width:220px;"} %>
+    <%= label_tag "Select an issue" %>
+    <%= text_field :date, {}, {:value => "Select a date for other issues", :class => "date-picker", :style => "float:left;width:220px;"} %>
     <% search_issues = Issue.last_created(10) %>
     <div class = "search_issues" style="float:left;width:100%;text-align:center;">
       <% search_issues.each do |search_issue| %>
-        <%= field_set_tag nil, :style => "margin-left:10px;margin-right:10px;background-color:#666666;" do %>
-          <%= link_to search_issue.number, issue_admin_orderings_path(:issue_id => search_issue.id), :method => :post %>
-        <% end %>
+        <%= link_to search_issue.number, priority_admin_orderings_path(:issue_id => search_issue.id), :class => "issue_link" %>
       <% end %>
     </div>
+  <% end %>
+  <div class="clear"></div>
+</div>
+<div class="module_content" style="float:left;">
+  
+  <%= field_set_tag nil, :style => "width:300px; float:left;margin-left:20px;" do %>
+    <p style="margin-left:10px;width:280px;"><b>Select if you want to order category of an issue and after pick issue</b></p>
+    <%= collection_select Category, :id, Category.issued, :id, :name, {:prompt => ""},  :style => "width:270px;" %>
   <% end %>
   <div class="clear"></div>
 </div>

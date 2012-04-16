@@ -684,6 +684,24 @@ overflow-y: scroll;
 
 /* New/Edit Article Module */
 
+a.issue_link{
+	float:left;
+	width:230px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	padding: 1% 0%;
+	margin: 10px 10px 0 10px;
+	background-color:#666666;
+	&:hover {
+		background-color:#DDDDDD;
+		color:#666666;
+		font-weight:bold;
+		text-decoration:none;
+	}
+}
+
 fieldset {
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
