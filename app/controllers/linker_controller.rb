@@ -50,7 +50,7 @@ class LinkerController < ApplicationController
       end
     elsif (@category = Category.where(permalink: params[:perma1], issued: false).first)
       @issue = Setting.current_issue
-      @article = Article.where(category_id: @category.id)
+      @article = Article.where(category_id: @category.id).order("date DESC").page(params[:page]).per(10)
       if !@article.empty?
         render action: "Category"
       else
@@ -62,6 +62,19 @@ class LinkerController < ApplicationController
     end
   end
 
+  def php
+    if !params[:article_id].nil?
+      if (@article = Article.find_by_id(params[:article_id].to_i))
+        url1 = @article.issue_id.present? ? "/issue_#{@article.issue_number}" : ""
+        @url = "#{url1}/#{@article.category_name}/#{@article.id}-#{@article.prettify_permalink}"
+        redirect_to @url
+      else
+        render_404
+      end
+    else
+      render_404
+    end
+  end
 
 end
 

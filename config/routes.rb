@@ -19,6 +19,7 @@ Mizatron::Application.routes.draw do
     resources :category, :as => :categories, :except => [:show]
     resources :article, :as => :articles do
       #get "reproc", :on => :collection
+      get 'page/:page', :action => :index, :on => :collection
     end
     resources :ordering, :as => :orderings, :only => [:index, :destroy]  do
       post "update_issue", :on => :collection
@@ -53,9 +54,10 @@ Mizatron::Application.routes.draw do
 
 	match 'article.php' => 'linker#php'
 
-
-	match '/issue_:perma1(/:perma2(/:perma3))' => 'linker#issued'
-  match '/:perma1(/:perma2)' => 'linker#non_issued'
+  match '/issue_:perma1(/:perma2/page/:page)' => 'linker#issued'
+	match '/issue_:perma1(/:perma2(/:perma3(/page/:page)))' => 'linker#issued'
+  match '/:perma1/page/:page' => 'linker#non_issued'
+  match '/:perma1((/page/:page)/:perma2)' => 'linker#non_issued'
 
 end
 

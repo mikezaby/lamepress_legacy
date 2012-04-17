@@ -93,10 +93,7 @@ right=""
 					</div>
 					<div class = \"half_redline\"></div>" %>
 	<% end %>
-
 <% end %>
-
-	<%#= pagerz("tade", @article.current_page, @article.page_count) %>
 
 			<div class = "half_main_left">
 				<%= raw left %>
@@ -108,7 +105,7 @@ right=""
 				<%= raw right %>
 			</div>
       <div class="pager">
-			  <%#= paginate @article %>
+			  <%= paginate @article %>
 			</div>
 	</div>
 <% end %>

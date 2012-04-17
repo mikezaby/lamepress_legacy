@@ -18,6 +18,13 @@
     });
     </script>
 <% end %>
+<% content_for :head do %>
+  <style>
+  .ui-datepicker-calendar {
+      display: none;
+      }
+  </style>
+<% end %>
 <%= form_tag "" do %>
 <div class="module_content" style="float:left;" >
   

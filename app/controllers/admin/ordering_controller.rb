@@ -8,7 +8,7 @@ class Admin::OrderingController < Admin::BaseController
   def priority
     if params[:issue_id].present? and params[:category_id].present?
       @articles = Article.joins(:ordering).where(issue_id: params[:issue_id], category_id: params[:category_id]).order("cat_pos ASC")
-      render "category"
+      @articles.first.nil? ? (redirect_to admin_orderings_path, :notice => "No articles in this category") : (render "category")
     elsif params[:issue_id].present?
       articles = Article.joins(:ordering).where(issue_id: params[:issue_id])
       @issue = articles.first.issue
