@@ -5,12 +5,18 @@ class Admin::ArticleController < Admin::BaseController
   cache_sweeper :article_sweeper
 
   def index
+    @q = Article.search(params[:q]) 
   	@article = Article.issued.page(params[:page]).per(20)
 		@nonis_article = Article.non_issued.page(params[:ni_page]).per(20)
   end
 
   def new
   	@article=Article.new
+  end
+
+  def search
+    @q = Article.search(params[:q])
+    @article = @q.result(:distinct => true).page(params[:page]).per(20)
   end
 
   def create

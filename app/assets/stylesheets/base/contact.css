@@ -1,0 +1,140 @@
+.cont_panel
+{
+float:left;
+width:751px;
+height:auto;
+}
+
+.ymonth
+{
+text-align:center;
+width:100%;
+}
+
+/* ---------------   Contact    -----------------------*/
+.map
+{
+width:366px;
+height:auto;
+float:left; 
+}
+
+.map img
+{
+width:364px;
+height:232px;
+border:1px solid gray;
+}
+
+.dmap
+{
+width:100%;
+height:0px;
+float:left; 
+}
+
+.dmap img
+{
+width:0px;
+height:0px;
+border:0px;
+}
+
+.cont
+{
+width:734px;
+height:auto;
+font-weight:bold;
+float:left;
+text-align:center;
+color:black;
+}
+
+.cont_title
+{
+float:left;
+width:100%;
+height:auto;
+font-weight:bold;
+float:left;
+text-align:center;
+color:black;
+margin-bottom:5px;
+}
+
+.inf
+{
+width:356px;
+
+float:left;
+height:auto;
+min-height:226px;
+text-align:center;
+border:1px solid gray;
+margin-right:4px;
+padding:3px;
+color:#7a6b67;
+}
+
+.inf a
+{
+text-decoration:none;
+color:red;
+font-weight:bold;
+}
+
+.inf a:hover
+{
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+
+.superfullredline
+{
+float:left;
+width:734px;
+height:4px;
+background-color:red;
+margin-right:17px;
+margin-top:9px;
+margin-bottom:8px;
+}
+/* ---------------  END Of Contact    -----------------------*/
+
+
+
+/*---------------  POSTERS   -----------------------------*/
+.posters
+{
+float:left;
+width:734px;
+}
+
+
+.lastimg img
+{
+width:19%;
+height:auto;
+margin-bottom:5px;
+float:left;
+}
+
+.normimg img
+{
+width:19%;
+height:auto;
+margin-right:1.25%;
+margin-bottom:5px;
+float:left;
+}
+/*------------ End of posters  -----------------------------*/
+
+/*------------ non issue  ------------------------------*/
+.announ
+{
+float:left;
+width:734px;
+}
+
+

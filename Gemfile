@@ -17,6 +17,7 @@ end
 #  gem 'thin', :group => :production
 #end
 
+gem "ransack"
 gem 'therubyracer'
 gem 'jquery-rails'
 gem "ckeditor", "3.7.0.rc3"

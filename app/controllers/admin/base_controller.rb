@@ -5,7 +5,6 @@ class Admin::BaseController < ApplicationController
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to admin_path, :alert => exception.message
   end
-
   
 
 	layout :compute_layout

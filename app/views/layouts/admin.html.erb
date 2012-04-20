@@ -37,9 +37,9 @@
 	</section><!-- end of secondary bar -->
 
 	<aside id="sidebar" class="column">
-		<form class="quick_search">
-			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
-		</form>
+		<%= search_form_for [:admin, Article.search(params[:q])], :url => search_admin_articles_path, :html => {:class => "quick_search"}  do |f| %>
+			<%= f.text_field :title_cont, { :value => "Quick Search", :onfocus => "if(!this._haschanged){this.value=''};this._haschanged=true;" }%>
+		<% end %>
 		<hr/>
 		<% if can? :manage, Article %>
 		<h3>Articles</h3>

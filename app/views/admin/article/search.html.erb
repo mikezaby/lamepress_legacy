@@ -1,0 +1,52 @@
+<%= search_form_for [:admin, @q], :url => search_admin_articles_path do |f| %>
+  <div class="module_content">
+    <%= field_set_tag nil, :style => "margin-left:1%;" do %>
+      <%= f.text_field :title_cont, {:onfocus => "if(!this._haschanged){this.value=''};this._haschanged=true;", :style => "width:24%;margin-left:1%;" }%>
+      <%= f.text_field :issue_number_gt, :style => "width:8%;margin-left:1%;" %>
+      <%= f.text_field :issue_number_lt, :style => "width:8%;margin-left:1%;" %>
+      <%= f.collection_select :category_id_eq, Category.find(:all), :id, :name, {:prompt => "Select a Category", :include_blank => true}, :style => "width:24%;margin-left:1%;" %>
+      <%= f.select :published_eq, "<option  value=\"\" selected=\"selected\"><option  value=\"1\">Published</option><option value=\"0\">Hidden</option>", {}, :style => "width:5%;"%>
+      <%= f.submit %>
+    <% end %>
+  </div>
+<% end %>
+<div class="clear"></div>
+<article class="module width_full">
+    <header><h3 class="tabs_involved">Content Manager</h3>
+    </header>
+
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+        <thead>
+          <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Issue</th>
+              <th>published</th>
+              <th>Actions</th>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @article.each do |article| %>
+          <tr>
+            <td><%= article.title %></td>
+            <td><%= article.category_name %></td>
+            <td><%= article.issue_number unless article.issue_id.nil? %></td>
+            <td><%= article.published  %></td>
+            <td><%= link_to image_tag("admin/show.png"), admin_article_path(article), :target => "blank" %></td>
+            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_article_path(article) %></td>
+            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,article], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+        <%= paginate @article %>
+      </div><!-- end of #tab1 -->
+
+    </div><!-- end of .tab_container -->
+
+</article><!-- end of content manager article -->
+

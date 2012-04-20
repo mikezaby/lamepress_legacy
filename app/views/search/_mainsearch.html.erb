@@ -1,0 +1,25 @@
+<div class="cont_panel">
+	<div class="cont_panel">
+		<div class="cont">Αναζήτηση</div>
+		<div class="superfullredline"></div>
+		<div class="announ">
+
+			
+			<% @article.each do |article| %>
+			<div class = "article_title">
+				<%=link_to article.title, article_permalink(article)%>
+			</div>
+			<div class = "nonisarticle">
+				<%= article.html.summarize %>
+			</div>
+			<div class = "complete_article">
+				<%= (link_to  "Πλήρες άρθρο...", article_permalink(article)) %>
+			</div>
+			
+			<% end %>
+		</div>
+	</div>		
+	<div class="pager">
+		<%= paginate @article %>
+	</div>
+</div>
