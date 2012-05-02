@@ -13,6 +13,5 @@ class Block < ActiveRecord::Base
   def self.get_name(id)
     find_by_id(id).name
   end
-
 end
 

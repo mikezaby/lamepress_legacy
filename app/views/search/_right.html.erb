@@ -1,11 +1,5 @@
 <!--########## Right column ########-->
 <div class = "right_col">
-
-      <% blocks_right= Block.place('right') %>
-      <% blocks_right.each do |block| %>
-        <% @block=block %>
-        <%= render 'blocks/'+block.mode %>
-      <% end %>
-
+  <%= block "right" %>
 </div>
 

@@ -1,13 +1,5 @@
 <!--########## Left column ########-->
-
-
-﻿<div class = "left_col">
-
-  <% blocks_left= Block.place('left') %>
-  <% blocks_left.each do |block| %>
-    <% @block=block %>
-    <%= render 'blocks/'+block.mode %>
-  <% end %>
-
+<div class = "left_col">
+  <%= block "left" %>
 </div>
 

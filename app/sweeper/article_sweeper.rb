@@ -21,7 +21,7 @@ class ArticleSweeper < ActionController::Caching::Sweeper
     # Expire a fragment
     expire_fragment('article#'+article.id.to_s)
     expire_fragment('home_cat#'+article.issue_id.to_s+"-"+article.category_id.to_s) unless article.issue_id.nil?
-    expire_fragment('home_issue#'+article.issue_id.to_s) unless article.issue_id.nil?
+    expire_fragment('home_issue#'+article.issue_id.to_s) unless (article.issue_id.nil? or article.ordering.issue_pos.nil?)
   end
 end
 

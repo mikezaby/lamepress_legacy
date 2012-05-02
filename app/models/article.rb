@@ -55,11 +55,11 @@ class Article < ActiveRecord::Base
 	end
 
 	def self.art_cat(category)
-  	joins(:category).merge(Category.get_cat(category))
+  	where(published: true).joins(:category).merge(Category.get_cat(category))
   end
 
 	def self.art_issue(number)
-  	joins(:issue).merge(Issue.get_issue(number))
+  	where(published: true).joins(:issue).merge(Issue.get_issue(number))
   end
 
   def self.last_arts(number)

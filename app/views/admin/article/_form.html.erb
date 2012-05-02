@@ -3,6 +3,12 @@
 <% javascript 'djs/misc' %>
 <%= content_for :head do %>
   <%= javascript_include_tag "ckeditor/init" %>
+  <script type="text/javascript">
+    CKEDITOR.config.language = 'el';
+    CKEDITOR.config.entities_greek = false ;
+    CKEDITOR.entities_latin = false;
+    CKEDITOR.autoParagraph = false;
+  </script>
 <% end %>
 <% if @article.errors.any? %>
 		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:

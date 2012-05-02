@@ -7,7 +7,6 @@ right=""
 %>
 <% keywords(@issue.number.to_s) %>
 <% cache 'home_issue#'+@issue.id.to_s do %>
-<%#	@article = Article.home(params[:perma1]) %>
 <% @article.each do |article| %>
 	<% if i==0 %>
 	<% i=1 %>

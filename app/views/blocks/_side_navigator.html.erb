@@ -1,15 +1,15 @@
-<% cache @issue.id.to_s+'#side_navigator' do %>
+<% cache 'side_navigator' do %>
 <div class = "side_panel">
   <div class = "title">
-		<%= @block.name %>
+		<%= block.name %>
 	</div>
   <div class = "side_blackline_4px"></div>
 
 	<div class = "stiles">
-	  <% left_nav = Navigator.list(@block.id) %>
+	  <% left_nav = Navigator.list(block.id) %>
 		<% left_nav.each do |navigator|%>
        <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
-          <li><%= (link_to navigator.name, "/issue_"+@issue.number.to_s+"/"+(raw navigator.navigatable.permalink)) %></li>
+          <li><%= (link_to navigator.name, "/issue_[lp#issue_number]/"+(raw navigator.navigatable.permalink)) %></li>
         <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
           <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
         <% elsif navigator.navigatable_type == "Block" %>

@@ -11,6 +11,11 @@ group :assets do
   gem 'uglifier'
 end
 
+
+group :development do
+  gem 'quiet_assets'
+  gem 'railroady'
+end
 #this is for heroku
 #group :production do
 #  gem 'pg', :group => :production
@@ -21,7 +26,6 @@ gem "ransack"
 gem 'therubyracer'
 gem 'jquery-rails'
 gem "ckeditor", "3.7.0.rc3"
-gem 'railroady', :group => :development
 gem 'mysql2', "0.3.7"
 gem 'rake', "0.9.2.2"
 gem 'devise'
