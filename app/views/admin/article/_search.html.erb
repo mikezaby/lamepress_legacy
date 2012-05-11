@@ -1,0 +1,58 @@
+<% content_for :scripts do %>
+  <script language="javascript">
+    <!--
+    $(document).ready(function()
+    {
+        $(".defaultText").focus(function(srcc)
+        {
+            if ($(this).val() == $(this)[0].title)
+            {
+                $(this).removeClass("defaultTextActive");
+                $(this).val("");
+            }
+        });
+        
+        $(".defaultText").blur(function()
+        {
+            if ($(this).val() == "")
+            {
+                $(this).addClass("defaultTextActive");
+                $(this).val($(this)[0].title);
+            }
+        });
+        
+        $(".defaultText").blur();        
+        
+        $("form").submit(function() {
+          $(".defaultText").each(function() {
+            if($(this).val() == this.title) {
+              $(this).val("");
+            }
+          });
+        });
+    });
+
+    //-->
+  </script>
+<% end %>
+
+<% content_for :head do %>
+  <style media="screen" type="text/css">
+    .defaultText { width: 300px; }
+    .defaultTextActive { color: #a1a1a1; font-style: italic; }
+  </style>
+<% end %>
+
+<%= search_form_for [:admin, @q], :url => search_admin_articles_path do |f| %>
+  <div class="module_content">
+    <%= field_set_tag nil, :style => "margin-left:1%;" do %>
+      <%= f.text_field :title_cont, {:title => "Title", :class => "defaultText", :style => "width:24%;margin-left:1%;" }%>
+      <%= f.text_field :issue_number_gteq, :style => "width:8%;margin-left:1%;", :title => "from issue", :class => "defaultText" %>
+      <%= f.text_field :issue_number_lteq, :style => "width:8%;margin-left:1%;", :title => "to issue", :class => "defaultText" %>
+      <%= f.collection_select :category_id_eq, Category.find(:all), :id, :name, {:prompt => "Select a Category", :include_blank => true}, :style => "width:24%;margin-left:1%;" %>
+      <%= f.select :published_eq, "<option  value=\"\" selected=\"selected\"><option  value=\"1\">Published</option><option value=\"0\">Hidden</option>", {}, :style => "width:5%;"%>
+      <%= f.submit %>
+    <% end %>
+  </div>
+<% end %>
+<div class="clear"></div>
