@@ -25,7 +25,7 @@ module ApplicationHelper
   def block(name)
     partials = ""
     Block.place(name).each do |block|
-      partials += render :partial => 'blocks/'+block.mode, :locals => { block: block}
+      partials += render :partial => 'blocks/'+block.partial, :locals => { block: block}
     end
     raw partials
   end

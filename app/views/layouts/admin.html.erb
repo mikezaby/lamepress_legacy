@@ -6,6 +6,8 @@
 	<title>Dashboard I Admin Panel</title>
 
 	<%= stylesheet_link_tag 'admin/all', :media => 'all' %>
+	<%= stylesheet_link_tag "fancybox/jquery.fancybox-1.3.4", :media => 'all' %>
+
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -96,8 +98,6 @@
 		<ul class="toggle">
 			<li class="icn_settings"><%= link_to "Current Issue", current_issue_admin_settings_path %></li>
 			<li class="icn_settings"><%= link_to "Block Placements", block_placements_admin_settings_path %></li>
-			<li class="icn_settings"><%= link_to "Navigator's Blocks", navigator_blocks_admin_settings_path %></li>
-
 		</ul>
 		<% end %>
 
@@ -121,11 +121,18 @@
   <%= javascript_include_tag "admin/all" %>
   <%= yield(:scripts) %>
   <script type="text/javascript">
+
+	  $(document).ready(function() {
+			$("a#single").fancybox();
+			$("a#pdf").fancybox({'frameWidth' : 700, 'frameHeight': 600, 'overlayShow': true, 'hideOnContentClick': false});
+		});
+
 	  $(document).ready(function()
     {
       $(".tablesorter").tablesorter();
     });
 	  $(document).ready(function() {
+
 
 	    //When page loads...
 	    $(".tab_content").hide(); //Hide all content

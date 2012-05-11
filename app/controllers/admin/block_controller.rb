@@ -19,7 +19,7 @@ class Admin::BlockController < Admin::BaseController
 
   def create
     @block = Block.new(params[:block])
-
+    @block.position = 99
     if @block.save
       redirect_to(admin_blocks_path, :notice => 'Block was successfully created.')
     else

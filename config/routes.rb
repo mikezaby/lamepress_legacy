@@ -37,11 +37,12 @@ Mizatron::Application.routes.draw do
     resources :block, :as => :blocks, :except => [:show] do
       post "sorter", :on => :collection
     end
-    resources :banner, :as => :banners, :except => [:show]
+    resources :banner, :as => :banners, :except => [:show] do
+      post "sorter", :on => :collection
+    end
     resources :setting, :as => :settings, :only => [:create, :update, :destroy] do
       get "current_issue", :on => :collection
       get "block_placements", :on => :collection
-      get "navigator_blocks", :on => :collection
     end
   end
 

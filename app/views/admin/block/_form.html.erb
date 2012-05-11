@@ -24,8 +24,11 @@
 		<%= f.label :mode %>
  		<%= f.text_field :mode, {:style => "width:84%;"} %>
  	<% end %>
-
- 	<%= (f.hidden_field :position, :value => 0) unless @act=="update" %>
+  <div class="clear"></div>
+  <%= field_set_tag do %>
+    <%= f.label :partial %>
+    <%= f.text_field :partial %>
+  <% end %>
 
  <div class="clear"></div>
 </div>

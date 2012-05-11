@@ -17,7 +17,7 @@
 
  	<%= field_set_tag do %>
 		<%= f.label :block_id %>
-    <%= f.collection_select :block_id, Setting.navigator_blocks, :id, :name, {:prompt => "Select a Block"} %>
+    <%= f.collection_select :block_id, Block.get_mode("navigator"), :id, :name, {:prompt => "Select a Block"} %>
  	<% end %>
 
  	<%= field_set_tag do %>

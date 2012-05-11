@@ -1,7 +1,7 @@
 <% banners = Banner.get_banner(block.id) %>
 <% banners.each do |banner| %>
   <div class = 'right_col_img1'>
-    <%= link_to (image_tag banner.photo.url, :border => 0, :width => "232px", :alt => banner.describe), banner.url, :target => "blank"   %>
+    <%= (banner.url.nil? or banner.url.empty?) ? (link_to (image_tag banner.photo.url, border: 0, width: "232px", alt: banner.describe), banner.check_url, id: "single") : (link_to (image_tag banner.photo.url, border: 0, width: "232px", alt: banner.describe), banner.check_url, target: "blank") %>
   </div>
 <% end %>
 

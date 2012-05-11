@@ -2,11 +2,9 @@ class Banner < ActiveRecord::Base
 
   belongs_to :block
 
-  before_save :check_url
-
   has_attached_file :photo,
-										:url  => "/media/banner/:filename.:extension",
-                  	:path => ":rails_root/public/media/banner/:filename.:extension"
+										:url  => "/media/banner/:filename",
+                  	:path => ":rails_root/public/media/banner/:filename"
 
   validates :block_id, :presence => true
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/gif']
@@ -15,17 +13,13 @@ class Banner < ActiveRecord::Base
 
   delegate :name, :placement, :to => :block, :prefix => true
 
-  def self.get_banner(blockid)
-    where("block_id = ?", blockid)
+  def self.get_banner(block_id)
+    where("block_id = ?", block_id).order("position ASC")
   end
 
-
-  private
   
   def check_url
-    if self.url.nil? or self.url == ""
-      self.url = self.photo.url
-    end
+    (self.url.nil? or self.url.empty?) ? self.photo.url : self.url
   end
 
 end

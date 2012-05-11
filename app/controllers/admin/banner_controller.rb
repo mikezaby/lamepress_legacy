@@ -3,7 +3,8 @@ class Admin::BannerController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @banner = Banner.all
+    @banner_blocks = Block.get_mode("banner")
+    @banners = @banner_blocks.collect { |block| Banner.where(:block_id => block.id).order("position ASC")}
   end
 
   def new
@@ -12,6 +13,7 @@ class Admin::BannerController < Admin::BaseController
 
   def create
 		@banner = Banner.new(params[:banner])
+    @banner.position = 99
     if @banner.save
       redirect_to(admin_banners_path, :notice => 'Banner was successfully created.')
     else
@@ -36,6 +38,14 @@ class Admin::BannerController < Admin::BaseController
   	@banner = Banner.find(params[:id])
     @banner.destroy
     redirect_to(admin_banners_path)
+  end
+
+  def sorter
+    Banner.where(block_id: params[:block_id]).each do |banner|
+      banner.position = params['page'].index(banner.id.to_s) + 1
+      banner.save
+    end
+    render :nothing => true
   end
 
 end

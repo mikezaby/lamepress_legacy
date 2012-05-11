@@ -9,10 +9,6 @@ class Admin::SettingController < Admin::BaseController
     @settings = Setting.where(meta_key: "block_placement")
   end
 
-  def navigator_blocks
-    @settings = Setting.where(meta_key: "navigator_block")
-  end
-
   def create
     @setting = Setting.new(params[:setting])
     if @setting.save
