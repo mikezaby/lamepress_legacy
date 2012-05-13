@@ -1,6 +1,6 @@
 <% keywords(@article.tag_names) %>
 <% head_title(@article.title) %>
-<% head_desc(@article.html.summarize) %>
+<% description(@article.html.summarize) %>
 <% cache 'article#'+@article.id.to_s do %>
 <div class = "main_col">
 	<div class = "main_panel">

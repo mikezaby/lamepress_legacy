@@ -1,0 +1,5 @@
+/*
+Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+*/
+CKEDITOR.skins.add("v2",function(){return{editor:{css:["editor.css"]},dialog:{css:["dialog.css"]},separator:{canGroup:!1},templates:{css:["templates.css"]},margins:[0,14,18,14]}}()),function(){function a(){CKEDITOR.dialog.on("resize",function(a){var b=a.data,c=b.width,d=b.height,e=b.dialog,f=e.parts.contents;if(b.skin!="v2")return;f.setStyles({width:c+"px",height:d+"px"});if(!CKEDITOR.env.ie||CKEDITOR.env.ie9Compat)return;setTimeout(function(){var a=e.parts.dialog.getChild([0,0,0]),b=a.getChild(0),c=b.getSize("width");d+=b.getChild(0).getSize("height")+1;var f=a.getChild(2);f.setSize("width",c),f=a.getChild(7),f.setSize("width",c-28),f=a.getChild(4),f.setSize("height",d),f=a.getChild(5),f.setSize("height",d)},100)})}CKEDITOR.dialog?a():CKEDITOR.on("dialogPluginReady",a)}();

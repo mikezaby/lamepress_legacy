@@ -5,7 +5,14 @@ i=0
 left=""
 right=""
  %>
-<% cache @category.id.to_s+'#category' do %>
+<% content_for :head do %>
+	<% cache "category-head##{@category.id.to_s}"do %>
+		<%= head_title("#{@category.name} | #{$title}") %>
+		<%= keywords(@category.name.gsub(" ", ", ")) %>
+		<%= cannonical_link("#{$domain}/#{@category.permalink}") %>
+	<% end %>
+<% end %>
+<% cache "category##{@category.id.to_s}"do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>

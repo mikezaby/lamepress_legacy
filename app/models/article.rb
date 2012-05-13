@@ -33,6 +33,12 @@ class Article < ActiveRecord::Base
                   	:path => ":rails_root/public/media/articles/:id/:style_img_:id.:extension",
                   	:styles => {:medium => "225>", :small => "200>" }
 
+  UNRANSACKABLE_ATTRIBUTES = ["id", "updated_at", "created_at", "published"]
+
+  def self.ransackable_attributes auth_object = user
+    (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
+  end
+
   # def self.search(value)
   #   where("title like ?", "%#{value}%").order("created_at DESC")
   # end

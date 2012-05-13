@@ -54,7 +54,7 @@ Mizatron::Application.routes.draw do
   match 'mobile/article' => 'mobile#article'
 #--> End of Android service
 
-	match 'article.php' => 'linker#php'
+	match '/article.php' => 'linker#php'
 
   match '/issue_:perma1(/:perma2/page/:page)' => 'linker#issued'
 	match '/issue_:perma1(/:perma2(/:perma3(/page/:page)))' => 'linker#issued'

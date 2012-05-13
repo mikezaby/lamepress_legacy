@@ -5,8 +5,16 @@ i=0
 left=""
 right=""
 %>
-<% keywords(@issue.number.to_s) %>
+<% content_for :head do %>
+	<% cache 'home_issue-head#'+@issue.id.to_s do %>
+		<%= head_title("Issue #{@issue.number.to_s} | #{$title}") %>
+		<%= keywords(@issue.number.to_s) %>
+		<%= cannonical_link("#{$domain}/issue_#{@issue.number.to_s}") %>
+		<%= description("Issue #{@issue.number.to_s}, release date #{@issue.date}") %>
+	<% end %>
+<% end %>
 <% cache 'home_issue#'+@issue.id.to_s do %>
+
 <% @article.each do |article| %>
 	<% if i==0 %>
 	<% i=1 %>

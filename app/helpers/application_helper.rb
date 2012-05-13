@@ -11,16 +11,21 @@ module ApplicationHelper
 	end
 
   def keywords(string)
-    content_for(:head) { raw "\n<meta name=\"keywords\" content=\""+string+"\" />"}
+    raw "\n<meta name=\"keywords\" content=\""+string+"\" />"
+  end
+
+  def cannonical_link(string)
+    raw "\n<link rel=\"canonical\" href=\"#{string}\"/>"
+  end
+
+  def description(string)
+    raw "\n<meta name=\"description\" content=\""+string+"\" />"
   end
 
   def head_title(string)
-    content_for(:title) { string+" | "}
+    raw "\n<title>#{string}</title>"
   end
 
-  def head_desc(string)
-    content_for(:head) {  raw "\n<meta name=\"description\" content=\""+string+"\" />"}
-  end
 
   def block(name)
     partials = ""

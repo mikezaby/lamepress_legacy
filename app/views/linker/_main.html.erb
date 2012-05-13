@@ -1,6 +1,12 @@
-<% keywords(@article.tag_names) %>
-<% head_title(@article.title) %>
-<% head_desc(@article.html.summarize) %>
+<% content_for :head do %>
+	<% cache 'article-head#'+@article.id.to_s do %>
+		<%= head_title("#{@article.title} | #{@article.category_name} | #{$title}") %>
+		<%= keywords(@article.tag_names) %>
+		<%= description(@article.html.summarize) %>
+		<% issue_number = @article.issue_id.nil? ? "" : "issue_#{@issue.number.to_s}" %>
+		<%= cannonical_link("#{$domain}/#{issue_number}/#{@article.category_permalink}/#{@article.id}-#{@article.prettify_permalink}") %>
+	<% end %>
+<% end %>
 <% cache 'article#'+@article.id.to_s do %>
 <div class = "main_col">
 	<div class = "main_panel">

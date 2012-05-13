@@ -5,7 +5,14 @@ i=0
 left=""
 right=""
  %>
-<% cache 'home_cat#'+@issue.id.to_s+"-"+@article[0].category_id.to_s do %>
+<% content_for :head do %>
+	<% cache 'home_cat-head#'+@issue.id.to_s+"-"+@category.id.to_s do %>
+		<%= head_title("#{@category.name} | Issue #{@issue.number.to_s} | #{$title}") %>
+		<%= keywords(@issue.number.to_s+", "+@category.name.gsub(" ", ", ")) %>
+		<%= cannonical_link("#{$domain}/issue_#{@issue.number.to_s}/#{@category.permalink}") %>
+	<% end %>
+<% end %>
+<% cache 'home_cat#'+@issue.id.to_s+"-"+@category.id.to_s do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>
@@ -16,7 +23,7 @@ right=""
 
 		<div class="headart">
 			<h3>
-				<%= link_to  (raw article.category.name)+image_tag("base/pointer.gif"), cat_link(article) %>
+				<%= link_to  (raw @category.name)+image_tag("base/pointer.gif"), cat_link(article) %>
 			</h3>
 			<% if !article.hypertitle.nil? %>
 			<h2>
@@ -48,7 +55,7 @@ right=""
 		left+="<div class = 'half_main_panel_left'>
 								<div class=\"headart\">
 									<h3>
-										"+(link_to  (raw article.category.name)+image_tag("base/pointer.gif"), cat_link(article))+"
+										"+(link_to  (raw @category.name)+image_tag("base/pointer.gif"), cat_link(article))+"
 									</h3>" %>
 		<% if !article.hypertitle.nil? %>
 		<%	left+="		<h2>
@@ -73,7 +80,7 @@ right=""
 		right+="<div class = 'half_main_panel_right'>
 								<div class=\"headart\">
 									<h3>
-										"+(link_to  (raw article.category.name)+image_tag("base/pointer.gif"),cat_link(article))+"
+										"+(link_to  (raw @category.name)+image_tag("base/pointer.gif"),cat_link(article))+"
 									</h3>" %>
 		<% if !article.hypertitle.nil? %>
 		<%	right+="		<h2>
