@@ -1,14 +1,18 @@
 <% cache 'cover#'+@issue.id.to_s do %>
 	<div class = "side_panel" >
 		<div class = "issue">
-						<div class = "exofilo">
-								<%= link_to image_tag((raw @issue.cover.url(:thumb)), :border => 0),(raw @issue.cover.url), :id => "single" %>
-						</div>
-						<div class = "num_issue">Αρ. Φύλλου <%= raw @issue.number %></div><div class = "date_issue">
-							<%= raw I18n.l(@issue.date, :format=> "%A  %d %b %Y") %></div>
-						<div class = "download_issue"><%= link_to image_tag("base/issue_download_icon.gif", :border => 0)+" Κατεβάστε το φύλλο", (raw @issue.pdf.url), :target => "blank" %>
-						</div>
-
+			<div class = "exofilo">
+				<%= link_to image_tag((raw @issue.cover.url(:thumb)), :border => 0),(raw @issue.cover.url), :id => "single" %>
+			</div>
+			<div class = "num_issue">
+				Αρ. Φύλλου <%= raw @issue.number %>
+			</div>
+			<div class = "date_issue">
+				<%= raw I18n.l(@issue.date, :format=> "%A  %d %b %Y") %>
+			</div>
+			<div class = "download_issue">
+				<%= link_to image_tag("base/issue_download_icon.gif", :border => 0)+" Κατεβάστε το φύλλο", (raw @issue.pdf.url), :target => "blank" %>
+			</div>
 		</div>
 	</div>
 <% end %>

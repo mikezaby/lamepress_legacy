@@ -3,8 +3,8 @@ class SearchController < ApplicationController
 
   def index
     @issue = Setting.current_issue
-    @q = Article.search(params[:q])
-    @article = @q.result(:distinct => true).page(params[:page]).per(20)
+    @q = Article.search(params[:q], :auth_object => nil)
+    @article = @q.result.page(params[:page]).per(20)
   end
 
 end

@@ -12,7 +12,7 @@ right=""
 		<%= cannonical_link("#{$domain}/#{@category.permalink}") %>
 	<% end %>
 <% end %>
-<% cache "category##{@category.id.to_s}"do %>
+<% cache "category##{@category.id.to_s}#page##{params[:page]}"do %>
 <% @article.each do |article| %>
 
 	<% if i==0 %>
