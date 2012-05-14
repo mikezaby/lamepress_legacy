@@ -1,4 +1,4 @@
-<% cache 'block_category#'+block.navigators[0].navigatable.name do %>
+<% cache 'block_category#'+block.id.to_s+"-"+block.navigators[0].navigatable.id.to_s do %>
   <div class = "white_side_panel">
     <div class = "title">
   		<%= block.navigators[0].navigatable.name %>

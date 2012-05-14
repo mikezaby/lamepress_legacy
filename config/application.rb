@@ -40,6 +40,12 @@ module Mizatron
 
     #enables assets pipeline
     config.assets.enabled = true
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    # Also for Heroku Deployment => http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
+    config.assets.initialize_on_precompile = false
+    config.assets.precompile += ['*.js', '*.css', '*.scss'] #+= %w( sign_in.css.erb pages_css/all admin_css/all )
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

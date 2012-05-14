@@ -46,9 +46,20 @@ class Issue < ActiveRecord::Base
 
   private
   def expire_cache
-    self.articles.each {|article|  ActionController::Base.new.expire_fragment('article#'+article.id.to_s)} if self.number_changed?
-    Category.issued.each {|category| ActionController::Base.new.expire_fragment('home_cat#'+self.id.to_s+"-"+category.id.to_s)}
+    self.articles.each do |article|
+      if self.number_changed?
+        ActionController::Base.new.expire_fragment('article#'+article.id.to_s)
+        ActionController::Base.new.expire_fragment('article-head#'+article.id.to_s)
+      end
+    end
+    Category.issued.each do |category|
+      if self.number_changed? 
+        ActionController::Base.new.expire_fragment('home_cat#'+self.id.to_s+"-"+category.id.to_s)
+        ActionController::Base.new.expire_fragment('home_cat-head#'+self.id.to_s+"-"+category.id.to_s)
+      end
+    end
     ActionController::Base.new.expire_fragment('home_issue#'+self.id.to_s)
+    ActionController::Base.new.expire_fragment('home_issue-head#'+self.id.to_s)
     ActionController::Base.new.expire_fragment('cover#'+self.id.to_s)
   end
 
