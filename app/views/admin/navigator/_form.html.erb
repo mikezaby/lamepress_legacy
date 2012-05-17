@@ -29,13 +29,12 @@
  	  <%= f.label "Mode" %>
     <select id="navigator_navigatable_type" name="navigator[navigatable_type]">
   		<option value="Category">Category</option>
-  		<option value="Article">Article</option>
   	</select>
  	<% end %>
 
  	<%= field_set_tag do %>
 		<%= f.label :navigatable_id %>
-    <%= f.text_field :navigatable_id %>
+    <%= f.collection_select :navigatable_id, Category.all, :id, :name, {:prompt => "Select a Category"} %>
  	<% end %>
 
 

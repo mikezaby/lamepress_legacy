@@ -35,5 +35,6 @@ class CategorySweeper < ActionController::Caching::Sweeper
       expire_fragment("navigator##{navigator.block_id.to_s}")
     end
     expire_fragment(%r{block_category#\d+-#{category.id}})
+    expire_fragment("feed##{category.id}")
   end
 end

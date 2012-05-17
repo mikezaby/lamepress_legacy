@@ -1,0 +1,59 @@
+<% if @page.errors.any? %>
+		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+			<ul>
+      	<% @page.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+      	<% end %>
+    	</ul>
+		</h4>
+<% end %>
+<%= form_for [:admin,@page], :html => {:multipart => true } do |f| %>
+<div class="module_content">
+
+
+  <%= field_set_tag do %>
+		<%= f.label "Title" %>
+ 		<%= f.text_field :title %>
+ 	<% end %>
+
+  <%= field_set_tag do %>
+    <%= f.label "Name" %>
+    <%= f.text_field :title %>
+  <% end %>
+
+  <%= field_set_tag do %>
+    <%= f.label "Clean url" %>
+    <%= f.text_field :permalink %>
+  <% end %>
+
+  <%= field_set_tag do %>
+    <%= f.label "Description" %>
+    <%= f.text_area :meta_description %>
+  <% end %>
+
+  <%= field_set_tag nil, :style => "width:100%; float:left;" do %>
+		<%= f.label "Content" %>
+    <%= f.text_area :content %>
+	<% end %>
+
+
+  <%= f.hidden_field :preview, :value => "0" %>
+
+
+
+  <div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+    <% if (@page.published==true || @page.published.nil? ) %>
+		  <%= select :page, :published, "<option  value=\"1\" selected=\"selected\">Published</option><option value=\"0\">Hidden</option>"%>
+		<% else %>
+		  <%= select :page, :published, "<option  value=\"1\">Published</option><option value=\"0\" selected=\"selected\">Hidden</option>"%>
+		<% end %>
+    <%= f.submit "Preview", :onclick => "this.form.target='_blank';$('input#page_preview').val('1');", :class => "alt_btn" %>
+		<%= f.submit :onclick => "this.form.removeAttribute('target');$('input#page_preview').val('0');" %>
+	</div>
+</footer>
+
+<% end %>
+

@@ -1,14 +1,15 @@
 <% javascript 'djs/sortable_list' %>
 <article class="module width_full">
-    <header><h3 class="tabs_involved">navigator Manager</h3>
-    <ul class="tabs">
-      <% i = 0 %>
-      <% @navigator_blocks.each do |block| %>
-        <% i += 1 %>
-        <li><a href="#tab_<%= block.id %>"><%= block.name %></a></li>
-        <input id="url<%= i %>" value="/admin/navigator/sorter?block_id=<%= block.id %>" type="hidden" />
-      <% end %>
-    </ul>
+    <header><h3 class="tabs_involved">navigator Manager</h3></header>
+    <header>
+      <ul class="tabs">
+        <% i = 0 %>
+        <% @navigator_blocks.each do |block| %>
+          <% i += 1 %>
+          <li><a href="#tab_<%= block.id %>"><%= block.name %></a></li>
+          <input id="url<%= i %>" value="/admin/navigator/sorter?block_id=<%= block.id %>" type="hidden" />
+        <% end %>
+      </ul>
     </header>
     <div class="tab_container">
             <% i = 0 %>

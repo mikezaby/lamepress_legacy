@@ -16,11 +16,13 @@ Mizatron::Application.routes.draw do
     resources :user, :as => :users, :except => [:show] do
        get "roles", :on => :member
     end
+    resources :page, :as => :pages
     resources :category, :as => :categories, :except => [:show]
     resources :article, :as => :articles do
-      #get "reproc", :on => :collection
+      get "reproc", :on => :collection
       get 'page/:page', :action => :index, :on => :collection
       get 'search', :on => :collection
+      get 'sitemap', :on => :collection
     end
     resources :ordering, :as => :orderings, :only => [:index, :destroy]  do
       post "update_issue", :on => :collection
@@ -29,7 +31,7 @@ Mizatron::Application.routes.draw do
     end
 
     resources :issue, :as => :issues, :except => [:show] do
-      #get "reproc", :on => :collection
+      get "reproc", :on => :collection
     end
     resources :navigator, :as => :navigators, :except => [:show] do
       post "sorter", :on => :collection
@@ -56,6 +58,7 @@ Mizatron::Application.routes.draw do
 
 	match '/article.php' => 'linker#php'
 
+  match '/feed/:id' => 'linker#feed'
   match '/issue_:perma1(/:perma2/page/:page)' => 'linker#issued'
 	match '/issue_:perma1(/:perma2(/:perma3(/page/:page)))' => 'linker#issued'
   match '/:perma1/page/:page' => 'linker#non_issued'

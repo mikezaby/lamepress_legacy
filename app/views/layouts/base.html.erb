@@ -35,47 +35,27 @@
 
     <%= block "top" %>
 
-	<div class = "blackline_4px"> </div>
-
-
-
-</div>
+		<div class = "blackline_4px"> </div>
+	</div>
 
 
 <!--###########-----body-----###########-->
 	<div class = "body-wrapper">
 
-	<%= yield %>
+		<%= yield %>
 
   </div>
 <!--###########-----footer-----###########-->
 
-    <div class = "footer-wrapper">
+  <div class = "footer-wrapper">
 
-			<div class = "red_footer"></div>
+		<div class = "red_footer"></div>
 
-			<div class = "footer_home">
-				<%= link_to image_tag("base/footer_home.gif", :border => 0), "/issue_"+@issue.number.to_s %>
-			</div>
+		<div class = "footer_home">
+			<%= link_to image_tag("base/footer_home.gif", :border => 0), "/issue_"+@issue.number.to_s %>
+		</div>
 
-			<div class = "footer_red_menu">
-				<%= link_to "miza", "/a/das" %>
-				<%= link_to "miza", "/a/das" %>
-				<%= link_to "miza", "/a/das" %>
-				<%= link_to "miza", "/a/das" %>
-			</div>
-
-			<div class = "footer_black_menu">
-
-				<%= link_to "miza", "/a/das" %>
-				<%= link_to "miza", "/a/das" %>
-				<%= link_to "miza", "/a/das" %>
-				<%= link_to "miza", "/a/das" %>
-
-			</div>
-
-
-
+		<%= block "bottom" %>
 
 	</div>
 
@@ -104,6 +84,18 @@
 	});
 </script>
 <%= yield(:scripts) %>
+<script type="text/javascript">
+  	$(document).ready(function()
+      {
+        $('a').each(function() {
+          $(this).attr("href", function(index, old) {
+            return old.replace("[lp#issue_number]", "<%= @issue.number %>");
+          });
+        });
+        $('a[href$="<%= @url %>"]:first').attr("id", "activated");
+      }
+  	);
+ </script>
 </body>
 </html>
 

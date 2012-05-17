@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510152555) do
+ActiveRecord::Schema.define(:version => 20120516182324) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -105,6 +105,17 @@ ActiveRecord::Schema.define(:version => 20120510152555) do
     t.integer  "article_id"
     t.integer  "issue_pos"
     t.integer  "cat_pos"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "meta_description"
+    t.text     "content"
+    t.string   "permalink"
+    t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

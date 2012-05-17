@@ -4,8 +4,8 @@ require 'i18n'
 require 'paperclip'
 require 'rails/all'
 # coding: UTF-8
-I18n.load_path = ['el.yml']
-I18n.locale = :el
+# I18n.load_path = ['el.yml']
+# I18n.locale = :el
 ActiveRecord::Base.establish_connection(
   :adapter => "mysql2",
   :encoding => "utf8",
@@ -31,7 +31,7 @@ class Artikle < ActiveRecord::Base
 end
 
 class Media < ActiveRecord::Base
-  has_one :article
+  has_one :artikle
 end
 
 
@@ -73,15 +73,8 @@ ActiveRecord::Base.establish_connection(
 )
 
 
-class Linker < ActiveRecord::Base
-	belongs_to :linkerable, :polymorphic => true
-
-	validates :permalink, :uniqueness => true
-	attr_accessible :permalink
-end
 
 class Article < ActiveRecord::Base
-	has_one :linker, :as => :linkerable
 	has_one :ordering
 
 
@@ -101,7 +94,6 @@ for j in (0..i)
 		@article = Article.new; @article.id = id[j]; @article.save!
 		@article.update_attributes(:id => id[j], :title => title[j], :hypertitle => hypertitle[j], :html => html[j], :author => author[j], :category_id => category_id[j], :issue_id => issue_id[j], :date => date[j], :published => published[j], :photo_file_name => media[j])
     @article.create_ordering(:cat_pos => 99 ) unless @article.issue_id.nil?
-    @article.create_linker(:permalink => url[j])
   rescue Exception => link
     puts "#id=> #{@article.id}, error =>#{link.message}"
   end

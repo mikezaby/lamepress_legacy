@@ -14,11 +14,6 @@ ActiveRecord::Base.establish_connection(
 )
 
 
-
-class Cattegory < ActiveRecord::Base
-
-end
-
 class Isue < ActiveRecord::Base
 
 end
@@ -41,15 +36,6 @@ ActiveRecord::Base.establish_connection(
 class Issue < ActiveRecord::Base
   has_many :articles, :dependent => :destroy
 	has_one :current_issue
-	has_one :linker, :as => :linkerable
-
-end
-
-class Linker < ActiveRecord::Base
-	belongs_to :linkerable, :polymorphic => true
-
-	validates :permalink, :uniqueness => true
-	attr_accessible :permalink
 
 end
 
@@ -59,7 +45,6 @@ end
 	puts pdf_path = iss.pdf_path.split("/").last
 	@issue = Issue.new; @issue.id = iss.id; @issue.save!
 	@issue.update_attributes(:id => iss.id, :number => iss.issue_number, :date => date, :published => iss.published, :cover_file_name => cover_path, :cover_content_type => "image/jpeg", :pdf_file_name => pdf_path, :pdf_content_type => "application/pdf")
-  @issue.create_linker(:permalink=>"/"+iss.issue_number.to_s)
 end
 puts "#end"
 

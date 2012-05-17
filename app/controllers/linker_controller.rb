@@ -76,5 +76,12 @@ class LinkerController < ApplicationController
     end
   end
 
+
+  def feed
+    @posts = Article.where(category_id: params[:id], published: true).select("title, category_id, issue_id, author, id, html, created_at").order("created_at DESC").limit(20) 
+    @category = @posts.first.category
+    render :action => "feed.rss.builder", :layout => false
+end
+
 end
 

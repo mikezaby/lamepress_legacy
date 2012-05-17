@@ -2,7 +2,7 @@
   <div class = "white_side_panel">
     <div class = "title">
   		<%= block.navigators[0].navigatable.name %>
-  		<%= link_to ( image_tag "base/rss.png", :align => "right", :width => "23px", :border => 0 ), "/" %>
+  		<%= link_to ( image_tag "base/rss.png", :align => "right", :width => "23px", :border => 0 ), "/feed/#{block.navigators[0].navigatable.id}" %>
   	</div>
   	<div class = "white_side_blackline_4px"></div>
     <% articles = block.navigators[0].navigatable.articles.last_arts(9) %>

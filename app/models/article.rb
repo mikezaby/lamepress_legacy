@@ -12,7 +12,6 @@ class Article < ActiveRecord::Base
 
 	has_one :ordering, :dependent => :delete
 
-	has_many :navigators, :as => :navigatable, :dependent => :destroy
 	has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
 
@@ -38,11 +37,6 @@ class Article < ActiveRecord::Base
   def self.ransackable_attributes auth_object = nil
     (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
   end
-
-
-  # def self.search(value)
-  #   where("title like ?", "%#{value}%").order("created_at DESC")
-  # end
 
   def tag_names
     @tag_names || tags.map(&:name).join(', ')

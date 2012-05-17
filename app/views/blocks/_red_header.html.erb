@@ -1,35 +1,9 @@
 <div class = "header_red_menu">
-<% content_for :scripts do %>
-  <script type="text/javascript">
-  	$(document).ready(function()
-      {
-        $('a').each(function() {
-          $(this).attr("href", function(index, old) {
-            return old.replace("[lp#issue_number]", "<%= @issue.number %>");
-          });
-        });
-        $('a[href$="<%= @url %>"]:first').attr("id", "activated");
-      }
-  	);
-  </script>
-<% end %>
 <% cache "navigator##{block.id.to_s}" do %>
 	<div class = "header_red_block">
 		<ul>
 			<li><%= link_to image_tag("base/home1.gif", :border => 0), "/issue_[lp#issue_number]" %></li>
-        <% nav_list=Navigator.list(block.id) %>
-        <% nav_list.each do |navigator| %>
-          <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
-            <li><%= (link_to navigator.name, "/issue_[lp#issue_number]/"+(raw navigator.navigatable.permalink)) %></li>
-          <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
-            <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
-          <% elsif navigator.navigatable_type == "Block" %>
-            <li><%= link_to navigator.name, "/"+(raw navigator.navigatable.name) %></li>
-          <% elsif navigator.navigatable_type == "Article" %>
-            <li><%= link_to navigator.name, article_permalink(navigator.navigatable) %></li>
-          <% end %>
-        <% end %>
-
+      <%= render :partial => "blocks/navigator_list", :locals => { block: block} %>
 			</ul>
 		</div>
   <% end %>
