@@ -1,5 +1,7 @@
 class Page < ActiveRecord::Base
 
+  has_many :navigators, :as => :navigatable
+
 	after_save :cache_expiration
   after_destroy :cache_expiration
 

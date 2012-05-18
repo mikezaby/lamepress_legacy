@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
 	before_save :prettify_permalink
 
 	has_many :articles
-	has_many :navigators, :as => :navigatable
+	has_many :navigators, :as => :navigatable, :dependent => :destroy
 
 
 	validates :name, :presence => true

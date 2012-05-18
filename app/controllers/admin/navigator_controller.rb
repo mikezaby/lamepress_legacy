@@ -9,10 +9,14 @@ class Admin::NavigatorController < Admin::BaseController
 
   def new
     @navigator = Navigator.new
+    @categories = Category.all
+    @pages = Page.all
   end
 
   def edit
     @navigator = Navigator.find(params[:id])
+    @categories = Category.all
+    @pages = Page.all
   end
 
   def create

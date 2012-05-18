@@ -14,8 +14,10 @@ class Issue < ActiveRecord::Base
 
 	validates :number, :presence => true,  :uniqueness => true
 	validates :date, :presence => true
-	validates_attachment_content_type :cover, :content_type => ['image/jpeg', 'image/png', 'image/gif']
-	validates_attachment_content_type :pdf, :content_type => ['application/pdf']
+  validates_attachment :cover, :presence => true,
+    :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }
+  validates_attachment :pdf, :presence => true,
+    :content_type => { :content_type => ['application/pdf'] }
 
 	attr_accessible :number, :date, :cover, :pdf, :published
 

@@ -64,6 +64,13 @@
 			<li class="icn_categories"><%= link_to "Manage Categories", admin_categories_path %></li>
 		</ul>
 		<% end %>
+		<% if can? :manage, Page %>
+		<h3>Pages</h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><%= link_to "Add Page", new_admin_page_path %></li>
+			<li class="icn_categories"><%= link_to "Manage Pages", admin_pages_path %></li>
+		</ul>
+		<% end %>
 		<% if can? :manage, Block %>
 		<h3>Blocks</h3>
 		<ul class="toggle">

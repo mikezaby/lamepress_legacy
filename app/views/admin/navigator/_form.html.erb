@@ -1,3 +1,29 @@
+<% content_for :scripts do %>
+  <script type="text/javascript">
+  $(document).ready(function() 
+  {
+    function mode_selection() {
+      var cat_options="<option value=\"\">Select a category</option>";
+      <% @categories.each do |category| %>
+        cat_options+="<option value=\"<%= category.id %>\"><%=h category.name %></option>";
+      <% end %>
+      var page_options="<option value=\"\">Select a page</option>";
+      <% @pages.each do |page| %>
+        page_options+="<option value=\"<%= page.id %>\"><%=h page.name%></option>";
+      <% end %>
+      mode = $('select#navigator_navigatable_type').val();
+      if (mode == "Category") {
+        $('select#navigator_navigatable_id').html(cat_options);
+      }
+      else {
+        $('select#navigator_navigatable_id').html(page_options);
+      }
+    }
+    mode_selection();
+    $('select#navigator_navigatable_type').change(mode_selection);
+  });
+  </script>
+<% end %>
 <% if @navigator.errors.any? %>
 		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
 			<ul>
@@ -29,12 +55,13 @@
  	  <%= f.label "Mode" %>
     <select id="navigator_navigatable_type" name="navigator[navigatable_type]">
   		<option value="Category">Category</option>
+      <option value="Page">Page</option>
   	</select>
  	<% end %>
 
  	<%= field_set_tag do %>
 		<%= f.label :navigatable_id %>
-    <%= f.collection_select :navigatable_id, Category.all, :id, :name, {:prompt => "Select a Category"} %>
+    <%= f.select :navigatable_id, "" %>
  	<% end %>
 
 

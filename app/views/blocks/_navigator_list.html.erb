@@ -5,5 +5,7 @@
     <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
   <% elsif navigator.navigatable_type == "Block" %>
     <li><%= link_to navigator.name, "/"+(raw navigator.navigatable.name) %></li>
+  <% elsif navigator.navigatable_type == "Page" %>
+    <li><%= link_to navigator.name, "/page/"+(raw navigator.navigatable.permalink) %></li>
   <% end %>
 <% end %>

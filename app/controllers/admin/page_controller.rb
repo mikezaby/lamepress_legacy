@@ -15,7 +15,8 @@ class Admin::PageController < Admin::BaseController
   def create
     @page = Page.new(params[:page])
     if params[:page][:preview] == "1"
-      redirect_to admin_page_path(@page)
+      @issue = Setting.current_issue
+      render :action => "show", :layout => "base"
     elsif @page.save
       redirect_to new_admin_page_url, notice: 'Page was successfully created.'
     else
@@ -30,7 +31,9 @@ class Admin::PageController < Admin::BaseController
   def update
     @page = Page.find(params[:id])
     if params[:page][:preview] == "1"
-      redirect_to admin_page_path(@page)
+      @issue = Setting.current_issue
+      @page = Page.new(params[:page])
+      render :action => "show", :layout => "base"
     elsif @page.update_attributes(params[:page])
       redirect_to admin_pages_url, notice: 'Page was successfully updated.'
     else
