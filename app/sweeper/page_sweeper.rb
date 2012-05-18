@@ -21,7 +21,7 @@ class PageSweeper < ActionController::Caching::Sweeper
     # Expire a fragment
     expire_fragment('page#'+page.id.to_s)
     expire_fragment('page-head#'+page.id.to_s)
-    page.navigator.each do |navigator|
+    page.navigators.each do |navigator|
       expire_fragment('navigator#'+navigator.block_id.to_s)
     end
   end
