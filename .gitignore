@@ -1,5 +1,6 @@
 log/*.log
 tmp/**/*
+config/database.yml
 public/media/**/*
 public/phpmedia/**/*
 public/ckeditor_assets/**/*
