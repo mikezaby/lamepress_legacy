@@ -89,10 +89,14 @@
       {
         $('a').each(function() {
           $(this).attr("href", function(index, old) {
-            return old.replace("[lp#issue_number]", "<%= @issue.number %>");
+          	try
+   					{
+            	return old.replace("[lp#issue_number]", "<%= @issue.number %>");
+            }
+            catch(err){}
           });
         });
-        $('a[href$="<%= @url %>"]:first').attr("id", "activated");
+        $('a[href$="<%= CGI::unescape(h @url) %>"]:first').attr("id", "activated");
       }
   	);
  </script>
