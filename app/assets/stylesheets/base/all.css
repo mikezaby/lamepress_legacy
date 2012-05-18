@@ -2,4 +2,5 @@
  *= require base/stylesheet
  *= require base/jquery-ui
  *= require base/contact
+ *= require fancybox
 */

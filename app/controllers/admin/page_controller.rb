@@ -2,6 +2,8 @@ class Admin::PageController < Admin::BaseController
   
   load_and_authorize_resource
 
+  cache_sweeper :page_sweeper
+
   def index
     @pages = Page.all
   end
@@ -12,7 +14,9 @@ class Admin::PageController < Admin::BaseController
 
   def create
     @page = Page.new(params[:page])
-    if @page.save
+    if params[:page][:preview] == "1"
+      redirect_to admin_page_path(@page)
+    elsif @page.save
       redirect_to new_admin_page_url, notice: 'Page was successfully created.'
     else
       render action: "new"
@@ -25,7 +29,9 @@ class Admin::PageController < Admin::BaseController
 
   def update
     @page = Page.find(params[:id])
-    if @page.update_attributes(params[:page])
+    if params[:page][:preview] == "1"
+      redirect_to admin_page_path(@page)
+    elsif @page.update_attributes(params[:page])
       redirect_to admin_pages_url, notice: 'Page was successfully updated.'
     else
       render action: "edit" 
@@ -33,8 +39,9 @@ class Admin::PageController < Admin::BaseController
   end
 
   def show
-    @pages = Page.position_order
+    @issue = Setting.current_issue
     @page = Page.find(params[:id])
+    render :action => "show", :layout => "base"
   end
 
   def destroy

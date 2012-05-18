@@ -26,10 +26,11 @@ gem "ransack"
 gem 'therubyracer'
 gem 'jquery-rails'
 gem "ckeditor", "3.7.0.rc3"
+gem "fancybox-rails"
 gem 'mysql2', "0.3.7"
 gem 'rake', "0.9.2.2"
 gem 'devise'
-gem "paperclip", "~> 2.3.11"
+gem "paperclip"
 gem 'kaminari'
 gem 'cancan'
 gem 'passenger'

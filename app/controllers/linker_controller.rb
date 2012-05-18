@@ -32,7 +32,7 @@ class LinkerController < ApplicationController
         render_404
       end
     #home issue
-    elsif @article = Article.home(params[:perma1].to_i)
+    elsif !(@article = Article.home(params[:perma1].to_i)).empty?
       @issue = @article.first.issue
       render action: "Issue"
     else
@@ -62,6 +62,14 @@ class LinkerController < ApplicationController
     end
   end
 
+  def page
+    if (@page =  Page.where(permalink: params[:perma]).published_only.first)
+      @issue = Setting.current_issue
+    else
+      render_404
+    end
+  end
+
   def php
     if !params[:article_id].nil?
       if (@article = Article.find_by_id(params[:article_id].to_i))
@@ -81,7 +89,7 @@ class LinkerController < ApplicationController
     @posts = Article.where(category_id: params[:id], published: true).select("title, category_id, issue_id, author, id, html, created_at").order("created_at DESC").limit(20) 
     @category = @posts.first.category
     render :action => "feed.rss.builder", :layout => false
-end
+  end
 
 end
 

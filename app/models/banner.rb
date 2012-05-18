@@ -7,7 +7,8 @@ class Banner < ActiveRecord::Base
                   	:path => ":rails_root/public/media/banner/:filename"
 
   validates :block_id, :presence => true
-  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment :photo, :presence => true,
+    :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }
 
   attr_accessible :describe, :block_id, :photo, :url
 

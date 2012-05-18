@@ -58,11 +58,13 @@ Mizatron::Application.routes.draw do
 
 	match '/article.php' => 'linker#php'
 
+  match '/page/:perma' => 'linker#page'
   match '/feed/:id' => 'linker#feed'
   match '/issue_:perma1(/:perma2/page/:page)' => 'linker#issued'
-	match '/issue_:perma1(/:perma2(/:perma3(/page/:page)))' => 'linker#issued'
+	match '/issue_:perma1(/:perma2(/:perma3))' => 'linker#issued'
   match '/:perma1/page/:page' => 'linker#non_issued'
   match '/:perma1((/page/:page)/:perma2)' => 'linker#non_issued'
+   match '*a', :to => 'application#render_404'
 
 end
 
