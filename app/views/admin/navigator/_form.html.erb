@@ -1,3 +1,5 @@
+<% @categories = Category.all %>
+<% @pages = Page.all %>
 <% content_for :scripts do %>
   <script type="text/javascript">
   $(document).ready(function() 
@@ -5,11 +7,13 @@
     function mode_selection() {
       var cat_options="<option value=\"\">Select a category</option>";
       <% @categories.each do |category| %>
-        cat_options+="<option value=\"<%= category.id %>\"><%=h category.name %></option>";
+        <% selected = (category.id == @navigator.navigatable_id and @navigator.navigatable_type == "Category") ? "selected" : "" %>
+        cat_options+="<option <%= selected %> value=\"<%= category.id %>\"><%=h category.name %></option>";
       <% end %>
       var page_options="<option value=\"\">Select a page</option>";
       <% @pages.each do |page| %>
-        page_options+="<option value=\"<%= page.id %>\"><%=h page.name%></option>";
+        <% selected = (page.id == @navigator.navigatable_id and @navigator.navigatable_type == "Page") ? "selected" : "" %>
+        page_options+="<option <%= selected %> value=\"<%= page.id %>\"><%=h page.name%></option>";
       <% end %>
       mode = $('select#navigator_navigatable_type').val();
       if (mode == "Category") {
@@ -54,8 +58,8 @@
  	<%= field_set_tag do %>
  	  <%= f.label "Mode" %>
     <select id="navigator_navigatable_type" name="navigator[navigatable_type]">
-  		<option value="Category">Category</option>
-      <option value="Page">Page</option>
+  		<option <%= "selected" if @navigator.navigatable_type=="Category" %>value="Category">Category</option>
+      <option <%= "selected" if @navigator.navigatable_type=="Page" %> value="Page">Page</option>
   	</select>
  	<% end %>
 
