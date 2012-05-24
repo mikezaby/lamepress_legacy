@@ -76,7 +76,7 @@ class Article < ActiveRecord::Base
 
   def prettify_permalink
     # parameterize function is nice but not as good as below
-    truncate(self.title.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
+    truncate(self.title.lm_strip, length: 50, separator: "-", omission: "")
   end
 
   private

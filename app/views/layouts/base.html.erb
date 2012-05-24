@@ -96,7 +96,7 @@
             catch(err){}
           });
         });
-        $('a[href$="<%= CGI::unescape(h @url) %>"]:first').attr("id", "activated");
+        $('a[href$="<%= CGI::unescape(@url.strip.gsub(/[\']|[\`]|[\"]/,"")) %>"]:first').attr("id", "activated");
       }
   	);
  </script>

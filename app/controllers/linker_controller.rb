@@ -5,6 +5,7 @@ class LinkerController < ApplicationController
   def root
     @issue = Setting.current_issue
     @article = @article = Article.home(@issue.number.to_i)
+    @url = "/issue_#{@issue.number}"
     render action: "Issue"
   end
 
@@ -64,6 +65,7 @@ class LinkerController < ApplicationController
 
   def page
     if (@page =  Page.where(permalink: params[:perma]).published_only.first)
+      @url = "/page/#{@page.permalink}"
       @issue = Setting.current_issue
     else
       render_404
