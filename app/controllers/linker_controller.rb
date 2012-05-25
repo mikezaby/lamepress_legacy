@@ -42,6 +42,7 @@ class LinkerController < ApplicationController
   end
 
   def non_issued
+    @url = request.fullpath
     if !params[:perma2].nil?
       if (@article = Article.find_by_id(params[:perma2].split("-").first.to_i))
         @issue = Setting.current_issue
