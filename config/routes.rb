@@ -19,7 +19,6 @@ Mizatron::Application.routes.draw do
     resources :page, :as => :pages
     resources :category, :as => :categories, :except => [:show]
     resources :article, :as => :articles do
-      get "reproc", :on => :collection
       get 'page/:page', :action => :index, :on => :collection
       get 'search', :on => :collection
       get 'sitemap', :on => :collection
@@ -30,9 +29,7 @@ Mizatron::Application.routes.draw do
       post "sorter", :on => :collection
     end
 
-    resources :issue, :as => :issues, :except => [:show] do
-      get "reproc", :on => :collection
-    end
+    resources :issue, :as => :issues, :except => [:show]
     resources :navigator, :as => :navigators, :except => [:show] do
       post "sorter", :on => :collection
     end

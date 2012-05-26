@@ -28,15 +28,16 @@ module ApplicationHelper
 
 
   def block(name)
-    begin
+    
       partials = ""
       Block.place(name).each do |block|
-        partials += render :partial => 'blocks/'+block.partial, :locals => { block: block}
+        begin
+          partials += render :partial => 'blocks/'+block.partial, :locals => { block: block}
+        rescue
+          "missing"
+        end
       end
       raw partials
-    rescue
-      "missing"
-    end
   end
 
 

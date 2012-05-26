@@ -6,11 +6,6 @@ body
   font-size:13px;
   color:#212121;
   margin: 0;
-  height:100%;
-}
-html
-{
-  height:100%;
 }
 #container {
    min-height: 100%;
@@ -90,6 +85,7 @@ html
   background-image:url("/assets/demo/menu_bg.png");
   -webkit-box-shadow:  3px 3px 5px 3px rgba(25, 25, 25, 0.2);
   box-shadow:  3px 3px 5px 3px rgba(25, 25, 25, 0.2);
+  overflow:hidden;
 }
 
 .menu-follow

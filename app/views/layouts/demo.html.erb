@@ -3,7 +3,7 @@
 
 
 <head>
-	<%= stylesheet_link_tag '/assets/demo/all', :media => 'all' %>
+	<%= stylesheet_link_tag 'demo/all', :media => 'all' %>
   <link href='http://fonts.googleapis.com/css?family=Oleo+Script:400,700' rel='stylesheet' type='text/css'>
 	<%= yield(:head) %>
 	<%= csrf_meta_tag %>
@@ -89,41 +89,37 @@
 </script>
 <%= yield(:scripts) %>
 <script type="text/javascript">
-  	$(document).ready(function()
-      {
-        $('a').each(function() {
-          $(this).attr("href", function(index, old) {
-          	try
-   					{
-            	return old.replace("[lp#issue_number]", "<%= @issue.number %>");
-            }
-            catch(err){}
-          });
-        });
-        $('a[href$="<%= CGI::unescape(@url.strip.gsub(/[\']|[\`]|[\"]/,"")) unless @url.nil? %>"]:first').attr("id", "activated");
-      }
-  	);
-		$(document).ready(function() {
-			function follow_menu() {
-				if($("body").scrollTop()<120) {
-					$("div#header-menu").attr("class", "");
-					$("div#cover").attr("class", "");
-          $("div#issue-options").attr("class", "");
-				}
-				else {
-					$("div#header-menu").attr("class", "menu-follow");
-					$("div#cover").attr("class", "cover-follow");
-					$("div#issue-options").attr("class", "issue-follow");
-					var top=($("#cover").height() + 70);
-          $(".issue-follow").css("top",top);
-				}
-			}
 
+  function follow_menu() {
+    if($(window).scrollTop()<120) {
+      $("div#header-menu").attr("class", "");
+      $("div#cover").attr("class", "");
+      $("div#issue-options").attr("class", "");
+    }
+    else {
+      $("div#header-menu").attr("class", "menu-follow");
+      $("div#cover").attr("class", "cover-follow");
+      $("div#issue-options").attr("class", "issue-follow");
+      var top=($("#cover").height() + 70);
+      $(".issue-follow").css("top",top);
+    }
+  }
+  $(document).ready(function() {
+    $('a').each(function() {
+      $(this).attr("href", function(index, old) {
+        try {
+          return old.replace("[lp#issue_number]", "<%= @issue.number %>");
+        }
+        catch(err){}
+      });
+    });
+    $('a[href$="<%= CGI::unescape(@url.strip.gsub(/[\']|[\`]|[\"]/,"")) unless @url.nil? %>"]:first').attr("id", "activated");
+
+    follow_menu();
+		$(window).scroll(function () { 
 			follow_menu();
-			$(window).scroll(function () { 
-				follow_menu();
-    	});  
-	   });
+    });  
+	});
  </script>
 </body>
 </html>
