@@ -1,6 +1,6 @@
 class LinkerController < ApplicationController
 
-  layout "base"
+  layout $layout
 
   def root
     @issue = Setting.current_issue
