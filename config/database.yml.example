@@ -12,7 +12,7 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: gscms_development
+  database: mizatron_development
   pool: 5
   username: root
   password: yourpass
@@ -25,7 +25,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: gscms_test
+  database: mizatron_test
   pool: 5
   username: root
   password: yourpass
@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: gscms_development
+  database: mizatron_development
   pool: 5
   username: root
   password: yourpass

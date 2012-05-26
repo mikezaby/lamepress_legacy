@@ -1,7 +1,0 @@
-<div class = "header_menu">
-<% cache "navigator##{block.id.to_s}" do %>
-	<ul>
-    <%= render :partial => "blocks/navigator_list", :locals => { block: block} %>
-	</ul>
-  <% end %>
-</div>
