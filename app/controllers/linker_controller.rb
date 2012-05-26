@@ -73,21 +73,6 @@ class LinkerController < ApplicationController
     end
   end
 
-  def php
-    if !params[:article_id].nil?
-      if (@article = Article.find_by_id(params[:article_id].to_i))
-        url1 = @article.issue_id.present? ? "/issue_#{@article.issue_number}" : ""
-        @url = "#{url1}/#{@article.category_name}/#{@article.id}-#{@article.prettify_permalink}"
-        redirect_to @url
-      else
-        render_404
-      end
-    else
-      render_404
-    end
-  end
-
-
   def feed
     @posts = Article.where(category_id: params[:id], published: true).select("title, category_id, issue_id, author, id, html, created_at").order("created_at DESC").limit(20) 
     @category = @posts.first.category

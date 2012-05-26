@@ -40,14 +40,5 @@ class Admin::IssueController < Admin::BaseController
   end
 
 
-  def reproc
-    issue = Issue.find(:all)
-    issue.each do |iss|
-      iss.update_attributes(:cover => File.open("/home/miza/rails/mizatron/public/phpmedia/issue_"+iss.number.to_s+"/issue_"+iss.number.to_s+".jpg"), :pdf => File.open("/home/miza/rails/mizatron/public/phpmedia/issue_"+iss.number.to_s+"/issue_"+iss.number.to_s+".pdf"))
-    end
-    render :text => "y0"
-  end
-
-
 end
 
