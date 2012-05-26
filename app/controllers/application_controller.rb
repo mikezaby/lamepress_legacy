@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
 
   require "custom_strings.rb"
 
-  $domain="http://www.mydomain.com"
-  $title="Domain"
+  $domain = "http://www.mydomain.com"
+  $title = "Domain"
+  $layout = "base"
 
   def after_sign_in_path_for(resource)
 		if resource.is_a?(User)
