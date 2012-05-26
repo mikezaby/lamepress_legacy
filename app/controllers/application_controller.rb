@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   $domain = "http://www.mydomain.com"
   $title = "Domain"
   $layout = "base"
+
   def after_sign_in_path_for(resource)
 		if resource.is_a?(User)
    		"/admin"
