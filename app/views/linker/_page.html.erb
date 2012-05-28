@@ -6,9 +6,10 @@
 	<% end %>
 <% end %>
 <% cache 'page#'+@page.id.to_s do %>
-	<div class="cont_panel">
-		<div class="cont"><%= @page.name %></div>
-		<div class="superfullredline"></div>
-		<%= raw @page.content %>
+	<div id="main-content">
+    <div id="article">
+			<h1 class="article"><%= @page.name %></h1>
+			<%= raw @page.content %>
+		</div>
 	</div>
 <% end %>

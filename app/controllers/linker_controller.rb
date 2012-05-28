@@ -33,8 +33,8 @@ class LinkerController < ApplicationController
         render_404
       end
     #home issue
-    elsif !(@article = Article.home(params[:perma1].to_i)).empty?
-      @issue = @article.first.issue
+    elsif !(@issue = Issue.find_by_number(params[:perma1])).nil?
+      @article = Article.home(params[:perma1].to_i)
       render action: "Issue"
     else
       render_404

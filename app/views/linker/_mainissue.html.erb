@@ -1,4 +1,3 @@
-<!--#########main column##############-->
 <% content_for :head do %>
 	<% cache 'home_issue-head#'+@issue.id.to_s do %>
 		<%= head_title("Issue #{@issue.number.to_s} | #{$title}") %>
@@ -10,19 +9,26 @@
 <% cache 'home_issue#'+@issue.id.to_s do %>
 	<div id="main-content">
 		<% @article.each do |article| %>
-	    <div id="article">
-	    	<% if !article.hypertitle.nil? %>
+	    <div id="article" class="hovered" onclick="location.href='<%= article_permalink(article) %>'">
+	    	<% if !article.hypertitle.nil? and !article.hypertitle.empty? %>
 	      	<h2 class="article">
 	        	<%= raw article.hypertitle %>
 	      	</h2>
 	      <% end %>
 	      <h1 class="article">
 	        <%= raw article.title %>
-	      <h1>
+	      </h1>
 	      <div id="article-content">
 	      	<%= (link_to image_tag((raw article.photo.url(:small)), :id => "article-image"),(raw article.photo.url), :id => "single") unless article.photo_file_name.nil? %>
 					<%= raw article.html.summarize %>
 				</div>
+				<div id="tags">
+					<%= image_tag "demo/tags.png" %>
+      		Tags: <%= article.tag_names %>
+      	</div>
+      	<div id="moar">
+      		read more
+      	</div>
 	    </div>
 	  <% end %>
 	</div>

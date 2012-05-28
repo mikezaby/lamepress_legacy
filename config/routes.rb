@@ -11,7 +11,8 @@ Mizatron::Application.routes.draw do
   root :to => 'linker#root'
 
   match "search" => "search#index"
-
+  post "search/issue" => "search#issue"
+ 
   namespace :admin do
     resources :user, :as => :users, :except => [:show] do
        get "roles", :on => :member

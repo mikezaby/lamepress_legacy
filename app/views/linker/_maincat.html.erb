@@ -1,10 +1,3 @@
-<!--#########main column##############-->
-<div class = "main_col">
-<%
-i=0
-left=""
-right=""
- %>
 <% content_for :head do %>
 	<% cache 'home_cat-head#'+@issue.id.to_s+"-"+@category.id.to_s do %>
 		<%= head_title("#{@category.name} | Issue #{@issue.number.to_s} | #{$title}") %>
@@ -13,107 +6,31 @@ right=""
 	<% end %>
 <% end %>
 <% cache 'home_cat#'+@issue.id.to_s+"-"+@category.id.to_s do %>
-<% @article.each do |article| %>
-
-	<% if i==0 %>
-	<% i=1 %>
-	<div class = "main_panel">
-
-		<div class = "full_redline"></div>
-
-		<div class="headart">
-			<h3>
-				<%= link_to  (raw @category.name)+image_tag("base/pointer.gif"), cat_link(article) %>
-			</h3>
-			<% if !article.hypertitle.nil? %>
-			<h2>
-			<%= (article.hypertitle) %>
-			</h2>
-			<% end %>
-			<h1>
-				<%= link_to article.title, article_permalink(article), :class => "art_title" %>
-			</h1>
-		</div>
-		<% if article.photo_file_name %>
-		<div class = "main_panel_img">
-			<%= link_to image_tag((raw article.photo.url(:medium)), :border => 0),(raw article.photo.url), :id => "single" %>
-		</div>
+	<div id="main-content">
+		<% @article.each do |article| %>
+			<div id="article" class="hovered" onclick="location.href='<%= article_permalink(article) %>'">
+		    <% if !article.hypertitle.nil? and !article.hypertitle.empty? %>
+		      <h2 class="article">
+		       	<%= raw article.hypertitle %>
+		     	</h2>
+		    <% end %>
+		    <h1 class="article">
+		      <%= raw article.title %>
+	      </h1>
+		    <div id="article-content">
+		      <%= (link_to image_tag((raw article.photo.url(:small)), :id => "article-image"),(raw article.photo.url), :id => "single") unless article.photo_file_name.nil? %>
+						<%= raw article.html.summarize %>
+				</div>
+				<div id="tags">
+					<%= image_tag "demo/tags.png" %>
+      		Tags: <%= article.tag_names %>
+      	</div>
+      	<div id="moar">
+      		read more
+      	</div>
+		  </div>
 		<% end %>
-		<div class = "article">
-			<%= raw article.html.summarize %>
-		</div>
-		<div class = "complete_article">
-			<%= (link_to  "Πλήρες άρθρο...", article_permalink(article)) %>
-		</div>
-
-		<div class = "full_redline"></div>
-
-	</div>
-	<% elsif i==1 %>
-		<%
-		i=2
-		left+="<div class = 'half_main_panel_left'>
-								<div class=\"headart\">
-									<h3>
-										"+(link_to  (raw @category.name)+image_tag("base/pointer.gif"), cat_link(article))+"
-									</h3>" %>
-		<% if !article.hypertitle.nil? %>
-		<%	left+="		<h2>
-										"+(article.hypertitle)+"
-									</h2>" %>
-		<% end %>
-		<% left+="     <h1>
-										"+(link_to article.title, article_permalink(article), :class => "art_title")+"
-									</h1>
-								</div>
-	              <div class = 'article'>
-									"+article.html.summarize+"
-								</div>
-								<div class = 'complete_article'>
-									"+(link_to  "Πλήρες άρθρο...", article_permalink(article))+"
-								</div>
-					</div>
-					<div class = \"half_redline\"></div>" %>
-	<% else %>
-		<%
-		i=1
-		right+="<div class = 'half_main_panel_right'>
-								<div class=\"headart\">
-									<h3>
-										"+(link_to  (raw @category.name)+image_tag("base/pointer.gif"),cat_link(article))+"
-									</h3>" %>
-		<% if !article.hypertitle.nil? %>
-		<%	right+="		<h2>
-										"+(article.hypertitle)+"
-									</h2>" %>
-		<% end %>
-		<% right+="     <h1>
-										"+(link_to article.title,article_permalink(article), :class => "art_title")+"
-									</h1>
-								</div>
-	              <div class = 'article'>
-									"+article.html.summarize+"
-								</div>
-								<div class = 'complete_article'>
-									"+(link_to  "Πλήρες άρθρο...", article_permalink(article))+"
-								</div>
-					</div>
-					<div class = \"half_redline\"></div>" %>
-	<% end %>
-
-<% end %>
-
-	<%#= pagerz("tade", @article.current_page, @article.page_count) %>
-
-			<div class = "half_main_left">
-				<%= raw left %>
-			</div>
-
-
-
-			<div class = "half_main_right">
-				<%= raw right %>
-			</div>
 	</div>
 <% end %>
+
 

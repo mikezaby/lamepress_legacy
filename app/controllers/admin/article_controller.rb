@@ -21,11 +21,12 @@ class Admin::ArticleController < Admin::BaseController
 
   def create
 		@article = Article.new(params[:article])
+    @article.build_ordering
+    @article.ordering.cat_pos=99
     if @article.preview == "1" and !params[:article][:category_id].empty?
       @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
       render :action => "show", :layout => "base"
     elsif @article.save
-      @article.create_ordering(:cat_pos => 99 ) unless @article.issue_id.nil?
       redirect_to(admin_articles_path, :notice => 'Page was successfully created.')
     else
       render :action => "new"

@@ -10,7 +10,14 @@
 		</div>
   </div>
   <div id="issue-options">
-    <span class="cover-info">Issue options</span>
+    <div id="search-issue">
+      <%= form_for Issue.new, :url => search_issue_path do |f| %>
+        <span class="cover-info">Issue No</span>
+        <%= f.text_field :number %>
+        <%= f.submit "Find Issue" %>
+      <% end %>
+    </div>
+    <span class="cover-info"><%= link_to "Issue options", "#", :onclick => "$('#search-issue').toggle('fast');" %> </span>
   </div>
 <% end %>
 

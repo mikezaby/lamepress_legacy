@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
 
   after_save :assign_tags
 
-  attr_writer :tag_names
+  attr_writer :tag_names,:tag_links
   attr_accessor :preview
 
 	belongs_to :category
@@ -40,6 +40,10 @@ class Article < ActiveRecord::Base
 
   def tag_names
     @tag_names || tags.map(&:name).join(', ')
+  end
+
+  def tag_links
+    #todo
   end
 
 	def self.cat_home(number, category)

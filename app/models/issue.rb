@@ -6,7 +6,7 @@ class Issue < ActiveRecord::Base
 	has_attached_file :cover,
 										:url  => "/media/issues/:id/:style_issue_:id.:extension",
                   	:path => ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
-                  	:styles => {:thumb => "212x290#" },
+                  	:styles => {:thumb => "250>" },
                   	:convert_options => { :thumb => '-quality 75' }
 	has_attached_file :pdf,
 										:url  => "/media/issues/:id/issue_:id.:extension",

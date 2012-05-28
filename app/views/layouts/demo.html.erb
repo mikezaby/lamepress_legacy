@@ -21,11 +21,15 @@
             <a href="http://www.lamezor.com" target="_blank" >Lamepress</a>
           </div>
           <div class="share">
+            <%= link_to (image_tag "demo/fb.png"), "#" %>
           </div>
           <div class="share">
+             <%= link_to (image_tag "demo/tw.png"), "#" %>
           </div>
           <div id="search">
-            search
+            <%= search_form_for Article.search(params[:q]), :url => search_path do |f| %>
+              <%= f.text_field :title_or_html_cont, { :value => "Search", :onfocus => "if(!this._haschanged){this.value=''};this._haschanged=true;"}%>
+            <% end %>
           </div>
         </div>
       </div>
@@ -47,14 +51,7 @@
         <%= yield %>
   <!-- -======== right side ========- --> 
         <div id="right-side">
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
-          &nbsp;&nbsp;a<br />
+          <%= block "right" %>
         </div>
       </div>
   <!-- -======== footer ========- --> 
@@ -118,7 +115,8 @@
     follow_menu();
 		$(window).scroll(function () { 
 			follow_menu();
-    });  
+    });
+
 	});
  </script>
 </body>
