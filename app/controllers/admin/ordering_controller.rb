@@ -2,6 +2,8 @@ class Admin::OrderingController < Admin::BaseController
   
   load_and_authorize_resource
 
+  cache_sweeper :ordering_sweeper
+
   def index
   end
 

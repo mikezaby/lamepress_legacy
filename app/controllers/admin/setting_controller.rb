@@ -2,7 +2,7 @@ class Admin::SettingController < Admin::BaseController
   load_and_authorize_resource
   
   def current_issue
-    @setting = Setting.where(meta_key: "current_issue").first
+    @setting = Setting.find_or_create_by_meta_key("current_issue")
   end
 
   def block_placements

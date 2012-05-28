@@ -15,6 +15,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'railroady'
+  gem 'faker'
 end
 #this is for heroku
 #group :production do
