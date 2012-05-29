@@ -21,7 +21,6 @@ end
 #  gem 'pg', :group => :production
 #  gem 'thin', :group => :production
 #end
-
 gem "ransack"
 gem 'therubyracer'
 gem 'jquery-rails'

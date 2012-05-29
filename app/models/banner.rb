@@ -3,8 +3,10 @@ class Banner < ActiveRecord::Base
   belongs_to :block
 
   has_attached_file :photo,
-										:url  => "/media/banner/:filename",
-                  	:path => ":rails_root/public/media/banner/:filename"
+										:url  => "/media/banner/:id/:style_:filename",
+                  	:path => ":rails_root/public/media/banner/:id/:style_:filename",
+                    :styles => {:thumb => "350>" },
+                    :convert_options => { :thumb => '-quality 75' }
 
   validates :block_id, :presence => true
   validates_attachment :photo, :presence => true,
