@@ -1,7 +1,7 @@
 class String
 
   def summarize
-    self.gsub(/\<!--(.+?)--\>/m,"").gsub(/<\/?[^>]*>/, "")[0..300]
+    self.gsub(/\<!--(.+?)--\>/m,"").gsub(/<\/?[^>]*>/, "")[0..400]
     #self[0..300].close_tags
   end
 
