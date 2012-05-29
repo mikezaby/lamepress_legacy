@@ -72,7 +72,7 @@ class Admin::ArticleController < Admin::BaseController
     sitemap.puts('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     @articles.each do |article|
       sitemap.puts('<url>')
-      url = article.issue_id.nil? ?  "/#{article.category_name}/#{article.id}-#{article.prettify_permalink}" : "/issue_#{article.issue_number}/#{article.category_name}/#{article.id}-#{article.prettify_permalink}"
+      url = article.issue_id.nil? ?  "/#{article.category_permalink}/#{article.id}-#{article.prettify_permalink}" : "/issue_#{article.issue_number}/#{article.category_permalink}/#{article.id}-#{article.prettify_permalink}"
       sitemap.puts("<loc>#{$domain}#{url}/</loc>")
       sitemap.puts("<lastmod>#{article.updated_at.strftime("%Y-%m-%d")}</lastmod>")
       sitemap.puts('</url>')
