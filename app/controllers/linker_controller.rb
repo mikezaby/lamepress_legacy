@@ -4,6 +4,7 @@ class LinkerController < ApplicationController
 
   def root
     @issue = Setting.current_issue
+    @issue = Issue.find_by_number(Issue.maximum(:number)) if @issue.nil? 
     @article = @article = Article.home(@issue.number.to_i)
     @url = "/issue_#{@issue.number}"
     render action: "Issue"
