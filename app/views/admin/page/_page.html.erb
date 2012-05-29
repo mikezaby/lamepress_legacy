@@ -1,10 +1,11 @@
 <% content_for :head do %>
-		<%= head_title("#{@page.title} | #{$title}") %>
-		<%= description(@page.meta_description) %>
-		<%= cannonical_link("#{$domain}/page/#{@page.permalink}") %>
+  <%= head_title("#{@page.title} | #{$title}") %>
+  <%= description(@page.meta_description) %>
+  <%= cannonical_link("#{$domain}/page/#{@page.permalink}") %>
 <% end %>
-<div class="cont_panel">
-	<div class="cont"><%= @page.name %></div>
-	<div class="superfullredline"></div>
-	<%= raw @page.content %>
+<div id="main-content">
+  <div id="article">
+    <h1 class="article"><%= @page.name %></h1>
+    <%= raw @page.content %>
+  </div>
 </div>

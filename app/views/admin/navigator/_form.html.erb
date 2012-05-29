@@ -13,7 +13,7 @@
       var page_options="<option value=\"\">Select a page</option>";
       <% @pages.each do |page| %>
         <% selected = (page.id == @navigator.navigatable_id and @navigator.navigatable_type == "Page") ? "selected" : "" %>
-        page_options+="<option <%= selected %> value=\"<%= page.id %>\"><%=h page.name%></option>";
+        page_options+="<option <%= selected %> value=\"<%= page.id %>\"><%=h page.permalink%></option>";
       <% end %>
       mode = $('select#navigator_navigatable_type').val();
       if (mode == "Category") {
