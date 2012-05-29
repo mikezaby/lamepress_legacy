@@ -12,9 +12,6 @@ class Ability
     if user.role? :author
       can :manage, [Article, Issue, Category, Ordering]
     end
-    if user.role? :demo
-      can :read, :all
-    end
 
     # Define abilities for the passed in user here. For example:
     #
