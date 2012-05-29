@@ -16,14 +16,20 @@ class Admin::SettingController < Admin::BaseController
     else
       redirect_to(:back, :notice => "Something going wrong", :setting => @setting)
     end
+    rescue ActionController::RedirectBackError
+      redirect_to "/admin/setting/current_issue"
   end
 
   def update
-    @setting = Setting.find(params[:id])
-    if @setting.update_attributes(params[:setting])
-      redirect_to(:back, :notice => "Setting was successfully updated.", :setting => @setting)
-    else
-      redirect_to(:back, :notice => "Something going wrong", :setting => @setting)
+    begin
+      @setting = Setting.find(params[:id])
+      if @setting.update_attributes(params[:setting])
+        redirect_to(:back, :notice => "Setting was successfully updated.", :setting => @setting)
+      else
+        redirect_to(:back, :notice => "Something going wrong", :setting => @setting)
+      end
+    rescue ActionController::RedirectBackError
+      redirect_to "/admin/setting/current_issue"
     end
   end
 
