@@ -4,9 +4,7 @@ config/database.yml
 public/media/**/*
 public/phpmedia/**/*
 public/ckeditor_assets/**/*
-public/javascripts/cache/*
-public/stylesheets/cache/*
-public/assets/**/*
+public/assets/
 todo
 .sass-cache/
 .bundle
