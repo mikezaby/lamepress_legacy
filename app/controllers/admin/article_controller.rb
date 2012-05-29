@@ -78,6 +78,7 @@ class Admin::ArticleController < Admin::BaseController
       sitemap.puts('</url>')
     end
     sitemap.puts('</urlset>')
+    sitemap.close
     redirect_to admin_articles_url, notice: 'Sitemap was successfully created.'
   end
 
