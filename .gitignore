@@ -11,4 +11,5 @@ todo
 .sass-cache/
 .bundle
 bin
+.rvmrc
 
