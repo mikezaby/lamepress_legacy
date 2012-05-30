@@ -7,7 +7,7 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 require "custom_strings.rb"
 User.create(email: "demo@email.com", password: "lamepress", roles_mask: "7")
-issue = Issue.create(number: 1, published: true, date: Date.today,  cover: File.new("#{Rails.root}/public/issue.jpg", "r"), pdf: File.new("#{Rails.root}/public/issue.pdf", "r"))
+issue = Issue.create(number: 1, published: true, date: Date.today,  cover: File.new("#{Rails.root}/public/issue.png", "r"), pdf: File.new("#{Rails.root}/public/issue.pdf", "r"))
 Setting.create(meta_key: "current_issue", meta_value: "#{issue.id}")
 Setting.create(meta_key: "block_placement", meta_value: "top")
 Setting.create(meta_key: "block_placement", meta_value: "left")
