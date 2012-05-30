@@ -6,7 +6,7 @@ Lamepress is a Content Managment System for issuing magazines/newspapers. It's w
 ###Demo
 Give a try to [Lamepress](http://press.lamezor.gr/admin)
 email: demo@email.com
-password: lamepress
+password: lamepress 
 
 ###Installation
 1. `git@github.com:mikezaby/Lamepress.git`
