@@ -6,7 +6,7 @@ public/ckeditor_assets/**/*
 public/assets/
 public/sitemap.xml
 .sass-cache/
-.bundle
+.bundle/
 bin
 .rvmrc
 
