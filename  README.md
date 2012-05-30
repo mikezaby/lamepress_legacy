@@ -1,5 +1,4 @@
-Lamepress
-=========
+#Lamepress
 
 Lamepress is a Content Managment System for issuing magazines/newspapers. It's written in Ruby language and rails framework. The deal of Lamepress is to make building and managing of magazines/newspapers as simple and easy as possible, also to give readers an easy way to browse current and older issues.
 
@@ -21,7 +20,7 @@ For admin login, go to localhost:3000/admin<br/>
 email: demo@email.com<br/>
 password: lamepress<br/>
 
-###License
+##License
 MIT License. Copyright &copy; 2012 Michael Zamparas
 
 
