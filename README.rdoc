@@ -21,4 +21,4 @@ For admin login, go to localhost:3000/admin
 <b>email:</b> demo@email.com, <b>password:</b> lamepress
 
 ==License
-MIT License. Copyright &copy; 2012 Michael Zamparas
+MIT License. Copyright 2012 Michael Zamparas
