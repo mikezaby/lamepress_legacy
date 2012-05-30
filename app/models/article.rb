@@ -71,7 +71,6 @@ class Article < ActiveRecord::Base
     order("date DESC").first(number)
   end
 
-
 	scope :iss_order, joins(:ordering).merge(Ordering.issue_ordered)
 	scope :cat_order, joins(:ordering).merge(Ordering.cat_ordered)
 

@@ -3,18 +3,22 @@ class LinkerController < ApplicationController
   layout $layout
 
   def root
-    @issue = Setting.current_issue
-    @issue = Issue.find_by_number(Issue.maximum(:number)) if @issue.nil? 
-    @article = @article = Article.home(@issue.number.to_i)
-    @url = "/issue_#{@issue.number}"
-    render action: "Issue"
+    begin
+      @issue = Setting.current_issue
+      @issue = Issue.get_issue(Issue.maximum(:number)).first if @issue.nil? 
+      @article = @article = Article.home(@issue.number.to_i)
+      @url = "/issue_#{@issue.number}"
+      render action: "Issue"
+    rescue
+      render_404
+    end
   end
 
   def issued
     @url = request.fullpath
     #article
     if !params[:perma3].nil?
-      if (@article = Article.find_by_id(params[:perma3].split("-").first.to_i))
+      if (@article = Article.where(id: params[:perma3].split("-").first.to_i, published: true).joins(:issue).merge(Issue.pub).first)
         @issue = @article.issue
         render action: "Article"
       else
@@ -22,7 +26,7 @@ class LinkerController < ApplicationController
       end
     #issued category
     elsif !params[:perma2].nil?
-      if (@category = Category.where(permalink: params[:perma2], issued: true).first) and (@issue = Issue.find_by_number(params[:perma1].to_i))
+      if (@category = Category.where(permalink: params[:perma2], issued: true).first) and (@issue = Issue.get_issue(params[:perma1].to_i).first)
         @article = Article.cat_home(params[:perma1], params[:perma2])
         if !@article.empty?
           render action: "catshow"
@@ -34,7 +38,7 @@ class LinkerController < ApplicationController
         render_404
       end
     #home issue
-    elsif !(@issue = Issue.find_by_number(params[:perma1])).nil?
+    elsif !(@issue = Issue.get_issue(params[:perma1]).first).nil?
       @article = Article.home(params[:perma1].to_i)
       render action: "Issue"
     else
@@ -45,7 +49,7 @@ class LinkerController < ApplicationController
   def non_issued
     @url = request.fullpath
     if !params[:perma2].nil?
-      if (@article = Article.find_by_id(params[:perma2].split("-").first.to_i))
+      if (@article = Article.where(id: params[:perma2].split("-").first.to_i, published: true))
         @issue = Setting.current_issue
         render action: "Article"
       else
@@ -53,7 +57,7 @@ class LinkerController < ApplicationController
       end
     elsif (@category = Category.where(permalink: params[:perma1], issued: false).first)
       @issue = Setting.current_issue
-      @article = Article.where(category_id: @category.id).order("date DESC").page(params[:page]).per(10)
+      @article = Article.where(category_id: @category.id, published: true).order("date DESC").page(params[:page]).per(10)
       if !@article.empty?
         render action: "Category"
       else

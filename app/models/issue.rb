@@ -22,7 +22,7 @@ class Issue < ActiveRecord::Base
 	attr_accessible :number, :date, :cover, :pdf, :published
 
 	def self.get_issue(number)
-    where("number = ?", number).pub
+    where(number: number).pub
   end
 
   def self.last_issues(number)
