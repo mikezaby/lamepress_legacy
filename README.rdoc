@@ -11,14 +11,18 @@ Give a try to {Lamepress}[http://press.lamezor.com/admin]
 1. <tt>git clone https://github.com/mikezaby/lamepress.git</tt>
 2. Run <tt>bundle install</tt> in project folder
 3. Make a database.yml like database.yml.example in config folder with your credentials
-4. Type <tt>rake db:create:all</tt> to create your databases
-5. Type <tt>rake db:schema:load</tt> to create database schema
-6. Type <tt>rake db:seed</tt> to load basic data
-7. Run <tt>passenger start</tt> or <tt>rails s</tt>
+4. Type <tt>rake lp:config</tt> to create lamepress.yml, has information about domain, title and layout
+5. Type <tt>rake db:create:all</tt> to create your databases
+6. Type <tt>rake db:schema:load</tt> to create database schema
+7. Type <tt>rake db:seed</tt> to load basic data
+8. Run <tt>passenger start</tt> or <tt>rails s</tt>
 
 For admin login, go to localhost:3000/admin
 
 <b>email:</b> demo@email.com, <b>password:</b> lamepress
+
+==Use
+Coming soon...
 
 ==License
 MIT License. Copyright 2012 Michael Zamparas
