@@ -1,6 +1,6 @@
 <% Navigator.list(block.id).each do |navigator| %>
   <% if navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == true %>
-    <li><%= (link_to navigator.name, "/issue_[lp#issue_number]/"+(raw navigator.navigatable.permalink)) %></li>
+    <li><%= (link_to navigator.name, "/issue/[lp#issue_number]/"+(raw navigator.navigatable.permalink)) %></li>
   <% elsif navigator.navigatable_type == "Category" &&  navigator.navigatable.issued == false %>
     <li><%=link_to navigator.name, "/"+(raw navigator.navigatable.permalink) %></li>
   <% elsif navigator.navigatable_type == "Block" %>

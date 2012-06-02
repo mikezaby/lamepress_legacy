@@ -22,6 +22,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ckeditor_authenticate
+    #if @asset
+      authorize! action_name, Ckeditor::Asset
+    #end
+  end
+
 
 end
 

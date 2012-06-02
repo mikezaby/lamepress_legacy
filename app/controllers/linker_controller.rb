@@ -7,7 +7,7 @@ class LinkerController < ApplicationController
       @issue = Setting.current_issue
       @issue = Issue.get_issue(Issue.maximum(:number)).first if @issue.nil? 
       @article = @article = Article.home(@issue.number.to_i)
-      @url = "/issue_#{@issue.number}"
+      @url = "/issue/#{@issue.number}"
       render action: "#{$layout}/Issue"
     rescue
       render_404

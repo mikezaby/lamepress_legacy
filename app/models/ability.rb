@@ -11,6 +11,7 @@ class Ability
     end
     if user.role? :author
       can :manage, [Article, Issue, Category, Ordering]
+      can :manage, Ckeditor::Asset
     end
 
     # Define abilities for the passed in user here. For example:

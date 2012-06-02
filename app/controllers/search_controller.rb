@@ -11,7 +11,7 @@ class SearchController < ApplicationController
   def issue
     issue = Issue.find_by_number(params[:issue][:number])
     if issue
-      redirect_to "/issue_#{issue.number}"
+      redirect_to "/issue/#{issue.number}"
     else
       redirect_to "/", :notice => "This issue does not exist"
     end

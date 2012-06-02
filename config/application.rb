@@ -46,6 +46,8 @@ module Mizatron
     config.assets.initialize_on_precompile = false
     config.assets.precompile += ['*.js', '*.css', '*.scss'] #+= %w( sign_in.css.erb pages_css/all admin_css/all )
 
+    
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
@@ -53,7 +55,6 @@ module Mizatron
     config.filter_parameters += [:password]
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-
   end
 end
 
