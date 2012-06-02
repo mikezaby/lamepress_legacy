@@ -7,6 +7,6 @@ public/assets/
 public/sitemap.xml
 .sass-cache/
 .bundle/
-bin
+bin/
 .rvmrc
 

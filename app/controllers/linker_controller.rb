@@ -8,7 +8,7 @@ class LinkerController < ApplicationController
       @issue = Issue.get_issue(Issue.maximum(:number)).first if @issue.nil? 
       @article = @article = Article.home(@issue.number.to_i)
       @url = "/issue_#{@issue.number}"
-      render action: "Issue"
+      render action: "#{$layout}/Issue"
     rescue
       render_404
     end
@@ -20,7 +20,7 @@ class LinkerController < ApplicationController
     if !params[:perma3].nil?
       if (@article = Article.where(id: params[:perma3].split("-").first.to_i, published: true).joins(:issue).merge(Issue.pub).first)
         @issue = @article.issue
-        render action: "Article"
+        render action: "#{$layout}/Article"
       else
         render_404
       end
@@ -29,10 +29,10 @@ class LinkerController < ApplicationController
       if (@category = Category.where(permalink: params[:perma2], issued: true).first) and (@issue = Issue.get_issue(params[:perma1].to_i).first)
         @article = Article.cat_home(params[:perma1], params[:perma2])
         if !@article.empty?
-          render action: "catshow"
+          render action: "#{$layout}/catshow"
         else
           @message = "No articles for this category in specific issue"
-          render action: "empty"
+          render action: "#{$layout}/empty"
         end
       else
         render_404
@@ -40,7 +40,7 @@ class LinkerController < ApplicationController
     #home issue
     elsif !(@issue = Issue.get_issue(params[:perma1]).first).nil?
       @article = Article.home(params[:perma1].to_i)
-      render action: "Issue"
+      render action: "#{$layout}/Issue"
     else
       render_404
     end
@@ -51,7 +51,7 @@ class LinkerController < ApplicationController
     if !params[:perma2].nil?
       if (@article = Article.where(id: params[:perma2].split("-").first.to_i, published: true))
         @issue = Setting.current_issue
-        render action: "Article"
+        render action: "#{$layout}/Article"
       else
         render_404
       end
@@ -59,10 +59,10 @@ class LinkerController < ApplicationController
       @issue = Setting.current_issue
       @article = Article.where(category_id: @category.id, published: true).order("date DESC").page(params[:page]).per(10)
       if !@article.empty?
-        render action: "Category"
+        render action: "#{$layout}/Category"
       else
         @message = "No articles for this category"
-        render action: "empty"
+        render action: "#{$layout}/empty"
       end
     else
       render_404
@@ -73,6 +73,7 @@ class LinkerController < ApplicationController
     if (@page =  Page.where(permalink: params[:perma]).published_only.first)
       @url = "/page/#{@page.permalink}"
       @issue = Setting.current_issue
+      render action: "#{$layout}/page"
     else
       render_404
     end
