@@ -1,6 +1,7 @@
 log/*.log
 tmp/**/*
 config/database.yml
+config/lamepress.yml
 public/media/**/*
 public/ckeditor_assets/**/*
 public/assets/

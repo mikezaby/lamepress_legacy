@@ -5,3 +5,13 @@
 require File.expand_path('../config/application', __FILE__)
 
 Mizatron::Application.load_tasks
+
+namespace :lp do
+  desc "Generate config file for lamepress"
+  task :config do
+    file = File.expand_path(File.dirname(__FILE__))
+    lamepress = File.new("#{file}/config/lamepress.yml", "w")
+    lamepress.write("domain: \"http://www.mydomain.com\"\ntitle: \"lamepress\"\nlayout: \"demo\"")
+    lamepress.close
+  end  
+end

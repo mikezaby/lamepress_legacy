@@ -18,3 +18,4 @@ category = Category.create(name: "Category", issued: 1)
 Navigator.create(name: "Category", block_id: block_top.id, position: 1, navigatable_type: "Category", navigatable_id: category.id)
 article = Article.create(title: "Lamepress CMS", published: true, category_id: category.id, issue_id: issue.id, date: Date.today, html: "Lamepress is a Content System Managment for issuing magazines/newspapers. It's written in Ruby language and rails framework. The deal of Lamepress is to make building and managing of magazines/newspapers as simple and easy as possible, also to give readers an easy way to browse current and older issues. Lamepress is under MIT Liecense.")
 article.create_ordering(issue_pos: 1, cat_pos: 1)
+
