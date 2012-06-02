@@ -4,7 +4,7 @@
 		<%= keywords(@article.tag_names) %>
 		<%= description(@article.html.summarize) %>
 		<% issue_number = @article.issue_id.nil? ? "" : "issue_#{@issue.number.to_s}" %>
-		<%= cannonical_link("#{$domain}/#{issue_number}/#{@article.category_permalink}/#{@article.id}-#{@article.prettify_permalink}") %>
+		<%= cannonical_link("#{$domain}/issue/#{issue_number}/#{@article.category_permalink}/#{@article.id}-#{@article.prettify_permalink}") %>
 	<% end %>
 <% end %>
 <% cache 'article#'+@article.id.to_s do %>
