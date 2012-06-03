@@ -6,6 +6,16 @@ public/media/**/*
 public/ckeditor_assets/**/*
 public/assets/
 public/sitemap.xml
+app/views/blocks
+!app/views/blocks/demo
+!app/views/blocks/_navigator_list.html.erb
+app/layouts/
+!app/layouts/admin.html.erb
+!app/layouts/demo.html.erb
+app/linker/
+!app/linker/demo/
+!app/linker/feed.rss.builder
+app/assets/
 .sass-cache/
 .bundle/
 bin/
