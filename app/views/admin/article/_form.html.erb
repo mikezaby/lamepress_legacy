@@ -10,6 +10,13 @@
     CKEDITOR.autoParagraph = false;
   </script>
 <% end %>
+<%= content_for :scripts do %>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $( "#article_date" ).datepicker({ changeYear: true, changeMonth: true, dateFormat: "yy-mm-dd"});
+  });
+  </script>
+<% end %>
 <% if @article.errors.any? %>
 		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
 			<ul>
@@ -24,12 +31,12 @@
 
 
   <%= field_set_tag do %>
-		<%= f.label "Τιτλος" %>
+		<%= f.label :title %>
  		<%= f.text_field :title %>
  	<% end %>
 
  	<%= field_set_tag do %>
-		<%= f.label "υπερτιτλος" %>
+		<%= f.label :hypertitle %>
  		<%= f.text_field :hypertitle %>
  	<% end %>
 
@@ -39,13 +46,13 @@
  	<% end %>
 
  	<%= field_set_tag nil, :style => "width:25%; float:left;margin-left:0%;margin-right: 2%;" do %>
-		<%= f.label "αρθρογραφος", :style => "width:84%;" %>
+		<%= f.label :author, :style => "width:84%;" %>
  		<%= f.text_field :author, :style => "width:84%;" %>
  	<% end %>
 
 
   <%= field_set_tag nil, :style => "width:25%; float:left;margin-left:0%;margin-right: 2%;" do %>
-  	<%= f.label "Φυλλο", {:style => "float:left;width:84%"} %>
+  	<%= f.label :issue_id,  {:style => "float:left;width:84%"} %>
   	<select id="year" style="float:left;width:33%;margin-left:2%;margin-right:0;">
   		<option value="0">Year</option>
   		<% time = Time.new;year=1990 %>
@@ -63,7 +70,7 @@
 	<% end %>
 
 	<%= field_set_tag nil, :style => "max-width:25%;float:left;margin-left:0%;margin-right: 0%;" do %>
-		<%= f.label "Κατηγορια", :style => "width:84%;" %>
+		<%= f.label :category_id, :style => "width:84%;" %>
 		<%= f.collection_select :category_id, Category.find(:all), :id, :name, {:prompt => "Select a Category"}, {:style => "width:84%;"} %>
   <% end %>
 

@@ -6,8 +6,8 @@ class Admin::ArticleController < Admin::BaseController
 
   def index
     @q = Article.search(params[:q], :auth_object => 'admin') 
-  	@article = Article.issued.page(params[:page]).per(20)
-		@nonis_article = Article.non_issued.page(params[:ni_page]).per(20)
+  	@article = Article.issued.page(params[:page]).order("date DESC").per(20)
+		@nonis_article = Article.non_issued.page(params[:ni_page]).order("date DESC").per(20)
   end
 
   def new
@@ -16,7 +16,7 @@ class Admin::ArticleController < Admin::BaseController
 
   def search
     @q = Article.search(params[:q], :auth_object => 'aaa')
-    @article = @q.result(:distinct => true).page(params[:page]).per(20)
+    @article = @q.result(:distinct => true).page(params[:page]).order("date DESC").per(20)
   end
 
   def create
@@ -25,7 +25,7 @@ class Admin::ArticleController < Admin::BaseController
     @article.ordering.cat_pos=99
     if @article.preview == "1" and !params[:article][:category_id].empty?
       @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
-      render :action => "show", :layout => $layout
+      render "/linker/#{$layout}/Article", :layout => $layout
     elsif @article.save
       redirect_to(admin_articles_path, :notice => 'Page was successfully created.')
     else
@@ -42,7 +42,7 @@ class Admin::ArticleController < Admin::BaseController
     if params[:article][:preview] == "1" and !params[:article][:category_id].empty?
       @article = Article.new(params[:article])
       @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
-      render :action => "show", :layout => $layout
+      render "/linker/#{$layout}/Article", :layout => $layout
     elsif @article.update_attributes(params[:article])
       redirect_to(admin_articles_path, :notice => 'Page was successfully updated.')
     else
@@ -59,7 +59,7 @@ class Admin::ArticleController < Admin::BaseController
   def show
   	@article = Article.find_by_id(params[:id])
     @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
-    render :action => "show", :layout => $layout
+    render "/linker/#{$layout}/Article", :layout => $layout
   end
 
 

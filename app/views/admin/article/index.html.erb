@@ -44,6 +44,7 @@
 				<tr>
     				<th>Title</th>
     				<th>Category</th>
+            <th>Date</th>
 						<th>published</th>
     				<th>Actions</th>
     				<th></th>
@@ -56,6 +57,7 @@
 
     				<td><%= article.title %></td>
     				<td><%= article.category_name %></td>
+            <td><%= raw I18n.l(article.date, :format=> "%d/%m/%Y") %></td>
 						<td><%= article.published  %></td>
             <td><%= link_to image_tag("admin/show.png"), admin_article_path(article), :target => "blank" %></td>
     				<td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_article_path(article) %></td>
