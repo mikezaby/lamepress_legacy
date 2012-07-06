@@ -49,7 +49,7 @@ class LinkerController < ApplicationController
   def non_issued
     @url = request.fullpath
     if !params[:perma2].nil?
-      if (@article = Article.where(id: params[:perma2].split("-").first.to_i, published: true))
+      if (@article = Article.where(id: params[:perma2].split("-").first.to_i, published: true).first)
         @issue = Setting.current_issue
         render action: "#{$layout}/Article"
       else

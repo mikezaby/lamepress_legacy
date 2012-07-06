@@ -8,7 +8,7 @@ Give a try to {Lamepress}[http://press.lamezor.com/admin]
 <b>email:</b> demo@email.com, <b>password:</b> lamepress
 
 ==Installation
-1. <tt>git clone https://github.com/mikezaby/lamepress.git</tt>
+1. <tt>git clone http://github.com/mikezaby/lamepress.git</tt>
 2. Run <tt>bundle install</tt> in project folder
 3. Make a database.yml like database.yml.example in config folder with your credentials
 4. Type <tt>rake lp:config</tt> to create lamepress.yml, has information about domain, title and layout

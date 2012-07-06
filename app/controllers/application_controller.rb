@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   $title = LP_CONFIG["title"]
   $layout = LP_CONFIG["layout"]
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+
   def after_sign_in_path_for(resource)
 		if resource.is_a?(User)
    		"/admin"
