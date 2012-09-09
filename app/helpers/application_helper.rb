@@ -1,14 +1,14 @@
 module ApplicationHelper
 
-	include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::SanitizeHelper
 
-	def javascript(*files)
-  	content_for(:scripts) { javascript_include_tag(*files) }
-	end
+  def javascript(*files)
+    content_for(:scripts) { javascript_include_tag(*files) }
+  end
 
-	def stylesheet(*files)
- 		content_for(:head) { stylesheet_link_tag(*files) }
-	end
+  def stylesheet(*files)
+    content_for(:head) { stylesheet_link_tag(*files) }
+  end
 
   def keywords(string)
     raw "\n<meta name=\"keywords\" content=\""+string+"\" />"
