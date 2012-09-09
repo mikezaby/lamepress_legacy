@@ -28,16 +28,17 @@ module ApplicationHelper
 
 
   def block(name)
-    
-      partials = ""
-      Block.place(name).each do |block|
-        begin
-          partials += render :partial => "blocks/#{$layout}/#{block.partial}", :locals => { block: block}
-        rescue
-          "missing"
-        end
+    partials = ""
+    Block.place(name).each do |block|
+      begin
+        partials << (render :partial => "blocks/#{$layout}/#{block.partial}",
+                            :locals => { block: block })
+      rescue
+        #replace this with something tha save error to database
+        partial << "missing"
       end
-      raw partials
+    end
+    raw partials
   end
 
   def render_linker(partial)
