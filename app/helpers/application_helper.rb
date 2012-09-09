@@ -11,21 +11,20 @@ module ApplicationHelper
   end
 
   def keywords(string)
-    raw "\n<meta name=\"keywords\" content=\""+string+"\" />"
+    raw %(<meta name="keywords" content="#{string}" />)
   end
 
   def cannonical_link(string)
-    raw "\n<link rel=\"canonical\" href=\"#{string}\"/>"
+    raw %(<link rel="canonical" href="#{string}"/>)
   end
 
   def description(string)
-    raw "\n<meta name=\"description\" content=\""+string+"\" />"
+    raw %(<meta name="description" content="#{string}" />)
   end
 
   def head_title(string)
     raw "\n<title>#{string}</title>"
   end
-
 
   def block(name)
     partials = ""
@@ -44,8 +43,6 @@ module ApplicationHelper
   def render_linker(partial)
     render :partial => "linker/#{$layout}/#{partial}"
   end
-
-
 
 end
 
