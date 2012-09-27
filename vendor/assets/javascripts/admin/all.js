@@ -5,4 +5,5 @@
 //= require admin/jquery.equalHeight
 //= require admin/jquery.tablesorter.min
 //= require fancybox
+//= require ckeditor/init
 

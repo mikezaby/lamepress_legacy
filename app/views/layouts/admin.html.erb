@@ -14,6 +14,7 @@
 
   <%= csrf_meta_tag %>
 	<%= yield(:head) %>
+	<%= javascript_include_tag "admin/all" %>
 </head>
 
 
@@ -124,7 +125,7 @@
 	</section>
 
 
-  <%= javascript_include_tag "admin/all" %>
+
   <%= yield(:scripts) %>
   <script type="text/javascript">
 
