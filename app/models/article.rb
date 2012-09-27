@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
 
-  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
+  # for using 'truncate' method on prettify_permalink
+  include ActionView::Helpers::TextHelper
 
   after_save :assign_tags
 
@@ -21,7 +22,8 @@ class Article < ActiveRecord::Base
 	validates :html, :presence => true
 	validates :category_id, :presence => true
 
-  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id, :date, :published, :hypertitle, :photo, :preview
+  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
+                  :date, :published, :hypertitle, :photo, :preview
 
 	delegate :number, :date, :cover, :pdf, :published, :to => :issue, :prefix => true
 	delegate :name, :permalink, :issued, :to => :category, :prefix => true
@@ -46,33 +48,51 @@ class Article < ActiveRecord::Base
     #todo
   end
 
-	def self.cat_home(number, category)
-		art_issue(number).art_cat(category).cat_order
-	end
-
-	def self.one_art(issue_id, category_id)
-	  where(issue_id: issue_id, category_id: category_id)
-	end
-
-
-	def self.home(number)
-		art_issue(number).iss_order
-	end
-
-	def self.art_cat(category)
-  	where(published: true).joins(:category).merge(Category.get_cat(category))
+  def self.home_issue(issue_number)
+    includes(:category, :tags).public_issue(issue_number).order_issue.published_only
   end
 
-	def self.art_issue(number)
-  	where(published: true).joins(:issue).merge(Issue.get_issue(number))
+  def self.issued_article(id, issue_number, category_perma)
+    includes(:category, :tags).public_issue(issue_number).
+      merge(Category.where(permalink: category_perma).issued).where(id: id).
+      published_only.first
   end
 
-  def self.last_arts(number)
-    order("date DESC").first(number)
+  def self.issued_category(issue_number, category_perma)
+    includes(:category, :tags).public_issue(issue_number).
+      merge(Category.where(permalink: category_perma).issued).order_category.
+      published_only
   end
 
-	scope :iss_order, joins(:ordering).merge(Ordering.issue_ordered)
-	scope :cat_order, joins(:ordering).merge(Ordering.cat_ordered)
+  def self.not_issued_category(category_perma, page = 0)
+    includes(:category, :tags).merge(Category.where(permalink: category_perma)).
+      published_only.order('date DESC').page(page).per(10)
+  end
+
+  def self.not_issued_article(id, category_perma)
+    includes(:category, :tags).merge(Category.where(permalink: category_perma)).
+      where(id: id, issue_id: nil).published_only.first
+  end
+
+  def self.feed(id)
+    includes(:issue, :category).where(category_id: id, published: true).
+      select("title, categories.id, categories.name, categories.permalink,
+              categories.issued, issues.number, author, id, html, created_at").
+      order("articles.date DESC").limit(20)
+  end
+
+  def self.public_issue(issue_number)
+    includes(:issue).merge(Issue.get_public_issue(issue_number))
+  end
+
+  def self.the_last(number)
+    includes(:category).order('created_at DESC').limit(number)
+  end
+
+  scope :published_only, where(published: true)
+
+	scope :order_issue, joins(:ordering).merge(Ordering.issue)
+	scope :order_category, joins(:ordering).merge(Ordering.category)
 
 	scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
 	scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:issue, :category)
