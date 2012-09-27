@@ -25,8 +25,8 @@
         <option value="<%= month %>"><%= month %></option>
       <% end %>
     </select>
-    <%= f.collection_select :meta_value, Issue.pub.order("number Desc"), :id, :number, {:prompt => "Issue"}, {:style => "float:left;width:30%;margin-left:2%;", :id => "article_issue_id"}  %>
-    
+    <%= f.collection_select :meta_value, Issue.published_only.order("number Desc"), :id, :number, {:prompt => "Issue"}, {:style => "float:left;width:30%;margin-left:2%;", :id => "article_issue_id"}  %>
+
     <div class="submit_link">
       <%= f.submit :confirm => "Are you sure?" %>
     </div>

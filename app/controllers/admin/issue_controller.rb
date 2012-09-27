@@ -3,8 +3,9 @@ class Admin::IssueController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @issue = Issue.pub.order("created_at DESC").page(params[:page]).per(20)
-		@unpub_issue = Issue.unpub.order("created_at Desc").page(params[:np_page]).per(20)
+    @issue = Issue.published_only.order("created_at DESC").page(params[:page]).per(20)
+    @unpub_issue = Issue.unpublished_only.order("created_at Desc").
+      page(params[:np_page]).per(20)
   end
 
   def new

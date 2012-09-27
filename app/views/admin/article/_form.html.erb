@@ -1,13 +1,14 @@
 <% javascript 'djs/dynamic_categories' %>
 <% javascript 'djs/dynamic_dates' %>
 <% javascript 'djs/misc' %>
-<%= content_for :head do %>
-  <%= javascript_include_tag "ckeditor/init" %>
+<%= content_for :scripts do %>
   <script type="text/javascript">
-    CKEDITOR.config.language = 'el';
-    CKEDITOR.config.entities_greek = false ;
-    CKEDITOR.entities_latin = false;
-    CKEDITOR.autoParagraph = false;
+    $(document).ready(function() {
+      CKEDITOR.config.language = 'el';
+      CKEDITOR.config.entities_greek = false ;
+      CKEDITOR.entities_latin = false;
+      CKEDITOR.autoParagraph = false;
+    });
   </script>
 <% end %>
 <%= content_for :scripts do %>
@@ -96,11 +97,7 @@
 </div>
 <footer>
 	<div class="submit_link">
-    <% if (@article.published==true || @article.published.nil? ) %>
-		  <%= select :article, :published, "<option  value=\"1\" selected=\"selected\">Published</option><option value=\"0\">Hidden</option>"%>
-		<% else %>
-		  <%= select :article, :published, "<option  value=\"1\">Published</option><option value=\"0\" selected=\"selected\">Hidden</option>"%>
-		<% end %>
+    <%= f.select :published, [["public", true], ["hidden", false]] %>
     <%= f.submit "Preview", :onclick => "this.form.target='_blank';$('input#article_preview').val('1');", :class => "alt_btn" %>
 		<%= f.submit :onclick => "this.form.removeAttribute('target');$('input#article_preview').val('0');" %>
 	</div>

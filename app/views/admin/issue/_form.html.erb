@@ -41,11 +41,7 @@
 </div>
 <footer>
 	<div class="submit_link">
-	  <% if (@issue.published==true || @issue.published.nil? ) %>
-		  <%= select :issue, :published, "<option  value=\"1\" selected=\"selected\">Published</option><option value=\"0\">Hidden</option>"%>
-		<% else %>
-		  <%= select :issue, :published, "<option  value=\"1\">Published</option><option value=\"0\" selected=\"selected\">Hidden</option>"%>
-		<% end %>
+    <%= f.select :published, [["public", true], ["hidden", false]] %>
 		<%= f.submit %>
 	</div>
 </footer>

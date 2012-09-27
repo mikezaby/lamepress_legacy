@@ -5,9 +5,9 @@ class Admin::ArticleController < Admin::BaseController
   cache_sweeper :article_sweeper
 
   def index
-    @q = Article.search(params[:q], :auth_object => 'admin') 
+    @q = Article.search(params[:q], :auth_object => 'admin')
   	@article = Article.issued.page(params[:page]).order("date DESC").per(20)
-		@nonis_article = Article.non_issued.page(params[:ni_page]).order("date DESC").per(20)
+    @nonis_article = Article.non_issued.page(params[:ni_page]).order("date DESC").per(20)
   end
 
   def new
@@ -64,7 +64,7 @@ class Admin::ArticleController < Admin::BaseController
 
 
   def sitemap
-    @articles = Article.where(published: true).order("created_at DESC")
+    @articles = Article.includes(:issue, :category).where(published: true).order("created_at DESC")
     File.delete("#{Rails.root}/public/sitemap.xml") if File.exists?("#{Rails.root}/public/sitemap.xml")
 
     sitemap = File.new("#{Rails.root}/public/sitemap.xml", "w")
