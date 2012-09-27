@@ -21,12 +21,12 @@ class Issue < ActiveRecord::Base
 
 	attr_accessible :number, :date, :cover, :pdf, :published
 
-	def self.get_issue(number)
-    where(number: number).pub
+  def self.get_public_issue(number)
+    where(number: number).published_only
   end
 
   def self.last_issues(number)
-    order("number DESC").pub.limit(number)
+    order("number DESC").published_only.limit(number)
   end
 
   def self.last_created(number)
@@ -37,14 +37,14 @@ class Issue < ActiveRecord::Base
     date1=year.to_s+"-"+month.to_s+"-00"
     date2=year.to_s+"-"+month.to_s+"-31"
     if published
-      where("date > ? and date < ?", date1, date2).pub.order("date DESC")
+      where("date > ? and date < ?", date1, date2).published_only.order("date DESC")
     else
       where("date > ? and date < ?", date1, date2).order("date DESC")
     end
   end
 
-  scope :pub , where("issues.published = TRUE")
-	scope :unpub , where("issues.published = FALSE")
+  scope :published_only , where(published: true)
+	scope :unpublished_only , where("issues.published = FALSE")
 
   private
   def expire_cache
