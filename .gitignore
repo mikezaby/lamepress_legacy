@@ -19,7 +19,6 @@ app/views/page/*
 !app/views/page/demo/
 app/views/search/*
 !app/views/search/demo/
-app/assets/
 .sass-cache/
 .bundle/
 bin/
