@@ -2,17 +2,17 @@ Mizatron::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-	devise_for :users, :controllers => { :registrations => "admin/user" }
+  devise_for :users, :controllers => { :registrations => "admin/user" }
 
   match '/ajax_handler/:action' => "ajax_handler"
-	match '/assets/djs/:action.:format' => "javascripts"
+  match '/assets/djs/:action.:format' => "javascripts"
 
   get "base/index"
-  root :to => 'linker#root'
+  root :to => 'article#root'
 
   match "search" => "search#index"
   post "search/issue" => "search#issue"
- 
+
   namespace :admin do
     resources :user, :as => :users, :except => [:show] do
        get "roles", :on => :member
@@ -54,13 +54,19 @@ Mizatron::Application.routes.draw do
   match 'mobile/article' => 'mobile#article'
 #--> End of Android service
 
-  match '/page/:perma' => 'linker#page'
-  match '/feed/:id' => 'linker#feed'
-  match "/issue/:perma1(/:perma2/page/:page)" => 'linker#issued'
-	match "/issue/:perma1(/:perma2(/:perma3))" => 'linker#issued'
-  match '/:perma1/page/:page' => 'linker#non_issued'
-  match '/:perma1((/page/:page)/:perma2)' => 'linker#non_issued'
-   match '*a', :to => 'application#render_404'
+  get '/page/:perma' => 'page#show', as: "page"
+  get '/feed/:id' => 'article#feed'
+
+  #isued articles
+  get '/issue/:number' => 'article#home_issue', as: 'home_issue'
+  get '/issue/:number/:name' => 'article#issued_category', as: 'issued_category'
+  get "/issue/:number/:name/:id.:title" => 'article#issued_article', as: 'issued_article'
+
+  #not issued articles
+  get '/:name(/page/:page)' => 'article#not_issued_category', as: 'not_issued_category'
+  get '/:name/:id.:title' => 'article#not_issued_article', as: 'not_issued_article'
+
+  match '*a', :to => 'application#render_404'
 
 end
 
