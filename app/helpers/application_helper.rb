@@ -41,7 +41,7 @@ module ApplicationHelper
   end
 
   def render_linker(partial)
-    render :partial => "linker/#{$layout}/#{partial}"
+    render :partial => "article/#{$layout}/#{partial}"
   end
 
 end
