@@ -1,5 +1,5 @@
 class Block < ActiveRecord::Base
-  has_many :navigators
+  has_many :navigators, :dependent => :destroy
   #has_many :navigators, :as => :navigatable
   has_many :banners, :dependent => :destroy
 
