@@ -2,9 +2,9 @@
 <% re = re = /(?<img><img .*? \/>)/ %>
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<title><%= raw @article.title %></title>
-	<%= stylesheet_link_tag 'mobile', :media => 'all' %>
+  <meta charset="utf-8"/>
+  <title><%= raw @article.title %></title>
+  <%= stylesheet_link_tag 'mobile', :media => 'all' %>
   <%= csrf_meta_tag %>
 </head>
 <body>

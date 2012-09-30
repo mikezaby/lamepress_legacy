@@ -7,7 +7,7 @@ class Admin::BaseController < ApplicationController
   end
   
 
-	layout "admin"
+  layout "admin"
 
 
   def index

@@ -8,31 +8,31 @@ class Article < ActiveRecord::Base
   attr_writer :tag_names,:tag_links
   attr_accessor :preview
 
-	belongs_to :category
-	belongs_to :issue
+  belongs_to :category
+  belongs_to :issue
 
-	has_one :ordering, :dependent => :delete
+  has_one :ordering, :dependent => :delete
 
-	has_many :taggings, :dependent => :destroy
+  has_many :taggings, :dependent => :destroy
   has_many :tags, :through => :taggings
 
 
-	validates :title, :presence => true
-	validates :date, :presence => true
-	validates :html, :presence => true
-	validates :category_id, :presence => true
+  validates :title, :presence => true
+  validates :date, :presence => true
+  validates :html, :presence => true
+  validates :category_id, :presence => true
 
   attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
                   :date, :published, :hypertitle, :photo, :preview
 
-	delegate :number, :date, :cover, :pdf, :published, :to => :issue, :prefix => true
-	delegate :name, :permalink, :issued, :to => :category, :prefix => true
-	delegate :issue_pos, :cat_pos, :to => :ordering, :prefix => true
+  delegate :number, :date, :cover, :pdf, :published, :to => :issue, :prefix => true
+  delegate :name, :permalink, :issued, :to => :category, :prefix => true
+  delegate :issue_pos, :cat_pos, :to => :ordering, :prefix => true
 
   has_attached_file :photo,
-										:url  => "/media/articles/:id/:style_img_:id.:extension",
-                  	:path => ":rails_root/public/media/articles/:id/:style_img_:id.:extension",
-                  	:styles => {:medium => "225>", :small => "200>" }
+                    :url  => "/media/articles/:id/:style_img_:id.:extension",
+                    :path => ":rails_root/public/media/articles/:id/:style_img_:id.:extension",
+                    :styles => {:medium => "225>", :small => "200>" }
 
   UNRANSACKABLE_ATTRIBUTES = ["id", "updated_at", "created_at", "published"]
 
@@ -91,11 +91,11 @@ class Article < ActiveRecord::Base
 
   scope :published_only, where(published: true)
 
-	scope :order_issue, joins(:ordering).merge(Ordering.issue)
-	scope :order_category, joins(:ordering).merge(Ordering.category)
+  scope :order_issue, joins(:ordering).merge(Ordering.issue)
+  scope :order_category, joins(:ordering).merge(Ordering.category)
 
-	scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
-	scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:issue, :category)
+  scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
+  scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:issue, :category)
 
   def prettify_permalink
     # parameterize function is nice but not as good as below

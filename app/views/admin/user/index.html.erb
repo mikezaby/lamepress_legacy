@@ -1,21 +1,21 @@
 <article class="module width_full">
-		<header><h3 class="tabs_involved">User List</h3>
-		</header>
+    <header><h3 class="tabs_involved">User List</h3>
+    </header>
 
-		<div class="tab_container">
-			<div id="tab1" class="tab_content">
-			  <table class="tablesorter" cellspacing="0">
-			  <thead>
-				  <tr>
-    				  <th>id</th>
-    				  <th>email</th>
-    				  <th>actions</th>
-						  <th></th>
-						  <th></th>
-			  	</tr>
-			  </thead>
-			  <tbody>
-			    <% @user.each do |user| %>
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+        <thead>
+          <tr>
+              <th>id</th>
+              <th>email</th>
+              <th>actions</th>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.each do |user| %>
           <tr>
             <td><%= user.id %></td>
             <td><%= user.email %></td>
@@ -25,13 +25,13 @@
            </tr>
         <% end %>
 
-			 </tbody>
-			 </table>
-			</div><!-- end of #tab1 -->
+       </tbody>
+       </table>
+      </div><!-- end of #tab1 -->
 
 
 
-		</div><!-- end of .tab_container -->
+    </div><!-- end of .tab_container -->
 
 </article><!-- end of content manager article -->
 

@@ -29,52 +29,52 @@
   </script>
 <% end %>
 <% if @navigator.errors.any? %>
-		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-			<ul>
-      	<% @navigator.errors.full_messages.each do |msg| %>
-      		<li><%= msg %></li>
-      	<% end %>
-    	</ul>
-		</h4>
+    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+      <ul>
+        <% @navigator.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </h4>
 <% end %>
 
 <%= form_for [:admin,@navigator] do |f| %>
 <div class="module_content">
   <%= field_set_tag do %>
-		<%= f.label :name %>
- 		<%= f.text_field :name %>
- 	<% end %>
+    <%= f.label :name %>
+     <%= f.text_field :name %>
+   <% end %>
 
- 	<%= field_set_tag do %>
-		<%= f.label :block_id %>
+   <%= field_set_tag do %>
+    <%= f.label :block_id %>
     <%= f.collection_select :block_id, Block.get_mode("navigator"), :id, :name, {:prompt => "Select a Block"} %>
- 	<% end %>
+   <% end %>
 
- 	<%= field_set_tag do %>
-		<%= f.label :position %>
+   <%= field_set_tag do %>
+    <%= f.label :position %>
     <%= f.text_field :position %>
- 	<% end %>
+   <% end %>
 
- 	<%= field_set_tag do %>
- 	  <%= f.label "Mode" %>
+   <%= field_set_tag do %>
+     <%= f.label "Mode" %>
     <select id="navigator_navigatable_type" name="navigator[navigatable_type]">
-  		<option <%= "selected" if @navigator.navigatable_type=="Category" %>value="Category">Category</option>
+      <option <%= "selected" if @navigator.navigatable_type=="Category" %>value="Category">Category</option>
       <option <%= "selected" if @navigator.navigatable_type=="Page" %> value="Page">Page</option>
-  	</select>
- 	<% end %>
+    </select>
+   <% end %>
 
- 	<%= field_set_tag do %>
-		<%= f.label :navigatable_id %>
+   <%= field_set_tag do %>
+    <%= f.label :navigatable_id %>
     <%= f.select :navigatable_id, "" %>
- 	<% end %>
+   <% end %>
 
 
  <div class="clear"></div>
 </div>
 <footer>
-	<div class="submit_link">
-		<%= f.submit %>
-	</div>
+  <div class="submit_link">
+    <%= f.submit %>
+  </div>
 </footer>
 <% end %>
 

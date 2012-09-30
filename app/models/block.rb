@@ -8,8 +8,8 @@ class Block < ActiveRecord::Base
   scope :get_mode, lambda {|mode| where(mode: mode)}
 
   def self.place(place)
-		where('placement = ?', place).order('position')
-	end
+    where('placement = ?', place).order('position')
+  end
 
   def self.get_name(id)
     find_by_id(id).name

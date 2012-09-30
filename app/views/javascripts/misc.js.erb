@@ -4,21 +4,21 @@ $(document).ready(function()
 var c_url=0;
 
 function autoLink(){
-	if($('input#autolink').is(':checked'))
-	{
-		$('input#article_permalink').attr("readonly", false);
-		c_url=1;
-	}
-	else
-	{
-		$('input#article_permalink').attr("readonly", true);
-		$('input#article_permalink').val($('input#article_title').val());
-		c_url=0;
-	}
+  if($('input#autolink').is(':checked'))
+  {
+    $('input#article_permalink').attr("readonly", false);
+    c_url=1;
+  }
+  else
+  {
+    $('input#article_permalink').attr("readonly", true);
+    $('input#article_permalink').val($('input#article_title').val());
+    c_url=0;
+  }
 }
 
 function urlMaker(){
-	if(!c_url) $('input#article_permalink').val($('input#article_title').val());
+  if(!c_url) $('input#article_permalink').val($('input#article_title').val());
 }
 
 

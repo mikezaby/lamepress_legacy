@@ -1,37 +1,37 @@
 <article class="module width_full">
-		<header><h3 class="tabs_involved">Content Manager</h3>
-		</header>
+    <header><h3 class="tabs_involved">Content Manager</h3>
+    </header>
 
-		<div class="tab_container">
-			<div id="tab1" class="tab_content">
-			  <table class="tablesorter" cellspacing="0">
-			  <thead>
-				  <tr>
-    				  <th>Title</th>
-    				  <th>Name</th>
-						  <th>published</th>
-    				  <th>Actions</th>
-    				  <th></th>
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+        <thead>
+          <tr>
+              <th>Title</th>
+              <th>Name</th>
+              <th>published</th>
+              <th>Actions</th>
               <th></th>
-			  	</tr>
-			  </thead>
-			  <tbody>
-				  <% @pages.each do |page| %>
-				  <tr>
-    				<td><%= page.title %></td>
-    				<td><%= page.name %></td>
-						<td><%= page.published  %></td>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @pages.each do |page| %>
+          <tr>
+            <td><%= page.title %></td>
+            <td><%= page.name %></td>
+            <td><%= page.published  %></td>
             <td><%= link_to image_tag("admin/show.png"), admin_page_path(page), :target => "blank" %></td>
-    				<td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_page_path(page) %></td>
-				    <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,page], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
-				  </tr>
-				  <% end %>
-			  </tbody>
-			  </table>
-			</div><!-- end of #tab1 -->
+            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_page_path(page) %></td>
+            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,page], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+      </div><!-- end of #tab1 -->
 
 
-		</div><!-- end of .tab_container -->
+    </div><!-- end of .tab_container -->
 
 </article><!-- end of content manager article -->
 

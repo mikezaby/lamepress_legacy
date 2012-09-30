@@ -1,36 +1,36 @@
 <% content_for :head do %>
-	<% cache 'home_cat-head#'+@issue.id.to_s+"-"+@category.id.to_s do %>
-		<%= head_title("#{@category.name} | Issue #{@issue.number.to_s} | #{$title}") %>
-		<%= keywords(@issue.number.to_s+", "+@category.name.gsub(" ", ", ")) %>
-		<%= cannonical_link("#{$domain}/issue/#{@issue.number.to_s}/#{@category.permalink}") %>
-	<% end %>
+  <% cache 'home_cat-head#'+@issue.id.to_s+"-"+@category.id.to_s do %>
+    <%= head_title("#{@category.name} | Issue #{@issue.number.to_s} | #{$title}") %>
+    <%= keywords(@issue.number.to_s+", "+@category.name.gsub(" ", ", ")) %>
+    <%= cannonical_link("#{$domain}/issue/#{@issue.number.to_s}/#{@category.permalink}") %>
+  <% end %>
 <% end %>
 <% cache 'home_cat#'+@issue.id.to_s+"-"+@category.id.to_s do %>
-	<div id="main-content">
-		<% @articles.each do |article| %>
-			<div id="article" class="hovered" onclick="location.href='<%= article_permalink(article) %>'">
-		    <% if !article.hypertitle.nil? and !article.hypertitle.empty? %>
-		      <h2 class="article">
-		       	<%= raw article.hypertitle %>
-		     	</h2>
-		    <% end %>
-		    <h1 class="article">
-		      <%= raw article.title %>
-	      </h1>
-		    <div id="article-content">
-		      <%= (link_to image_tag((raw article.photo.url(:small)), :id => "article-image"),(raw article.photo.url), :id => "single") unless article.photo_file_name.nil? %>
-						<%= raw article.html.summarize %>
-				</div>
-				<div id="tags">
-					<%= image_tag "demo/tags.png" %>
-      		Tags: <%= article.tag_names %>
-      	</div>
-      	<div id="moar">
-      		read more
-      	</div>
-		  </div>
-		<% end %>
-	</div>
+  <div id="main-content">
+    <% @articles.each do |article| %>
+      <div id="article" class="hovered" onclick="location.href='<%= article_permalink(article) %>'">
+        <% if !article.hypertitle.nil? and !article.hypertitle.empty? %>
+          <h2 class="article">
+             <%= raw article.hypertitle %>
+           </h2>
+        <% end %>
+        <h1 class="article">
+          <%= raw article.title %>
+        </h1>
+        <div id="article-content">
+          <%= (link_to image_tag((raw article.photo.url(:small)), :id => "article-image"),(raw article.photo.url), :id => "single") unless article.photo_file_name.nil? %>
+            <%= raw article.html.summarize %>
+        </div>
+        <div id="tags">
+          <%= image_tag "demo/tags.png" %>
+          Tags: <%= article.tag_names %>
+        </div>
+        <div id="moar">
+          read more
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 

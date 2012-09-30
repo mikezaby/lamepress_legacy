@@ -9,11 +9,11 @@ class Admin::IssueController < Admin::BaseController
   end
 
   def new
-  	@issue=Issue.new
+    @issue=Issue.new
   end
 
   def create
-		@issue = Issue.new(params[:issue])
+    @issue = Issue.new(params[:issue])
     if @issue.save
       redirect_to(admin_issues_path, :notice => 'Issue was successfully created.')
     else
@@ -22,11 +22,11 @@ class Admin::IssueController < Admin::BaseController
   end
 
   def edit
-  	@issue = Issue.find(params[:id])
+    @issue = Issue.find(params[:id])
   end
 
   def update
-  	@issue = Issue.find(params[:id])
+    @issue = Issue.find(params[:id])
     if @issue.update_attributes(params[:issue])
       redirect_to(admin_issues_path, :notice => "The issue was successfully updated.")
     else
@@ -35,7 +35,7 @@ class Admin::IssueController < Admin::BaseController
   end
 
   def destroy
-  	@issue = Issue.find(params[:id])
+    @issue = Issue.find(params[:id])
     @issue.destroy
     redirect_to(admin_issues_path)
   end

@@ -6,44 +6,44 @@
   </script>
 <% end %>
 <% if @issue.errors.any? %>
-		<h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-			<ul>
-      	<% @issue.errors.full_messages.each do |msg| %>
-      		<li><%= msg %></li>
-      	<% end %>
-    	</ul>
-		</h4>
+    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
+      <ul>
+        <% @issue.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </h4>
 <% end %>
 
 <%= form_for [:admin,@issue], :html => { :multipart => true } do |f| %>
 <div class="module_content">
   <%= field_set_tag nil, :style => "width:48%; float:left;margin-right:3%" do %>
-		<%= f.label :number %>
- 		<%= f.text_field :number, :style => "width:92%;" %>
- 	<% end %>
+    <%= f.label :number %>
+     <%= f.text_field :number, :style => "width:92%;" %>
+   <% end %>
 
- 	<%= field_set_tag nil, :style => "width:48%; float:left;" do %>
-		<%= f.label :date %>
- 		<%= f.text_field :date,:style => "width:92%;" %>
- 	<% end %>
+   <%= field_set_tag nil, :style => "width:48%; float:left;" do %>
+    <%= f.label :date %>
+     <%= f.text_field :date,:style => "width:92%;" %>
+   <% end %>
 
- 	<%= field_set_tag nil, :style => "width:48%; float:left;margin-right:3%" do %>
+   <%= field_set_tag nil, :style => "width:48%; float:left;margin-right:3%" do %>
     <%= f.label :cover %>
     <%= f.file_field :cover %>
- 	<% end %>
+   <% end %>
 
- 	<%= field_set_tag nil, :style => "width:48%; float:left;" do %>
+   <%= field_set_tag nil, :style => "width:48%; float:left;" do %>
     <%= f.label :pdf %>
     <%= f.file_field :pdf %>
- 	<% end %>
+   <% end %>
 
  <div class="clear"></div>
 </div>
 <footer>
-	<div class="submit_link">
+  <div class="submit_link">
     <%= f.select :published, [["public", true], ["hidden", false]] %>
-		<%= f.submit %>
-	</div>
+    <%= f.submit %>
+  </div>
 </footer>
 <% end %>
 

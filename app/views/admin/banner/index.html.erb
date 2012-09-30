@@ -1,7 +1,7 @@
 <% javascript 'djs/sortable_list' %>
 
 <article class="module width_full">
-		<header><h3 class="tabs_involved">Banner Manager</h3>
+    <header><h3 class="tabs_involved">Banner Manager</h3>
             <ul class="tabs">
                 <% i = 0 %>
                 <% @banner_blocks.each do |block| %>
@@ -10,27 +10,27 @@
                     <input id="url<%= i %>" value="/admin/banner/sorter?block_id=<%= block.id %>" type="hidden" />
                 <% end %>
             </ul>
-		</header>
+    </header>
 
-		<div class="tab_container">
+    <div class="tab_container">
             <% i = 0 %>
             <% @banners.each do |banners| %>
                 <% i+=1 %>
                 <div id="tab<%= i %>" class="tab_content">
-    			<table class="tablesorter" cellspacing="0">
-    			   <thead>
-    				  <tr>
-        				<th>id</th>
+          <table class="tablesorter" cellspacing="0">
+             <thead>
+              <tr>
+                <th>id</th>
                         <th>photo</th>
-        				<th>block place</th>
-        				<th>describe</th>
-        				<th>Actions</th>
-        				<th></th>
-        				<th></th>
-    			  	  </tr>
-    			    </thead>
-    			    <tbody id="sortable<%= i %>">
-    			    <% banners.each do |banner| %>
+                <th>block place</th>
+                <th>describe</th>
+                <th>Actions</th>
+                <th></th>
+                <th></th>
+                </tr>
+              </thead>
+              <tbody id="sortable<%= i %>">
+              <% banners.each do |banner| %>
                         <tr id="page_<%= banner.id %>" class="handle">
                           <td><%= banner.id %></td>
                           <td><%= link_to "show", banner.photo.url, id: "single" %></td>
@@ -40,11 +40,11 @@
                           <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,banner], :confirm => 'Are you sure?', :method => :delete %></td>
                         </tr>
                     <% end %>
-    			    </tbody>
-    			  </table>
-    			</div><!-- end of #tab1 -->
+              </tbody>
+            </table>
+          </div><!-- end of #tab1 -->
             <% end %>
-		</div><!-- end of .tab_container -->
+    </div><!-- end of .tab_container -->
 
 </article><!-- end of content manager article -->
 

@@ -1,25 +1,25 @@
 class Issue < ActiveRecord::Base
-	has_many :articles, :dependent => :destroy
+  has_many :articles, :dependent => :destroy
 
   after_save :expire_cache
 
-	has_attached_file :cover,
-										:url  => "/media/issues/:id/:style_issue_:id.:extension",
-                  	:path => ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
-                  	:styles => {:thumb => "250>" },
-                  	:convert_options => { :thumb => '-quality 75' }
-	has_attached_file :pdf,
-										:url  => "/media/issues/:id/issue_:id.:extension",
-                  	:path => ":rails_root/public/media/issues/:id/issue_:id.:extension"
+  has_attached_file :cover,
+                    :url  => "/media/issues/:id/:style_issue_:id.:extension",
+                    :path => ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
+                    :styles => {:thumb => "250>" },
+                    :convert_options => { :thumb => '-quality 75' }
+  has_attached_file :pdf,
+                    :url  => "/media/issues/:id/issue_:id.:extension",
+                    :path => ":rails_root/public/media/issues/:id/issue_:id.:extension"
 
-	validates :number, :presence => true,  :uniqueness => true
-	validates :date, :presence => true
+  validates :number, :presence => true,  :uniqueness => true
+  validates :date, :presence => true
   validates_attachment :cover, :presence => true,
     :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }
   validates_attachment :pdf, :presence => true,
     :content_type => { :content_type => ['application/pdf'] }
 
-	attr_accessible :number, :date, :cover, :pdf, :published
+  attr_accessible :number, :date, :cover, :pdf, :published
 
   def self.get_public_issue(number)
     where(number: number).published_only
@@ -44,7 +44,7 @@ class Issue < ActiveRecord::Base
   end
 
   scope :published_only , where(published: true)
-	scope :unpublished_only , where("issues.published = FALSE")
+  scope :unpublished_only , where("issues.published = FALSE")
 
   private
   def expire_cache

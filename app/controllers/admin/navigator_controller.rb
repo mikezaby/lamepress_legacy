@@ -49,7 +49,7 @@ class Admin::NavigatorController < Admin::BaseController
       navigator.position = params['page'].index(navigator.id.to_s) + 1
       navigator.save
     end
-	#delete_cache
+  #delete_cache
     render :nothing => true
   end
 

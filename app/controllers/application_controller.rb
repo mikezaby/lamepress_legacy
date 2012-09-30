@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
   def after_sign_in_path_for(resource)
-		if resource.is_a?(User)
-   		"/admin"
-   	end
+    if resource.is_a?(User)
+       "/admin"
+     end
   end
 
   def render_404

@@ -2,161 +2,161 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
-	<title>Dashboard I Admin Panel</title>
+  <meta charset="utf-8"/>
+  <title>Dashboard I Admin Panel</title>
 
-	<%= stylesheet_link_tag 'admin/all', :media => 'all' %>
+  <%= stylesheet_link_tag 'admin/all', :media => 'all' %>
 
-	<!--[if lt IE 9]>
-	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
   <%= csrf_meta_tag %>
-	<%= yield(:head) %>
-	<%= javascript_include_tag "admin/all" %>
+  <%= yield(:head) %>
+  <%= javascript_include_tag "admin/all" %>
 </head>
 
 
 <body>
-	<header id="header">
-		<hgroup>
-			<h1 class="site_title">
-				<%= link_to "Admin panel", admin_path %>
-			</h1>
-			<h2 class="section_title"><%= controller.controller_name %></h2><div class="btn_view_site"><%= link_to "View Site", root_path %></div>
-		</hgroup>
-	</header> <!-- end of header bar -->
+  <header id="header">
+    <hgroup>
+      <h1 class="site_title">
+        <%= link_to "Admin panel", admin_path %>
+      </h1>
+      <h2 class="section_title"><%= controller.controller_name %></h2><div class="btn_view_site"><%= link_to "View Site", root_path %></div>
+    </hgroup>
+  </header> <!-- end of header bar -->
 
-	<section id="secondary_bar">
-		<div class="user">
-			<p><%= current_user.email+" " %></p>
-			<%= link_to "logout", destroy_user_session_path, :class => "logout_user" %>
-		</div>
-		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><%= link_to "Admin panel", admin_path  %><div class="breadcrumb_divider"></div><%= link_to controller.controller_name, "/"+controller.controller_path  %><div class="breadcrumb_divider"></div><a class="current"><%= controller.action_name%></a></article>
-		</div>
-	</section><!-- end of secondary bar -->
+  <section id="secondary_bar">
+    <div class="user">
+      <p><%= current_user.email+" " %></p>
+      <%= link_to "logout", destroy_user_session_path, :class => "logout_user" %>
+    </div>
+    <div class="breadcrumbs_container">
+      <article class="breadcrumbs"><%= link_to "Admin panel", admin_path  %><div class="breadcrumb_divider"></div><%= link_to controller.controller_name, "/"+controller.controller_path  %><div class="breadcrumb_divider"></div><a class="current"><%= controller.action_name%></a></article>
+    </div>
+  </section><!-- end of secondary bar -->
 
-	<aside id="sidebar" class="column">
-		<%= search_form_for [:admin, Article.search(params[:q])], :url => search_admin_articles_path, :html => {:class => "quick_search"}  do |f| %>
-			<%= f.text_field :title_cont, { :value => "Quick Search", :onfocus => "if(!this._haschanged){this.value=''};this._haschanged=true;" }%>
-		<% end %>
-		<hr/>
-		<% if can? :manage, Article %>
-		<h3>Articles</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Article", new_admin_article_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Articles", admin_articles_path %></li>
-			<li class="icn_categories"><%= link_to "Priority of Articles", admin_orderings_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Issue %>
-		<h3>Issues</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Issue", new_admin_issue_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Issues", admin_issues_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Category %>
-		<h3>Categories</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Category", new_admin_category_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Categories", admin_categories_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Page %>
-		<h3>Pages</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Page", new_admin_page_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Pages", admin_pages_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Block %>
-		<h3>Blocks</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Block", new_admin_block_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Blocks", admin_blocks_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Navigator %>
-		<h3>Navigators</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Navigator", new_admin_navigator_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Navigators", admin_navigators_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Banner %>
-		<h3>Banners</h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><%= link_to "Add Banner", new_admin_banner_path %></li>
-			<li class="icn_categories"><%= link_to "Manage Banners", admin_banners_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, User %>
-		<h3>Users</h3>
-		<ul class="toggle">
-			<li class="icn_add_user"><%= link_to "Add User", new_admin_user_path %></li>
-			<li class="icn_view_users"><%= link_to "Manage Users", admin_users_path %></li>
-		</ul>
-		<% end %>
-		<% if can? :manage, Setting %>
-		<h3>Settings</h3>
-		<ul class="toggle">
-			<li class="icn_settings"><%= link_to "Current Issue", current_issue_admin_settings_path %></li>
-			<li class="icn_settings"><%= link_to "Block Placements", block_placements_admin_settings_path %></li>
-			<li class="icn_categories"><%= link_to "Update Sitemap", sitemap_admin_articles_path %></li>
-		</ul>
-		<% end %>
+  <aside id="sidebar" class="column">
+    <%= search_form_for [:admin, Article.search(params[:q])], :url => search_admin_articles_path, :html => {:class => "quick_search"}  do |f| %>
+      <%= f.text_field :title_cont, { :value => "Quick Search", :onfocus => "if(!this._haschanged){this.value=''};this._haschanged=true;" }%>
+    <% end %>
+    <hr/>
+    <% if can? :manage, Article %>
+    <h3>Articles</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Article", new_admin_article_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Articles", admin_articles_path %></li>
+      <li class="icn_categories"><%= link_to "Priority of Articles", admin_orderings_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Issue %>
+    <h3>Issues</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Issue", new_admin_issue_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Issues", admin_issues_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Category %>
+    <h3>Categories</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Category", new_admin_category_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Categories", admin_categories_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Page %>
+    <h3>Pages</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Page", new_admin_page_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Pages", admin_pages_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Block %>
+    <h3>Blocks</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Block", new_admin_block_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Blocks", admin_blocks_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Navigator %>
+    <h3>Navigators</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Navigator", new_admin_navigator_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Navigators", admin_navigators_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Banner %>
+    <h3>Banners</h3>
+    <ul class="toggle">
+      <li class="icn_new_article"><%= link_to "Add Banner", new_admin_banner_path %></li>
+      <li class="icn_categories"><%= link_to "Manage Banners", admin_banners_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, User %>
+    <h3>Users</h3>
+    <ul class="toggle">
+      <li class="icn_add_user"><%= link_to "Add User", new_admin_user_path %></li>
+      <li class="icn_view_users"><%= link_to "Manage Users", admin_users_path %></li>
+    </ul>
+    <% end %>
+    <% if can? :manage, Setting %>
+    <h3>Settings</h3>
+    <ul class="toggle">
+      <li class="icn_settings"><%= link_to "Current Issue", current_issue_admin_settings_path %></li>
+      <li class="icn_settings"><%= link_to "Block Placements", block_placements_admin_settings_path %></li>
+      <li class="icn_categories"><%= link_to "Update Sitemap", sitemap_admin_articles_path %></li>
+    </ul>
+    <% end %>
 
-		<div class="clear"></div>
+    <div class="clear"></div>
 
-		<footer>
-			<hr />
-			<p><strong>Copyright &copy; 2012 Michael Zamparas - Lamepress</strong></p>
-		</footer>
-	</aside><!-- end of sidebar -->
+    <footer>
+      <hr />
+      <p><strong>Copyright &copy; 2012 Michael Zamparas - Lamepress</strong></p>
+    </footer>
+  </aside><!-- end of sidebar -->
 
-	<section id="main" class="column">
-		<%= (raw "<h4 class=\"alert_info\">"+notice+"</h4>") unless notice.nil? %>
-		<%= (raw "<h4 class=\"alert_error\">"+alert+"</h4>") unless alert.nil? %>
-		<%= yield %>
-	<div class="spacer"></div>
-	</section>
+  <section id="main" class="column">
+    <%= (raw "<h4 class=\"alert_info\">"+notice+"</h4>") unless notice.nil? %>
+    <%= (raw "<h4 class=\"alert_error\">"+alert+"</h4>") unless alert.nil? %>
+    <%= yield %>
+  <div class="spacer"></div>
+  </section>
 
 
 
   <%= yield(:scripts) %>
   <script type="text/javascript">
 
-	  $(document).ready(function() {
-			$("a#single").fancybox();
-			$("a#pdf").fancybox({'frameWidth' : 700, 'frameHeight': 600, 'overlayShow': true, 'hideOnContentClick': false});
-		});
+    $(document).ready(function() {
+      $("a#single").fancybox();
+      $("a#pdf").fancybox({'frameWidth' : 700, 'frameHeight': 600, 'overlayShow': true, 'hideOnContentClick': false});
+    });
 
-	  $(document).ready(function()
+    $(document).ready(function()
     {
       $(".tablesorter").tablesorter();
     });
-	  $(document).ready(function() {
+    $(document).ready(function() {
 
 
-	    //When page loads...
-	    $(".tab_content").hide(); //Hide all content
-	    $("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	    $(".tab_content:first").show(); //Show first tab content
+      //When page loads...
+      $(".tab_content").hide(); //Hide all content
+      $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+      $(".tab_content:first").show(); //Show first tab content
 
-	    //On Click Event
-	    $("ul.tabs li").click(function() {
+      //On Click Event
+      $("ul.tabs li").click(function() {
 
-		    $("ul.tabs li").removeClass("active"); //Remove any "active" class
-		    $(this).addClass("active"); //Add "active" class to selected tab
-		    $(".tab_content").hide(); //Hide all tab content
+        $("ul.tabs li").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+        $(".tab_content").hide(); //Hide all tab content
 
-		    var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		    $(activeTab).fadeIn(); //Fade in the active ID content
-		    return false;
-	    });
+        var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+        $(activeTab).fadeIn(); //Fade in the active ID content
+        return false;
+      });
 
     });
     </script>

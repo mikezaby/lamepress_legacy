@@ -2,12 +2,12 @@ class Page < ActiveRecord::Base
 
   has_many :navigators, :as => :navigatable
 
-	after_save :cache_expiration
+  after_save :cache_expiration
   after_destroy :cache_expiration
 
   attr_accessor :preview
 
-	include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
+  include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
   before_validation :prettify_permalink
 
   validates :name, :length => { :maximum => 250 }

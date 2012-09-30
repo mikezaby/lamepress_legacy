@@ -6,12 +6,12 @@ class Admin::ArticleController < Admin::BaseController
 
   def index
     @q = Article.search(params[:q], :auth_object => 'admin')
-  	@article = Article.issued.page(params[:page]).order("date DESC").per(20)
+    @article = Article.issued.page(params[:page]).order("date DESC").per(20)
     @nonis_article = Article.non_issued.page(params[:ni_page]).order("date DESC").per(20)
   end
 
   def new
-  	@article=Article.new
+    @article=Article.new
   end
 
   def search
@@ -20,7 +20,7 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def create
-		@article = Article.new(params[:article])
+    @article = Article.new(params[:article])
     @article.build_ordering
     @article.ordering.cat_pos=99
     if @article.preview == "1" and !params[:article][:category_id].empty?
@@ -34,11 +34,11 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def edit
-  	@article = Article.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def update
-  	@article = Article.find(params[:id])
+    @article = Article.find(params[:id])
     if params[:article][:preview] == "1" and !params[:article][:category_id].empty?
       @article = Article.new(params[:article])
       @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
@@ -51,13 +51,13 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def destroy
-  	@article = Article.find(params[:id])
+    @article = Article.find(params[:id])
     @article.destroy
     redirect_to(admin_articles_path)
   end
 
   def show
-  	@article = Article.find_by_id(params[:id])
+    @article = Article.find_by_id(params[:id])
     @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
     render "/linker/#{$layout}/Article", :layout => $layout
   end

@@ -1,33 +1,33 @@
 <% javascript 'djs/sortable_list' %>
 <article class="module width_full">
-		<header><h3 class="tabs_involved">block Manager</h3>
-		<ul class="tabs">
+    <header><h3 class="tabs_involved">block Manager</h3>
+    <ul class="tabs">
             <% i = 0 %>
             <% @block_placements.each do |placement| %>
               <% i += 1 %>
-   			  <li><a href="#tab_<%= placement %>"><%= placement %></a></li>
+           <li><a href="#tab_<%= placement %>"><%= placement %></a></li>
                <input id="url<%= i %>" value="/admin/block/sorter?place=<%= placement %>" type="hidden" />
             <% end %>
-		</ul>
-		</header>
-		<div class="tab_container">
+    </ul>
+    </header>
+    <div class="tab_container">
             <% i = 0 %>
             <% @blocks.each do |blocks| %>
                 <% i += 1 %>
-    			<div id="tab_<%= blocks.first.placement unless blocks.first.nil? %>" class="tab_content">
-    			  <table class="tablesorter" cellspacing="0">
-    			  <thead>
-    				  <tr>
-        				<th>id</th>
-        				<th>name</th>
-        				<th>mode</th>
-        				<th></th>
-        				<th></th>
-    			  	</tr>
-    			  </thead>
-    			  <tbody id="sortable<%= i %>">
-    				  <% blocks.each do |block| %>
-    				    <tr id="page_<%= block.id %>" class="handle">
+          <div id="tab_<%= blocks.first.placement unless blocks.first.nil? %>" class="tab_content">
+            <table class="tablesorter" cellspacing="0">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>mode</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="sortable<%= i %>">
+              <% blocks.each do |block| %>
+                <tr id="page_<%= block.id %>" class="handle">
                           <td><%= block.id %></td>
                           <td><%= block.name %></td>
                           <td><%= block.mode %></td>
@@ -35,11 +35,11 @@
                           <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,block], :confirm => 'Are you sure?', :method => :delete %></td>
                         </tr>
                       <% end %>
-    			  </tbody>
-    			  </table>
-    			</div><!-- end of #tab1 -->
+            </tbody>
+            </table>
+          </div><!-- end of #tab1 -->
             <% end %>
-		</div><!-- end of .tab_container -->
+    </div><!-- end of .tab_container -->
 
 </article><!-- end of content manager article -->
 

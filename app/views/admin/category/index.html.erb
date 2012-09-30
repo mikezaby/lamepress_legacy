@@ -1,25 +1,25 @@
 <article class="module width_full">
-		<header><h3 class="tabs_involved">Category Manager</h3>
-		<ul class="tabs">
-   			<li><a href="#tab1">Issued</a></li>
-    		<li><a href="#tab2">Non Issued</a></li>
-		</ul>
-		</header>
+    <header><h3 class="tabs_involved">Category Manager</h3>
+    <ul class="tabs">
+         <li><a href="#tab1">Issued</a></li>
+        <li><a href="#tab2">Non Issued</a></li>
+    </ul>
+    </header>
 
-		<div class="tab_container">
-			<div id="tab1" class="tab_content">
-			  <table class="tablesorter" cellspacing="0">
-			  <thead>
-				  <tr>
-    				<th>id</th>
-    				<th>name</th>
-    				<th>permalink</th>
-    				<th>Actions</th>
-    				<th></th>
-			  	</tr>
-			  </thead>
-			  <tbody>
-				  <% @category.each do |category| %>
+    <div class="tab_container">
+      <div id="tab1" class="tab_content">
+        <table class="tablesorter" cellspacing="0">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>permalink</th>
+            <th>Actions</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @category.each do |category| %>
             <td><%= category.id %></td>
             <td><%= category.name %></td>
             <td><%= category.permalink %></td>
@@ -27,24 +27,24 @@
             <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,category], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
           <% end %>
-			  </tbody>
-			  </table>
-				<%= paginate @category %>
-			</div><!-- end of #tab1 -->
+        </tbody>
+        </table>
+        <%= paginate @category %>
+      </div><!-- end of #tab1 -->
 
-			<div id="tab2" class="tab_content">
-			<table class="tablesorter" cellspacing="0">
-			<thead>
-				<tr>
-    		  <th>id</th>
-    			<th>name</th>
-    			<th>permalink</th>
-    			<th>Actions</th>
-    			<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @nonis_category.each do |category| %>
+      <div id="tab2" class="tab_content">
+      <table class="tablesorter" cellspacing="0">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>permalink</th>
+          <th>Actions</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @nonis_category.each do |category| %>
             <td><%= category.id %></td>
             <td><%= category.name %></td>
             <td><%= category.permalink %></td>
@@ -52,12 +52,12 @@
             <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,category], :confirm => 'Are you sure?', :method => :delete %></td>
           </tr>
           <% end %>
-			</tbody>
-			</table>
-				<%= paginate @nonis_category, :param_name => :ni_page%>
-			</div><!-- end of #tab2 -->
+      </tbody>
+      </table>
+        <%= paginate @nonis_category, :param_name => :ni_page%>
+      </div><!-- end of #tab2 -->
 
-		</div><!-- end of .tab_container -->
+    </div><!-- end of .tab_container -->
 
 </article><!-- end of content manager article -->
 
