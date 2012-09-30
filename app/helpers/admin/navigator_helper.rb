@@ -1,2 +1,0 @@
-module Admin::NavigatorHelper
-end

@@ -1,4 +1,0 @@
-module Admin::BaseHelper
-
-  
-end
