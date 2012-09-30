@@ -3,26 +3,29 @@
 Lamepress is a Content Managment System for issuing magazines/newspapers. It's written in Ruby language and rails framework. The deal of Lamepress is to make building and managing of magazines/newspapers as simple and easy as possible, also to give readers an easy way to browse current and older issues.
 
 ==Demo
-Give a try to {Lamepress}[http://press.lamezor.com/admin]
+Give a try to {Lamepress}[http://press.lamezor.com/page/playme]
 
 <b>email:</b> demo@email.com, <b>password:</b> lamepress
 
 ==Installation
-1. <tt>git clone http://github.com/mikezaby/lamepress.git</tt>
+1. <tt>git clone git://github.com/mikezaby/lamepress.git</tt>
 2. Run <tt>bundle install</tt> in project folder
 3. Make a database.yml like database.yml.example in config folder with your credentials
 4. Type <tt>rake lp:config</tt> to create lamepress.yml, has information about domain, title and layout
 5. Type <tt>rake db:create:all</tt> to create your databases
 6. Type <tt>rake db:schema:load</tt> to create database schema
 7. Type <tt>rake db:seed</tt> to load basic data
-8. Run <tt>passenger start</tt> or <tt>rails s</tt>
+8. Run <tt>rails s</tt> or <tt>rails s thin</tt>
 
 For admin login, go to localhost:3000/admin
 
 <b>email:</b> demo@email.com, <b>password:</b> lamepress
 
-==Use
-Coming soon...
+==Todo
+1. Improve spec coverage
+2. Make better template system with mustache or something else
+3. Documentation for the basic logic of lamepress
+4. Maybe change admin panel and replace it with bootstrap
 
 ==License
 MIT License. Copyright 2012 Michael Zamparas
