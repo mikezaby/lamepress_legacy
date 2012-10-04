@@ -20,11 +20,7 @@
 </div>
 <footer>
   <div class="submit_link">
-    <% if (@category.issued==true || @category.issued.nil? ) %>
-      <%= select :category, :issued, "<option  value=\"1\" selected=\"selected\">Issued</option><option value=\"0\">Non Issued</option>"%>
-    <% else %>
-      <%= select :category, :issued, "<option  value=\"1\">Issued</option><option value=\"0\" selected=\"selected\">Non Issued</option>"%>
-    <% end %>
+    <%= f.select :issued, [["issued", true], ["not issued", false]] %>
     <%= f.submit %>
   </div>
 </footer>

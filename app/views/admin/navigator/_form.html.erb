@@ -57,10 +57,7 @@
 
    <%= field_set_tag do %>
      <%= f.label "Mode" %>
-    <select id="navigator_navigatable_type" name="navigator[navigatable_type]">
-      <option <%= "selected" if @navigator.navigatable_type=="Category" %>value="Category">Category</option>
-      <option <%= "selected" if @navigator.navigatable_type=="Page" %> value="Page">Page</option>
-    </select>
+      <%= f.select :navigatable_type, [["Category", "Category"],["Page", "Page"]] %>
    <% end %>
 
    <%= field_set_tag do %>
