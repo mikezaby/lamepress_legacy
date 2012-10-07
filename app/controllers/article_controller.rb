@@ -1,12 +1,11 @@
-class ArticleController < ApplicationController
+class ArticleController < ThemeController
 
-  layout $layout
   before_filter :get_issue, only: [:root, :not_issued_category, :not_issued_article]
 
   def root
     @articles = Article.home_issue(@issue.number.to_i)
     @url = "/issue/#{@issue.number}"
-    render action: "#{$layout}/home_issue"
+    render action: :home_issue
   end
 
   def home_issue
@@ -17,7 +16,7 @@ class ArticleController < ApplicationController
       @issue = @articles.first.issue
       @url = home_issue_path(@issue.number)
 
-      render action: "#{$layout}/home_issue"
+      render action: :home_issue
     end
   end
 
@@ -33,7 +32,7 @@ class ArticleController < ApplicationController
       @url = issued_article_path(@issue.number, @category.permalink,
                                  @article.id, @article.prettify_permalink)
 
-      render action: "#{$layout}/issued_article"
+      render action: :issued_article
     end
   end
 
@@ -41,13 +40,13 @@ class ArticleController < ApplicationController
     @articles = Article.issued_category(params[:number].to_i, params[:name])
     if @articles.empty?
       @issue = Issue.get_public_issue(params[:number].to_i).first
-      @issue.nil? ? render_404 : (render action: "#{$layout}/empty")
+      @issue.nil? ? render_404 : (render action: :empty)
     else
       @issue = @articles.first.issue
       @category = @articles.first.category
       @url = issued_category_path(number: @issue.number, name: @category.permalink)
 
-      render action: "#{$layout}/issued_category"
+      render action: :issued_category
     end
   end
 
@@ -58,7 +57,7 @@ class ArticleController < ApplicationController
       page = params[:page].present? ? params[:page] : 1
       @url = not_issued_category_path(name: @category.permalink, page: page)
 
-      render action: "#{$layout}/not_issued_category"
+      render action: :not_issued_category
     else
       render_404
     end
@@ -70,7 +69,7 @@ class ArticleController < ApplicationController
       @category = @article.category
       @url = not_issued_article_path(name: @category.permalink,id: @article.id,
                                      title: @article.title)
-      render action: "#{$layout}/not_issued_article"
+      render action: :not_issued_article
     else
       render_404
     end
@@ -78,7 +77,7 @@ class ArticleController < ApplicationController
 
   def feed
     @articles = Article.feed(params[:id].to_i)
-    render :action => "feed.rss.builder", :layout => false
+    render action: "feed.rss.builder", layout: false
   end
 
 end

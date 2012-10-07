@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     @issue = Setting.current_issue
     @q = Article.includes(:issue, :category).search(params[:q], :auth_object => nil)
     @article = @q.result.page(params[:page]).order("date DESC").per(20)
-    render action: "#{$layout}/index"
+    render action: :index
   end
 
 
