@@ -7,7 +7,7 @@ class Navigator < ActiveRecord::Base
   after_save :expire_cache
 
   def self.list(block_id)
-    where('block_id = ?', block_id).order("position")
+    includes(:navigatable).where(block_id: block_id).order("position")
   end
 
   scope :orderit, order("block_id, position")
