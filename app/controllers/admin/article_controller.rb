@@ -5,7 +5,7 @@ class Admin::ArticleController < Admin::BaseController
   cache_sweeper :article_sweeper
 
   def index
-    @q = Article.search(params[:q], :auth_object => 'admin')
+    @q = Article.includes(:issue, :category).search(params[:q], :auth_object => 'admin')
     @article = Article.issued.page(params[:page]).order("date DESC").per(20)
     @nonis_article = Article.non_issued.page(params[:ni_page]).order("date DESC").per(20)
   end
@@ -15,7 +15,7 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def search
-    @q = Article.search(params[:q], :auth_object => 'aaa')
+    @q = Article.includes(:issue, :category).search(params[:q], :auth_object => 'admin')
     @article = @q.result(:distinct => true).page(params[:page]).order("date DESC").per(20)
   end
 
