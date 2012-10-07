@@ -1,0 +1,23 @@
+<% cache 'cover#'+@issue.id.to_s do %>
+  <div id="cover">
+    <%= link_to image_tag((raw @issue.cover.url(:thumb)), :border => 0),(raw @issue.cover.url), :id => "single" %>
+    <div id="cover-info">
+      <span class="cover-info"> Issue No</span><%= raw @issue.number %><br />
+      <span class="cover-info"> Date</span><%= raw I18n.l(@issue.date, :format=> "%d/%m/%Y") %>
+    </div>
+    <div id = "download-issue">
+      <%= link_to "Download PDF", (raw @issue.pdf.url), :target => "blank" %>
+    </div>
+  </div>
+  <div id="issue-options">
+    <div id="search-issue">
+      <%= form_for Issue.new, :url => search_issue_path do |f| %>
+        <span class="cover-info">Issue No</span>
+        <%= f.text_field :number %>
+        <%= f.submit "Find Issue" %>
+      <% end %>
+    </div>
+    <span class="cover-info"><%= link_to "Issue options", "#", :onclick => "$('#search-issue').toggle('fast');" %> </span>
+  </div>
+<% end %>
+

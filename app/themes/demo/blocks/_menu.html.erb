@@ -1,0 +1,8 @@
+<% cache "navigator##{block.id.to_s}" do %>
+  <div class="menu">
+    <ul>
+      <%= render :partial => "blocks/navigator_list", :locals => { block: block} %>
+    </ul>
+  </div>
+<% end %>
+
