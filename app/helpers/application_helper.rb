@@ -30,7 +30,7 @@ module ApplicationHelper
     partials = ""
     Block.place(name).each do |block|
       begin
-        partials << (render :partial => "blocks/#{$layout}/#{block.partial}",
+        partials << (render :partial => "blocks/#{block.partial}",
                             :locals => { block: block })
       rescue
         #replace this with something tha save error to database
@@ -38,10 +38,6 @@ module ApplicationHelper
       end
     end
     raw partials
-  end
-
-  def render_linker(partial)
-    render :partial => "article/#{$layout}/#{partial}"
   end
 
 end
