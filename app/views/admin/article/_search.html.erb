@@ -50,6 +50,8 @@
       <%= f.text_field :issue_number_gteq, :style => "width:11%;margin-left:1%;", :title => "from issue", :class => "defaultText" %>
       <%= f.text_field :issue_number_lteq, :style => "width:11%;margin-left:1%;", :title => "to issue", :class => "defaultText" %>
       <%= f.collection_select :category_id_eq, Category.find(:all), :id, :name, {:prompt => "Select a Category", :include_blank => true}, :style => "width:24%;margin-left:1%;" %>
+      <div class="clear" style="margin-bottom:5px;"></div>
+      <%= f.select :published_eq, [["public", true], ["hidden", false]], {}, :style => "width:11%;margin-left:1%;" %>
       <%= f.submit %>
     <% end %>
   </div>

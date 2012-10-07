@@ -36,8 +36,12 @@ class Article < ActiveRecord::Base
 
   UNRANSACKABLE_ATTRIBUTES = ["id", "updated_at", "created_at", "published"]
 
-  def self.ransackable_attributes auth_object = nil
-    (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
+  def self.ransackable_attributes(auth_object = nil)
+    if auth_object == 'admin'
+      column_names + _ransackers.keys
+    else
+      (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
+    end
   end
 
   def tag_names
