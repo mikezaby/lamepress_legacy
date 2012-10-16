@@ -30,12 +30,12 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    builder (3.0.3)
+    builder (3.0.4)
     cancan (1.6.8)
     ckeditor (3.7.1)
       mime-types
       orm_adapter
-    cocaine (0.3.1)
+    cocaine (0.4.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -62,22 +62,23 @@ GEM
       railties (>= 3.0.0)
     fancybox-rails (0.1.4)
       railties (>= 3.1.0)
-    guard (1.3.3)
+    guard (1.4.0)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
-    guard-rspec (1.2.1)
+    guard-rspec (2.1.0)
       guard (>= 1.1)
+      rspec (~> 2.11)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (2.1.2)
+    jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    listen (0.5.2)
+    listen (0.5.3)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -86,11 +87,11 @@ GEM
     multi_json (1.3.6)
     mysql2 (0.3.10)
     orm_adapter (0.4.0)
-    paperclip (3.2.0)
+    paperclip (3.3.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
-      cocaine (>= 0.0.2)
+      cocaine (~> 0.4.0)
       mime-types
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -102,7 +103,7 @@ GEM
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     railroady (1.1.0)
     rails (3.2.8)
@@ -156,7 +157,7 @@ GEM
       rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
-    treetop (1.4.10)
+    treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
     turbolinks (0.5.1)
@@ -178,7 +179,7 @@ DEPENDENCIES
   devise
   factory_girl_rails (= 4.0.0)
   fancybox-rails
-  guard-rspec (= 1.2.1)
+  guard-rspec
   jquery-rails
   kaminari
   mysql2 (= 0.3.10)

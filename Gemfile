@@ -12,7 +12,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'railroady'
-  gem 'guard-rspec', "1.2.1"
+  gem 'guard-rspec'
   gem 'ruby_gntp'
   gem 'thin'
 end
