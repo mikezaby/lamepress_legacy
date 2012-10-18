@@ -62,6 +62,14 @@ describe ArticleController do
                                                     id: @article.id,
                                                     title: @article.prettify_permalink)
       end
+
+      it "should redirect to article with category that contain one article" do
+        get :issued_category, { number: @issue.number, name: @category.permalink }
+        response.should redirect_to(issued_article_path(number: @issue.number,
+                                                        name: @category.permalink,
+                                                        id: @article.id,
+                                                        title: @article.prettify_permalink))
+      end
     end
 
     context '#Unpublished issue' do
@@ -100,9 +108,12 @@ describe ArticleController do
         @issue = @article.issue
         @category = @article.category
         @unpub_article = FactoryGirl.create(:article, :unpublished,
-                                            :issue_ordered, :issued,
-                                            issue: @issue, category: @category)
+                                            :issue_ordered,issue: @issue,
+                                            category: @category)
       end
+      let(:aditional_article) { FactoryGirl.create(:article, :issue_ordered,
+                                                   issue: @issue,
+                                                   category: @category) }
 
       it "should not have unpublished articles in home" do
         get :home_issue, { number: @issue.number }
@@ -112,6 +123,7 @@ describe ArticleController do
       end
 
       it "should not have unpublished articles in category" do
+        aditional_article
         get :issued_category, { number: @issue.number, name: @category.permalink }
         response.should be_ok
 

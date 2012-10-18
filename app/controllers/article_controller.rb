@@ -41,6 +41,11 @@ class ArticleController < ThemeController
     if @articles.empty?
       @issue = Issue.get_public_issue(params[:number].to_i).first
       @issue.nil? ? render_404 : (render action: :empty)
+    elsif @articles.size == 1
+      redirect_to issued_article_path(@articles.first.issue.number,
+                                      @articles.first.category.permalink,
+                                      @articles.first.id,
+                                      @articles.first.prettify_permalink)
     else
       @issue = @articles.first.issue
       @category = @articles.first.category

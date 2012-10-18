@@ -40,7 +40,7 @@ FactoryGirl.define do
     end
 
 
-    factory :issued_article,   traits: [:issued, :default_order]
+    factory :issued_article, traits: [:issued, :default_order]
     factory :not_issued_article, traits: [:not_issued]
   end
 end
