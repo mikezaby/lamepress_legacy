@@ -2,6 +2,8 @@ class Admin::ArticleController < Admin::BaseController
 
   load_and_authorize_resource
 
+  ActionController::Base.prepend_view_path("app/themes/#{$layout}")
+
   cache_sweeper :article_sweeper
 
   def index
@@ -23,9 +25,8 @@ class Admin::ArticleController < Admin::BaseController
     @article = Article.new(params[:article])
     @article.build_ordering
     @article.ordering.cat_pos=99
-    if @article.preview == "1" and !params[:article][:category_id].empty?
-      @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
-      render "/article/#{$layout}/issued_article", :layout => $layout
+    if @article.preview == "1" && @article.valid?
+      show
     elsif @article.save
       redirect_to(admin_articles_path, :notice => 'Page was successfully created.')
     else
@@ -39,10 +40,8 @@ class Admin::ArticleController < Admin::BaseController
 
   def update
     @article = Article.find(params[:id])
-    if params[:article][:preview] == "1" and !params[:article][:category_id].empty?
-      @article = Article.new(params[:article])
-      @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
-      render "/article/#{$layout}/issued_article", :layout => $layout
+    if params[:article][:preview] == "1" && @article.valid?
+      show
     elsif @article.update_attributes(params[:article])
       redirect_to(admin_articles_path, :notice => 'Page was successfully updated.')
     else
@@ -57,9 +56,10 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def show
-    @article = Article.find_by_id(params[:id])
-    @issue = (@article.issue_id.nil? ? Setting.current_issue : Issue.find_by_id(@article.issue_id))
-    render "/article/#{$layout}/issued_article", :layout => $layout
+    @article = Article.find(params[:id]) if @article.nil?
+    @issue = @article.issue ||  Setting.current_issue || Issue.first
+    @category = @article.category
+    render "/article/issued_article", layout: $layout
   end
 
 
