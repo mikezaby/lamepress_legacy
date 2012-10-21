@@ -69,8 +69,12 @@ class Article < ActiveRecord::Base
   end
 
   def self.not_issued_category(category_perma, page = 0)
-    includes(:category, :tags).merge(Category.where(permalink: category_perma)).
-      published_only.order('date DESC').page(page).per(10)
+    if (category = Category.where(permalink: category_perma)).present?
+      includes(:category, :tags).merge(category).
+        published_only.
+        order("date #{Category::ORDER_ARTICLES.key(category.first.order_articles)}").
+        page(page).per(10)
+    end
   end
 
   def self.not_issued_article(id, category_perma)

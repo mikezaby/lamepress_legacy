@@ -11,8 +11,9 @@ class Category < ActiveRecord::Base
   validates :name, :presence => true
   validates :permalink, :uniqueness => true
 
-  attr_accessible :name, :permalink, :issued
+  attr_accessible :name, :permalink, :issued, :order_articles
 
+  ORDER_ARTICLES = { desc: 0, asc: 1 }
 
   def self.get_cat(category)
     where("categories.permalink = ?", category)

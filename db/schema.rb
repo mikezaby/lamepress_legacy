@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111004235243) do
+ActiveRecord::Schema.define(:version => 20121021125428) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20111004235243) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "issued"
+    t.integer  "order_articles"
   end
 
   add_index "categories", ["permalink"], :name => "index_categories_on_permalink", :unique => true
