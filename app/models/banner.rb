@@ -20,9 +20,9 @@ class Banner < ActiveRecord::Base
     where("block_id = ?", block_id).order("position ASC")
   end
 
-  
-  def check_url
-    (self.url.nil? or self.url.empty?) ? self.photo.url : self.url
+
+  def path
+    self.url.present? ? self.url : self.photo.url
   end
 
 end
