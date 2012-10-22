@@ -56,7 +56,7 @@ class Issue < ActiveRecord::Base
       Category.issued.each do |category|
         ActionController::Base.new.expire_fragment('home_cat#'+self.id.to_s+"-"+category.id.to_s)
         ActionController::Base.new.expire_fragment('home_cat-head#'+self.id.to_s+"-"+category.id.to_s)
-        expire_fragment("feed##{category.id}")
+        ActionController::Base.new.expire_fragment("feed##{category.id}")
       end
     end
     ActionController::Base.new.expire_fragment('home_issue#'+self.id.to_s)
