@@ -17,7 +17,6 @@ group :development do
   gem 'thin'
 end
 
-gem "turbolinks", "0.5.1"
 gem "ransack"
 gem 'jquery-rails'
 gem "ckeditor", "3.7.1"
