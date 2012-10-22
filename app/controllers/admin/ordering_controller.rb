@@ -23,11 +23,11 @@ class Admin::OrderingController < Admin::BaseController
   end
 
   def category
-    
+
   end
 
   def update_issue
-    orderings = Ordering.find(params[:ordering][:id])
+    orderings = Ordering.where(id: params[:ordering][:id])
     orderings.each do |ordering|
       ordering.issue_pos=99
       ordering.save
