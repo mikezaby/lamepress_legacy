@@ -1,7 +1,7 @@
 <%= content_for :scripts do %>
   <script type="text/javascript">
   $(document).ready(function() {
-    $( "#issue_date" ).datepicker({ changeYear: true, changeMonth: true});
+    $( "#issue_date" ).datepicker({ changeYear: true, changeMonth: true, dateFormat: "yy-mm-dd"});
   });
   </script>
 <% end %>
