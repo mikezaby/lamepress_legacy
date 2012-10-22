@@ -7,13 +7,14 @@ Mizatron::Application.routes.draw do
   match '/ajax_handler/:action' => "ajax_handler"
   match '/assets/djs/:action.:format' => "javascripts"
 
-  get "base/index"
   root :to => 'article#root'
 
   match "search" => "search#index"
   post "search/issue" => "search#issue"
 
   namespace :admin do
+    root to:'base#index'
+
     resources :user, :as => :users, :except => [:show] do
        get "roles", :on => :member
     end
