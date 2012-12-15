@@ -31,6 +31,8 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
+    bullet (4.2.0)
+      uniform_notifier
     cancan (1.6.8)
     ckeditor (3.7.1)
       mime-types
@@ -101,6 +103,8 @@ GEM
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-mini-profiler (0.1.23)
+      rack (>= 1.1.3)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.2)
@@ -164,6 +168,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uniform_notifier (1.1.0)
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -171,6 +176,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bullet
   cancan
   ckeditor (= 3.7.1)
   coffee-rails (~> 3.2.1)
@@ -184,6 +190,7 @@ DEPENDENCIES
   mysql2 (= 0.3.10)
   paperclip
   quiet_assets
+  rack-mini-profiler
   railroady
   rails (= 3.2.8)
   rake (= 0.9.2.2)

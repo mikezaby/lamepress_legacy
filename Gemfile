@@ -8,13 +8,16 @@ group :assets do
   gem "uglifier", ">= 1.0.3"
 end
 
-
 group :development do
   gem 'quiet_assets'
   gem 'railroady'
   gem 'guard-rspec'
   gem 'ruby_gntp'
   gem 'thin'
+
+  #add this two gem for improve queries and page loading time
+  gem 'rack-mini-profiler'
+  gem 'bullet'
 end
 
 gem "ransack"
