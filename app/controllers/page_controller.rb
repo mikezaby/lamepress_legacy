@@ -1,6 +1,6 @@
 class PageController < ThemeController
 
-  before_filter :get_issue
+  before_filter :fetch_issue
 
   def show
     if (@page = Page.where(permalink: params[:perma]).published_only.first)

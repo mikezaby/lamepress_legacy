@@ -1,6 +1,6 @@
 class ArticleController < ThemeController
 
-  before_filter :get_issue, only: [:root, :not_issued_category, :not_issued_article]
+  before_filter :fetch_issue, expect: [:feed]
 
   def root
     @articles = Article.home_issue(@issue.number.to_i)

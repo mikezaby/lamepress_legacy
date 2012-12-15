@@ -28,8 +28,9 @@ class ApplicationController < ActionController::Base
     authorize! action_name, Ckeditor::Asset
   end
 
-  def get_issue
-    @issue = Setting.current_issue
+  def fetch_issue
+    @issue = Issue.get_public_issue(params[:number]).first if params[:number].present?
+    @issue ||= Setting.current_issue
     @issue ||= Issue.order('number DESC').published_only.limit(1).first
   end
 
