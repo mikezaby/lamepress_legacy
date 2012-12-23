@@ -2,9 +2,6 @@ class Page < ActiveRecord::Base
 
   has_many :navigators, :as => :navigatable
 
-  after_save :cache_expiration
-  after_destroy :cache_expiration
-
   attr_accessor :preview
 
   include ActionView::Helpers::TextHelper # for using 'truncate' method on prettify_permalink
@@ -28,8 +25,4 @@ class Page < ActiveRecord::Base
     self.permalink = truncate(self.permalink.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 50, separator: "-", omission: "")
   end
 
-
-  private
-  def cache_expiration
-  end
 end

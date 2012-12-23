@@ -1,8 +1,6 @@
 class Admin::PageController < Admin::BaseController
-  
-  load_and_authorize_resource
 
-  cache_sweeper :page_sweeper
+  load_and_authorize_resource
 
   def index
     @pages = Page.all
@@ -37,7 +35,7 @@ class Admin::PageController < Admin::BaseController
     elsif @page.update_attributes(params[:page])
       redirect_to admin_pages_url, notice: 'Page was successfully updated.'
     else
-      render action: "edit" 
+      render action: "edit"
     end
   end
 

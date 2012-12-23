@@ -1,8 +1,6 @@
 class Issue < ActiveRecord::Base
   has_many :articles, :dependent => :destroy
 
-  after_save :expire_cache
-
   has_attached_file :cover,
                     :url  => "/media/issues/:id/:style_issue_:id.:extension",
                     :path => ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
@@ -45,24 +43,6 @@ class Issue < ActiveRecord::Base
 
   scope :published_only , where(published: true)
   scope :unpublished_only , where("issues.published = FALSE")
-
-  private
-  def expire_cache
-    if self.number_changed?
-      self.articles.each do |article|
-        ActionController::Base.new.expire_fragment('article#'+article.id.to_s)
-        ActionController::Base.new.expire_fragment('article-head#'+article.id.to_s)
-      end
-      Category.issued.each do |category|
-        ActionController::Base.new.expire_fragment('home_cat#'+self.id.to_s+"-"+category.id.to_s)
-        ActionController::Base.new.expire_fragment('home_cat-head#'+self.id.to_s+"-"+category.id.to_s)
-        ActionController::Base.new.expire_fragment("feed##{category.id}")
-      end
-    end
-    ActionController::Base.new.expire_fragment('home_issue#'+self.id.to_s)
-    ActionController::Base.new.expire_fragment('home_issue-head#'+self.id.to_s)
-    ActionController::Base.new.expire_fragment('cover#'+self.id.to_s)
-  end
 
 end
 

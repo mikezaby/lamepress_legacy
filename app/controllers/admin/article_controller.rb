@@ -4,8 +4,6 @@ class Admin::ArticleController < Admin::BaseController
 
   ActionController::Base.prepend_view_path("app/themes/#{$layout}")
 
-  cache_sweeper :article_sweeper
-
   def index
     @q = Article.includes(:issue, :category).search(params[:q], :auth_object => 'admin')
     @article = Article.issued.page(params[:page]).order("date DESC").per(20)

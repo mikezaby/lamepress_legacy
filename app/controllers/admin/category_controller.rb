@@ -2,8 +2,6 @@ class Admin::CategoryController < Admin::BaseController
 
   load_and_authorize_resource
 
-  cache_sweeper :category_sweeper
-
   def index
     @category = Category.issued.page(params[:page]).per(20)
     @nonis_category = Category.non_issued.page(params[:ni_page]).per(20)
