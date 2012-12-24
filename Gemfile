@@ -13,6 +13,7 @@ group :development do
   gem 'railroady'
   gem 'guard-rspec'
   gem 'ruby_gntp'
+  gem 'rb-inotify', '>= 0.8.8'
   gem 'thin'
 
   #add this two gem for improve queries and page loading time
@@ -35,4 +36,9 @@ group :test, :development do
   gem "rspec-rails", "2.11.0"
   gem 'factory_girl_rails', "4.0.0"
   gem 'database_cleaner', '0.8.0'
+end
+
+group :test do
+  gem 'spork'
+  gem 'guard-spork'
 end
