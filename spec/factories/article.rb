@@ -7,7 +7,7 @@ FactoryGirl.define do
     html "Random content"
     published true
     author "me"
-    date "2010-02-20"
+    sequence(:date) { |n| (Date.today + n.days) }
 
     trait :unpublished do
       published false
@@ -42,5 +42,6 @@ FactoryGirl.define do
 
     factory :issued_article, traits: [:issued, :default_order]
     factory :not_issued_article, traits: [:not_issued]
+    factory :home_article, traits: [:issued, :issue_ordered]
   end
 end

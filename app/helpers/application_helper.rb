@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def block(name)
     partials = ""
-    Block.place(name).each do |block|
+    Block.includes(:navigators).place(name).each do |block|
       begin
         partials << (render :partial => "blocks/#{block.partial}",
                             :locals => { block: block })

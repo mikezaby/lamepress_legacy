@@ -7,8 +7,10 @@ FactoryGirl.define do
     cover { File.new(Rails.root.join('spec', 'fixtures', 'issue.png')) }
     pdf { File.new(Rails.root.join('spec', 'fixtures', 'issue.pdf')) }
 
-    factory :public_issue do
+    trait :public do
       published true
     end
+
+    factory :public_issue, traits: [:public]
   end
 end

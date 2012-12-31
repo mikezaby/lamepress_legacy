@@ -7,7 +7,7 @@ Mizatron::Application.routes.draw do
   match '/ajax_handler/:action' => "ajax_handler"
   match '/assets/djs/:action.:format' => "javascripts"
 
-  root :to => 'article#root'
+  root :to => 'article#home_issue'
 
   match "search" => "search#index"
   post "search/issue" => "search#issue"

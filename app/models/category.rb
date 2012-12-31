@@ -19,6 +19,10 @@ class Category < ActiveRecord::Base
     where("categories.permalink = ?", category)
   end
 
+  def ordered
+    ORDER_ARTICLES.keys[order_articles]
+  end
+
   def prettify_permalink
     # parameterize function is nice but not as good as below
     self.permalink = self.name

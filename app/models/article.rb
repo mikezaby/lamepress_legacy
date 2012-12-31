@@ -25,9 +25,8 @@ class Article < ActiveRecord::Base
   attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
                   :date, :published, :hypertitle, :photo, :preview
 
-  delegate :number, :date, :cover, :pdf, :published, :to => :issue, :prefix => true
+  delegate :number, :date, to: :issue, prefix: true
   delegate :name, :permalink, :issued, :to => :category, :prefix => true
-  delegate :issue_pos, :cat_pos, :to => :ordering, :prefix => true
 
   has_attached_file :photo,
                     :url  => "/media/articles/:id/:style_img_:id.:extension",
@@ -50,6 +49,10 @@ class Article < ActiveRecord::Base
 
   def tag_links
     #todo
+  end
+
+  def self.home
+    includes(:category, :tags).order_issue.published_only
   end
 
   def self.home_issue(issue_number)
@@ -103,14 +106,24 @@ class Article < ActiveRecord::Base
   scope :order_category, joins(:ordering).merge(Ordering.category)
 
   scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
-  scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:issue, :category)
+  scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:category)
 
-  def prettify_permalink
+  scope :for_category, lambda { |category_id| use_index("index_articles_on_issue_id").
+                                              includes(:category).
+                                              where(category_id: category_id ) }
+
+  def permalink
     # parameterize function is nice but not as good as below
     truncate(self.title.lm_strip, length: 50, separator: "-", omission: "")
   end
 
+  alias :prettify_permalink :permalink
+
   private
+
+  def self.use_index(index)
+    from("#{self.table_name} USE INDEX(#{index})")
+  end
 
   def assign_tags
     if @tag_names

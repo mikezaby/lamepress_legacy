@@ -30,9 +30,11 @@ class ApplicationController < ActionController::Base
   end
 
   def fetch_issue
-    @issue = Issue.get_public_issue(params[:number]).first if params[:number].present?
-    @issue ||= Setting.current_issue
-    @issue ||= Issue.order('number DESC').published_only.limit(1).first
+    @issue = if params[:number].present?
+      Issue.published_only.find_by_number!(params[:number])
+    else
+      Setting.current_issue
+    end
   end
 
 end
