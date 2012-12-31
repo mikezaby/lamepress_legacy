@@ -1,15 +1,15 @@
 <% content_for :head do %>
-  <% cache 'home_issue-head#'+@issue.id.to_s do %>
+  <% cache [@issue,:home_issue_head] do %>
     <%= head_title("Issue #{@issue.number.to_s} | #{$title}") %>
     <%= keywords(@issue.number.to_s) %>
     <%= cannonical_link("#{$domain}/issue/#{@issue.number.to_s}") %>
     <%= description("Issue #{@issue.number.to_s}, release date #{@issue.date}") %>
   <% end %>
 <% end %>
-<% cache 'home_issue#'+@issue.id.to_s do %>
+<% cache [@issue,:home_issue] do %>
   <div id="main-content">
     <% @articles.each do |article| %>
-      <div id="article" class="hovered" onclick="location.href='<%= article_permalink(article) %>'">
+      <div id="article" class="hovered" onclick="location.href='<%= article_canonical_path(article, @issue) %>'">
         <% if !article.hypertitle.nil? and !article.hypertitle.empty? %>
           <h2 class="article">
             <%= raw article.hypertitle %>

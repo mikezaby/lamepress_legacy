@@ -1,4 +1,4 @@
-cache 'feed#'+@articles.first.category.id.to_s do
+cache [@category, :feed] do
   xml.instruct! :xml, :version => "1.0"
   xml.rss :version => "2.0" do
     xml.channel do
@@ -12,7 +12,7 @@ cache 'feed#'+@articles.first.category.id.to_s do
           xml.title article.title
           xml.description article.html.summarize
           xml.pubDate article.created_at.to_s(:rfc822)
-          xml.link article_permalink(article)
+          xml.link article_canonical_url(article)
         end
       end
     end

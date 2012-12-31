@@ -10,6 +10,16 @@ module ArticleHelper
     end
   end
 
+  def article_canonical_url(article, issue = nil)
+    if article.issue_id.nil?
+     not_issued_article_url(article.category_permalink, article.id,
+                            article.permalink)
+    else
+      issued_article_url(issue.number,article.category_permalink,
+                        article.id, article.permalink)
+    end
+  end
+
   alias :article_permalink :article_canonical_path
 
   def cat_link(article)

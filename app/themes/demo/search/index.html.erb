@@ -1,6 +1,6 @@
   <div id="main-content">
     <% @article.each do |article| %>
-      <div id="article" class="hovered" onclick="location.href='<%= article_permalink(article) %>'">
+      <div id="article" class="hovered" onclick="location.href='<%= article_canonical_path(article, article.issue) %>'">
         <% if !article.hypertitle.nil? and !article.hypertitle.empty? %>
           <h2 class="article">
             <%= raw article.hypertitle %>
