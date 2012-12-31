@@ -108,7 +108,7 @@ class Article < ActiveRecord::Base
   scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
   scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:category)
 
-  scope :for_category, lambda { |category_id| use_index("index_articles_on_issue_id").
+  scope :for_category, lambda { |category_id| use_index("index_articles_on_issue_id_and_category_id_and_published").
                                               includes(:category).
                                               where(category_id: category_id ) }
 
