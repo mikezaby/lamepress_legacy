@@ -8,8 +8,8 @@ class Article < ActiveRecord::Base
   attr_writer :tag_names,:tag_links
   attr_accessor :preview
 
-  belongs_to :category
-  belongs_to :issue
+  belongs_to :category, touch: true
+  belongs_to :issue, touch: true
 
   has_one :ordering, :dependent => :delete
 

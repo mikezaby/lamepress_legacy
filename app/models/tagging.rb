@@ -1,5 +1,5 @@
 class Tagging < ActiveRecord::Base
-  belongs_to :article
-  belongs_to :tag
+  belongs_to :article, touch: true
+  belongs_to :tag, touch: true
 end
 

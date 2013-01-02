@@ -1,5 +1,6 @@
 class Ordering < ActiveRecord::Base
-  belongs_to :article
+  belongs_to :article, touch: true
+
   scope :exist , where('issue_pos IS NOT NULL')
   scope :issue, exist.order("issue_pos")
   scope :category, order("cat_pos")

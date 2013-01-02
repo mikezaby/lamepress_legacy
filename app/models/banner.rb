@@ -1,6 +1,6 @@
 class Banner < ActiveRecord::Base
 
-  belongs_to :block
+  belongs_to :block, touch: true
 
   has_attached_file :photo,
                     :url  => "/media/banner/:id/:style_:filename",
