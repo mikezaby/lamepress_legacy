@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
 
+  require "custom_strings.rb"
+
   protect_from_forgery
 
-  require "custom_strings.rb"
+  before_filter :fetch_url
 
   $domain = LP_CONFIG["domain"]
   $title = LP_CONFIG["title"]
@@ -27,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def ckeditor_authenticate
     authorize! action_name, Ckeditor::Asset
+  end
+
+  def fetch_url
+    @url = CGI::unescape(request.path.strip.gsub(/[\']|[\`]|[\"]/,""))
   end
 
   def fetch_issue
