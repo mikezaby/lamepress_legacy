@@ -14,7 +14,6 @@ group :development do
   gem 'guard-rspec'
   gem 'ruby_gntp'
   gem 'rb-inotify', '>= 0.8.8'
-  gem 'thin'
 
   #add this two gem for improve queries and page loading time
   gem 'rack-mini-profiler'
@@ -31,6 +30,8 @@ gem 'devise'
 gem "paperclip"
 gem 'kaminari'
 gem 'cancan'
+
+gem 'unicorn'
 
 group :test, :development do
   gem "rspec-rails", "2.11.0"
