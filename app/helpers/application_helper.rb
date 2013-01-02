@@ -30,15 +30,17 @@ module ApplicationHelper
     partials = ""
     Block.includes(:navigators).place(name).each do |block|
       begin
-        partials << (render :partial => "blocks/#{block.partial}",
-                            :locals => { block: block })
-      rescue
-        #replace this with something tha save error to database
-        partial << "missing"
+        partials << (render partial: "blocks/#{block.partial}",
+                            locals: { block: block })
+      rescue Exception => e
+        if Rails.env.development?
+          partials << e.message
+        else
+          partials << "missing"
+        end
       end
     end
     raw partials
   end
 
 end
-
