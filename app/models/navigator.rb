@@ -9,7 +9,4 @@ class Navigator < ActiveRecord::Base
   def self.list(block_id)
     includes(:navigatable).where(block_id: block_id).order("position")
   end
-
-  scope :orderit, order("block_id, position")
 end
-

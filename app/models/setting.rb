@@ -12,5 +12,4 @@ class Setting < ActiveRecord::Base
   def self.navigator_blocks
     where(meta_key: "navigator_block").map(&:meta_value).collect {|block_id| Block.find_by_id(block_id)}
   end
-
 end

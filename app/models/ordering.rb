@@ -7,4 +7,3 @@ class Ordering < ActiveRecord::Base
 
   delegate :title, :issue_id, :to => :article, :prefix => true
 end
-

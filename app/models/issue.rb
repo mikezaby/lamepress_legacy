@@ -19,14 +19,6 @@ class Issue < ActiveRecord::Base
 
   attr_accessible :number, :date, :cover, :pdf, :published
 
-  def self.get_public_issue(number)
-    where(number: number).published_only
-  end
-
-  def self.last_issues(number)
-    order("number DESC").published_only.limit(number)
-  end
-
   def self.last_created(number)
     order("created_at DESC").limit(number)
   end
@@ -43,6 +35,4 @@ class Issue < ActiveRecord::Base
 
   scope :published_only , where(published: true)
   scope :unpublished_only , where("issues.published = FALSE")
-
 end
-
