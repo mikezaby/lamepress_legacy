@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  require "custom_strings.rb"
-
   protect_from_forgery
 
   before_filter :fetch_url
