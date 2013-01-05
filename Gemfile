@@ -34,6 +34,7 @@ gem 'cancan'
 gem 'unicorn'
 
 group :test, :development do
+  gem 'shoulda-matchers', '>= 1.4.2'
   gem "rspec-rails", "2.11.0"
   gem 'factory_girl_rails', "4.0.0"
   gem 'database_cleaner', '0.8.0'
