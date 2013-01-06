@@ -17,7 +17,7 @@
 
    <%= field_set_tag do %>
     <%= f.label :block_id %>
-        <%= f.collection_select :block_id, Block.get_mode("banner"), :id, :name, {:prompt => "Sellect block"}  %>
+        <%= f.collection_select :block_id, Block.where(mode: "banner"), :id, :name, {:prompt => "Sellect block"}  %>
    <% end %>
 
   <%= field_set_tag do %>
