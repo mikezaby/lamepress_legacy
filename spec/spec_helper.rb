@@ -9,6 +9,7 @@ Spork.prefork do
   require 'rspec/rails'
   require 'shoulda-matchers'
   require 'shoulda/matchers/integrations/rspec'
+  require "paperclip/matchers"
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -21,6 +22,8 @@ Spork.prefork do
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
+
+    config.include Paperclip::Shoulda::Matchers
 
     config.order = "random"
 
