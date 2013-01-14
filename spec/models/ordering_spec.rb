@@ -6,11 +6,12 @@ describe Ordering do
   let(:issue_orderings) { FactoryGirl.create_list(:issue_ordering, 3) }
   let(:category_ordering) { FactoryGirl.create(:category_ordering) }
   let(:category_orderings) { FactoryGirl.create_list(:category_ordering, 3) }
+  let(:article){ FactoryGirl.create(:article) }
 
   it { should belong_to(:article) }
 
   describe "save" do
-    subject { FactoryGirl.build(:ordering) }
+    subject { FactoryGirl.build(:ordering, article: article) }
 
     it "touches article" do
       subject.article.should_receive(:touch)
