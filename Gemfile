@@ -13,7 +13,7 @@ group :development do
   gem 'railroady'
   gem 'guard-rspec'
   gem 'ruby_gntp'
-  gem 'rb-inotify', '>= 0.8.8'
+  gem 'rb-inotify', '~> 0.8.8'
 
   #add this two gem for improve queries and page loading time
   gem 'rack-mini-profiler'
@@ -35,9 +35,9 @@ gem 'unicorn'
 
 group :test, :development do
   gem 'shoulda-matchers', '>= 1.4.2'
-  gem "rspec-rails", "2.11.0"
-  gem 'factory_girl_rails', "4.0.0"
-  gem 'database_cleaner', '0.8.0'
+  gem "rspec-rails", "2.12.2"
+  gem 'factory_girl_rails', "4.1.0"
+  gem 'database_cleaner', '0.9.1'
   gem 'pry-rails'
   gem 'pry-debugger'
 end
