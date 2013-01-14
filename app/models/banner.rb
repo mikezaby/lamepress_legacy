@@ -14,16 +14,11 @@ class Banner < ActiveRecord::Base
 
   attr_accessible :describe, :block_id, :photo, :url
 
-  delegate :name, :placement, :to => :block, :prefix => true
-
   def self.get_banner(block_id)
-    where("block_id = ?", block_id).order("position ASC")
+    where(block_id: block_id).order(:position)
   end
-
 
   def path
     self.url.present? ? self.url : self.photo.url
   end
-
 end
-

@@ -3,7 +3,7 @@ class Admin::BannerController < Admin::BaseController
   load_and_authorize_resource
 
   def index
-    @banner_blocks = Block.get_mode("banner")
+    @banner_blocks = Block.where(mode: "banner")
     @banners = @banner_blocks.collect { |block| Banner.where(:block_id => block.id).order("position ASC")}
   end
 

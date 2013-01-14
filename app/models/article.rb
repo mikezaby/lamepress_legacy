@@ -47,42 +47,8 @@ class Article < ActiveRecord::Base
     @tag_names || tags.map(&:name).join(', ')
   end
 
-  def tag_links
-    #todo
-  end
-
   def self.home
     includes(:category, :tags).order_issue.published_only
-  end
-
-  def self.home_issue(issue_number)
-    includes(:category, :tags).public_issue(issue_number).order_issue.published_only
-  end
-
-  def self.issued_article(id, issue_number, category_perma)
-    includes(:category, :tags).public_issue(issue_number).
-      merge(Category.where(permalink: category_perma).issued).where(id: id).
-      published_only.first
-  end
-
-  def self.issued_category(issue_number, category_perma)
-    includes(:category, :tags).public_issue(issue_number).
-      merge(Category.where(permalink: category_perma).issued).order_category.
-      published_only
-  end
-
-  def self.not_issued_category(category_perma, page = 0)
-    if (category = Category.where(permalink: category_perma)).present?
-      includes(:category, :tags).merge(category).
-        published_only.
-        order("date #{Category::ORDER_ARTICLES.key(category.first.order_articles)}").
-        page(page).per(10)
-    end
-  end
-
-  def self.not_issued_article(id, category_perma)
-    includes(:category, :tags).merge(Category.where(permalink: category_perma)).
-      where(id: id, issue_id: nil).published_only.first
   end
 
   def self.feed(id)
@@ -92,21 +58,13 @@ class Article < ActiveRecord::Base
       order("articles.date DESC").limit(20)
   end
 
-  def self.public_issue(issue_number)
-    includes(:issue).merge(Issue.get_public_issue(issue_number))
-  end
-
-  def self.the_last(number)
-    includes(:category).order('created_at DESC').limit(number)
-  end
-
   scope :published_only, where(published: true)
 
   scope :order_issue, joins(:ordering).merge(Ordering.issue)
   scope :order_category, joins(:ordering).merge(Ordering.category)
 
-  scope :issued , where("issue_id is not NULL").order('created_at DESC').includes(:issue, :category)
-  scope :non_issued , where("issue_id is NULL").order('created_at DESC').includes(:category)
+  scope :issued , where("issue_id is not NULL")
+  scope :non_issued , where(issue_id: nil)
 
   scope :for_category, lambda { |category_id| use_index("index_articles_on_issue_id_and_category_id_and_published").
                                               includes(:category).
@@ -132,6 +90,4 @@ class Article < ActiveRecord::Base
       end
     end
   end
-
 end
-
