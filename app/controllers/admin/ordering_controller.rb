@@ -3,6 +3,7 @@ class Admin::OrderingController < Admin::BaseController
   load_and_authorize_resource
 
   def index
+    @search_issues = Issue.order("created_at desc").limit(15)
   end
 
   def priority

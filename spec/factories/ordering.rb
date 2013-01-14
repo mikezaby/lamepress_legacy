@@ -5,6 +5,10 @@ FactoryGirl.define do
     cat_pos 99
     issue_pos nil
 
+    trait :with_article do
+      association :article, factory: :article
+    end
+
     trait :category do
       sequence(:cat_pos) { |n| Random.new.rand(80) }
     end

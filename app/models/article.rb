@@ -47,10 +47,6 @@ class Article < ActiveRecord::Base
     @tag_names || tags.map(&:name).join(', ')
   end
 
-  def tag_links
-    #todo
-  end
-
   def self.home
     includes(:category, :tags).order_issue.published_only
   end

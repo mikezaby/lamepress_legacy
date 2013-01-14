@@ -19,20 +19,17 @@ class Issue < ActiveRecord::Base
 
   attr_accessible :number, :date, :cover, :pdf, :published
 
-  def self.last_created(number)
-    order("created_at DESC").limit(number)
-  end
+  def self.search_issues(year,month, published = true)
+    date = Date.new(year.to_i, month.to_i)
+    start_date = date.beginning_of_month
+    end_date =  date.end_of_month
 
-  def self.search_issues(year,month,published)
-    date1=year.to_s+"-"+month.to_s+"-00"
-    date2=year.to_s+"-"+month.to_s+"-31"
-    if published
-      where("date > ? and date < ?", date1, date2).published_only.order("date DESC")
-    else
-      where("date > ? and date < ?", date1, date2).order("date DESC")
-    end
+    scope = where("date > ? and date <= ?", start_date, end_date).order("date DESC")
+    scope = scope.published_only if published
+
+    scope
   end
 
   scope :published_only , where(published: true)
-  scope :unpublished_only , where("issues.published = FALSE")
+  scope :unpublished_only , where(published: false)
 end

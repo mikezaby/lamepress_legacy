@@ -8,6 +8,7 @@ FactoryGirl.define do
     published true
     author "me"
     sequence(:date) { |n| (Date.today + n.days) }
+    association :category, factory: :category
 
     trait :unpublished do
       published false
