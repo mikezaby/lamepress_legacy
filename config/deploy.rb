@@ -12,9 +12,9 @@ set :bundle_flags, "--deployment --quiet --binstubs"
 set :application, "lamepress"
 set :domain, "domain.com"
 server "37.247.54.81", :web, :app, :db, primary: true
+set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/lamepress"
 
-set :user, "deployer"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
