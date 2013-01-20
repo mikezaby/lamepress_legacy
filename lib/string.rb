@@ -1,21 +1,15 @@
 class String
 
   def summarize
-    self.gsub(/\<!--(.+?)--\>/m,"").gsub(/<\/?[^>]*>/, "")[0..400]
-    #self[0..300].close_tags
+    text = Nokogiri::HTML(self).to_str
+    return text if text.size <= 300
+
+    stop = text.index('.', 260)
+    (stop.present? && stop < 500) ? text[0..stop] : text[0..300]
   end
 
   def bold(value)
     self.gsub(value, "<b>"+value+"</b>")
-  end
-
-  def close_tags
-    text = self
-    open_tags = []
-    text.scan(/\<([^\>\s\/]+)[^\>\/]*?\>/).each { |t| open_tags.unshift(t) }
-    text.scan(/\<\/([^\>\s\/]+)[^\>]*?\>/).each { |t| open_tags.slice!(open_tags.index(t)) }
-    open_tags.each {|t| text += "</#{t}>" }
-    text
   end
 
   def lm_strip

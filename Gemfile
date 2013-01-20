@@ -30,6 +30,7 @@ gem 'devise'
 gem "paperclip"
 gem 'kaminari'
 gem 'cancan'
+gem "nokogiri"
 
 gem 'unicorn'
 

@@ -112,6 +112,7 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.5.0)
     mysql2 (0.3.10)
+    nokogiri (1.5.6)
     orm_adapter (0.4.0)
     paperclip (3.4.0)
       activemodel (>= 3.0.0)
@@ -233,6 +234,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mysql2 (= 0.3.10)
+  nokogiri
   paperclip
   pry-debugger
   pry-rails
