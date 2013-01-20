@@ -44,7 +44,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
-    ckeditor (3.7.1)
+    ckeditor (3.7.3)
       mime-types
       orm_adapter
     cocaine (0.4.2)
@@ -238,7 +238,7 @@ DEPENDENCIES
   bullet
   cancan
   capistrano (>= 2.13.5)
-  ckeditor (= 3.7.1)
+  ckeditor (= 3.7.3)
   coffee-rails (~> 3.2.1)
   database_cleaner (= 0.9.1)
   devise

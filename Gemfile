@@ -22,7 +22,7 @@ end
 
 gem "ransack"
 gem 'jquery-rails'
-gem "ckeditor", "3.7.1"
+gem "ckeditor", "3.7.3"
 gem "fancybox-rails"
 gem 'mysql2', "0.3.10"
 gem 'rake', "0.9.2.2"
