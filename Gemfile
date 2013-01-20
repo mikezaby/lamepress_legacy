@@ -31,7 +31,7 @@ gem "paperclip"
 gem 'kaminari'
 gem 'cancan'
 gem "nokogiri"
-
+gem 'capistrano', '>= 2.13.5'
 gem 'unicorn'
 
 group :test, :development do
