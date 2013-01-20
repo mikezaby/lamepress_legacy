@@ -56,7 +56,7 @@ Mizatron::Application.routes.draw do
 #--> End of Android service
 
   get '/page/:perma' => 'page#show', as: "page"
-  get '/feed/:id' => 'article#feed'
+  get '/feed/:id' => 'article#feed', as: :category_feed
 
   #isued articles
   get '/issue/:number' => 'article#home_issue', as: 'home_issue'
