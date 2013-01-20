@@ -25,7 +25,7 @@ gem 'jquery-rails'
 gem "ckeditor", "3.7.3"
 gem "fancybox-rails"
 gem 'mysql2', "0.3.10"
-gem 'rake', "0.9.2.2"
+gem 'rake', "10.0.3"
 gem 'devise'
 gem "paperclip"
 gem 'kaminari'
