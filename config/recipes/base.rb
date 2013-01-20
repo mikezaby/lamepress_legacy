@@ -32,7 +32,6 @@ namespace :deploy do
   end
 
   task :setup_config, roles: :app do
-    run "cp #{release_path}/config/application.#{application}.rb #{release_path}/config/application.rb"
     run "ln -nfs #{shared_path}/config/lamepress.yml #{release_path}/config/lamepress.yml"
   end
   after "deploy:finalize_update", "deploy:setup_config"
