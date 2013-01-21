@@ -118,7 +118,7 @@ GEM
     mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.5.0)
-    mysql2 (0.3.10)
+    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -251,7 +251,7 @@ DEPENDENCIES
   guard-spork
   jquery-rails (~> 2.1.3)
   kaminari
-  mysql2 (= 0.3.10)
+  mysql2 (= 0.3.11)
   nokogiri
   paperclip
   pry-debugger

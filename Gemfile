@@ -25,7 +25,7 @@ gem "ransack"
 gem 'jquery-rails', '~> 2.1.3'
 gem "ckeditor", "3.7.3"
 gem "fancybox-rails"
-gem 'mysql2', "0.3.10"
+gem 'mysql2', "0.3.11"
 gem 'rake', "10.0.3"
 gem 'devise'
 gem "paperclip"
