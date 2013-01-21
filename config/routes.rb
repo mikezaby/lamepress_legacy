@@ -5,7 +5,7 @@ Mizatron::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "admin/user" }
 
   match '/ajax_handler/:action' => "ajax_handler"
-  match '/assets/djs/:action.:format' => "javascripts"
+  match '/djs/:action.:format' => "javascripts"
 
   root :to => 'article#home_issue'
 
