@@ -33,6 +33,10 @@ namespace :deploy do
 
   task :setup_config, roles: :app do
     run "ln -nfs #{shared_path}/config/lamepress.yml #{release_path}/config/lamepress.yml"
+    run "mkdir -p #{shared_path}/uploads/media"
+    run "ln -nfs #{shared_path}/uploads/media #{release_path}/public/media"
+    run "mkdir -p #{shared_path}/uploads/ckeditor_assets"
+    run "ln -nfs #{shared_path}/uploads/ckeditor_assets #{release_path}/public/ckeditor_assets"
   end
   after "deploy:finalize_update", "deploy:setup_config"
 end
