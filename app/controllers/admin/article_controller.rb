@@ -61,7 +61,7 @@ class Admin::ArticleController < Admin::BaseController
   private
 
   def assign_search
-    @q = Article.includes(:issue, :category).search(params[:q], auth_object: 'admin')
+    @q = Article.search(params[:q], auth_object: 'admin')
   end
 
   def fetch_article

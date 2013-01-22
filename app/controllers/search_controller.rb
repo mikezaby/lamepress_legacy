@@ -3,8 +3,8 @@ class SearchController < ApplicationController
 
   def index
     @issue = Setting.current_issue
-    @q = Article.includes(:issue, :category).search(params[:q], :auth_object => nil)
-    @article = @q.result.page(params[:page]).order("date DESC").per(20)
+    @q = Article.search(params[:q], :auth_object => nil)
+    @article = @q.result.page(params[:page]).order("date DESC").per(10)
     render action: :index
   end
 
