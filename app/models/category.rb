@@ -11,7 +11,7 @@ class Category < ActiveRecord::Base
   validates :name, :presence => true
   validates :permalink, :uniqueness => true
 
-  attr_accessible :name, :permalink, :issued, :order_articles
+  attr_accessible :name, :permalink, :issued, :order_articles, :mode
 
   ORDER_ARTICLES = { desc: 0, asc: 1 }
 

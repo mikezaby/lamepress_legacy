@@ -33,7 +33,10 @@
     <%= f.label "Order articles by date" %>
     <%= f.select :order_articles, Category::ORDER_ARTICLES %>
   <% end %>
-
+  <%= field_set_tag do %>
+    <%= f.label :mode %>
+    <%= f.text_field :mode %>
+  <% end %>
  <div class="clear"></div>
 </div>
 <footer>
