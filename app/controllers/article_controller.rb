@@ -43,7 +43,6 @@ class ArticleController < ThemeController
   end
 
   private
-
   def redirect_to_canonical
     if request.path != article_canonical_path(@article, @issue)
       redirect_to(article_canonical_path(@article, @issue), status: :moved_permanently)

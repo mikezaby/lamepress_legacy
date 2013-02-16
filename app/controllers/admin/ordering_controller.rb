@@ -2,27 +2,37 @@ class Admin::OrderingController < Admin::BaseController
 
   load_and_authorize_resource
 
+  before_filter :fetch_issues, only: [:index, :priority]
+
   def index
-    @search_issues = Issue.order("created_at desc").limit(15)
   end
 
   def priority
-    if params[:issue_id].present? and params[:category_id].present?
-      @articles = Article.joins(:ordering).where(issue_id: params[:issue_id], category_id: params[:category_id]).order("cat_pos ASC")
-      @articles.first.nil? ? (redirect_to admin_orderings_path, :notice => "No articles in this category") : (render "category")
-    elsif params[:issue_id].present?
-      articles = Article.joins(:ordering).where(issue_id: params[:issue_id])
-      @issue = articles.first.issue
+    if params[:issue_id].present?
+      @issue = Issue.find(params[:issue_id])
+    elsif params[:issue_number].present?
+      @issue = Issue.find_by_number!(params[:issue_number])
+    end
+
+    if @issue and params[:category_id].present?
+      @articles = @issue.articles.joins(:ordering).
+                         where( category_id: params[:category_id]).
+                         order("cat_pos ASC")
+      if @articles.empty?
+        flash[:notice] = "No articles in this category"
+        render 'index'
+      else
+        render "category"
+      end
+    elsif @issue
+      articles = @issue.articles.joins(:ordering)
       @not_ordered = articles.merge(Ordering.where(issue_pos: nil)).collect {|article| article.ordering}
       @ordered = articles.merge(Ordering.where("issue_pos is not null").order("issue_pos ASC"))
       render "issue"
     else
-      redirect_to admin_orderings_path, :notice => "Wrong values"
+      flash[:notice] = "wrong values"
+      redirect_to admin_orderings_path
     end
-  end
-
-  def category
-
   end
 
   def update_issue
@@ -54,4 +64,9 @@ class Admin::OrderingController < Admin::BaseController
     render :nothing => true
   end
 
+  private
+
+  def fetch_issues
+    @search_issues = Issue.order("created_at desc").limit(5)
+  end
 end
