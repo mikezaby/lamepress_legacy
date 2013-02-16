@@ -11,7 +11,7 @@ class Issue < ActiveRecord::Base
                     :path => ":rails_root/public/media/issues/:id/issue_:id.:extension"
 
   validates :number, :presence => true,  :uniqueness => true
-  validates :date, :presence => true
+  validates :date, :presence => true, :uniqueness => true
   validates_attachment :cover, :presence => true,
     :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }
   validates_attachment :pdf, :presence => true,

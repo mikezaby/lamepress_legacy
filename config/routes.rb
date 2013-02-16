@@ -31,7 +31,9 @@ Mizatron::Application.routes.draw do
       post "sorter", :on => :collection
     end
 
-    resources :issue, :as => :issues, :except => [:show]
+    resources :issue, :as => :issues, :except => [:show] do
+      get 'search', :on => :collection
+    end
     resources :navigator, :as => :navigators, :except => [:show] do
       post "sorter", :on => :collection
     end
@@ -70,4 +72,3 @@ Mizatron::Application.routes.draw do
   match '*a', :to => 'application#render_404'
 
 end
-

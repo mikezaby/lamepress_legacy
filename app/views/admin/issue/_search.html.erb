@@ -1,0 +1,14 @@
+<%= search_form_for [:admin, @q], :url => search_admin_issues_path do |f| %>
+  <div class="module_content">
+    <%= field_set_tag nil, :style => "margin-left:1%;" do %>
+      <%= f.text_field :number_gteq, style: "width:11%;margin-left:1%;",
+                      placeholder: "from issue" %>
+      <%= f.text_field :number_lteq, style: "width:11%;margin-left:1%;",
+                       placeholder: "to issue" %>
+      <%= f.select :published_eq, [["public", true], ["hidden", false]], {},
+                   style: "width:11%;margin-left:1%;" %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+<% end %>
+<div class="clear"></div>
