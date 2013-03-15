@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130209140611) do
+ActiveRecord::Schema.define(:version => 20130315081006) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.string   "hypertitle"
-    t.text     "html"
+    t.text     "html",               :limit => 16777215
     t.string   "author"
     t.boolean  "published"
     t.integer  "category_id"
