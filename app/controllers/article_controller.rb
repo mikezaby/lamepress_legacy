@@ -35,7 +35,7 @@ class ArticleController < ThemeController
 
   def feed
     @category = Category.non_issued.find(params[:id])
-    @articles = @category.articles.published_only
+    @articles = @category.articles.published_only.order("date desc").limit(50)
 
     respond_to do |format|
       format.rss { render layout: false }
