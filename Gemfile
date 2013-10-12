@@ -15,10 +15,6 @@ group :development do
   gem 'guard-rspec'
   gem 'ruby_gntp'
   gem 'rb-inotify', '~> 0.8.8'
-
-  #add this two gem for improve queries and page loading time
-  gem 'rack-mini-profiler'
-  gem 'bullet'
 end
 
 gem "ransack"
