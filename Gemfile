@@ -41,9 +41,5 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'pry-rails'
   gem 'pry-debugger'
-end
-
-group :test do
-  gem 'spork'
-  gem 'guard-spork'
+  gem 'spring'
 end
