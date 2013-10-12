@@ -58,15 +58,15 @@ class Article < ActiveRecord::Base
       order("articles.date DESC").limit(20)
   end
 
-  scope :published_only, where(published: true)
+  scope :published_only, -> { where(published: true) }
 
-  scope :order_issue, joins(:ordering).merge(Ordering.issue)
-  scope :order_category, joins(:ordering).merge(Ordering.category)
+  scope :order_issue, -> { joins(:ordering).merge(Ordering.issue) }
+  scope :order_category, -> { joins(:ordering).merge(Ordering.category) }
 
-  scope :issued , where("issue_id is not NULL")
-  scope :non_issued , where(issue_id: nil)
+  scope :issued, -> { where("issue_id is not NULL") }
+  scope :non_issued, -> { where(issue_id: nil) }
 
-  scope :for_category, lambda { |category_id| use_index("index_articles_on_issue_id_and_category_id_and_published").
+  scope :for_category, ->(category_id) { use_index("index_articles_on_issue_id_and_category_id_and_published").
                                               includes(:category).
                                               where(category_id: category_id ) }
 

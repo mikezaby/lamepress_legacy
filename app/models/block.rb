@@ -4,5 +4,5 @@ class Block < ActiveRecord::Base
 
   attr_accessible :name, :placement, :mode, :position, :partial
 
-  scope :place, lambda { |place| where(placement: place).order(:position) }
+  scope :place, ->(place) { where(placement: place).order(:position) }
 end

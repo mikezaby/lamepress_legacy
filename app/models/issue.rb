@@ -30,6 +30,6 @@ class Issue < ActiveRecord::Base
     scope
   end
 
-  scope :published_only , where(published: true)
-  scope :unpublished_only , where(published: false)
+  scope :published_only, -> { where(published: true) }
+  scope :unpublished_only, -> { where(published: false) }
 end

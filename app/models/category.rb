@@ -19,9 +19,9 @@ class Category < ActiveRecord::Base
     ORDER_ARTICLES.keys[order_articles]
   end
 
-  scope :mobile_issued , where(issued: true).select("id, name, permalink")
-  scope :issued , where(issued: true)
-  scope :non_issued , where(issued: false)
+  scope :mobile_issued, -> { where(issued: true).select("id, name, permalink") }
+  scope :issued, -> { where(issued: true) }
+  scope :non_issued, ->  { where(issued: false) }
 
   private
 

@@ -13,7 +13,7 @@ class Page < ActiveRecord::Base
   validates :title, length: { maximum: 250 }
   validates :meta_description, length: { maximum: 250, allow_blank: true }
 
-  scope :published_only, where(published: true)
+  scope :published_only, -> { where(published: true) }
 
   private
 
