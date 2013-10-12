@@ -6,6 +6,7 @@ class Issue < ActiveRecord::Base
                     path: ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
                     styles: { thumb: "250>" },
                     convert_options: { thumb: '-quality 75' }
+
   has_attached_file :pdf,
                     url: "/media/issues/:id/issue_:id.:extension",
                     path: ":rails_root/public/media/issues/:id/issue_:id.:extension"
@@ -19,6 +20,9 @@ class Issue < ActiveRecord::Base
 
   attr_accessible :number, :date, :cover, :pdf, :published
 
+  scope :published_only, -> { where(published: true) }
+  scope :unpublished_only, -> { where(published: false) }
+
   def self.search_issues(year,month, published = true)
     date = Date.new(year.to_i, month.to_i)
     start_date = date.beginning_of_month
@@ -29,7 +33,4 @@ class Issue < ActiveRecord::Base
 
     scope
   end
-
-  scope :published_only, -> { where(published: true) }
-  scope :unpublished_only, -> { where(published: false) }
 end
