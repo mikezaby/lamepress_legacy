@@ -1,21 +1,21 @@
 class Issue < ActiveRecord::Base
-  has_many :articles, :dependent => :destroy
+  has_many :articles, dependent: :destroy
 
   has_attached_file :cover,
-                    :url  => "/media/issues/:id/:style_issue_:id.:extension",
-                    :path => ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
-                    :styles => {:thumb => "250>" },
-                    :convert_options => { :thumb => '-quality 75' }
+                    url: "/media/issues/:id/:style_issue_:id.:extension",
+                    path: ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
+                    styles: { thumb: "250>" },
+                    convert_options: { thumb: '-quality 75' }
   has_attached_file :pdf,
-                    :url  => "/media/issues/:id/issue_:id.:extension",
-                    :path => ":rails_root/public/media/issues/:id/issue_:id.:extension"
+                    url: "/media/issues/:id/issue_:id.:extension",
+                    path: ":rails_root/public/media/issues/:id/issue_:id.:extension"
 
-  validates :number, :presence => true,  :uniqueness => true
-  validates :date, :presence => true, :uniqueness => true
-  validates_attachment :cover, :presence => true,
-    :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }
-  validates_attachment :pdf, :presence => true,
-    :content_type => { :content_type => ['application/pdf'] }
+  validates :number, presence: true, uniqueness: true
+  validates :date, presence: true, uniqueness: true
+  validates_attachment :cover, presence: true,
+    content_type: { content_type: ['image/jpeg', 'image/png', 'image/gif'] }
+  validates_attachment :pdf, presence: true,
+    content_type: { content_type: ['application/pdf'] }
 
   attr_accessible :number, :date, :cover, :pdf, :published
 

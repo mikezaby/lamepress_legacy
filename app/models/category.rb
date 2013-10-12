@@ -6,10 +6,10 @@ class Category < ActiveRecord::Base
   before_save :prettify_permalink
 
   has_many :articles
-  has_many :navigators, :as => :navigatable, :dependent => :destroy
+  has_many :navigators, as: :navigatable, dependent: :destroy
 
-  validates :name, :presence => true
-  validates :permalink, :uniqueness => true
+  validates :name, presence: true
+  validates :permalink, uniqueness: true
 
   attr_accessible :name, :permalink, :issued, :order_articles, :mode
 

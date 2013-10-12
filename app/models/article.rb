@@ -11,27 +11,27 @@ class Article < ActiveRecord::Base
   belongs_to :category, touch: true
   belongs_to :issue, touch: true
 
-  has_one :ordering, :dependent => :delete
+  has_one :ordering, dependent: :delete
 
-  has_many :taggings, :dependent => :destroy
-  has_many :tags, :through => :taggings
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
 
 
-  validates :title, :presence => true
-  validates :date, :presence => true
-  validates :html, :presence => true
-  validates :category_id, :presence => true
+  validates :title, presence: true
+  validates :date, presence: true
+  validates :html, presence: true
+  validates :category_id, presence: true
 
   attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
                   :date, :published, :hypertitle, :photo, :preview
 
   delegate :number, :date, to: :issue, prefix: true
-  delegate :name, :permalink, :issued, :to => :category, :prefix => true
+  delegate :name, :permalink, :issued, to: :category, prefix: true
 
   has_attached_file :photo,
-                    :url  => "/media/articles/:id/:style_img_:id.:extension",
-                    :path => ":rails_root/public/media/articles/:id/:style_img_:id.:extension",
-                    :styles => {:medium => "225>", :small => "200>" }
+                    url: "/media/articles/:id/:style_img_:id.:extension",
+                    path: ":rails_root/public/media/articles/:id/:style_img_:id.:extension",
+                    styles: { medium: "225>", small: "200>" }
 
   UNRANSACKABLE_ATTRIBUTES = ["id", "updated_at", "created_at", "published"]
 
