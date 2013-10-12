@@ -35,10 +35,10 @@ gem 'unicorn'
 gem 'protected_attributes'
 
 group :test, :development do
-  gem 'shoulda-matchers', '>= 1.4.2'
-  gem "rspec-rails", "2.12.2"
-  gem 'factory_girl_rails', "4.1.0"
-  gem 'database_cleaner', '0.9.1'
+  gem 'shoulda-matchers'
+  gem "rspec-rails"
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
   gem 'pry-rails'
   gem 'pry-debugger'
 end
