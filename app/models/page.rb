@@ -1,17 +1,17 @@
 class Page < ActiveRecord::Base
 
-  has_many :navigators, as: :navigatable, dependent: :destroy
-
-  attr_accessor :preview
-
-  # for using 'truncate' method on prettify_permalink
   include ActionView::Helpers::TextHelper
-  before_validation :prettify_permalink
+
+  has_many :navigators, as: :navigatable, dependent: :destroy
 
   validates :name, length: { maximum: 250 }
   validates :permalink, uniqueness: true, length: { maximum: 99 }
   validates :title, length: { maximum: 250 }
   validates :meta_description, length: { maximum: 250, allow_blank: true }
+
+  before_validation :prettify_permalink
+
+  attr_accessor :preview
 
   scope :published_only, -> { where(published: true) }
 
