@@ -4,6 +4,8 @@ Mizatron::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
+  config.eager_load = true
+
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
@@ -19,6 +21,9 @@ Mizatron::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+   # Compress JavaScripts and CSS
+   config.assets.js_compressor = :uglifier
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

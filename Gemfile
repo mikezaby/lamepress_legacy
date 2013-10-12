@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '4.0.0'
 
 group :assets do
-  gem "sass-rails", "~> 3.2.3"
-  gem "coffee-rails", "~> 3.2.1"
-  gem "uglifier", ">= 1.0.3"
+  gem "sass-rails", "~> 4.0.0"
+  gem "coffee-rails", "~> 4.0.0"
+  gem "uglifier", ">= 1.3.0"
   gem 'turbo-sprockets-rails3'
 end
 
@@ -19,17 +19,20 @@ end
 
 gem "ransack"
 gem 'jquery-rails', '~> 2.1.3'
-gem "ckeditor", "3.7.3"
+gem "ckeditor", "4.0.6"
 gem "fancybox-rails"
 gem 'mysql2', "0.3.11"
-gem 'rake', "10.0.3"
-gem 'devise'
+gem 'rake', "10.1.0"
+gem 'devise', "3.0.3"
 gem "paperclip"
 gem 'kaminari'
 gem 'cancan'
 gem "nokogiri"
 gem 'capistrano', '>= 2.13.5'
 gem 'unicorn'
+
+# Remove this when we migrate to strong_parameters
+gem 'protected_attributes'
 
 group :test, :development do
   gem 'shoulda-matchers', '>= 1.4.2'

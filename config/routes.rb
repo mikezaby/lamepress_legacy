@@ -4,12 +4,12 @@ Mizatron::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "admin/user" }
 
-  match '/ajax_handler/:action' => "ajax_handler"
-  match '/djs/:action.:format' => "javascripts"
+  get '/ajax_handler/:action' => "ajax_handler"
+  get '/djs/:action.:format' => "javascripts"
 
   root :to => 'article#home_issue'
 
-  match "search" => "search#index"
+  get "search" => "search#index"
   post "search/issue" => "search#issue"
 
   namespace :admin do
@@ -49,12 +49,12 @@ Mizatron::Application.routes.draw do
     end
   end
 
-  match '/admin' => 'admin/base#index'
+  get '/admin' => 'admin/base#index'
 
 #--> Android service
-  match 'mobile/menu' => 'mobile#menu'
-  match 'mobile/category' => 'mobile#category'
-  match 'mobile/article' => 'mobile#article'
+  get 'mobile/menu' => 'mobile#menu'
+  get 'mobile/category' => 'mobile#category'
+  get 'mobile/article' => 'mobile#article'
 #--> End of Android service
 
   get '/page/:perma' => 'page#show', as: "page"
@@ -69,6 +69,6 @@ Mizatron::Application.routes.draw do
   get '/:name(/page/:page)' => 'article#not_issued_category', as: 'not_issued_category'
   get '/:name/:id.:title' => 'article#not_issued_article', as: 'not_issued_article'
 
-  match '*a', :to => 'application#render_404'
+  match '*a', :to => 'application#render_404', via: [:get, :post, :put, :delete]
 
 end
