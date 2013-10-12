@@ -12,4 +12,6 @@ app/themes/*
 .bundle/
 bin/
 .rvmrc
+.ruby-version
+.ruby-gemset
 
