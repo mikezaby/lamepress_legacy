@@ -6,6 +6,7 @@ describe Tagging do
 
   it { should belong_to(:article) }
   it { should belong_to(:tag) }
+  it { should validate_uniqueness_of(:tag_id).scoped_to(:article_id) }
 
   describe "save" do
     it "touches article" do
