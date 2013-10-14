@@ -22,7 +22,6 @@ class Article < ActiveRecord::Base
   validates :html, presence: true
   validates :category_id, presence: true
 
-
   after_save :assign_tags
 
   delegate :number, :date, to: :issue, prefix: true
@@ -33,7 +32,6 @@ class Article < ActiveRecord::Base
 
   attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
                   :date, :published, :hypertitle, :photo, :preview
-
 
   scope :published_only, -> { where(published: true) }
 
@@ -46,23 +44,20 @@ class Article < ActiveRecord::Base
   scope :for_category, ->(category_id) { use_index("index_articles_on_issue_id_and_category_id_and_published").
                                            includes(:category).
                                            where(category_id: category_id ) }
-  def self.home
-    includes(:category, :tags).order_issue.published_only
-  end
+
+  scope :home, -> { includes(:category, :tags).order_issue.published_only }
 
   def self.feed(id)
-    includes(:issue, :category).where(category_id: id, published: true).
+    includes(:issue, :category).where(category_id: id).published_only.
       select("title, categories.id, categories.name, categories.permalink,
               categories.issued, issues.number, author, id, html, created_at").
       order("articles.date DESC").limit(20)
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    if auth_object == 'admin'
-      column_names + _ransackers.keys
-    else
-      (column_names - UNRANSACKABLE_ATTRIBUTES) + _ransackers.keys
-    end
+    available_attr = super
+    available_attr -= UNRANSACKABLE_ATTRIBUTES if auth_object != 'admin'
+    available_attr
   end
 
   def tag_names
@@ -70,7 +65,6 @@ class Article < ActiveRecord::Base
   end
 
   def permalink
-    # parameterize function is nice but not as good as below
     truncate(self.title.lm_strip, length: 50, separator: "-", omission: "")
   end
   alias :prettify_permalink :permalink
@@ -82,10 +76,10 @@ class Article < ActiveRecord::Base
   end
 
   def assign_tags
-    if @tag_names
-      self.tags = @tag_names.split(/,\s+/).map do |name|
-        Tag.find_or_create_by_name(name)
-      end
+    return if @tag_names.blank?
+
+    self.tags = @tag_names.split(/,\s+/).map do |name|
+      Tag.where(name: name).first_or_create
     end
   end
 end
