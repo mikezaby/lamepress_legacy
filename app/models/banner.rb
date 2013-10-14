@@ -19,6 +19,6 @@ class Banner < ActiveRecord::Base
   end
 
   def path
-    self.url.present? ? self.url : self.photo.url
+    url.present? ? url : photo.url
   end
 end
