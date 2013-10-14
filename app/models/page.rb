@@ -18,7 +18,6 @@ class Page < ActiveRecord::Base
   private
 
   def prettify_permalink
-    # parameterize function is nice but not as good as below
-    self.permalink = truncate(self.permalink.strip.gsub(/[\~]|[\`]|[\!]|[\@]|[\#]|[\$]|[\%]|[\^]|[\&]|[\*]|[\(]|[\)]|[\+]|[\=]|[\{]|[\[]|[\}]|[\]]|[\|]|[\\]|[\:]|[\;]|[\"]|[\']|[\<]|[\,]|[\>]|[\.]|[\?]|[\/]/,"").gsub(/\s+/,"-").downcase, length: 100, separator: "-", omission: "")
+    self.permalink = truncate(permalink.lm_strip, length: 100, separator: "-", omission: "")
   end
 end
