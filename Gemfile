@@ -13,8 +13,7 @@ group :development do
   gem 'quiet_assets'
   gem 'railroady'
   gem 'guard-rspec'
-  gem 'ruby_gntp'
-  gem 'rb-inotify', '~> 0.8.8'
+  gem 'rb-inotify', '~> 0.9'
 end
 
 gem "ransack"
