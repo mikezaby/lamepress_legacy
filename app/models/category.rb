@@ -25,9 +25,6 @@ class Category < ActiveRecord::Base
   private
 
   def prettify_permalink
-    # parameterize function is nice but not as good as below
-    self.permalink = self.name
-    self.permalink = truncate(self.permalink.lm_strip, length: 50,
-                              separator: "-", omission: "")
+    self.permalink = truncate(name.lm_strip, length: 50, separator: "-", omission: "")
   end
 end
