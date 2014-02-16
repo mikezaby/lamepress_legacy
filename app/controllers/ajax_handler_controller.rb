@@ -1,27 +1,29 @@
 class AjaxHandlerController < ApplicationController
 
   def search_issues
-    issues=""
-    year=params[:year]
-    month=params[:month]
-    month="0"+month.to_s if month.to_i < 10
-    search_issues = Issue.search_issues(year,month,true)
-    search_issues.each do |search_issue|
-      issues += '<a href="/issue/'+search_issue.number.to_s+'">'+search_issue.number.to_s+'</a>'
+    issues_links = fetch_issues do |issue|
+      view_context.link_to issue.number, home_issue_path(issue.number)
     end
-    render :text => issues
+
+    render text: issues_links.join
   end
 
   def admin_search_issues
-    issues=""
-    year=params[:year]
-    month=params[:month]
-    month="0"+month.to_s if month.to_i < 10
-    search_issues = Issue.search_issues(year,month,false)
-    search_issues.each do |search_issue|
-      issues += '<a class="issue_link" href="/admin/ordering/priority?issue_id='+search_issue.id.to_s+'">'+search_issue.number.to_s+'</a>'
+    issues_links = fetch_issues(published: false) do |issue|
+      view_context.link_to issue.number, priority_admin_orderings_path(issue_id: issue.id),
+                           class: 'issue_link'
     end
-    render :text => issues
+
+    render text: issues_links.join
   end
 
+  private
+
+  def fetch_issues(options = {})
+    published = options.fetch(:published) { true }
+    year = params.fetch(:year) { Date.today.year.to_s }
+    month = params.fetch(:month) { Date.today.month.to_s }.rjust(2, '0')
+
+    Issue.search_issues(year, month, published).map { |issue| yield(issue) }
+  end
 end
