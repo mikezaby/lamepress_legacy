@@ -24,7 +24,7 @@ class Issue < ActiveRecord::Base
     start_date = date.beginning_of_month
     end_date =  date.end_of_month
 
-    scope = where("date > ? and date <= ?", start_date, end_date).order("date DESC")
+    scope = where("date >= ? and date <= ?", start_date, end_date).order("date DESC")
     scope = scope.published_only if published
 
     scope
