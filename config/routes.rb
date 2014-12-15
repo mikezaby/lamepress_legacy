@@ -13,7 +13,7 @@ Mizatron::Application.routes.draw do
   post "search/issue" => "search#issue"
 
   namespace :admin do
-    root to:'base#index'
+    root to:'home#index'
 
     resources :user, :as => :users, :except => [:show] do
        get "roles", :on => :member
@@ -48,8 +48,6 @@ Mizatron::Application.routes.draw do
       get "block_placements", :on => :collection
     end
   end
-
-  get '/admin' => 'admin/base#index'
 
 #--> Android service
   get 'mobile/menu' => 'mobile#menu'
