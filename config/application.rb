@@ -41,8 +41,8 @@ module Mizatron
 
     # Also for Heroku Deployment => http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += ['*.js', '*.css', '*.scss'] #+= %w( sign_in.css.erb pages_css/all admin_css/all )
-
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.precompile += ['*.js', '*.css', '*.scss']
 
 
     # Configure the default encoding used in templates for Ruby 1.9.
