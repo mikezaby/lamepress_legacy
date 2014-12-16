@@ -1,55 +1,58 @@
-<% unless params[:setting].nil? %>
-<% if @setting.errors.any? %>
-  <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-    <ul>
-      <% @setting.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </h4>
+<% if @setting.present? %>
+  <%= render partial: "alers", locals: { record: @setting } %>
 <% end %>
-<% end %>
-<%= form_for [:admin,Setting.new] do |f| %>
-<div class="module_content">
-  
-  <%= field_set_tag nil, :style => "width:400px; float:left;margin-left:20px;margin-right: 2%;" do %>
-    <%= f.label "Block Placement", {:style => "float:left;width:84%"} %>
-    <%= f.text_field :meta_value, {:style => "width:365px;"} %>
-    <%= f.hidden_field :meta_key, :value => "block_placement" %>
-    <div class="submit_link">
-      <%= f.submit "Create Block Placement" %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="col-lg-6">
+      <div class="panel">
+        <%= form_for [:admin,Setting.new], html: { role: 'form' }  do |f| %>
+          <div class="form-group">
+            <%= f.label :meta_value, "Block Placement" %>
+            <%= f.text_field :meta_value, class: "form-control" %>
+            <%= f.hidden_field :meta_key, value: "block_placement" %>
+          </div>
+          <div class="submit_link">
+            <%= f.button "Create Block Placement", type: :submit, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="clear"></div>
+    <div class="col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Block Manager
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Placement</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @settings.each do |setting| %>
+                  <tr>
+                    <td><%= setting.id %></td>
+                    <td><%= setting.meta_value %></td>
+                    <td>
+                      <%= link_to [:admin,setting], data: { confirm: 'Are you sure?' }, method: :delete do %>
+                        <i class="fa fa-trash"></i>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+      </div>
+      <!-- /.panel -->
+    </div>
+  </div>
 </div>
-<% end %>
-<article class="module width_full">
-    <header><h3 class="tabs_involved">Block Manager</h3>
-    </header>
-
-    <div class="tab_container">
-      <div id="tab1" class="tab_content">
-        <table class="tablesorter" cellspacing="0">
-        <thead>
-          <tr>
-              <th>Block Placement</th>
-              <th>Actions</th>
-              <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @settings.each do |setting| %>
-          <tr>
-            <td><%= setting.meta_value %></td>
-            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,setting], :confirm => 'Are you sure?', :method => :delete %></td>
-          </tr>
-          <% end %>
-        </tbody>
-        </table>
-
-      </div><!-- end of #tab1 -->
-
-    </div><!-- end of .tab_container -->
-
-</article><!-- end of content manager article -->

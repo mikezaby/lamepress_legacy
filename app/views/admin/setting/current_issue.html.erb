@@ -1,4 +1,5 @@
 <% javascript '/djs/dynamic_dates_pub' %>
+
 <% if @setting.errors.any? %>
   <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
     <ul>
@@ -8,31 +9,49 @@
     </ul>
   </h4>
 <% end %>
-<%= form_for [:admin,@setting] do |f| %>
-<div class="module_content">
-  <%= field_set_tag nil, :style => "width:25%; float:left;margin-left:20px;margin-right: 2%;" do %>
-  <%= f.label "Current Issue", {:style => "float:left;width:84%"} %>
-    <select id="year" style="float:left;width:33%;margin-left:2%;margin-right:0;">
-      <option value="0">Year</option>
-      <% time = Time.new;year=1990 %>
-      <% for year in (time.year+1).downto(1990) %>
-        <option value=<%= year %>><%= year %></option>
-      <% end %>
-    </select>
-    <select id="month" style="float:left;width:25%;margin-left:2%;margin-right:0;">
-      <option value="0">Month</option>
-      <% for month in '01'..'12' %>
-        <option value="<%= month %>"><%= month %></option>
-      <% end %>
-    </select>
-    <%= f.collection_select :meta_value, Issue.published_only.order("number Desc"), :id, :number, {:prompt => "Issue"}, {:style => "float:left;width:30%;margin-left:2%;", :id => "article_issue_id"}  %>
 
-    <div class="submit_link">
-      <%= f.submit :confirm => "Are you sure?" %>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Current Issue:
+        <b>
+          <% if @issue.present? %>
+            <%= @issue.number %>
+          <% else %>
+            Not setted
+          <% end %>
+        </b>
+      </div>
+
+      <div class="panel-body">
+        <div class="row">
+          <%= form_for [:admin,@setting] do |f| %>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= label_tag :year %>
+                <%= select_tag :year, options_for_select(@years), class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= label_tag :month %>
+                <%= select_tag :month, options_for_select("01".."12"), class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.label :meta_value, "Issue" %>
+                <%= f.select :meta_value, [], {}, class: "form-control", id: "article_issue_id" %>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <%= f.button "Set Issue", type: :submit, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="clear"></div>
+  </div>
 </div>
-
-<% end %>
