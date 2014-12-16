@@ -200,6 +200,7 @@
     <%= javascript_include_tag "admin/all" %>
 
     <script>
+      $('.js-li-<%= controller.controller_name %>').addClass('active');
       $('.js-li-<%= controller.controller_name %>').children('ul').collapse('show');
     </script>
 
