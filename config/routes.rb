@@ -23,7 +23,6 @@ Mizatron::Application.routes.draw do
     resources :article, :as => :articles do
       get 'page/:page', :action => :index, :on => :collection
       get 'search', :on => :collection
-      get 'sitemap', :on => :collection
     end
     resources :ordering, :as => :orderings, :only => [:index, :destroy]  do
       post "update_issue", :on => :collection
