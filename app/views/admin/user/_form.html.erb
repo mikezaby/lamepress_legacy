@@ -1,43 +1,37 @@
-<% if @user.errors.any? %>
-    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </h4>
-<% end %>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: '/admin/partials/alerts', locals: { record: @user } %>
 
-<%= form_for [:admin,@user] do |f| %>
-<div class="module_content">
-  <%= field_set_tag do %>
-    <%= f.label :email %>
-     <%= f.text_field :email %>
-   <% end %>
+      <%= form_for [:admin,@user] do |f| %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
 
-   <%= field_set_tag do %>
-    <%= f.label :password %>
-     <%= f.text_field :password %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.text_field :password, class: "form-control"  %>
+        </div>
 
-   <%= field_set_tag do %>
-    <%= f.label :password_confirmation %>
-     <%= f.text_field :password_confirmation %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.text_field :password_confirmation, class: "form-control"  %>
+        </div>
 
-     <%= f.label :roles %>
-    <% for role in User::ROLES %>
-      <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
-      <%= h role.humanize %>
-    <% end %>
-  <%= hidden_field_tag "user[roles][]"%>
+        <div class="form-group">
+          <%= f.label :roles %>
+          <% for role in User::ROLES %>
+            <label class="checkbox-inline">
+              <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
+              <%= h role.humanize %>
+            </label>
+          <% end %>
+          <%= hidden_field_tag "user[roles][]"%>
+        </div>
 
- <div class="clear"></div>
-</div>
-<footer>
-  <div class="submit_link">
-    <%= f.submit %>
+        <%= f.submit nil, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
-</footer>
-<% end %>
-
+</div>

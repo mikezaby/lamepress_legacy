@@ -1,7 +1,12 @@
-<div class="clear"></div>
-<article class="module width_full" style="min-width:750px;">
-<header><h3>Edit User Role</h3></header>
-<%= render 'role_form' %>
-</article>
-<div class="spacer"></div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Edit User Role: <%= @user.email %>
+      </div>
+
+      <%= render 'role_form' %>
+    </div>
+  </div>
+</div>
 
