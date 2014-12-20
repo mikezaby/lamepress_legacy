@@ -1,43 +1,50 @@
 <%= render "search" %>
 
-<article class="module width_full">
-    <header><h3 class="tabs_involved">issue Manager</h3>
-    </header>
+<div class="panel panel-default tab-content">
+  <div class="panel-heading">
+    Issue Manager
+  </div>
 
-    <div class="tab_container">
-      <div id="tab1" class="tab_content">
-        <table class="tablesorter" cellspacing="0">
+  <div class="panel-body tab-pane fade active in" role="tabpanel" id="tab_issues">
+    <div class="text-right">
+      <%= paginate @issue %>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table">
         <thead>
           <tr>
-            <th>id</th>
-            <th>number</th>
-            <th>date</th>
-            <th>published</th>
-            <th>cover</th>
-            <th>pdf</th>
-            <th>Actions</th>
-            <th></th>
+            <th>#</th>
+            <th>Number</th>
+            <th>Date</th>
+            <th>Cover</th>
+            <th>Pdf</th>
+            <th colspan="2">Actions</th>
           </tr>
         </thead>
         <tbody>
           <% @issue.each do |issue| %>
-          <tr>
-            <td><%= issue.id %></td>
-            <td><%= issue.number %></td>
-            <td><%= issue.date %></td>
-            <td><%= issue.published %></td>
-            <td><%= link_to "show", issue.cover.url, id: "single" %></td>
-            <td><%= link_to "show", issue.pdf.url, tatget: "blank" %></td>
-            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_issue_path(issue) %></td>
-            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,issue], :confirm => 'Are you sure?', :method => :delete %></td>
-          </tr>
+            <tr>
+              <td><%= issue.id %></td>
+              <td><%= issue.number %></td>
+              <td><%= issue.date %></td>
+              <td><%= link_to "show", issue.cover.url, target: "blank" %></td>
+              <td><%= link_to "show", issue.pdf.url, tatget: "blank" %></td>
+              <td>
+                <%= link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_issue_path(issue) %>
+              </td>
+              <td>
+                <%= link_to "<i class='fa fa-trash'></i>".html_safe, [:admin,issue],
+                  data: { confirm: 'Are you sure?' }, method: :delete %>
+            </td>
+            </tr>
           <% end %>
         </tbody>
-        </table>
-        <%= paginate @issue %>
-      </div><!-- end of #tab1 -->
+      </table>
+    </div>
 
-    </div><!-- end of .tab_container -->
-
-</article><!-- end of content manager article -->
-
+    <div class="text-right">
+      <%= paginate @issue %>
+    </div>
+  </div>
+</div>
