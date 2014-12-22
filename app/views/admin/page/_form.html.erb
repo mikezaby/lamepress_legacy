@@ -1,55 +1,45 @@
-<% if @page.errors.any? %>
-    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-      <ul>
-        <% @page.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </h4>
-<% end %>
-<%= form_for [:admin,@page], :html => {:multipart => true } do |f| %>
-<div class="module_content">
+<div class="panel-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: '/admin/partials/alerts', locals: { record: @page } %>
 
+      <%= form_for [:admin,@page], html: { role: 'form' } do |f| %>
+        <div class="form-group">
+          <%= f.label "Title" %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag do %>
-    <%= f.label "Title" %>
-     <%= f.text_field :title %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label "Name" %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag do %>
-    <%= f.label "Name" %>
-    <%= f.text_field :name %>
-  <% end %>
+        <div class="form-group">
+          <%= f.label "Clean url" %>
+          <%= f.text_field :permalink, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag do %>
-    <%= f.label "Clean url" %>
-    <%= f.text_field :permalink %>
-  <% end %>
+        <div class="form-group">
+          <%= f.label "Description" %>
+          <%= f.text_area :meta_description, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag do %>
-    <%= f.label "Description" %>
-    <%= f.text_area :meta_description %>
-  <% end %>
+        <div class="form-group">
+          <%= f.label "Content" %>
+          <%= f.text_area :content, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag nil, :style => "width:100%; float:left;" do %>
-    <%= f.label "Content" %>
-    <%= f.text_area :content %>
-  <% end %>
-
-
-  <%= f.hidden_field :preview, :value => "0" %>
-
-
-
-  <div class="clear"></div>
-</div>
-<footer>
-  <div class="submit_link">
-    <%= f.select :published, [["public", true], ["hidden", false]] %>
-    <%= f.submit "Preview", :onclick => "this.form.target='_blank';$('input#page_preview').val('1');", :class => "alt_btn" %>
-    <%= f.submit :onclick => "this.form.removeAttribute('target');$('input#page_preview').val('0');" %>
+        <div class="row">
+          <%= f.hidden_field :preview, value: "0" %>
+          <div class="form-group col-lg-6">
+            <%= f.submit onclick: "this.form.removeAttribute('target');$('input#page_preview').val('0');", class: "btn btn-primary" %>
+            <%= f.submit "Preview", onclick: "this.form.target='_blank';$('input#page_preview').val('1');", class: "btn btn-default" %>
+          </div>
+          <div class="form-group col-lg-6">
+            <%= f.select :published, [["public", true], ["hidden", false]], {}, class: "form-control " %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-</footer>
-
-<% end %>
-
+</div>
