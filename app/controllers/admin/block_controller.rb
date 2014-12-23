@@ -4,7 +4,7 @@ class Admin::BlockController < Admin::BaseController
 
   def index
     @block_placements = Setting.block_placements
-    @blocks =  @block_placements.collect {|placement| Block.place(placement) }
+    @group_blocks = Block.order([:placement, :position]).group_by(&:placement)
   end
 
   def new
@@ -45,13 +45,12 @@ class Admin::BlockController < Admin::BaseController
     redirect_to(admin_blocks_path)
   end
 
-   def sorter
+  def sorter
     Block.place(params['place']).each do |block|
-      block.position = params['page'].index(block.id.to_s) + 1
-      block.save
+      block.position = params['position'].index(block.id.to_s) + 1
+      block.save!
     end
-    render :nothing => true
+
+    render json: { notice: 'Blocks was successfully sorted' }
   end
-
 end
-
