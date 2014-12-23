@@ -4,4 +4,4 @@
 //= require admin/bootstrap.min
 //= require admin/metisMenu.min
 //= require admin/sb-admin-2
-
+//= require admin/sortable

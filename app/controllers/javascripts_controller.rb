@@ -17,10 +17,6 @@ class JavascriptsController < ApplicationController
 
   end
 
-  def sortable_list
-
-  end
-
   def date_picker
 
   end
