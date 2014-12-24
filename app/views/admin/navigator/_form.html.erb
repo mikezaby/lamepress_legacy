@@ -2,76 +2,65 @@
 <% @pages = Page.all %>
 <% content_for :scripts do %>
   <script type="text/javascript">
-  $(document).ready(function()
-  {
-    function mode_selection() {
-      var cat_options="<option value=\"\">Select a category</option>";
-      <% @categories.each do |category| %>
-        <% selected = (category.id == @navigator.navigatable_id and @navigator.navigatable_type == "Category") ? "selected" : "" %>
-        cat_options+="<option <%= selected %> value=\"<%= category.id %>\"><%=h category.name %></option>";
-      <% end %>
-      var page_options="<option value=\"\">Select a page</option>";
-      <% @pages.each do |page| %>
-        <% selected = (page.id == @navigator.navigatable_id and @navigator.navigatable_type == "Page") ? "selected" : "" %>
-        page_options+="<option <%= selected %> value=\"<%= page.id %>\"><%=h page.permalink%></option>";
-      <% end %>
-      mode = $('select#navigator_navigatable_type').val();
-      if (mode == "Category") {
-        $('select#navigator_navigatable_id').html(cat_options);
+    $(document).ready(function() {
+      function mode_selection() {
+        var cat_options="<option value=\"\">Select a category</option>";
+        <% @categories.each do |category| %>
+          <% selected = (category.id == @navigator.navigatable_id and @navigator.navigatable_type == "Category") ? "selected" : "" %>
+          cat_options+="<option <%= selected %> value=\"<%= category.id %>\"><%=h category.name %></option>";
+        <% end %>
+        var page_options="<option value=\"\">Select a page</option>";
+        <% @pages.each do |page| %>
+          <% selected = (page.id == @navigator.navigatable_id and @navigator.navigatable_type == "Page") ? "selected" : "" %>
+          page_options+="<option <%= selected %> value=\"<%= page.id %>\"><%=h page.permalink%></option>";
+        <% end %>
+        mode = $('select#navigator_navigatable_type').val();
+        if (mode == "Category") {
+          $('select#navigator_navigatable_id').html(cat_options);
+        }
+        else {
+          $('select#navigator_navigatable_id').html(page_options);
+        }
       }
-      else {
-        $('select#navigator_navigatable_id').html(page_options);
-      }
-    }
-    mode_selection();
-    $('select#navigator_navigatable_type').change(mode_selection);
-  });
+      mode_selection();
+      $('select#navigator_navigatable_type').change(mode_selection);
+    });
   </script>
 <% end %>
-<% if @navigator.errors.any? %>
-    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-      <ul>
-        <% @navigator.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </h4>
-<% end %>
 
-<%= form_for [:admin,@navigator] do |f| %>
-<div class="module_content">
-  <%= field_set_tag do %>
-    <%= f.label :name %>
-     <%= f.text_field :name %>
-   <% end %>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: '/admin/partials/alerts', locals: { record: @navigator } %>
 
-   <%= field_set_tag do %>
-    <%= f.label :block_id %>
-    <%= f.collection_select :block_id, Block.where(mode: "navigator"), :id, :name, {:prompt => "Select a Block"} %>
-   <% end %>
+      <%= form_for [:admin,@navigator], role: 'form' do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
 
-   <%= field_set_tag do %>
-    <%= f.label :position %>
-    <%= f.text_field :position %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :block_id %>
+          <%= f.select :block_id, @navigator_blocks, { prompt: "Select a Block" }, { class: "form-control" } %>
+        </div>
 
-   <%= field_set_tag do %>
-     <%= f.label "Mode" %>
-      <%= f.select :navigatable_type, [["Category", "Category"],["Page", "Page"]] %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :position %>
+          <%= f.text_field :position, class: 'form-control' %>
+        </div>
 
-   <%= field_set_tag do %>
-    <%= f.label :navigatable_id %>
-    <%= f.select :navigatable_id, "" %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label "Mode" %>
+          <%= f.select :navigatable_type, [["Category", "Category"],["Page", "Page"]], {}, class: 'form-control' %>
+        </div>
 
+        <div class="form-group">
+          <%= f.label :navigatable_id %>
+          <%= f.select :navigatable_id, "", {}, class: 'form-control' %>
+        </div>
 
- <div class="clear"></div>
-</div>
-<footer>
-  <div class="submit_link">
-    <%= f.submit %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
-</footer>
-<% end %>
-
+</div>
