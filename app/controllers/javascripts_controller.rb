@@ -13,10 +13,6 @@ class JavascriptsController < ApplicationController
     render "dynamic_dates"
   end
 
-  def misc
-
-  end
-
   def date_picker
 
   end
