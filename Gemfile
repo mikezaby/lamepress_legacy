@@ -14,6 +14,7 @@ end
 
 gem "ransack"
 gem 'jquery-rails', '3.1.2'
+gem 'jquery-ui-rails'
 gem "ckeditor", "4.1.1"
 gem "fancybox-rails"
 gem 'mysql2', "0.3.17"
