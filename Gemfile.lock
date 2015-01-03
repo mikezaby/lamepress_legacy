@@ -96,7 +96,7 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
-    jquery-rails (2.1.4)
+    jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
@@ -249,7 +249,7 @@ DEPENDENCIES
   faker
   fancybox-rails
   guard-rspec
-  jquery-rails (~> 2.1.3)
+  jquery-rails (= 3.1.2)
   kaminari
   mysql2 (= 0.3.11)
   nokogiri

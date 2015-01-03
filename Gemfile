@@ -13,7 +13,7 @@ group :development do
 end
 
 gem "ransack"
-gem 'jquery-rails', '~> 2.1.3'
+gem 'jquery-rails', '3.1.2'
 gem "ckeditor", "4.1.1"
 gem "fancybox-rails"
 gem 'mysql2', "0.3.11"
