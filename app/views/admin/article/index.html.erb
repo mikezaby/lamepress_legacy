@@ -1,75 +1,112 @@
-<%= render "search" %>
-<article class="module width_full">
-    <header><h3 class="tabs_involved">Content Manager</h3>
-    <ul class="tabs">
-         <li><a href="#tab1">Issued</a></li>
-        <li><a href="#tab2">Non Issued</a></li>
-    </ul>
-    </header>
+<% if params[:ni_page].present? %>
+  <% content_for :scripts do %>
+    <script type="text/javascript">
+      $('a[href="#non_issued_articles"]').tab('show');
+    </script>
+  <% end %>
+<% end %>
 
-    <div class="tab_container">
-      <div id="tab1" class="tab_content">
-        <table class="tablesorter" cellspacing="0">
-        <thead>
-          <tr>
+<%= render "search" %>
+
+<div class="col-lg-12">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#issued_articles" data-toggle="tab">Issued</a></li>
+    <li><a href="#non_issued_articles" data-toggle="tab">Non Issued</a></li>
+  </ul>
+
+  <div class="panel panel-default tab-content">
+    <div class="panel-heading">
+      Article Manager
+    </div>
+
+    <div class="panel-body tab-pane fade in active" role="tabpanel" id="issued_articles">
+      <div class="text-right">
+        <%= paginate @article, param_name: 'page' %>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
               <th>Title</th>
               <th>Category</th>
               <th>Issue</th>
-              <th>published</th>
-              <th>Actions</th>
-              <th></th>
-              <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @article.each do |article| %>
-          <tr>
-            <td><%= article.title %></td>
-            <td><%= article.category_name %></td>
-            <td><%= article.issue_number unless article.issue_id.nil? %></td>
-            <td><%= article.published  %></td>
-            <td><%= link_to image_tag("admin/show.png"), admin_article_path(article), :target => "blank" %></td>
-            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_article_path(article) %></td>
-            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,article], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
-          </tr>
-          <% end %>
-        </tbody>
+              <th>Published</th>
+              <th colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @article.each do |article| %>
+              <tr>
+                <td><%= article.id %></td>
+                <td><%= article.title %></td>
+                <td><%= article.category_name %></td>
+                <td><%= article.issue_number %></td>
+                <td><%= article.published  %></td>
+                <td>
+                  <%= link_to "<i class='fa fa-eye'></i>".html_safe, admin_article_path(article), target: "blank" %>
+                </td>
+                <td>
+                  <%= link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_article_path(article) %>
+                </td>
+                <td>
+                  <%= link_to "<i class='fa fa-trash'></i>".html_safe, [:admin,article],
+                    data: { confirm: 'Are you sure?' }, method: :delete %>
+              </td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
-        <%= paginate @article %>
-      </div><!-- end of #tab1 -->
+      </div>
 
-      <div id="tab2" class="tab_content">
-      <table class="tablesorter" cellspacing="0">
-      <thead>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th>published</th>
-            <th>Actions</th>
-            <th></th>
-            <th><th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @nonis_article.each do |article| %>
-        <tr>
+      <div class="text-right">
+        <%= paginate @article, param_name: 'page' %>
+      </div>
+    </div>
 
-            <td><%= article.title %></td>
-            <td><%= article.category_name %></td>
-            <td><%= raw I18n.l(article.date, :format=> "%d/%m/%Y") %></td>
-            <td><%= article.published  %></td>
-            <td><%= link_to image_tag("admin/show.png"), admin_article_path(article), :target => "blank" %></td>
-            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_article_path(article) %></td>
-            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,article], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
-        </tr>
-        <% end %>
-      </tbody>
-      </table>
-        <%= paginate @nonis_article, :param_name => :ni_page%>
-      </div><!-- end of #tab2 -->
+    <div class="panel-body tab-pane fade" role="tabpanel" id="non_issued_articles">
+      <div class="text-right">
+        <%= paginate @nonis_article, param_name: 'ni_page' %>
+      </div>
 
-    </div><!-- end of .tab_container -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Published</th>
+              <th colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @nonis_article.each do |article| %>
+              <tr>
+                <td><%= article.id %></td>
+                <td><%= article.title %></td>
+                <td><%= article.category_name %></td>
+                <td><%= article.published  %></td>
+                <td>
+                  <%= link_to "<i class='fa fa-eye'></i>".html_safe, admin_article_path(article), target: "blank" %>
+                </td>
+                <td>
+                  <%= link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_article_path(article) %>
+                </td>
+                <td>
+                  <%= link_to "<i class='fa fa-trash'></i>".html_safe, [:admin,article],
+                    data: { confirm: 'Are you sure?' }, method: :delete %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
-</article><!-- end of content manager article -->
-
+      <div class="text-right">
+        <%= paginate @nonis_article, param_name: 'ni_page' %>
+      </div>
+    </div>
+  </div>
+</div>

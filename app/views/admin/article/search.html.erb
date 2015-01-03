@@ -1,40 +1,55 @@
 <%= render "search" %>
-<article class="module width_full">
-    <header><h3 class="tabs_involved">Content Manager</h3>
-    </header>
 
-    <div class="tab_container">
-      <div id="tab1" class="tab_content">
-        <table class="tablesorter" cellspacing="0">
-        <thead>
-          <tr>
+<div class="col-lg-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Article Manager
+    </div>
+
+    <div class="panel-body">
+      <div class="text-right">
+        <%= paginate @article %>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
               <th>Title</th>
               <th>Category</th>
               <th>Issue</th>
-              <th>published</th>
-              <th>Actions</th>
-              <th></th>
-              <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @article.each do |article| %>
-          <tr>
-            <td><%= article.title %></td>
-            <td><%= article.category_name %></td>
-            <td><%= article.issue_number unless article.issue_id.nil? %></td>
-            <td><%= article.published  %></td>
-            <td><%= link_to image_tag("admin/show.png"), admin_article_path(article), :target => "blank" %></td>
-            <td><%= link_to image_tag("admin/icn_edit.png"), edit_admin_article_path(article) %></td>
-            <td><%= link_to image_tag("admin/icn_trash.png"), [:admin,article], :confirm => 'Είσαι σίγουρος οτι θες να σβήσεις αυτό το άρθρο;', :method => :delete %></td>
-          </tr>
-          <% end %>
-        </tbody>
+              <th>Published</th>
+              <th colspan="2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @article.each do |article| %>
+              <tr>
+                <td><%= article.id %></td>
+                <td><%= article.title %></td>
+                <td><%= article.category_name %></td>
+                <td><%= article.issue.present? ? article.issue_number : '' %></td>
+                <td><%= article.published  %></td>
+                <td>
+                  <%= link_to "<i class='fa fa-eye'></i>".html_safe, admin_article_path(article), target: "blank" %>
+                </td>
+                <td>
+                  <%= link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_article_path(article) %>
+                </td>
+                <td>
+                  <%= link_to "<i class='fa fa-trash'></i>".html_safe, [:admin,article],
+                    data: { confirm: 'Are you sure?' }, method: :delete %>
+              </td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
-        <%= paginate @article %>
-      </div><!-- end of #tab1 -->
+      </div>
 
-    </div><!-- end of .tab_container -->
-
-</article><!-- end of content manager article -->
-
+      <div class="text-right">
+        <%= paginate @article, param_name: 'page' %>
+      </div>
+    </div>
+  </div>
+</div>

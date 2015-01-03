@@ -3,31 +3,30 @@ class Admin::OrderingController < Admin::BaseController
   load_and_authorize_resource
 
   before_filter :fetch_issues, only: [:index, :priority]
+  before_filter :fetch_years, only: [:index, :priority]
 
   def index
   end
 
   def priority
-    if params[:issue_id].present?
-      @issue = Issue.find(params[:issue_id])
-    elsif params[:issue_number].present?
-      @issue = Issue.find_by_number!(params[:issue_number])
-    end
+    @issue = Issue.find_by(id: params[:issue_id])
+    @category = Category.find_by(id: params[:category_id]) if params[:category_id].present?
 
-    if @issue and params[:category_id].present?
-      @articles = @issue.articles.joins(:ordering).
-                         where( category_id: params[:category_id]).
-                         order("cat_pos ASC")
-      if @articles.empty?
+    if @issue and @category
+      @orderings = Ordering.includes(:article).for_issue(@issue).
+                          for_category(@category).
+                          order(:cat_pos).pluck('articles.title', :id)
+      if @orderings.empty?
         flash[:notice] = "No articles in this category"
         render 'index'
       else
         render "category"
       end
     elsif @issue
-      articles = @issue.articles.joins(:ordering)
-      @not_ordered = articles.merge(Ordering.where(issue_pos: nil)).collect {|article| article.ordering}
-      @ordered = articles.merge(Ordering.where("issue_pos is not null").order("issue_pos ASC"))
+      @not_ordered = Ordering.includes(:article).for_issue(@issue).
+                              without_issue_position.pluck('articles.title', :id)
+      @ordered = Ordering.includes(:article).for_issue(@issue).with_issue_position.
+                          order(:issue_pos).pluck('articles.title', :id)
       render "issue"
     else
       flash[:notice] = "wrong values"
@@ -53,11 +52,11 @@ class Admin::OrderingController < Admin::BaseController
   end
 
   def sorter
-    Ordering.find(params['page']).each do |ordering|
+    Ordering.find(params['position']).each do |ordering|
       if params['what'] == "issue"
-        ordering.issue_pos = params['page'].index(ordering.id.to_s) + 1
+        ordering.issue_pos = params['position'].index(ordering.id.to_s) + 1
       elsif params['what'] == "category"
-        ordering.cat_pos = params['page'].index(ordering.id.to_s) + 1
+        ordering.cat_pos = params['position'].index(ordering.id.to_s) + 1
       end
       ordering.save
     end
@@ -68,5 +67,9 @@ class Admin::OrderingController < Admin::BaseController
 
   def fetch_issues
     @search_issues = Issue.order("created_at desc").limit(5)
+  end
+
+  def fetch_years
+    @years = Issue.uniq.order(:date).pluck("YEAR(date)")
   end
 end
