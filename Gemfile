@@ -8,7 +8,6 @@ gem "uglifier", ">= 1.3.0"
 
 group :development do
   gem 'quiet_assets'
-  gem 'railroady'
   gem 'guard-rspec'
   gem 'rb-inotify', '~> 0.9'
 end
