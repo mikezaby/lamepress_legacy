@@ -16,23 +16,18 @@ describe Article do
   let(:home_articles) { FactoryGirl.create_list(:home_article, 3, issue: issue) }
   let(:unpublished_home_article) { FactoryGirl.create(:home_article,
                                                       :unpublished, issue: issue) }
-  let(:sorted_home_articles) do
-    home_articles.sort { |a, b| a.ordering.issue_pos <=> b.ordering.issue_pos }
-  end
-  let(:issued_category_articles) { FactoryGirl.create_list(:article, 3,
-                                                           :category_ordered,
-                                                           category: issued_category,
-                                                           issue: issue) }
+  let(:sorted_home_articles) { home_articles.sort_by { |a| a.ordering.issue_pos } }
+  let(:issued_category_articles) {
+    FactoryGirl.create_list(:article, 3, :category_ordered,
+                            category: issued_category, issue: issue) }
 
-  let(:category_articles) { FactoryGirl.create_list(:article, 3,
-                                                     category: category) }
   let(:category_article) { FactoryGirl.create(:article, category: category) }
   let(:unpublished_category_article) { FactoryGirl.create(:article, :unpublished,
                                                            category: category) }
   let(:other_category_article) { FactoryGirl.create(:article) }
 
-  it { should belong_to(:category) }
-  it { should belong_to(:issue) }
+  it { should belong_to(:category).touch(true) }
+  it { should belong_to(:issue).touch(true) }
   it { should have_one(:ordering).dependent(:delete) }
   it { should have_many(:taggings).dependent(:destroy) }
   it { should have_many(:tags).through(:taggings) }
@@ -77,7 +72,7 @@ describe Article do
 
   describe ".order_category" do
     let(:ordered_articles) do
-      issued_category_articles.sort { |a,b| a.ordering.cat_pos <=> b.ordering.cat_pos }
+      issued_category_articles.sort_by { |article| article.ordering.cat_pos }
     end
 
     it "should have category articles ordered" do
@@ -89,6 +84,7 @@ describe Article do
     it "should have issued articles" do
       Article.issued.should include(issued_article)
     end
+
     it "should not have non issued articles" do
       Article.issued.should_not include(category_article)
     end

@@ -9,14 +9,14 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315081006) do
+ActiveRecord::Schema.define(version: 20130315081006) do
 
-  create_table "articles", :force => true do |t|
+  create_table "articles", force: true do |t|
     t.string   "title"
     t.string   "hypertitle"
-    t.text     "html",               :limit => 16777215
+    t.text     "html",               limit: 16777215
     t.string   "author"
     t.boolean  "published"
     t.integer  "category_id"
@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.datetime "photo_updated_at"
   end
 
-  add_index "articles", ["category_id", "date"], :name => "index_articles_on_category_id_and_date"
-  add_index "articles", ["created_at"], :name => "index_articles_on_created_at"
-  add_index "articles", ["date"], :name => "index_articles_on_date"
-  add_index "articles", ["issue_id", "category_id", "published"], :name => "index_articles_on_issue_id_and_category_id_and_published"
+  add_index "articles", ["category_id", "date"], name: "index_articles_on_category_id_and_date", using: :btree
+  add_index "articles", ["created_at"], name: "index_articles_on_created_at", using: :btree
+  add_index "articles", ["date"], name: "index_articles_on_date", using: :btree
+  add_index "articles", ["issue_id", "category_id", "published"], name: "index_articles_on_issue_id_and_category_id_and_published", using: :btree
 
-  create_table "banners", :force => true do |t|
+  create_table "banners", force: true do |t|
     t.string   "describe"
     t.integer  "block_id"
     t.string   "photo_file_name"
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.integer  "position"
   end
 
-  add_index "banners", ["block_id", "position"], :name => "index_banners_on_block_id_and_position"
+  add_index "banners", ["block_id", "position"], name: "index_banners_on_block_id_and_position", using: :btree
 
-  create_table "blocks", :force => true do |t|
+  create_table "blocks", force: true do |t|
     t.integer  "position"
     t.string   "name"
     t.string   "mode"
@@ -60,9 +60,9 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.string   "partial"
   end
 
-  add_index "blocks", ["placement", "position"], :name => "index_blocks_on_placement_and_position"
+  add_index "blocks", ["placement", "position"], name: "index_blocks_on_placement_and_position", using: :btree
 
-  create_table "categories", :force => true do |t|
+  create_table "categories", force: true do |t|
     t.string   "name"
     t.string   "permalink"
     t.datetime "created_at"
@@ -72,23 +72,23 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.string   "mode"
   end
 
-  add_index "categories", ["permalink", "id"], :name => "index_categories_on_permalink", :unique => true
+  add_index "categories", ["permalink", "id"], name: "index_categories_on_permalink_and_id", unique: true, using: :btree
 
-  create_table "ckeditor_assets", :force => true do |t|
-    t.string   "data_file_name",                  :null => false
+  create_table "ckeditor_assets", force: true do |t|
+    t.string   "data_file_name",               null: false
     t.string   "data_content_type"
     t.integer  "data_file_size"
     t.integer  "assetable_id"
-    t.string   "assetable_type",    :limit => 30
-    t.string   "type",              :limit => 30
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
-  create_table "issues", :force => true do |t|
+  create_table "issues", force: true do |t|
     t.integer  "number"
     t.date     "date"
     t.boolean  "published"
@@ -104,9 +104,9 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.datetime "pdf_updated_at"
   end
 
-  add_index "issues", ["number", "id"], :name => "index_issues_on_number_and_id", :unique => true
+  add_index "issues", ["number", "id"], name: "index_issues_on_number_and_id", unique: true, using: :btree
 
-  create_table "navigators", :force => true do |t|
+  create_table "navigators", force: true do |t|
     t.string   "name"
     t.integer  "block_id"
     t.integer  "position"
@@ -116,10 +116,10 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.datetime "updated_at"
   end
 
-  add_index "navigators", ["block_id", "position"], :name => "index_navigators_on_block_id_and_position"
-  add_index "navigators", ["navigatable_type", "navigatable_id"], :name => "index_navigators_on_navigatable_type_and_navigatable_id"
+  add_index "navigators", ["block_id", "position"], name: "index_navigators_on_block_id_and_position", using: :btree
+  add_index "navigators", ["navigatable_type", "navigatable_id"], name: "index_navigators_on_navigatable_type_and_navigatable_id", using: :btree
 
-  create_table "orderings", :force => true do |t|
+  create_table "orderings", force: true do |t|
     t.integer  "article_id"
     t.integer  "issue_pos"
     t.integer  "cat_pos"
@@ -127,10 +127,10 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.datetime "updated_at"
   end
 
-  add_index "orderings", ["article_id", "cat_pos"], :name => "index_orderings_on_article_id_and_cat_pos"
-  add_index "orderings", ["article_id", "issue_pos"], :name => "index_orderings_on_article_id_and_issue_pos"
+  add_index "orderings", ["article_id", "cat_pos"], name: "index_orderings_on_article_id_and_cat_pos", using: :btree
+  add_index "orderings", ["article_id", "issue_pos"], name: "index_orderings_on_article_id_and_issue_pos", using: :btree
 
-  create_table "pages", :force => true do |t|
+  create_table "pages", force: true do |t|
     t.string   "name"
     t.string   "title"
     t.string   "meta_description"
@@ -141,37 +141,37 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["permalink"], :name => "index_pages_on_permalink", :unique => true
+  add_index "pages", ["permalink"], name: "index_pages_on_permalink", unique: true, using: :btree
 
-  create_table "settings", :force => true do |t|
+  create_table "settings", force: true do |t|
     t.string   "meta_key"
     t.string   "meta_value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "taggings", :force => true do |t|
+  create_table "taggings", force: true do |t|
     t.integer  "article_id"
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "taggings", ["article_id", "tag_id"], :name => "index_taggings_on_article_id_and_tag_id"
+  add_index "taggings", ["article_id", "tag_id"], name: "index_taggings_on_article_id_and_tag_id", using: :btree
 
-  create_table "tags", :force => true do |t|
+  create_table "tags", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+  create_table "users", force: true do |t|
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",     limit: 128, default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(:version => 20130315081006) do
     t.integer  "roles_mask"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

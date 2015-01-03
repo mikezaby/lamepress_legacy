@@ -1,14 +1,18 @@
-<%= search_form_for [:admin, @q], :url => search_admin_issues_path do |f| %>
-  <div class="module_content">
-    <%= field_set_tag nil, :style => "margin-left:1%;" do %>
-      <%= f.text_field :number_gteq, style: "width:11%;margin-left:1%;",
-                      placeholder: "from issue" %>
-      <%= f.text_field :number_lteq, style: "width:11%;margin-left:1%;",
-                       placeholder: "to issue" %>
-      <%= f.select :published_eq, [["public", true], ["hidden", false]], {},
-                   style: "width:11%;margin-left:1%;" %>
-      <%= f.submit %>
+<div class="row">
+  <div class="col-lg-12">
+    <%= search_form_for [:admin, @q], url: search_admin_issues_path, html: { role: 'form' } do |f| %>
+      <div class="form-group col-lg-3">
+        <%= f.text_field :number_gteq, placeholder: "from issue", class: "form-control" %>
+      </div>
+      <div class="form-group col-lg-3">
+        <%= f.text_field :number_lteq, placeholder: "to issue", class: "form-control" %>
+      </div>
+      <div class="form-group col-lg-3">
+        <%= f.select :published_eq, [["public", true], ["hidden", false]], {}, class: "form-control" %>
+      </div>
+      <div class="form-group col-lg-3">
+        <%= f.submit nil, class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
-<% end %>
-<div class="clear"></div>
+</div>

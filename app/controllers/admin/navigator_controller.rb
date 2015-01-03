@@ -1,22 +1,20 @@
 class Admin::NavigatorController < Admin::BaseController
-
   load_and_authorize_resource
+
+  before_action :fetch_navigator_blocks, only: [:new, :create, :edit, :update]
 
   def index
     @navigator_blocks = Block.where(mode: "navigator")
-    @navigators = @navigator_blocks.map(&:id).collect {|block_id| Navigator.list(block_id)}
+    @group_navigators = Navigator.includes(:block).order([:block_id, :position]).
+                                  group_by { |navigator| navigator.block.name }
   end
 
   def new
     @navigator = Navigator.new
-    @categories = Category.all
-    @pages = Page.all
   end
 
   def edit
     @navigator = Navigator.find(params[:id])
-    @categories = Category.all
-    @pages = Page.all
   end
 
   def create
@@ -46,13 +44,16 @@ class Admin::NavigatorController < Admin::BaseController
 
   def sorter
     Navigator.where(block_id: params['block_id']).each do |navigator|
-      navigator.position = params['page'].index(navigator.id.to_s) + 1
+      navigator.position = params['position'].index(navigator.id.to_s) + 1
       navigator.save
     end
-  #delete_cache
-    render :nothing => true
+
+    render json: { notice: 'Navigators was successfully sorted' }
   end
 
+  private
 
+  def fetch_navigator_blocks
+    @navigator_blocks = Block.where(mode: "navigator").pluck(:name, :id)
+  end
 end
-

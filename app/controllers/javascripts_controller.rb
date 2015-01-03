@@ -13,14 +13,6 @@ class JavascriptsController < ApplicationController
     render "dynamic_dates"
   end
 
-  def misc
-
-  end
-
-  def sortable_list
-
-  end
-
   def date_picker
 
   end

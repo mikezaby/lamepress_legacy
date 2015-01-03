@@ -1,23 +1,27 @@
 class Issue < ActiveRecord::Base
-  has_many :articles, :dependent => :destroy
+  has_many :articles, dependent: :destroy
 
   has_attached_file :cover,
-                    :url  => "/media/issues/:id/:style_issue_:id.:extension",
-                    :path => ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
-                    :styles => {:thumb => "250>" },
-                    :convert_options => { :thumb => '-quality 75' }
-  has_attached_file :pdf,
-                    :url  => "/media/issues/:id/issue_:id.:extension",
-                    :path => ":rails_root/public/media/issues/:id/issue_:id.:extension"
+                    url: "/media/issues/:id/:style_issue_:id.:extension",
+                    path: ":rails_root/public/media/issues/:id/:style_issue_:id.:extension",
+                    styles: { thumb: "250>" },
+                    convert_options: { thumb: '-quality 75' }
 
-  validates :number, :presence => true,  :uniqueness => true
-  validates :date, :presence => true, :uniqueness => true
-  validates_attachment :cover, :presence => true,
-    :content_type => { :content_type => ['image/jpeg', 'image/png', 'image/gif'] }
-  validates_attachment :pdf, :presence => true,
-    :content_type => { :content_type => ['application/pdf'] }
+  has_attached_file :pdf,
+                    url: "/media/issues/:id/issue_:id.:extension",
+                    path: ":rails_root/public/media/issues/:id/issue_:id.:extension"
+
+  validates :number, presence: true, uniqueness: true
+  validates :date, presence: true, uniqueness: true
+  validates_attachment :cover, presence: true,
+    content_type: { content_type: ['image/jpeg', 'image/png', 'image/gif'] }
+  validates_attachment :pdf, presence: true,
+    content_type: { content_type: ['application/pdf'] }
 
   attr_accessible :number, :date, :cover, :pdf, :published
+
+  scope :published_only, -> { where(published: true) }
+  scope :unpublished_only, -> { where(published: false) }
 
   def self.search_issues(year,month, published = true)
     date = Date.new(year.to_i, month.to_i)
@@ -29,7 +33,4 @@ class Issue < ActiveRecord::Base
 
     scope
   end
-
-  scope :published_only , where(published: true)
-  scope :unpublished_only , where(published: false)
 end

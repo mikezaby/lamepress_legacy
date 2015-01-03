@@ -1,30 +1,32 @@
+<% javascript '/djs/sortable_list' %>
+
 <%= render(partial: 'search') %>
 
-<% javascript '/djs/sortable_list' %>
-<input id="url1" value="/admin/ordering/sorter?what=category" type="hidden" />
-<article class="module width_full">
-    <header><h3 class="tabs_involved">Issue  <%= @articles.first.issue_number %> - Category <%= @articles.first.category_name %></h3>
-    </header>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default tab-content">
+      <div class="panel-heading">
+        Issue  <%= @issue.number %> - Category <%= @category.name %>
+      </div>
 
-    <div class="tab_container">
-      <div id="tab1" class="tab_content">
-        <table class="tablesorter" cellspacing="0">
-        <thead>
-          <tr>
-              <th>Article Title</th>
-          </tr>
-        </thead>
-        <tbody id="sortable1">
-          <% @articles.each do |article| %>
-          <tr id="page_<%= article.ordering.id %>" class="handle">
-            <td><%= article.title %></td>
-          </tr>
-          <% end %>
-        </tbody>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tbody class="js-sortable-list" data-url="<%= sorter_admin_orderings_path(params:{ what: 'category' }) %>">
+            <% @orderings.each do |title, id| %>
+              <tr id="position_<%= id %>">
+                <td><%= id %></td>
+                <td><%= title %></td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
-
-      </div><!-- end of #tab1 -->
-
-    </div><!-- end of .tab_container -->
-
-</article><!-- end of content manager article -->
+      </div>
+    </div>
+  </div>
+</div>

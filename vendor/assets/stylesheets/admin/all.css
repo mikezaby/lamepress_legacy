@@ -1,6 +1,7 @@
 /*
- *= require admin/core
- *= require fancybox
- *= require jquery-ui
+ *= require admin/bootstrap.min
+ *= require admin/metisMenu.min
+ *= require admin/sb-admin-2
+ *= require admin/font-awesome.min
+ *= require jquery-ui.min
 */
-

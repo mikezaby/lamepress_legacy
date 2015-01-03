@@ -1,10 +1,11 @@
 class Admin::BannerController < Admin::BaseController
-
   load_and_authorize_resource
 
+  before_action :fetch_banner_blocks, only: [:new, :create, :edit, :update]
+
   def index
-    @banner_blocks = Block.where(mode: "banner")
-    @banners = @banner_blocks.collect { |block| Banner.where(:block_id => block.id).order("position ASC")}
+    @group_banners = Banner.order([:block_id, :position]).includes(:block).
+                            group_by { |banner| banner.block.name  }
   end
 
   def new
@@ -41,12 +42,18 @@ class Admin::BannerController < Admin::BaseController
   end
 
   def sorter
-    Banner.where(block_id: params[:block_id]).each do |banner|
-      banner.position = params['page'].index(banner.id.to_s) + 1
-      banner.save
+    Banner.includes(:block).where(block_id: params[:block_id]).each do |banner|
+      banner.position = params['position'].index(banner.id.to_s) + 1
+      banner.save!
     end
-    render :nothing => true
+
+    render json: { notice: 'Banners was successfully sorted' }
   end
 
+  private
+
+  def fetch_banner_blocks
+    @banner_blocks = Block.where(mode: "banner").pluck(:name, :id)
+  end
 end
 

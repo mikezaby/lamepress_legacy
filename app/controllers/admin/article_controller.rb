@@ -4,13 +4,14 @@ class Admin::ArticleController < Admin::BaseController
 
   ActionController::Base.prepend_view_path("app/themes/#{$layout}")
 
-  before_filter :assign_search, only: [:index, :search]
-  before_filter :fetch_article, only: [:edit, :update, :destroy, :show]
+  before_action :assign_search, only: [:index, :search]
+  before_action :fetch_article, only: [:edit, :update, :destroy, :show]
+  before_action :fetch_years, only: [:new, :create, :edit, :update]
 
   def index
-    @article = Article.issued.page(params[:page]).order("date DESC").per(20)
-    @nonis_article = Article.non_issued.page(params[:ni_page]).
-                             order("date DESC").per(20)
+    article_scope = Article.order(date: :desc).includes(:category, :issue)
+    @article = article_scope.issued.page(params[:page])
+    @nonis_article = article_scope.non_issued.page(params[:ni_page])
   end
 
   def new
@@ -65,6 +66,10 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def fetch_article
-    @article = @article = Article.find(params[:id])
+    @article = Article.find(params[:id])
+  end
+
+  def fetch_years
+    @years = Issue.uniq.order(:date).pluck("YEAR(date)")
   end
 end

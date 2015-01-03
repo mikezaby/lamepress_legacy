@@ -4,10 +4,7 @@ require 'rails/all'
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  Bundler.require(:default, :assets, Rails.env)
+  Bundler.require(:default, Rails.env)
 end
 
 module Mizatron
@@ -44,9 +41,9 @@ module Mizatron
 
     # Also for Heroku Deployment => http://guides.rubyonrails.org/asset_pipeline.html#precompiling-assets
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += ['*.js', '*.css', '*.scss'] #+= %w( sign_in.css.erb pages_css/all admin_css/all )
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.precompile += ['*.js', '*.css', '*.scss']
 
-    
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -55,6 +52,9 @@ module Mizatron
     config.filter_parameters += [:password]
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+
+    # Add this until add strong parameters
+    config.active_record.whitelist_attributes = false
   end
 end
 

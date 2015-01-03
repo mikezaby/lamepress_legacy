@@ -1,6 +1,5 @@
 <% javascript '/djs/dynamic_categories' %>
 <% javascript '/djs/dynamic_dates' %>
-<% javascript '/djs/misc' %>
 <%= content_for :scripts do %>
   <script type="text/javascript">
     $(document).ready(function() {
@@ -18,90 +17,88 @@
   });
   </script>
 <% end %>
-<% if @article.errors.any? %>
-    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-      <ul>
-        <% @article.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </h4>
-<% end %>
-<%= form_for [:admin,@article], :html => {:multipart => true } do |f| %>
-<div class="module_content">
+<div class="panel-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: '/admin/partials/alerts', locals: { record: @article } %>
 
+      <%= form_for [:admin,@article], html: { multipart: true, role: "form" } do |f| %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag do %>
-    <%= f.label :title %>
-     <%= f.text_field :title %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :hypertitle %>
+          <%= f.text_field :hypertitle, class: 'form-control' %>
+        </div>
 
-   <%= field_set_tag do %>
-    <%= f.label :hypertitle %>
-     <%= f.text_field :hypertitle %>
-   <% end %>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <%= f.label :date %>
+              <%= f.text_field :date, class: 'form-control' %>
+            </div>
+          </div>
 
-   <%= field_set_tag nil, :style => "width:17%;float:left;margin-left:0%;margin-right:2%;" do %>
-    <%= f.label :date, :style => "width:70%;" %>
-     <%= f.text_field :date, :style => "width:70%;"  %>
-   <% end %>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <%= f.label :author %>
+              <%= f.text_field :author, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
 
-   <%= field_set_tag nil, :style => "width:25%; float:left;margin-left:0%;margin-right: 2%;" do %>
-    <%= f.label :author, :style => "width:84%;" %>
-     <%= f.text_field :author, :style => "width:84%;" %>
-   <% end %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <%= label_tag :year %>
+              <%= select_tag :year, options_for_select(@years), class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <%= label_tag :month %>
+              <%= select_tag :month, options_for_select("01".."12"), class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <%= f.label :issue_id, "Issue" %>
+              <%= f.select :issue_id, [], {}, class: "form-control", id: "article_issue_id" %>
+            </div>
+          </div>
+        </div>
 
+        <div class="form-group">
+          <%= f.label :category_id %>
+          <%= f.select :category_id, [], { prompt: "Select a Category" }, { class: 'form-control' } %>
+        </div>
 
-  <%= field_set_tag nil, :style => "width:25%; float:left;margin-left:0%;margin-right: 2%;" do %>
-    <%= f.label :issue_id,  {:style => "float:left;width:84%"} %>
-    <select id="year" style="float:left;width:33%;margin-left:2%;margin-right:0;">
-      <option value="0">Year</option>
-      <% time = Time.new;year=1990 %>
-      <% for year in (time.year+1).downto(1990) %>
-        <option value=<%= year %>><%= year %></option>
+        <div class="form-group">
+          <%= f.cktext_area :html, toolbar: 'Easy' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :tag_names %>
+          <%= f.text_field :tag_names, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :photo %>
+          <%= f.file_field :photo %>
+        </div>
+
+        <div class="row">
+          <%= f.hidden_field :preview, value: "0" %>
+          <div class="form-group col-lg-6">
+            <%= f.submit onclick: "this.form.removeAttribute('target');$('input#page_preview').val('0');", class: "btn btn-primary" %>
+            <%= f.submit "Preview", onclick: "this.form.target='_blank';$('input#page_preview').val('1');", class: "btn btn-default" %>
+          </div>
+          <div class="form-group col-lg-6">
+            <%= f.select :published, [["public", true], ["hidden", false]], {}, class: "form-control " %>
+          </div>
+        </div>
       <% end %>
-    </select>
-    <select id="month" style="float:left;width:25%;margin-left:2%;margin-right:0;">
-      <option value="0">Month</option>
-      <% for month in '01'..'12' %>
-        <option value="<%= month %>"><%= month %></option>
-      <% end %>
-    </select>
-    <%= f.collection_select :issue_id, Issue.find(:all, :order => "number DESC"), :id, :number, {:prompt => "Φύλλο"}, {:style => "float:left;width:30%;margin-left:2%;"}  %>
-  <% end %>
-
-  <%= field_set_tag nil, :style => "max-width:25%;float:left;margin-left:0%;margin-right: 0%;" do %>
-    <%= f.label :category_id, :style => "width:84%;" %>
-    <%= f.collection_select :category_id, Category.find(:all), :id, :name, {:prompt => "Select a Category"}, {:style => "width:84%;"} %>
-  <% end %>
-
-  <%= field_set_tag nil, :style => "width:100%; float:left;" do %>
-    <%= f.cktext_area :html, :toolbar=>'Easy', :width=>'98%', :height=>'200px' %>
-  <% end %>
-
-
-  <%= field_set_tag nil, :style => "width:48%; float:left;margin-right:3%" do %>
-    <%= f.label :tag_names %>
-    <%= f.text_field :tag_names ,:style => "width:92%;"%>
-  <% end %>
-
-  <%= field_set_tag nil, :style => "width:48%; float:left;" do %>
-    <%= f.label :photo, :style => "width:100%" %>
-    <%= f.file_field :photo,:style => "margin-left:10px;" %>
-  <% end %>
-  <%= f.hidden_field :preview, :value => "0" %>
-
-
-
-  <div class="clear"></div>
-</div>
-<footer>
-  <div class="submit_link">
-    <%= f.select :published, [["public", true], ["hidden", false]] %>
-    <%= f.submit "Preview", :onclick => "this.form.target='_blank';$('input#article_preview').val('1');", :class => "alt_btn" %>
-    <%= f.submit :onclick => "this.form.removeAttribute('target');$('input#article_preview').val('0');" %>
+    </div>
   </div>
-</footer>
-
-<% end %>
-

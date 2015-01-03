@@ -12,7 +12,7 @@ describe Banner do
 
   subject { FactoryGirl.build(:banner) }
 
-  it { should belong_to(:block) }
+  it { should belong_to(:block).touch(true) }
 
   it { should validate_presence_of(:block_id) }
   it { should validate_attachment_presence(:photo) }

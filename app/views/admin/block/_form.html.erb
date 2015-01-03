@@ -1,41 +1,31 @@
-<% if @block.errors.any? %>
-    <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
-      <ul>
-        <% @block.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </h4>
-<% end %>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <%= render partial: '/admin/partials/alerts', locals: { record: @block } %>
+      <%= form_for [:admin,@block], role: 'form' do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
 
-<%= form_for [:admin,@block] do |f| %>
-<div class="module_content">
-  <%= field_set_tag do %>
-    <%= f.label :name %>
-     <%= f.text_field :name %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :placement %>
+          <%= f.select :placement, @block_placements, {}, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag nil, :style => "width:48%; float:left;margin-left:0%;margin-right: 2%;" do %>
-    <%= f.label :placement %>
-     <%= f.select :placement, @block_placements, {:style => "width:84%;"} %>
-   <% end %>
+        <div class="form-group">
+          <%= f.label :mode %>
+          <%= f.text_field :mode, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :partial %>
+          <%= f.text_field :partial, class: 'form-control' %>
+        </div>
 
-  <%= field_set_tag nil, :style => "width:49%; float:left;margin-left:0%;margin-right: 0%;" do %>
-    <%= f.label :mode %>
-     <%= f.text_field :mode, {:style => "width:84%;"} %>
-   <% end %>
-  <div class="clear"></div>
-  <%= field_set_tag do %>
-    <%= f.label :partial %>
-    <%= f.text_field :partial %>
-  <% end %>
-
- <div class="clear"></div>
-</div>
-<footer>
-  <div class="submit_link">
-    <%= f.submit %>
+        <div class="form-group">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</footer>
-<% end %>
-
+</div>

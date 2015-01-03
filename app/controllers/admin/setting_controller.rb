@@ -1,8 +1,11 @@
 class Admin::SettingController < Admin::BaseController
   load_and_authorize_resource
-  
+
   def current_issue
     @setting = Setting.find_or_create_by_meta_key("current_issue")
+    @years = Issue.uniq.order(:date).pluck("YEAR(date)")
+
+    @issue = Issue.published_only.find_by(id: @setting.meta_value)
   end
 
   def block_placements
@@ -12,32 +15,24 @@ class Admin::SettingController < Admin::BaseController
   def create
     @setting = Setting.new(params[:setting])
     if @setting.save
-      redirect_to(:back, :notice => "Setting was successfully updated.", :setting => @setting)
+      redirect_to(:back, notice: "Setting was successfully updated.", setting: @setting)
     else
-      redirect_to(:back, :notice => "Something going wrong", :setting => @setting)
+      redirect_to(:back, notice: "Something going wrong", setting: @setting)
     end
-    rescue ActionController::RedirectBackError
-      redirect_to "/admin/setting/current_issue"
   end
 
   def update
-    begin
-      @setting = Setting.find(params[:id])
-      if @setting.update_attributes(params[:setting])
-        redirect_to(:back, :notice => "Setting was successfully updated.", :setting => @setting)
-      else
-        redirect_to(:back, :notice => "Something going wrong", :setting => @setting)
-      end
-    rescue ActionController::RedirectBackError
-      redirect_to "/admin/setting/current_issue"
+    @setting = Setting.find(params[:id])
+    if @setting.update_attributes(params[:setting])
+      redirect_to(:back, notice: "Setting was successfully updated.", setting: @setting)
+    else
+      redirect_to(:back, notice: "Something going wrong", setting: @setting)
     end
   end
 
   def destroy
     @setting = Setting.find(params[:id])
-    @setting.destroy
-    redirect_to(:back, :notice => "Setting was successfully deleted")
+    @setting.destroy!
+    redirect_to(:back, notice: "Setting was successfully deleted")
   end
-
-
 end

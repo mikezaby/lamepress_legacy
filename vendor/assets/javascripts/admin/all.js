@@ -1,9 +1,8 @@
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
-//= require admin/hideshow
-//= require admin/jquery.equalHeight
-//= require admin/jquery.tablesorter.min
-//= require fancybox
+//= require jquery-ui
+//= require admin/bootstrap.min
+//= require admin/metisMenu.min
 //= require ckeditor/init
-
+//= require admin/sb-admin-2
+//= require admin/sortable
