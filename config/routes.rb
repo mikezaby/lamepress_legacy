@@ -48,12 +48,6 @@ Mizatron::Application.routes.draw do
     end
   end
 
-#--> Android service
-  get 'mobile/menu' => 'mobile#menu'
-  get 'mobile/category' => 'mobile#category'
-  get 'mobile/article' => 'mobile#article'
-#--> End of Android service
-
   get '/page/:perma' => 'page#show', as: "page"
   get '/feed/:id' => 'article#feed', as: :category_feed
 

@@ -14,7 +14,6 @@ class Category < ActiveRecord::Base
 
   attr_accessible :name, :permalink, :issued, :order_articles, :mode
 
-  scope :mobile_issued, -> { where(issued: true).select("id, name, permalink") }
   scope :issued, -> { where(issued: true) }
   scope :non_issued, ->  { where(issued: false) }
 
