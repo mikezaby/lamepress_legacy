@@ -1,7 +1,5 @@
 <%= render(partial: 'search') %>
 
-<% javascript '/djs/sortable_list' %>
-
 <div class="row">
   <div class="col-lg-6">
     <%= form_for :ordering, url: { action: "update_issue" }, role: "form" do |f| %>
