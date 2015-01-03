@@ -19,7 +19,7 @@ gem "ckeditor", "4.1.1"
 gem "fancybox-rails"
 gem 'mysql2', "0.3.17"
 gem 'rake', "10.1.0"
-gem 'devise', "3.0.3"
+gem 'devise', "3.4.1"
 gem "paperclip"
 gem 'kaminari'
 gem 'cancan'
