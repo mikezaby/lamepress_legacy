@@ -4,8 +4,6 @@ Mizatron::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "admin/user" }
 
-  get '/djs/:action.:format' => "javascripts"
-
   root :to => 'article#home_issue'
 
   get "search" => "search#index"
