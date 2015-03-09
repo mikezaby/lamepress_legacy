@@ -12,6 +12,10 @@ Mizatron::Application.routes.draw do
   get "search" => "search#index"
   post "search/issue" => "search#issue"
 
+  namespace :api do
+    resources :categories, only: [:index, :show]
+  end
+
   namespace :admin do
     root to:'home#index'
 
