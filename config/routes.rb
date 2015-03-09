@@ -14,6 +14,7 @@ Mizatron::Application.routes.draw do
 
   namespace :api do
     resources :categories, only: [:index, :show]
+    resources :issues, only: [:index]
   end
 
   namespace :admin do
