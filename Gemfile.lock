@@ -93,6 +93,11 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    handlebars_assets (0.19.1)
+      execjs (>= 1.2.9)
+      multi_json
+      sprockets (>= 2.0.3)
+      tilt
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
@@ -253,6 +258,7 @@ DEPENDENCIES
   faker
   fancybox-rails
   guard-rspec
+  handlebars_assets
   jquery-rails (= 3.1.2)
   jquery-ui-rails
   kaminari
