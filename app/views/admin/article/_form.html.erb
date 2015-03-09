@@ -1,4 +1,3 @@
-<% javascript '/djs/dynamic_categories' %>
 <% javascript '/djs/dynamic_dates' %>
 <%= content_for :scripts do %>
   <script type="text/javascript">
@@ -15,6 +14,13 @@
   $(document).ready(function() {
     $( "#article_date" ).datepicker({ changeYear: true, changeMonth: true, dateFormat: "yy-mm-dd"});
   });
+  </script>
+<% end %>
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      new CategorySelector({default_option: <%= @article.category_id || 'null' %>});
+    });
   </script>
 <% end %>
 <div class="panel-body">
@@ -65,14 +71,14 @@
           <div class="col-lg-4">
             <div class="form-group">
               <%= f.label :issue_id, "Issue" %>
-              <%= f.select :issue_id, [], {}, class: "form-control", id: "article_issue_id" %>
+              <%= f.select :issue_id, [], {}, class: "form-control js-issue-selector" %>
             </div>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label :category_id %>
-          <%= f.select :category_id, [], { prompt: "Select a Category" }, { class: 'form-control' } %>
+          <%= f.select :category_id, [], {}, { class: 'form-control js-category-selector' } %>
         </div>
 
         <div class="form-group">
