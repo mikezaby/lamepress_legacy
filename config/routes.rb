@@ -63,5 +63,4 @@ Mizatron::Application.routes.draw do
   get '/:name/:id.:title' => 'article#not_issued_article', as: 'not_issued_article'
 
   match '*a', :to => 'application#render_404', via: [:get, :post, :put, :delete]
-
 end
