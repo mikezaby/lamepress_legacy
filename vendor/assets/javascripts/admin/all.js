@@ -8,4 +8,5 @@
 //= require admin/sb-admin-2
 //= require admin/sortable
 //= require core/category_selector
+//= require core/issue_selector
 //= require_tree ../core/templates
