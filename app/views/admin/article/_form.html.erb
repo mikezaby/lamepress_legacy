@@ -18,7 +18,10 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     $(document).ready(function() {
-      new CategorySelector({default_option: <%= @article.category_id || 'null' %>});
+      issue_selector = new IssueSelector({default_option: <%= @article.issue_id || 'null' %>});
+      issue_selector.ready.done(function(){
+        new CategorySelector({default_option: <%= @article.category_id || 'null' %>});
+      });
     });
   </script>
 <% end %>
@@ -42,7 +45,7 @@
           <div class="col-lg-6">
             <div class="form-group">
               <%= f.label :date %>
-              <%= f.text_field :date, class: 'form-control' %>
+              <%= f.text_field :date, class: 'form-control js-date-field' %>
             </div>
           </div>
 
@@ -58,13 +61,15 @@
           <div class="col-lg-4">
             <div class="form-group">
               <%= label_tag :year %>
-              <%= select_tag :year, options_for_select(@years), class: "form-control" %>
+              <%= select_tag :year, @available_dates.year_options,
+                             class: "form-control js-year-selector" %>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="form-group">
               <%= label_tag :month %>
-              <%= select_tag :month, options_for_select("01".."12"), class: "form-control" %>
+              <%= select_tag :month, @available_dates.month_options,
+                             class: "form-control js-month-selector" %>
             </div>
           </div>
           <div class="col-lg-4">
