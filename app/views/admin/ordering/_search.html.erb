@@ -1,3 +1,14 @@
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      issue_selector = new IssueSelector({default_option: <%= @issue.try(:id) || 'null' %>});
+      issue_selector.ready.done(function(){
+        new CategorySelector({default_option: <%= @category.try(:id) || 'null' %>});
+      });
+    });
+  </script>
+<% end %>
+
 <div class="row">
   <div class="col-lg-12">
     <%= form_tag priority_admin_orderings_path, method: :get, role: 'html' do %>
@@ -5,28 +16,27 @@
         <div class="col-lg-3">
           <div class="form-group">
             <%= label_tag :year %>
-            <%= select_tag :year, options_for_select(@years), class: "form-control" %>
+            <%= select_tag :year, @available_dates.year_options,
+                           class: "form-control js-year-selector" %>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="form-group">
             <%= label_tag :month %>
-            <%= select_tag :month, options_for_select("01".."12"), class: "form-control" %>
+            <%= select_tag :month, @available_dates.month_options,
+                            class: "form-control js-month-selector" %>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="form-group">
-            <%= label_tag :issue_id, 'Issue' %>
-            <%= select_tag :issue_id, {}, class: "form-control", id: "article_issue_id" %>
+            <%= label_tag :issue_id, "Issue" %>
+            <%= select_tag :issue_id, [], class: "form-control js-issue-selector" %>
           </div>
         </div>
 
         <div class="form-group col-lg-3">
-          <%= label_tag "Category" %>
-          <%= select_tag :category_id,
-            options_for_select(Category.issued.pluck(:name, :id),
-                               selected: params[:category_id]),
-            prompt: "", class: 'form-control' %>
+          <%= label_tag :category_id %>
+          <%= select_tag :category_id, [], { class: 'form-control js-category-selector' } %>
         </div>
       </div>
       <div class="row">

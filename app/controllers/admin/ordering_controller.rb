@@ -2,16 +2,14 @@ class Admin::OrderingController < Admin::BaseController
 
   load_and_authorize_resource
 
-  before_filter :fetch_issues, only: [:index, :priority]
-  before_filter :fetch_years, only: [:index, :priority]
+  before_filter :fetch_issue, only: [:index, :priority]
+  before_filter :fetch_category, only: [:index, :priority]
+  before_filter :fetch_available_dates, only: [:index, :priority]
 
   def index
   end
 
   def priority
-    @issue = Issue.find_by(id: params[:issue_id])
-    @category = Category.find_by(id: params[:category_id]) if params[:category_id].present?
-
     if @issue and @category
       @orderings = Ordering.includes(:article).for_issue(@issue).
                           for_category(@category).
@@ -65,11 +63,15 @@ class Admin::OrderingController < Admin::BaseController
 
   private
 
-  def fetch_issues
-    @search_issues = Issue.order("created_at desc").limit(5)
+  def fetch_issue
+    @issue = Issue.find_by(id: params[:issue_id])
   end
 
-  def fetch_years
-    @years = Issue.uniq.order(:date).pluck("YEAR(date)")
+  def fetch_category
+    @category = Category.find_by(id: params[:category_id]) if params[:category_id].present?
+  end
+
+  def fetch_available_dates
+    @available_dates = AvailableDatesPresenter.new(date: @issue.try(:date))
   end
 end
