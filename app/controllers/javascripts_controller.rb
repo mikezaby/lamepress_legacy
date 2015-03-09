@@ -1,9 +1,4 @@
 class JavascriptsController < ApplicationController
-
-  def dynamic_categories
-    @categories = Category.find(:all)
-  end
-
   def dynamic_dates
     @issues = Issue.find(:all, :order => "number DESC")
   end
