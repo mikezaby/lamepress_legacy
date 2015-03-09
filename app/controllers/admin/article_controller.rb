@@ -6,7 +6,7 @@ class Admin::ArticleController < Admin::BaseController
 
   before_action :assign_search, only: [:index, :search]
   before_action :fetch_article, only: [:edit, :update, :destroy, :show]
-  before_action :fetch_years, only: [:new, :create, :edit, :update]
+  before_action :fetch_available_dates, only: [:new, :create, :edit, :update]
 
   def index
     article_scope = Article.order(date: :desc).includes(:category, :issue)
@@ -69,7 +69,7 @@ class Admin::ArticleController < Admin::BaseController
     @article = Article.find(params[:id])
   end
 
-  def fetch_years
-    @years = Issue.uniq.order(:date).pluck("YEAR(date)")
+  def fetch_available_dates
+    @available_dates = AvailableDatesPresenter.new(date: @article.issue.try(:date))
   end
 end
