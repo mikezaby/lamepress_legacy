@@ -47,6 +47,7 @@ module Mizatron
     config.filter_parameters += [:password]
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    config.autoload_paths += %W(#{config.root}/app/presenter)
 
     # Add this until add strong parameters
     config.active_record.whitelist_attributes = false

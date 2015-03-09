@@ -17,6 +17,7 @@ gem 'jquery-rails', '3.1.2'
 gem 'jquery-ui-rails'
 gem "ckeditor", "4.1.1"
 gem "fancybox-rails"
+gem 'handlebars_assets'
 gem 'mysql2', "0.3.17"
 gem 'rake', "10.1.0"
 gem 'devise', "3.4.1"

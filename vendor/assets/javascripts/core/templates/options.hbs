@@ -1,0 +1,10 @@
+{{#if promp}}
+  <option value="">
+    {{promp}}
+  </option>
+{{/if}}
+{{#each options}}
+  <option value={{id}}>
+    {{name}}
+  </option>
+{{/each}}

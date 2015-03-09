@@ -14,7 +14,7 @@ class Category < ActiveRecord::Base
 
   attr_accessible :name, :permalink, :issued, :order_articles, :mode
 
-  scope :issued, -> { where(issued: true) }
+  scope :issued, ->(value = true) { where(issued: value) }
   scope :non_issued, ->  { where(issued: false) }
 
   def ordered

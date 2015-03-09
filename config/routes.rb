@@ -4,13 +4,15 @@ Mizatron::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "admin/user" }
 
-  get '/ajax_handler/:action' => "ajax_handler"
-  get '/djs/:action.:format' => "javascripts"
-
   root :to => 'article#home_issue'
 
   get "search" => "search#index"
   post "search/issue" => "search#issue"
+
+  namespace :api do
+    resources :categories, only: [:index, :show]
+    resources :issues, only: [:index]
+  end
 
   namespace :admin do
     root to:'home#index'
@@ -61,5 +63,4 @@ Mizatron::Application.routes.draw do
   get '/:name/:id.:title' => 'article#not_issued_article', as: 'not_issued_article'
 
   match '*a', :to => 'application#render_404', via: [:get, :post, :put, :delete]
-
 end
