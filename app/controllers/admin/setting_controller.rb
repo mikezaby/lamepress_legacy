@@ -3,9 +3,8 @@ class Admin::SettingController < Admin::BaseController
 
   def current_issue
     @setting = Setting.find_or_create_by_meta_key("current_issue")
-    @years = Issue.uniq.order(:date).pluck("YEAR(date)")
-
     @issue = Issue.published_only.find_by(id: @setting.meta_value)
+    @available_dates = AvailableDatesPresenter.new(date: @issue.try(:date))
   end
 
   def block_placements

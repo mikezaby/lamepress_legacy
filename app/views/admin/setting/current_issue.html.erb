@@ -1,3 +1,11 @@
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      new IssueSelector({default_option: <%= @issue.try(:id) || 'null' %>});
+    });
+  </script>
+<% end %>
+
 <% if @setting.errors.any? %>
   <h4 class="alert_warning"> Παρουσιαστηκαν τα εξείς λάθοι:
     <ul>
@@ -28,19 +36,21 @@
             <div class="col-lg-4">
               <div class="form-group">
                 <%= label_tag :year %>
-                <%= select_tag :year, options_for_select(@years), class: "form-control" %>
+                <%= select_tag :year, @available_dates.year_options,
+                               class: "form-control js-year-selector" %>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <%= label_tag :month %>
-                <%= select_tag :month, options_for_select("01".."12"), class: "form-control" %>
+                <%= select_tag :month, @available_dates.month_options,
+                                class: "form-control js-month-selector" %>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="form-group">
                 <%= f.label :meta_value, "Issue" %>
-                <%= f.select :meta_value, [], {}, class: "form-control", id: "article_issue_id" %>
+                <%= f.select :meta_value, [], {}, class: "form-control js-issue-selector" %>
               </div>
             </div>
 
