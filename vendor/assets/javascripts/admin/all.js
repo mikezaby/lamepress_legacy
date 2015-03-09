@@ -6,3 +6,4 @@
 //= require ckeditor/init
 //= require admin/sb-admin-2
 //= require admin/sortable
+//= require core/category_selector
