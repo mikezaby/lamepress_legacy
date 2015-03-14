@@ -31,7 +31,7 @@ class Article < ActiveRecord::Base
   attr_accessor :preview
 
   attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
-                  :date, :published, :hypertitle, :photo, :preview
+                  :date, :published, :hypertitle, :preview
 
   scope :published_only, -> { where(published: true) }
 

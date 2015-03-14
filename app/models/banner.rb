@@ -12,7 +12,7 @@ class Banner < ActiveRecord::Base
   validates_attachment :photo, presence: true,
     content_type: { content_type: ['image/jpeg', 'image/png', 'image/gif'] }
 
-  attr_accessible :describe, :block_id, :photo, :url
+  attr_accessible :describe, :block_id, :url
 
   def self.get_banner(block_id)
     where(block_id: block_id).order(:position)

@@ -18,7 +18,7 @@ class Issue < ActiveRecord::Base
   validates_attachment :pdf, presence: true,
     content_type: { content_type: ['application/pdf'] }
 
-  attr_accessible :number, :date, :cover, :pdf, :published
+  attr_accessible :number, :date, :published
 
   scope :published_only, -> { where(published: true) }
   scope :unpublished_only, -> { where(published: false) }
