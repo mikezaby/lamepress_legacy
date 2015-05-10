@@ -29,9 +29,6 @@ gem "nokogiri"
 gem 'capistrano', '>= 2.13.5'
 gem 'unicorn'
 
-# Remove this when we migrate to strong_parameters
-gem 'protected_attributes'
-
 group :test, :development do
   gem 'shoulda-matchers'
   gem "rspec-rails"
