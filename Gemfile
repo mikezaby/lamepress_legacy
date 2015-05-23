@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.2.1'
 
 gem "sass-rails", "~> 4.0.0"
 gem "coffee-rails", "~> 4.0.0"
@@ -24,7 +24,7 @@ gem 'rake', "10.1.0"
 gem 'devise', "3.4.1"
 gem "paperclip"
 gem 'kaminari'
-gem 'cancan'
+gem 'cancancan'
 gem "nokogiri"
 gem 'capistrano', '>= 2.13.5'
 gem 'unicorn'
