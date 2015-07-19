@@ -2,6 +2,8 @@ class Admin::CategoryController < Admin::BaseController
 
   load_and_authorize_resource
 
+  before_filter :fetch_category, only: [:edit, :update, :destroy]
+
   def index
     @category = Category.issued.page(params[:page]).per(20)
     @nonis_category = Category.non_issued.page(params[:ni_page]).per(20)
@@ -12,7 +14,7 @@ class Admin::CategoryController < Admin::BaseController
   end
 
   def create
-    @category = Category.new(params[:category])
+    @category = Category.new(category_params)
     if @category.save
       redirect_to(admin_categories_path, :notice => 'Page was successfully created.')
     else
@@ -21,12 +23,10 @@ class Admin::CategoryController < Admin::BaseController
   end
 
   def edit
-    @category = Category.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
-    if @category.update_attributes(params[:category])
+    if @category.update_attributes(category_params)
       redirect_to(admin_categories_path, :notice => 'Page was successfully updated.')
     else
       render :action => "edit"
@@ -34,11 +34,18 @@ class Admin::CategoryController < Admin::BaseController
   end
 
   def destroy
-    @category = Category.find(params[:id])
     @category.destroy
     redirect_to(admin_categories_path)
   end
 
+  private
 
+  def fetch_category
+    @category = Category.find(params[:id])
+  end
+
+  def category_params
+    params.require(:category).permit!
+  end
 end
 

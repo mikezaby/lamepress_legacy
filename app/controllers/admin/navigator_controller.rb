@@ -1,6 +1,7 @@
 class Admin::NavigatorController < Admin::BaseController
   load_and_authorize_resource
 
+  before_filter :fetch_navigator, only: [:edit, :update, :destroy]
   before_action :fetch_navigator_blocks, only: [:new, :create, :edit, :update]
 
   def index
@@ -14,11 +15,10 @@ class Admin::NavigatorController < Admin::BaseController
   end
 
   def edit
-    @navigator = Navigator.find(params[:id])
   end
 
   def create
-    @navigator = Navigator.new(params[:navigator])
+    @navigator = Navigator.new(navigator_params)
     if @navigator.save
       redirect_to(admin_navigators_path, :notice => 'Navigator was successfully created.')
     else
@@ -27,9 +27,7 @@ class Admin::NavigatorController < Admin::BaseController
   end
 
   def update
-    @navigator = Navigator.find(params[:id])
-
-    if @navigator.update_attributes(params[:navigator])
+    if @navigator.update_attributes(navigator_params)
       redirect_to(admin_navigators_path, :notice => 'Navigator was successfully updated.')
     else
       render :action => "edit"
@@ -37,7 +35,6 @@ class Admin::NavigatorController < Admin::BaseController
   end
 
   def destroy
-    @navigator = Navigator.find(params[:id])
     @navigator.destroy
     redirect_to(admin_navigators_path)
   end
@@ -52,6 +49,14 @@ class Admin::NavigatorController < Admin::BaseController
   end
 
   private
+
+  def fetch_navigator
+    @navigator = Navigator.find(params[:id])
+  end
+
+  def navigator_params
+    params.require(:navigator).permit!
+  end
 
   def fetch_navigator_blocks
     @navigator_blocks = Block.where(mode: "navigator").pluck(:name, :id)

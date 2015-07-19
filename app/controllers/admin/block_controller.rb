@@ -1,6 +1,7 @@
 class Admin::BlockController < Admin::BaseController
-
   load_and_authorize_resource
+
+  before_action :fetch_block, only: [:edit, :update, :destroy]
 
   def index
     @block_placements = Setting.block_placements
@@ -13,12 +14,11 @@ class Admin::BlockController < Admin::BaseController
   end
 
   def edit
-    @block = Block.find(params[:id])
     @block_placements = Setting.block_placements
   end
 
   def create
-    @block = Block.new(params[:block])
+    @block = Block.new(block_params)
     @block.position = 99
     if @block.save
       redirect_to(admin_blocks_path, :notice => 'Block was successfully created.')
@@ -29,9 +29,7 @@ class Admin::BlockController < Admin::BaseController
 
 
   def update
-    @block = Block.find(params[:id])
-
-    if @block.update_attributes(params[:block])
+    if @block.update_attributes(block_params)
       redirect_to(admin_blocks_path, :notice => 'Block was successfully updated.')
     else
       render :action => "edit"
@@ -40,7 +38,6 @@ class Admin::BlockController < Admin::BaseController
 
 
   def destroy
-    @block = Block.find(params[:id])
     @block.destroy
     redirect_to(admin_blocks_path)
   end
@@ -52,5 +49,15 @@ class Admin::BlockController < Admin::BaseController
     end
 
     render json: { notice: 'Blocks was successfully sorted' }
+  end
+
+  private
+
+  def fetch_block
+    @block = Block.find(params[:id])
+  end
+
+  def block_params
+    params.require(:block).permit!
   end
 end

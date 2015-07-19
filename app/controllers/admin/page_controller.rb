@@ -1,6 +1,6 @@
 class Admin::PageController < Admin::BaseController
-
   load_and_authorize_resource
+  before_action :fetch_page, only: [:edit, :update, :show, :destroy]
 
   def index
     @pages = Page.all
@@ -11,8 +11,8 @@ class Admin::PageController < Admin::BaseController
   end
 
   def create
-    @page = Page.new(params[:page])
-    if params[:page][:preview] == "1"
+    @page = Page.new(page_params)
+    if page_params[:preview] == "1"
       @issue = Setting.current_issue
       render :action => "show", :layout => $layout
     elsif @page.save
@@ -23,16 +23,14 @@ class Admin::PageController < Admin::BaseController
   end
 
   def edit
-    @page = Page.find(params[:id])
   end
 
   def update
-    @page = Page.find(params[:id])
-    if params[:page][:preview] == "1"
+    if page_params[:preview] == "1"
       @issue = Setting.current_issue
-      @page = Page.new(params[:page])
+      @page = Page.new(page_params)
       render :action => "show", :layout => $layout
-    elsif @page.update_attributes(params[:page])
+    elsif @page.update_attributes(page_params)
       redirect_to admin_pages_url, notice: 'Page was successfully updated.'
     else
       render action: "edit"
@@ -41,14 +39,21 @@ class Admin::PageController < Admin::BaseController
 
   def show
     @issue = Setting.current_issue
-    @page = Page.find(params[:id])
     render :action => "show", :layout => $layout
   end
 
   def destroy
-    @page = Page.find(params[:id])
     @page.destroy
     redirect_to admin_pages_url, notice: "Page was successfully deleted."
   end
 
+  private
+
+  def page_params
+    params.require(:page).permit!
+  end
+
+  def fetch_page
+    @page = Page.find(params[:id])
+  end
 end

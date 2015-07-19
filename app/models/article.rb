@@ -30,9 +30,6 @@ class Article < ActiveRecord::Base
   attr_writer :tag_names,:tag_links
   attr_accessor :preview
 
-  attr_accessible :tag_names, :title, :html, :author, :category_id, :issue_id,
-                  :date, :published, :hypertitle, :preview
-
   scope :published_only, -> { where(published: true) }
 
   scope :order_issue, -> { joins(:ordering).merge(Ordering.issue) }

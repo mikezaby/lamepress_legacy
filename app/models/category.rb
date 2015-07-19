@@ -12,8 +12,6 @@ class Category < ActiveRecord::Base
 
   before_save :prettify_permalink
 
-  attr_accessible :name, :permalink, :issued, :order_articles, :mode
-
   scope :issued, ->(value = true) { where(issued: value) }
   scope :non_issued, ->  { where(issued: false) }
 
