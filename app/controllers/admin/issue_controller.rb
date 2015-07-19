@@ -21,7 +21,7 @@ class Admin::IssueController < Admin::BaseController
   end
 
   def create
-    @issue = Issue.new(params[:issue])
+    @issue = Issue.new(issue_params)
     if @issue.save
       redirect_to(admin_issues_path, :notice => 'Issue was successfully created.')
     else
@@ -33,7 +33,7 @@ class Admin::IssueController < Admin::BaseController
   end
 
   def update
-    if @issue.update_attributes(params[:issue])
+    if @issue.update_attributes(issue_params)
       redirect_to(admin_issues_path, :notice => "The issue was successfully updated.")
     else
       render :action => "edit"
@@ -46,6 +46,10 @@ class Admin::IssueController < Admin::BaseController
   end
 
   private
+
+  def issue_params
+    params.require(:issue).permit!
+  end
 
   def assign_search
     @q = Issue.search(params[:q])

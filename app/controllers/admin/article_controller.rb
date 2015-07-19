@@ -24,7 +24,7 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def create
-    @article = Article.new(params[:article])
+    @article = Article.new(article_params)
     @article.build_ordering
     @article.ordering.cat_pos=99
     if @article.preview == "1" && @article.valid?
@@ -40,9 +40,9 @@ class Admin::ArticleController < Admin::BaseController
   end
 
   def update
-    if params[:article][:preview] == "1" && @article.valid?
+    if article_params[:preview] == "1" && @article.valid?
       show
-    elsif @article.update_attributes(params[:article])
+    elsif @article.update_attributes(article_params)
       redirect_to(admin_articles_path, :notice => 'Page was successfully updated.')
     else
       render :action => "edit"
@@ -71,5 +71,9 @@ class Admin::ArticleController < Admin::BaseController
 
   def fetch_available_dates
     @available_dates = AvailableDatesPresenter.new(date: @article.issue.try(:date))
+  end
+
+  def article_params
+    params.require(:article).permit!
   end
 end
